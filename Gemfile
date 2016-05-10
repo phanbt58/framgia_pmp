@@ -9,9 +9,13 @@ gem "turbolinks"
 gem "jbuilder", "~> 2.0"
 gem "sdoc", "~> 0.4.0", group: :doc
 gem "mysql2", "~> 0.3.20"
+gem "devise"
+gem "config"
+gem "i18n-js"
 
 group :development, :test do
   gem "byebug"
+  gem "i18n-tasks"
 end
 
 group :development do
