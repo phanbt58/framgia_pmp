@@ -8,3 +8,28 @@ en:
     login: "Login"
   project:
     title: "List project"
+  projects:
+    new: "New Project"
+    name: "Name: "
+    description: "Description"
+    start_date: "Start date"
+    end_date: "End date"
+    created: "Project created successfully"
+    not_created: "Project not created"
+  buttons:
+    create: "Create"
+  errors: 
+    wrong_end_date: "End date must bigger than start date "
+  flashs:
+    access_denied: "Permisstion denied"
+    user:
+      mustlogin: "You need to login to access!"
+    messages:
+      created: "%{model_name} was created successfully!"
+      not_created: "%{model_name} couldn't be created"
+      deleted: "%{model_name} was deleted successfully!"
+      not_deleted: "%{model_name} couldn't be deleted!"
+      updated: "%{model_name} was updated successfully!"
+      not_updated: "%{model_name} couldn't be updated"
+  date:
+    format: "dd-mm-yyyy"

@@ -13,4 +13,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-sprockets
 //= require_tree .
+//= require i18n
+//= require i18n/translations
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.ja.js
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.js
+
+$(document).ready(function(){
+  $(".datepicker").datepicker({
+    format: I18n.t("date.format")
+  });
+});
