@@ -2,8 +2,7 @@ class User < ActiveRecord::Base
   has_many :assignees
   has_many :time_logs
   has_many :activities
-  has_many :projects
-
+  has_many :projects, foreign_key: :manager_id
   devise :database_authenticatable, :registerable, :recoverable,
     :rememberable, :trackable, :validatable
 
