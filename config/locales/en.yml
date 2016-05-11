@@ -6,3 +6,5 @@ en:
     logout: "Logout"
   buttons:
     login: "Login"
+  project:
+    title: "List project"
