@@ -14,6 +14,8 @@ gem "config"
 gem "i18n-js"
 gem "faker"
 gem "bootstrap-sass"
+gem "bootstrap-datepicker-rails"
+gem "cancancan", "~> 1.10"
 
 group :development, :test do
   gem "byebug"

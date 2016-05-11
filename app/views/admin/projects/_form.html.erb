@@ -1,0 +1,38 @@
+<%= form_for [:admin, @project] do |f| %>
+  <div class="row">
+    <div class="row">
+      <%= f.hidden_field :manager_id, value: current_user.id %>
+      <div class="col-md-2 text-right">
+        <span><%= t "projects.name" %></span>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :name, class: "form-control", required: true %>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col-md-2 text-right">
+        <span><%= t "projects.description" %></span>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_area :description, class: "form-control", required: true %>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col-md-2 text-right">
+        <span><%= t "projects.start_date" %></span>
+      </div>
+      <div class="col-md-3">
+        <%= f.text_field :start_date, class: "form-control datepicker", required: true %>
+      </div>
+      <div class="col-md-1 text-right">
+        <span><%= t "projects.end_date" %></span>
+      </div>
+      <div class="col-md-3">
+        <%= f.text_field :end_date, class: "form-control datepicker", required: true %>
+      </div>
+    </div></br>
+    <div class="col-md-2 col-md-offset-2">
+      <%= f.submit t("buttons.create"), class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
