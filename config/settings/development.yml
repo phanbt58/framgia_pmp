@@ -1,0 +1,3 @@
+hr_system_link:
+  sessions: "http://8298bb29.ngrok.io/api/sessions.json?"
+  users: "http://8298bb29.ngrok.io/api/users.json?"

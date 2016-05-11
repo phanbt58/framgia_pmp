@@ -9,4 +9,5 @@ Rails.application.routes.draw do
       resources :sprints
     end
   end
+  resources :synchronizes, only: [:index, :create]
 end
