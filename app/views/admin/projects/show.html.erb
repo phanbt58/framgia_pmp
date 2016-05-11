@@ -1,0 +1,35 @@
+<div class="title"><h1><%= t "project.show.overview" %></h1></div>
+<div class="row">
+  <div class="lb-contain">
+    <div class="lbcal pull-left">
+      <ul>
+        <li><%= label_tag :project, t("project.show.project_name") %></li>
+        <li><%= @project.name %></li>
+      </ul>
+      <ul>
+        <li><%= label_tag :description, t("project.show.description") %></li>
+        <li><%= @project.description %></li>
+      </ul>
+      <ul>
+        <li><%= label_tag :start_date, t("project.show.start_date") %></li>
+        <li><%= @project.start_date %></li>
+      </ul>
+      <ul>
+        <li><%= label_tag :end_date, t("project.show.end_date") %></li>
+        <li><%= @project.end_date %></li>
+      </ul>
+    </div>
+    <div class="pull-right">
+      <ul>
+        <li><%= label_tag :manager, t("project.show.manager") %></li>
+        <li><%= @manager.name %></li>
+      </ul>
+      <ul>
+        <li><%= label_tag :member, t("project.show.member") %></li>
+        <% @assignees.each do |assignee| %>
+          <li><%= assignee.user_name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
