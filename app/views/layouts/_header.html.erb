@@ -1,0 +1,12 @@
+<header class="navbar navbar-fixed-top navbar-custom">
+  <%= link_to t("project_name"), "", id: "logo"  %>
+  <div class="container">
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to t("sessions.login"), new_user_session_path %></li>
+        <li><%= link_to t("sessions.logout"), destroy_user_session_path,
+          method: :delete %></li>
+      </ul>
+    </nav>
+  </div>
+</header>

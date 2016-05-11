@@ -12,10 +12,14 @@ gem "mysql2", "~> 0.3.20"
 gem "devise"
 gem "config"
 gem "i18n-js"
+gem "faker"
+gem "bootstrap-sass"
 
 group :development, :test do
   gem "byebug"
   gem "i18n-tasks"
+  gem "rspec-rails"
+  gem "fabrication"
 end
 
 group :development do

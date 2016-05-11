@@ -10,4 +10,11 @@ class User < ActiveRecord::Base
   enum role: [:member, :leader, :manager]
 
   validates :name, presence: true, length: {maximum: 50}
+
+  before_create :set_default_role
+
+  private
+  def set_default_role
+    self.role ||= :member
+  end
 end
