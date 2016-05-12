@@ -18,6 +18,18 @@
         <%= f.text_area :description, class: "form-control", required: true %>
       </div>
     </div><br>
+
+    <div class="row">
+      <div class="col-md-2 text-right">
+        <span><%= t "projects.member" %></span>
+      </div>
+      <div class="col-md-7">
+        <div class="form-group">
+          <%= f.select :user_ids, @users.collect {|user| [user.name, user.id]}, {},
+            {id: "assignee", multiple: :true} %>
+        </div>
+      </div>
+    </div><br>
     <div class="row">
       <div class="col-md-2 text-right">
         <span><%= t "projects.start_date" %></span>

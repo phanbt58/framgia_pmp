@@ -16,6 +16,7 @@ gem "faker"
 gem "bootstrap-sass"
 gem "bootstrap-datepicker-rails"
 gem "cancancan", "~> 1.10"
+gem "select2-rails"
 
 group :development, :test do
   gem "byebug"

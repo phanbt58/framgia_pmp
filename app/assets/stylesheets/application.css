@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  *= require bootstrap-datepicker
+ *= require select2
+ *= require select2-bootstrap
  */
 
 @import "bootstrap-sprockets";

@@ -16,7 +16,6 @@ en:
       member: "Member"
     delete:
       confirm: "You are sure?"
-  projects:
     overview: "Overview"
     new: "New Project"
     edit: "Edit Project"

@@ -3,14 +3,17 @@ class Project < ActiveRecord::Base
 
   has_many :sprints
   has_many :product_backlogs
+  has_many :assignees
+  has_many :users, through: :assignees
 
   scope :list_by_assignee, ->user do
     joins(sprints: :assignees).where assignees: {user_id: user.id}
   end
-  PROJECT_ATTRIBUTES_PARAMS = [:name, :description, :manager_id, :start_date, :end_date]
+  PROJECT_ATTRIBUTES_PARAMS = [:name, :description, :manager_id, :start_date,
+    :end_date, user_ids: []]
 
   validate :check_end_date, on: [:create, :update]
-  
+
   private
   def check_end_date
     if self.start_date.present? && self.end_date < self.start_date
