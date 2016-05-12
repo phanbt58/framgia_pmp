@@ -20,9 +20,16 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.ja.js
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.js
+//= require select2
 
 $(document).ready(function(){
   $(".datepicker").datepicker({
     format: I18n.t("date.format")
+  });
+
+  $( "#assignee" ).select2({
+    multiple: true,
+    theme: "bootstrap",
+    width: '100%'
   });
 });

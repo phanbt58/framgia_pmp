@@ -1,5 +1,10 @@
 class Admin::ProjectsController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
+  before_action :load_assignee, only: [:new, :edit, :show]
+
+  def index
+    @projects = Project.all
+  end
 
   def create
     if @project.save
@@ -12,6 +17,7 @@ class Admin::ProjectsController < ApplicationController
   end
 
   def show
+    @project = Project.find params[:id]
     @manager = @project.manager
     @assignees = Assignee.list_by_project @project
   end
@@ -38,5 +44,10 @@ class Admin::ProjectsController < ApplicationController
   private
   def project_params
     params.require(:project).permit Project::PROJECT_ATTRIBUTES_PARAMS
+  end
+
+  def load_assignee
+    @users = User.all
+    @assignee = Assignee.new
   end
 end
