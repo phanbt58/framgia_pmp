@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :projects
   namespace :admin do
     root "projects#index"
-    resources :projects
+    resources :projects do 
+      resources :sprints
+    end
   end
 end

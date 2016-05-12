@@ -1,0 +1,5 @@
+<%= render "shared/category_tab", active_tab: Settings.tabs.new_sprint, project: @project %>
+<div id="sprints">
+  <h2 class="text-center"><%= t "sprints.new" %></h2>
+  <%= render "form" %>
+</div>

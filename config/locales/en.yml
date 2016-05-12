@@ -18,17 +18,22 @@ en:
       member: "Member"
     delete:
       confirm: "You are sure?"
+  projects:
+    overview: "Overview"
     new: "New Project"
     edit: "Edit Project"
     name: "Name: "
     description: "Description"
     start_date: "Start date"
     end_date: "End date"
-    created: "Project created successfully"
-    not_created: "Project not created"
+  sprints:
+    new: "New Sprint"
+    name: "Name"
+    description: "Description"
   buttons:
     create: "Create"
     delete: "Delete"
+    update: "Update"
   errors:
     update: "Update"
   errors:

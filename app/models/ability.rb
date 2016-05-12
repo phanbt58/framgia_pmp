@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
     if user.manager? || user.leader?
       can :manage, Project 
+      can :manage, Sprint
     end
   end
 end

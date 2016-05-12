@@ -1,0 +1,26 @@
+<%= form_for @sprint, url: admin_project_sprints_path(@project) do |f| %>
+  <div class="row">
+    <div class="row">
+      <%= render "shared/error_messages", object: @sprint %>
+      <%= f.hidden_field :project_id, value: @project.id %>
+      <div class="col-md-2 text-right">
+        <span><%= t "sprints.name" %></span>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_field :name, class: "form-control", required: true %>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col-md-2 text-right">
+        <span><%= t "sprints.description" %></span>
+      </div>
+      <div class="col-md-7">
+        <%= f.text_area :description, class: "form-control", required: true %>
+      </div>
+    </div><br>
+    <div class="col-md-2 col-md-offset-2">
+      <%= f.submit (f.object.new_record? ? t("buttons.create")
+        : t("buttons.update")), class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
