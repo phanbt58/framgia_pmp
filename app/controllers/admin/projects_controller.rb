@@ -1,12 +1,17 @@
 class Admin::ProjectsController < ApplicationController
-  # load_and_authorize_resource
   before_action :load_assignee, only: [:new, :edit, :show]
+  before_action :load_project, except: [:index, :new, :create]
 
   def index
     @projects = Project.all
   end
+  
+  def new
+    @project = Project.new
+  end
 
   def create
+    @project = Project.new project_params
     if @project.save
       flash[:success] = flash_message "created"
       redirect_to admin_root_url
@@ -17,7 +22,6 @@ class Admin::ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find params[:id]
     @manager = @project.manager
     @assignees = Assignee.list_by_project @project
   end
@@ -25,7 +29,7 @@ class Admin::ProjectsController < ApplicationController
   def update
     if @project.update_attributes project_params
       flash[:success] = flash_message "updated"
-      redirect_to admin_root_url
+      redirect_to admin_project_path(@project)
     else
       flash[:failed] = flash_message "not_updated"
       render :edit
@@ -49,5 +53,9 @@ class Admin::ProjectsController < ApplicationController
   def load_assignee
     @users = User.all
     @assignee = Assignee.new
+  end
+
+  def load_project
+    @project = Project.find params[:id]
   end
 end

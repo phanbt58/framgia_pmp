@@ -1,2 +1,8 @@
 <%= render "shared/category_tab", project: @project, active_tab: @sprint.id %>
-<p><%= @sprint.description %></p>
+<div class="sprints">
+  <%= link_to t("buttons.edit"), edit_admin_project_sprint_path(@project, @sprint),
+    class: "btn btn-primary" %>
+  <%= link_to t("buttons.delete"), admin_project_sprint_path(@project, @sprint), method: :delete,
+    class: "btn btn-danger", data: {confirm: t("projects.delete.confirm")} %>
+  <p><%= @sprint.description %></p>
+</div>
