@@ -25,4 +25,8 @@ module ApplicationHelper
         models_name: params[0].join(", ") unless params[0].empty?
     end
   end
+
+  def tab_active tab_name, current_tab
+    current_tab == tab_name ? "active" : nil
+  end
 end
