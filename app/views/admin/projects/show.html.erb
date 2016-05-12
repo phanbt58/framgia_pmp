@@ -1,35 +1,40 @@
-<div class="title"><h1><%= t "project.show.overview" %></h1></div>
+<div class="title"><h2><%= t "projects.show.overview" %></h2></div>
 <div class="row">
   <div class="lb-contain">
-    <div class="lbcal pull-left">
+    <div class="project-info">
       <ul>
-        <li><%= label_tag :project, t("project.show.project_name") %></li>
+        <li><%= label_tag :project, t("projects.show.project_name") %></li>
         <li><%= @project.name %></li>
       </ul>
       <ul>
-        <li><%= label_tag :description, t("project.show.description") %></li>
+        <li><%= label_tag :description, t("projects.show.description") %></li>
         <li><%= @project.description %></li>
       </ul>
       <ul>
-        <li><%= label_tag :start_date, t("project.show.start_date") %></li>
+        <li><%= label_tag :start_date, t("projects.show.start_date") %></li>
         <li><%= @project.start_date %></li>
       </ul>
       <ul>
-        <li><%= label_tag :end_date, t("project.show.end_date") %></li>
+        <li><%= label_tag :end_date, t("projects.show.end_date") %></li>
         <li><%= @project.end_date %></li>
       </ul>
     </div>
-    <div class="pull-right">
+    <div class="member">
+      <div class="title"><h2><%= t "projects.show.member" %></h2></div>
       <ul>
-        <li><%= label_tag :manager, t("project.show.manager") %></li>
+        <li><%= label_tag :manager, t("projects.show.manager") %></li>
         <li><%= @manager.name %></li>
       </ul>
       <ul>
-        <li><%= label_tag :member, t("project.show.member") %></li>
+        <li><%= label_tag :member, t("projects.show.member") %></li>
         <% @assignees.each do |assignee| %>
           <li><%= assignee.user_name %></li>
         <% end %>
       </ul>
     </div>
   </div>
+</div>
+<div class="button">
+  <%= link_to t("buttons.delete"), admin_project_path, method: :delete,
+    class: "btn btn-danger", data: {confirm: t("projects.delete.confirm")} %>
 </div>

@@ -25,7 +25,16 @@ class Admin::ProjectsController < ApplicationController
       render :edit
     end
   end
-  
+
+  def destroy
+    if @project.destroy
+      flash[:success] = flash_message "deleted"
+    else
+      flash[:success] = flash_message "not_deleted"
+    end
+    redirect_to admin_root_path
+  end
+
   private
   def project_params
     params.require(:project).permit Project::PROJECT_ATTRIBUTES_PARAMS
