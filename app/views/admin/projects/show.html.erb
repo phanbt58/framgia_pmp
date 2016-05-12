@@ -2,6 +2,12 @@
   active_tab: Settings.tabs.overview_project %>
 <div id="projects">
   <div class="title"><h1><%= t "project.show.overview" %></h1></div>
+  <div class="button">
+    <%= link_to t("buttons.delete"), admin_project_path, method: :delete,
+      class: "btn btn-danger", data: {confirm: t("projects.delete.confirm")} %>
+    <%= link_to t("buttons.edit"), edit_admin_project_path(@project),
+      class: "btn btn-primary" %>
+  </div>
   <div class="row">
     <div class="col-md-9">
       <ul>
@@ -33,9 +39,5 @@
         <% end %>
       </ul>
     </div>
-  </div>
-  <div class="button">
-    <%= link_to t("buttons.delete"), admin_project_path, method: :delete,
-      class: "btn btn-danger", data: {confirm: t("projects.delete.confirm")} %>
   </div>
 </div>

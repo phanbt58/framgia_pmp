@@ -1,0 +1,6 @@
+<div id="sprints">
+  <h2 class="text-center"><%= t "sprints.edit" %></h2>
+  <%= form_for @sprint, url: admin_project_sprint_path(@project, @sprint), method: :patch do |f| %>
+    <%= render "form", f: f %>
+  <% end %>
+</div>

@@ -26,15 +26,18 @@ en:
   sprints:
     new: "New Sprint"
     name: "Name"
+    edit: "Edit Sprint"
     description: "Description"
   buttons:
     create: "Create"
     delete: "Delete"
     update: "Update"
+    edit: "Edit"
     login: "Login"
     login_hr: "Login HR System"
     synchronize: "Synchronize"
     synchronizing: "Synchronizing..."
+    new: "New"
   errors:
     update: "Update"
   errors:
