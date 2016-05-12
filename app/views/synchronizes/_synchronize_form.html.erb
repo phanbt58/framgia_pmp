@@ -1,0 +1,7 @@
+<h2 class="text-center"><%= t "layouts.synchronize" %></h2>
+<%= form_tag synchronizes_path, method: :post do %>
+  <%= button_tag t("buttons.synchronize"),
+    data: {disable_with: t("buttons.synchronizing")},
+    class: "btn btn-primary center-block" %>
+<% end %>
+<br>

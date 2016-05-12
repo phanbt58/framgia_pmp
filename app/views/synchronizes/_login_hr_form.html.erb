@@ -1,0 +1,15 @@
+<h2 class="text-center"><%= t "layouts.login_hr" %></h2>
+<%= form_tag synchronizes_path, method: :post do |f| %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= label_tag :email %><br/>
+      <%= email_field_tag :email, "", class: "form-control" %><br/>
+
+      <%= label_tag :password %><br/>
+      <%= password_field_tag :password, "", class: "form-control" %><br/>
+
+      <%= button_tag t("buttons.login_hr"),
+        class: "btn btn-primary center-block" %>
+    </div>
+  </div>
+<% end %>

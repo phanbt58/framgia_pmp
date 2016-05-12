@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510085504) do
+ActiveRecord::Schema.define(version: 20160511084058) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "product_backlog_id", limit: 4
@@ -117,6 +117,8 @@ ActiveRecord::Schema.define(version: 20160510085504) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
+    t.string   "hr_token",               limit: 255
+    t.string   "hr_email",               limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

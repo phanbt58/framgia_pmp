@@ -4,8 +4,6 @@ en:
   sessions:
     login: "Login"
     logout: "Logout"
-  buttons:
-    login: "Login"
   projects:
     title: "List project"
     show:
@@ -34,6 +32,10 @@ en:
     create: "Create"
     delete: "Delete"
     update: "Update"
+    login: "Login"
+    login_hr: "Login HR System"
+    synchronize: "Synchronize"
+    synchronizing: "Synchronizing..."
   errors:
     update: "Update"
   errors:
@@ -45,11 +47,17 @@ en:
     user:
       mustlogin: "You need to login to access!"
     messages:
+      login_success: "login success"
       created: "%{model_name} was created successfully!"
       not_created: "%{model_name} couldn't be created"
       deleted: "%{model_name} was deleted successfully!"
       not_deleted: "%{model_name} couldn't be deleted!"
       updated: "%{model_name} was updated successfully!"
       not_updated: "%{model_name} couldn't be updated"
+      synchronized: "synchronized"
   date:
     format: "dd-mm-yyyy"
+  layouts:
+    synchronize: "Synchonize Data"
+    login_hr: "Login HR System"
+
