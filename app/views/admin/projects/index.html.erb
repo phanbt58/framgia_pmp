@@ -1,13 +1,13 @@
 <div class="row content">
   <div class="col-md-4 pull-left">
-    <h2><%= t "project.title" %></h2>
+    <h2><%= t "projects.title" %></h2>
   </div>
   <div class="col-md-8">
     <div class="pull-right">
       <div class="project box">
         <ul>
           <% @projects.each do |project| %>
-            <li><%= link_to project.name, project %></li>
+            <li><%= link_to project.name, admin_project_path(project) %></li>
           <% end %>
         </ul>
       </div>

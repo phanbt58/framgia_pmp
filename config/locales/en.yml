@@ -6,7 +6,7 @@ en:
     logout: "Logout"
   buttons:
     login: "Login"
-  project:
+  projects:
     title: "List project"
     show:
       overview: "Overview"
@@ -16,7 +16,8 @@ en:
       end_date: "End date"
       manager: "Manager"
       member: "Member"
-  projects:
+    delete:
+      confirm: "You are sure?"
     new: "New Project"
     edit: "Edit Project"
     name: "Name: "
@@ -27,9 +28,10 @@ en:
     not_created: "Project not created"
   buttons:
     create: "Create"
+    delete: "Delete"
   errors:
     update: "Update"
-  errors: 
+  errors:
     form: "Form"
     errors: "errors"
     wrong_end_date: "End date must bigger than start date "
