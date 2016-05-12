@@ -1,11 +1,12 @@
-<div class="row content">
-  <div class="col-md-4 pull-left">
-    <h2><%= t "projects.title" %></h2>
-  </div>
-  <div class="col-md-8">
-    <div class="pull-right">
-    <%= link_to t("buttons.new"), new_admin_project_path, class: "btn btn-primary" %>
-      <div class="project box">
+<div id="projects">
+  <div class="row content">
+    <div class="col-md-5">
+      <h2><%= t :home %></h2>
+    </div>
+    <div class="col-md-7">
+      <div class=" project box">
+        <%= link_to t("buttons.new"), new_admin_project_path, class: "btn btn-primary" %>
+        <h2><%= t "projects.title" %></h2>
         <ul>
           <% @projects.each do |project| %>
             <li><%= link_to project.name, admin_project_path(project) %></li>

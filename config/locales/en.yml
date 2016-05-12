@@ -1,5 +1,6 @@
 en:
   hello: "Hello world"
+  home: "Home"
   project_name: "FramgiaPMP"
   sessions:
     login: "Login"
