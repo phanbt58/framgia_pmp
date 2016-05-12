@@ -10,7 +10,12 @@ class Admin::ProjectsController < ApplicationController
       render :new
     end
   end
-  
+
+  def show
+    @manager = @project.manager
+    @assignees = Assignee.list_by_project @project
+  end
+
   private
   def project_params
     params.require(:project).permit Project::PROJECT_ATTRIBUTES_PARAMS
