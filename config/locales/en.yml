@@ -18,6 +18,7 @@ en:
       member: "Member"
   projects:
     new: "New Project"
+    edit: "Edit Project"
     name: "Name: "
     description: "Description"
     start_date: "Start date"
@@ -27,6 +28,10 @@ en:
   buttons:
     create: "Create"
   errors:
+    update: "Update"
+  errors: 
+    form: "Form"
+    errors: "errors"
     wrong_end_date: "End date must bigger than start date "
   flashs:
     access_denied: "Permisstion denied"
