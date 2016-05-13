@@ -1,7 +1,6 @@
 class Admin::ProjectsController < ApplicationController
   before_action :load_assignee, only: [:new, :edit, :show]
   before_action :load_project, except: [:index, :new, :create]
-  before_action :load_params, except: [:index, :create]
 
   def index
     @projects = Project.all

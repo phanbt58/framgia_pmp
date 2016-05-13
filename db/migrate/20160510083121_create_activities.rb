@@ -2,6 +2,7 @@ class CreateActivities < ActiveRecord::Migration
   def change
     create_table :activities do |t|
       t.references :product_backlog, index: true, foreign_key: true
+      t.references :sprint
       t.string :subject
       t.string :description
       t.integer :spent_time

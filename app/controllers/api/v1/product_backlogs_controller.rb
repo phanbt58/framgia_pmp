@@ -1,9 +1,8 @@
 class Api::V1::ProductBacklogsController < Api::BaseController
   def index
     product_backlogs = load_project.product_backlogs
-    projects = Project.all.select :id, :name
     product_backlog_rows_data = {
-      projects: projects,
+      project_name: load_project.name,
       rows: product_backlogs.map do |pb|
         {
           id: pb.id,

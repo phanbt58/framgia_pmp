@@ -7,10 +7,10 @@ Rails.application.routes.draw do
   resources :sprints
   resources :projects
   resources :synchronizes, only: [:index, :create]
-  resource :product_backlog_updates
 
   resources :projects do
     resources :product_backlogs
+    resource :product_backlog_updates
   end
   namespace :api do
     resources :sprints
