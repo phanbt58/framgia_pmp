@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, only: :session
+  devise_for :users, only: [:session, :password]
   root "projects#index"
 
   resources :sprints
