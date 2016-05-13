@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable,
     :rememberable, :trackable, :validatable
 
+  USER_ATTRIBUTES_PARAMS = [:name, :email, :password, :password_confirmation]
+
   enum role: [:member, :leader, :manager]
 
   validates :name, presence: true, length: {maximum: 50}
