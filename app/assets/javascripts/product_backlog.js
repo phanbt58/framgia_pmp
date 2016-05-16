@@ -1,4 +1,4 @@
-var tabName = "pb_tab_show";
+var project_name;
 
 function initGrid(){
   myGrid = new dhtmlXGridObject("product_backlog_input");
@@ -24,8 +24,6 @@ function initGrid(){
    return true;
   });
 
-  project_column = myGrid.getCombo(4);
-
   dp = new dataProcessor($("#product_backlog_input").data("updateApi"));
   dp.setTransactionMode("POST", false);
   dp.setUpdateMode("row");
@@ -36,29 +34,19 @@ function initGrid(){
    dataType: "json",
     success: function(data) {
       myGrid.parse(data, "json");
-      projects = data.projects;
-      for (i in projects) {
-        project_column.put(projects[i].id, projects[i].name);
-      }
-      isLoad = true;
+      project_name = data.project_name
     },
     error: function(msg) {
     }
   });
-  isLoad = true;
 }
 
-$(document).on("click", "#pb_tab_show", function() {
-  tabName = "pb_tab_show"
-});
-
 $(document).on("page:change", function(){
-  if(tabName == "pb_tab_show"){
+  if ($("#has_product_backlog_api").length) {
     initGrid();
-    tabName = "";
   }
 });
 
 $(document).on("click", "#add_more_pb", function() {
-  myGrid.addRow(myGrid.uid(),"")
+  myGrid.addRow(myGrid.uid(),",,,," + project_name)
 });

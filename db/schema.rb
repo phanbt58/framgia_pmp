@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20160511084058) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "product_backlog_id", limit: 4
+    t.integer  "sprint_id",          limit: 4
     t.string   "subject",            limit: 255
     t.string   "description",        limit: 255
     t.integer  "spent_time",         limit: 4

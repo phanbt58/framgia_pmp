@@ -1,5 +1,5 @@
 Fabricator :sprint do
-  name {Faker::Lorem.word}
+  name {sequence(:name, 1) {|i| "Sprint#{i}"}}
   description {Faker::Lorem.sentence}
   project_id
 end
