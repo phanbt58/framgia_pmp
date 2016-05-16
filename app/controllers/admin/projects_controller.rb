@@ -1,17 +1,8 @@
 class Admin::ProjectsController < ApplicationController
+  load_and_authorize_resource
   before_action :load_assignee, only: [:new, :edit, :show]
-  before_action :load_project, except: [:index, :new, :create]
-
-  def index
-    @projects = Project.all
-  end
-
-  def new
-    @project = Project.new
-  end
 
   def create
-    @project = Project.new project_params
     if @project.save
       flash[:success] = flash_message "created"
       redirect_to admin_root_url
@@ -53,9 +44,5 @@ class Admin::ProjectsController < ApplicationController
   def load_assignee
     @users = User.all
     @assignee = Assignee.new
-  end
-
-  def load_project
-    @project = Project.find params[:id]
   end
 end

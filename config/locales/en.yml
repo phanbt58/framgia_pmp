@@ -7,6 +7,7 @@ en:
     logout: "Logout"
     forgot: "(forgot password)"
     reset: "Reser Password"
+    not_admin: "you are not Admin"
   projects:
     title: "List project"
     show:
