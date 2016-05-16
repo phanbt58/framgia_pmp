@@ -6,6 +6,7 @@ en:
     login: "Login"
     logout: "Logout"
     forgot: "(forgot password)"
+    reset: "Reser Password"
   projects:
     title: "List project"
     show:
@@ -50,6 +51,9 @@ en:
     wrong_end_date: "End date must bigger than start date "
   flashs:
     access_denied: "Permisstion denied"
+    password_reset: "Email sent with password reset instructions"
+    not_email: "Email address not found"
+    reset_success: "Password has been reset."
     user:
       mustlogin: "You need to login to access!"
     messages:
@@ -70,5 +74,9 @@ en:
     new_pass: "New Password"
     password_confirmation: "Confirm new password"
     forgot_pass: "Forgot your password?"
+    invite: "Invite User"
+    sync_user: "Synchonize User"
+    pass_reset: "Password reset"
+    mail_body: "To reset your password click the link below:"
   product_backlog:
     title: "Product Backlog"
