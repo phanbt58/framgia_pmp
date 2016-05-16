@@ -1,5 +1,6 @@
 class SynchronizesController < ApplicationController
   require "net/http"
+  before_action :verity_admin?
 
   def index
     @has_token = current_user.hr_token.present?
@@ -40,5 +41,4 @@ class SynchronizesController < ApplicationController
     uri = URI("#{Settings.hr_system_link.users}email=#{email}&token=#{token}")
     Net::HTTP.get_response uri
   end
-
 end

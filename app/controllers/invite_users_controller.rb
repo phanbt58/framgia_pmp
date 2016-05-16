@@ -1,5 +1,6 @@
 class InviteUsersController < ApplicationController
   before_action :load_user, only: [:edit, :update]
+  before_action :verity_admin?
 
   def create
     @user = User.find_by email: params[:invite_user][:email].downcase
