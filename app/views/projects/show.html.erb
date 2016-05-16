@@ -1,7 +1,8 @@
-<div class="title"><h1><%= t "projects.show.overview" %></h1></div>
-<div class="row">
-  <div class="lb-contain">
-    <div class="lbcal pull-left">
+<%= render "shared/category_tab", project: @project,
+  active_tab: Settings.tabs.overview_project %>
+<div id="projects">
+  <div class="row">
+    <div class="col-md-9 project-description">
       <ul>
         <li><%= label_tag :project, t("projects.show.project_name") %></li>
         <li><%= @project.name %></li>
@@ -19,18 +20,17 @@
         <li><%= @project.end_date %></li>
       </ul>
     </div>
-    <div class="pull-right">
+    <div class="col-md-3 box">
       <ul>
         <li><%= label_tag :manager, t("projects.show.manager") %></li>
-        <li><%= @manager.name %></li>
+        <li><%= link_to "#{@manager.name}", user_path(@manager) %></li>
       </ul>
       <ul>
         <li><%= label_tag :member, t("projects.show.member") %></li>
         <% @assignees.each do |assignee| %>
-          <li><%= assignee.user_name %></li>
+          <li><%= link_to "#{assignee.user_name}", user_path(assignee) %></li>
         <% end %>
       </ul>
     </div>
   </div>
 </div>
-

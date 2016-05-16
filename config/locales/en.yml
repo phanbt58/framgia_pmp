@@ -30,6 +30,7 @@ en:
   work_performances:
     view: "View work performance data"
   sprints:
+    title: "List Sprint"
     new: "New Sprint"
     name: "Name"
     edit: "Edit Sprint"

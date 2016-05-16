@@ -5,5 +5,10 @@ class Sprint < ActiveRecord::Base
   has_many :users, through: :assignees
   has_many :product_backlogs
   has_many :activities
+
   SPRINT_ATTRIBUTES_PARAMS = [:name, :description, :project_id, user_ids: []]
+
+  scope :list_by_user, ->user do
+    joins(:assignees).where assignees: {user_id: user.id}
+  end
 end

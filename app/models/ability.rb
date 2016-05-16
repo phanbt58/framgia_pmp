@@ -4,7 +4,8 @@ class Ability
   def initialize user
     user ||= User.new
     if user.member?
-      can [:show, :update], User, id: user.id
+      can [:update], User, id: user.id
+      can [:show], User
     else
       can :manage, Project
       can :manage, Sprint
