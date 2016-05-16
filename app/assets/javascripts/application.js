@@ -1,3 +1,4 @@
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -14,6 +15,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require product_backlog
 //= require_tree .
 //= require i18n
 //= require i18n/translations
@@ -38,6 +40,10 @@
 //= require dhtmlx/dhtmlxsh_selection
 //= require dhtmlx/dhtmlxsh_undo
 //= require spreadsheet
+//= require dhtmlxcommon
+//= require dhtmlxgrid
+//= require dhtmlxgridcell
+//= require dhtmlxdataprocessor
 
 $(document).on("page:change", function(){
   $(".datepicker").datepicker({

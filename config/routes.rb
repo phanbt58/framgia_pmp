@@ -1,3 +1,5 @@
+require "api_constraints"
+
 Rails.application.routes.draw do
   devise_for :users, only: [:session, :password]
   root "projects#index"
@@ -5,7 +7,11 @@ Rails.application.routes.draw do
   resources :sprints
   resources :projects
   resources :synchronizes, only: [:index, :create]
+  resource :product_backlog_updates
 
+  resources :projects do
+    resources :product_backlogs
+  end
   namespace :api do
     resources :sprints
   end
@@ -18,4 +24,10 @@ Rails.application.routes.draw do
 
   resources :synchronizes, only: [:index, :create]
   resources :users, except: [:new, :create]
+
+  namespace :api, defaults: {format: "json"} do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+      resources :product_backlogs
+    end
+  end
 end
