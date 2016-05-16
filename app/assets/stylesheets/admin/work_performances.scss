@@ -1,0 +1,29 @@
+#work-performance-datas {
+  margin-top: 20px;
+
+  .tbl-work-performance-datas {
+    td, th {
+      border: 1px solid;
+    }
+
+    .th {
+      width: 1%;
+    }
+
+    .activity {
+      width: 30%;
+    }
+
+    .assgined {
+      width: 15%;
+    }
+
+    .phase-name {
+      text-align: center;
+    }
+
+    .phase-value {
+      text-align: center;
+    }
+  }
+}

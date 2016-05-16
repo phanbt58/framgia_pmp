@@ -9,6 +9,7 @@ class Ability
       can :manage, Project
       can :manage, Sprint
       can :manage, User
+      can :manage, WorkPerformance
     end
   end
 end

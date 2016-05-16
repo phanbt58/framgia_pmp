@@ -22,6 +22,7 @@
  *= require dhtmlx/dhtmlxgrid_reset
  *= require dhtmlx/dhtmlxspreadsheet
  *= require skins/dhtmlxgrid_dhx_blue
+ *= require admin/work_performances
  */
 
 @import "bootstrap-sprockets";

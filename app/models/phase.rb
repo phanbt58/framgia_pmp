@@ -1,3 +1,3 @@
 class Phase < ActiveRecord::Base
-  has_many :work_performance_datas
+  has_many :work_performances
 end

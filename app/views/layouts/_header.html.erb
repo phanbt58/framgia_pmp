@@ -4,12 +4,13 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li><%= link_to t("sessions.logout"), destroy_user_session_path,
-          method: :delete %></li>
           <% if current_user.manager? %>
             <li><%= link_to t("layouts.invite"), new_invite_user_path %></li>
             <li><%= link_to t("layouts.sync_user"), synchronizes_path %></li>
+            <li><%= link_to t("layouts.projects"), admin_projects_path %></li>
           <% end %>
+          <li><%= link_to t("sessions.logout"), destroy_user_session_path,
+          method: :delete %></li>
         <% else %>
           <li><%= link_to t("sessions.login"), new_user_session_path %></li>
         <% end %>

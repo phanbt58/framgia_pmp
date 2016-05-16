@@ -1,0 +1,43 @@
+<%= render "shared/category_tab", project: @project, active_tab: @sprint.id %>
+<div id="work-performance-datas">
+  <table class="table table-striped tbl-work-performance-datas">
+    <thead>
+      <tr>
+        <th class="th"></th>
+        <th class="activity"><%= t "table.thead.activity" %></th>
+        <th class="assigned"><%= t "table.thead.assigned" %></th>
+        <% @phases.each do |phase| %>
+          <th colspan="2" class="phase-name"><%= phase.phase_name %></th>
+        <% end %>
+      </tr>
+      <tr>
+        <th class="th"></th>
+        <th class="activity"></th>
+        <th class="assigned"></th>
+        <% @phases.each do |phase| %>
+          <th class="phase-value"><%= t "table.thead.plan" %></th>
+          <th class="phase-value"><%= t "table.thead.actual" %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @activities.each_with_index.map do |activity, index| %>
+        <tr>
+          <td class="th"><%= index + 1 %></td>
+          <td class="activity"><%= activity.subject %></td>
+          <td class="assigned"><%= activity.user_name %></td>
+          <% @phases.each do |phase| %>         
+            <% if activity.work_performance.present? &&
+              activity.work_performance.phase == phase %>
+                <td class="phase-value"><%= activity.work_performance_plan %></td>
+                <td class="phase-value"><%= activity.work_performance_actual %></td>
+            <% else %>
+              <td></td>
+              <td></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
