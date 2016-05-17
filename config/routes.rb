@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root "projects#index"
     resources :projects do
-      resources :sprints
+      resources :sprints do
+        resources :work_performances, only: [:index, :edit, :update]
+      end
     end
   end
 

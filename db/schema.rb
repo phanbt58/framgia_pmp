@@ -21,11 +21,10 @@ ActiveRecord::Schema.define(version: 20160511084058) do
     t.integer  "spent_time",         limit: 4
     t.integer  "estimate",           limit: 4
     t.integer  "user_id",            limit: 4
+    t.integer  "sprint_id",          limit: 4
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
-
-  add_index "activities", ["product_backlog_id"], name: "index_activities_on_product_backlog_id", using: :btree
 
   create_table "assignees", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -125,7 +124,7 @@ ActiveRecord::Schema.define(version: 20160511084058) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "work_performance_data", force: :cascade do |t|
+  create_table "work_performances", force: :cascade do |t|
     t.integer  "phase_id",    limit: 4
     t.string   "description", limit: 255
     t.integer  "plan",        limit: 4
@@ -135,8 +134,6 @@ ActiveRecord::Schema.define(version: 20160511084058) do
     t.datetime "updated_at",              null: false
   end
 
-  add_index "work_performance_data", ["activity_id"], name: "index_work_performance_data_on_activity_id", using: :btree
-  add_index "work_performance_data", ["phase_id"], name: "index_work_performance_data_on_phase_id", using: :btree
+  add_index "work_performances", ["phase_id"], name: "index_work_performances_on_phase_id", using: :btree
 
-  add_foreign_key "activities", "product_backlogs"
 end

@@ -27,6 +27,8 @@ en:
     description: "Description"
     start_date: "Start date"
     end_date: "End date"
+  work_performances:
+    view: "View work performance data"
   sprints:
     new: "New Sprint"
     name: "Name"
@@ -66,9 +68,16 @@ en:
       updated: "%{model_name} was updated successfully!"
       not_updated: "%{model_name} couldn't be updated"
       synchronized: "synchronized"
+  table:
+    thead:
+      activity: "Activity"
+      assigned: "Assigned for"
+      plan: "P"
+      actual: "A"
   date:
     format: "dd-mm-yyyy"
   layouts:
+    projects: "Projects"
     synchronize: "Synchonize Data"
     login_hr: "Login HR System"
     update_user: "Update your profile"
