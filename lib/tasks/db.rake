@@ -7,20 +7,21 @@ namespace :db do
     user = Fabricate :user, role: 2, email: "chu.anh.tuan@framgia.com",
       name: "Chu Anh Tuan"
 
-    puts "Creating product backlog"
-
-    5.times do
-      estimate = Faker::Number.between(4, 16)
-      actual = Faker::Number.between(0, 4)
-      remaining = estimate - actual
-
-      Fabricate :product_backlog, estimate: estimate, actual: actual,
-        remaining: remaining
-    end
-
     puts "Creating project"
     5.times do
       Fabricate :project, manager_id: user.id
+    end
+
+    puts "Creating product backlog"
+    Project.all.each do |project|
+      5.times do
+        estimate = Faker::Number.between(4, 16)
+        actual = Faker::Number.between(0, 4)
+        remaining = estimate - actual
+        
+        Fabricate :product_backlog, estimate: estimate, actual: actual,
+          remaining: remaining, project_id: project.id
+      end
     end
 
     puts "Creating sprint"

@@ -6,7 +6,8 @@ class Api::V1::ProductBacklogsController < Api::BaseController
       rows: product_backlogs.map do |pb|
         {
           id: pb.id,
-          data: [pb.priority, pb.estimate, pb.actual, pb.remaining, get_project_name(pb)]
+          data: [pb.category, pb.story, pb.priority, pb.estimate, pb.actual,
+            pb.remaining, get_project_name(pb)]
         }
       end
     }
