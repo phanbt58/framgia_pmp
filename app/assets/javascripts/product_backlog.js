@@ -2,26 +2,39 @@ var project_name;
 
 function initGrid(){
   myGrid = new dhtmlXGridObject("product_backlog_input");
-  myGrid.setImagePath("assets/imgs/");
-  myGrid.setHeader("Priority, Estimate, Actual, Remaining, Project, Remove");
-  myGrid.setInitWidths("70,70,70,100,200,70");
-  myGrid.setColAlign("center,center,center,center,center,center");
-  myGrid.setColTypes("ed,ed,ed,ed,ro,ro");
-  myGrid.setColSorting("int,str,str");
+  myGrid.setImagePath("/assets/imgs/");
+  myGrid.setHeader("Category, Story, Priority, Estimate, Actual, Remaining," +
+    "Project name, Remove");
+  myGrid.setInitWidths("150,150,100,100,100,100,200,70");
+  myGrid.setColAlign("center,center,center,center,center,center,center,center");
+  myGrid.setColTypes("ed,ed,ed,ed,ed,ed,ro,ro");
+  myGrid.setColSorting("str,str,int,int,int,int,str");
   myGrid.setSkin("dhx_blue");
+  myGrid.enableAutoHeight(true);
+  myGrid.enableAutoWidth(true);
   myGrid.init();
-  myGrid.enableResizing("false,false,false,false");
+  myGrid.enableResizing("false,true,true,true,true,true,true,true");
+  myGrid.enableEditTabOnly(true);
 
   myGrid.attachEvent("onRowCreated", function(id){
-    myGrid.cells(id, 5).setValue("<button class='btn btn-xs btn-danger'>" +
+    myGrid.cells(id, 7).setValue("<button class='btn btn-xs btn-danger'>" +
       "<span class='glyphicon glyphicon-trash'></span></button");
    return true;
   });
 
   myGrid.attachEvent("onRowSelect", function(id, index){
-   if (index == 5)
-       myGrid.deleteSelectedRows();
+   if (index == 7)
+      myGrid.deleteSelectedRows();
    return true;
+  });
+
+  myGrid.attachEvent("onEditCell", function(stage, id, ind){
+      if (stage == 2 && ind == 5 && id == this.getRowId(this.getRowsNum()-1)){
+        this.addRow(this.getUID(),",,,,,," + project_name);
+        this.selectCell(this.getRowsNum(),0);
+        this.editCell();
+      }
+      return true;
   });
 
   dp = new dataProcessor($("#product_backlog_input").data("updateApi"));
@@ -48,5 +61,7 @@ $(document).on("page:change", function(){
 });
 
 $(document).on("click", "#add_more_pb", function() {
-  myGrid.addRow(myGrid.uid(),",,,," + project_name)
+  var newID = myGrid.uid();
+  myGrid.addRow(newID,",,,,,," + project_name);
+  myGrid.selectCell(myGrid.getRowIndex(newID),0,false,false,true);
 });

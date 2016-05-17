@@ -1853,6 +1853,7 @@ div.gridbox table.obj.row20px tr td {
 	padding-bottom: 0px !important;
 	border-collapse: separate !important;
 	border-top: 1px solid #DDDDDD !important;
+  text-overflow: ellipsis;
 }
 
 div.gridbox table.obj th, div.gridbox table.hdr th {
@@ -1908,12 +1909,6 @@ div.gridbox table.obj tr td.editable {
 
 .dhx_combo_edit:focus {
 	border: none !important;
-}
-
-div.gridbox table.obj.row20px tr td:first-child,
-div.gridbox table.obj.row20px tr td:first-child {
-	border-color: #FDFDFD #A4BED4 #A4BED4 #FDFDFD !important;
-	border-width: 1px 0 !important;
 }
 
 div.dhx_toolbar_poly_dhx_skyblue table.buttons_cont td.td_btn_img {

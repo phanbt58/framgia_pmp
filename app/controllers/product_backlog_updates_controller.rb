@@ -3,8 +3,8 @@ class ProductBacklogUpdatesController < ApplicationController
   
   def create
     @mode = params["!nativeeditor_status"]
-    priority, estimate, actual, remaining, project_id = params[:c0], params[:c1],
-      params[:c2], params[:c3], params[:project_id]
+    category, story, priority, estimate, actual, remaining, project_id = params[:c0],
+      params[:c1], params[:c2], params[:c3], params[:c4], params[:c5], params[:project_id]
 
     @id = params["gr_id"]
 
@@ -15,12 +15,14 @@ class ProductBacklogUpdatesController < ApplicationController
 
     when "updated"
       if @id.empty?
-        product_backlog = ProductBacklog.create priority: priority, estimate: estimate,
-          actual: actual,remaining: remaining, project_id: project_id
+        product_backlog = ProductBacklog.create category: category, story: story,
+          priority: priority, estimate: estimate, actual: actual,remaining: remaining,
+          project_id: project_id
       else
         product_backlog = ProductBacklog.find @id
-        product_backlog.update_attributes priority: priority, estimate: estimate,
-          actual: actual, remaining: remaining, project_id: project_id
+        product_backlog.update_attributes category: category, story: story,
+          priority: priority, estimate: estimate, actual: actual, remaining: remaining,
+          project_id: project_id
         product_backlog.save
         @tid = @id
       end
