@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20160511084058) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "product_backlog_id", limit: 4
-    t.integer  "sprint_id",          limit: 4
     t.string   "subject",            limit: 255
     t.string   "description",        limit: 255
     t.integer  "spent_time",         limit: 4
@@ -49,14 +48,16 @@ ActiveRecord::Schema.define(version: 20160511084058) do
   end
 
   create_table "product_backlogs", force: :cascade do |t|
+    t.string   "category",   limit: 255
+    t.string   "story",      limit: 255
     t.integer  "priority",   limit: 4
     t.float    "estimate",   limit: 24
     t.float    "actual",     limit: 24
     t.float    "remaining",  limit: 24
     t.integer  "project_id", limit: 4
     t.integer  "sprint_id",  limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "product_backlogs", ["project_id"], name: "index_product_backlogs_on_project_id", using: :btree

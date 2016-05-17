@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes user_params
+      sign_in(@user, bypass: true)
       flash[:success] = flash_message "updated"
       redirect_to @user
     else
