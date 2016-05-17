@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
   has_many :users, through: :assignees
 
   scope :list_by_assignee, ->user do
-    joins(sprints: :assignees).where assignees: {user_id: user.id}
+    joins(:assignees).where assignees: {user_id: user.id}
   end
   PROJECT_ATTRIBUTES_PARAMS = [:name, :description, :manager_id, :start_date,
     :end_date, user_ids: []]
