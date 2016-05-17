@@ -8,6 +8,8 @@ en:
     forgot: "(forgot password)"
     reset: "Reser Password"
     not_admin: "you are not Admin"
+    profile: Profile
+    edit: "Update User"
   projects:
     title: "List project"
     show:
@@ -78,6 +80,7 @@ en:
   date:
     format: "dd-mm-yyyy"
   layouts:
+    account: "Account"
     projects: "Projects"
     synchronize: "Synchonize Data"
     login_hr: "Login HR System"

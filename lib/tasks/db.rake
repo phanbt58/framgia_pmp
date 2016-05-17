@@ -61,7 +61,7 @@ namespace :db do
 
     puts "Creating work performance data"
     Activity.all.each do |activity|
-      Fabricate :work_performance_data, phase_id: Phase.first.id, activity_id: activity.id
+      Fabricate :work_performance, phase_id: Phase.first.id, activity_id: activity.id
     end
 
     puts "Success remake data"
