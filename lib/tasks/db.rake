@@ -46,8 +46,7 @@ namespace :db do
 
     puts "Add asignee to sprints 1"
     User.all.each do |user|
-      Fabricate :assignee, user_id: user.id, project_id: Project.first.id,
-        sprint_id: Sprint.first.id
+      Fabricate :assignee, user_id: user.id, project_id: Project.first.id
     end
 
     puts "Creating activities for sprint 1"

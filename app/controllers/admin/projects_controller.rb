@@ -42,7 +42,7 @@ class Admin::ProjectsController < ApplicationController
   end
 
   def load_assignee
-    @users = User.all
+    @users = User.fitler_by_role_not_manager
     @assignee = Assignee.new
   end
 end
