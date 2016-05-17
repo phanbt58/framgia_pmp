@@ -29,6 +29,7 @@ en:
     end_date: "End date"
   work_performances:
     view: "View work performance data"
+    update: "Update"
   sprints:
     title: "List Sprint"
     new: "New Sprint"

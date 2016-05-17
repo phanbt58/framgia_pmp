@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     root "projects#index"
     resources :projects do
       resources :sprints do
-        resources :work_performances, only: [:index, :edit, :update]
+        resources :work_performances, except: [:new, :create]
       end
     end
   end

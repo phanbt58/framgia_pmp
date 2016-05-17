@@ -24,13 +24,20 @@
       <% @activities.each_with_index.map do |activity, index| %>
         <tr>
           <td class="th"><%= index + 1 %></td>
-          <td class="activity"><%= activity.subject %></td>
+          <td><%= link_to "#{activity.subject}",
+            edit_admin_project_sprint_work_performance_path(
+            @project, @sprint, activity.work_performance), remote: true %>
+          </td>
           <td class="assigned"><%= activity.user_name %></td>
-          <% @phases.each do |phase| %>         
+          <% @phases.each do |phase| %>
             <% if activity.work_performance.present? &&
               activity.work_performance.phase == phase %>
-                <td class="phase-value"><%= activity.work_performance_plan %></td>
-                <td class="phase-value"><%= activity.work_performance_actual %></td>
+              <td class="phase-value", id="plan-<%= phase.id %>">
+                <%= activity.work_performance_plan %>
+              </td>
+              <td class="phase-value" id="actual-<%= phase.id %>">
+                <%= activity.work_performance_actual %>
+              </td>
             <% else %>
               <td></td>
               <td></td>
@@ -41,3 +48,4 @@
     </tbody>
   </table>
 </div>
+<%= render "dialog" %>
