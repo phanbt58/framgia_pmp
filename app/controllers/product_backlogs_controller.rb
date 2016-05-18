@@ -1,6 +1,7 @@
 class ProductBacklogsController < ApplicationController
-
+  load_resource :project
+  
   def index
-    @project = Project.find params[:project_id]
+    @sprints = Sprint.list_by_user current_user
   end
 end

@@ -44,9 +44,14 @@ namespace :db do
       user = Fabricate :user, name: key, email: value+"@framgia.com"
     end
 
+    puts "Add asignee to project 1"
+    User.all.each do |user|
+      Fabricate :assignee, user_id: user.id, project_id: Project.first.id, sprint_id: nil
+    end
+
     puts "Add asignee to sprints 1"
     User.all.each do |user|
-      Fabricate :assignee, user_id: user.id, project_id: Project.first.id
+      Fabricate :assignee, user_id: user.id, project_id: nil, sprint_id: Sprint.first.id
     end
 
     puts "Creating activities for sprint 1"

@@ -4,13 +4,14 @@ Rails.application.routes.draw do
   devise_for :users, only: [:session, :password]
   root "projects#index"
 
-  resources :sprints
-  resources :projects
   resources :synchronizes, only: [:index, :create]
 
   resources :projects do
     resources :product_backlogs
     resource :product_backlog_updates
+    resources :sprints do
+      resources :work_performances, except: [:new, :create]
+    end
   end
   namespace :api do
     resources :sprints
