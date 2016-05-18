@@ -1,9 +1,10 @@
-class Admin::WorkPerformancesController < ApplicationController
-  load_and_authorize_resource
-  load_and_authorize_resource :project
-  load_and_authorize_resource :sprint
+class WorkPerformancesController < ApplicationController
+  load_resource
+  load_resource :project
+  load_resource :sprint
 
   def index
+    @sprints = Sprint.list_by_user current_user
     @phases = Phase.all
     @activities = @sprint.activities
   end

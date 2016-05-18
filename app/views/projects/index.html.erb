@@ -16,7 +16,7 @@
                   <ul>
                     <% @sprints.each do |sprint| %>
                       <% if project.sprints.include? sprint%>
-                        <li><%= link_to sprint.name, sprint %></li>
+                        <li><%= link_to sprint.name, project_sprint_path(project, sprint) %></li>
                       <% end %>
                     <% end %>
                   </ul>
