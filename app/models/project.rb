@@ -14,6 +14,8 @@ class Project < ActiveRecord::Base
 
   validate :check_end_date, on: [:create, :update]
 
+  delegate :name, to: :manager, prefix: true, allow_nil: true
+
   private
   def check_end_date
     if self.start_date.present? && self.end_date < self.start_date

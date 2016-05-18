@@ -2,11 +2,15 @@
 @import "bootstrap";
 
 .navbar-custom {
-  color: #B4F2A0;
-  background-color: #B4F2A0;
-}
+  background-color: #628DB6;
+  a {
+    color: #FFFFFF;
+    font-size: 1em;
+    }
+  }
 
 #logo {
+  padding-left: 10px;
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
@@ -17,7 +21,7 @@
 }
 
 #logo:hover {
-  color: #ffefef;
+  color: #576980;
   text-decoration: none;
 }
 
@@ -26,4 +30,8 @@
   .error_explanation {
     padding-left: 150px;
   }
+
+#work-performance-datas, #sprints {
+  padding: 15px 25px;
+  } 
 }

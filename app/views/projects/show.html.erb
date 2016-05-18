@@ -1,36 +1,26 @@
-<%= render "shared/category_tab", project: @project,
+<%= render "shared/category_tab", project: @project, 
   active_tab: Settings.tabs.overview_project %>
 <div id="projects">
-  <div class="row">
-    <div class="col-md-9 project-description">
-      <ul>
-        <li><%= label_tag :project, t("projects.show.project_name") %></li>
-        <li><%= @project.name %></li>
-      </ul>
-      <ul>
-        <li><%= label_tag :description, t("projects.show.description") %></li>
-        <li><%= @project.description %></li>
-      </ul>
-      <ul>
-        <li><%= label_tag :start_date, t("projects.show.start_date") %></li>
-        <li><%= @project.start_date %></li>
-      </ul>
-      <ul>
-        <li><%= label_tag :end_date, t("projects.show.end_date") %></li>
-        <li><%= @project.end_date %></li>
-      </ul>
-    </div>
-    <div class="col-md-3 box">
-      <ul>
-        <li><%= label_tag :manager, t("projects.show.manager") %></li>
-        <li><%= link_to "#{@manager.name}", user_path(@manager) %></li>
-      </ul>
-      <ul>
-        <li><%= label_tag :member, t("projects.show.member") %></li>
-        <% @assignees.each do |assignee| %>
-          <li><%= link_to "#{assignee.user_name}", user_path(assignee) %></li>
-        <% end %>
-      </ul>
+  <div class="subject-content">
+    <div class="row">
+      <div class="col-md-9 project-description">
+        <h3><%= @project.name %></h3>
+        <p><i><%= @project.description %></i></p>
+        <p class="label"><%= t "projects.show.start_date" %></p>
+        <p><%= @project.start_date %></p>
+        <p class="label"><%= t "projects.show.end_date" %></p>
+        <p><%= @project.end_date %></p>
+      </div>
+      <div class="col-md-3 box">
+        <p class="label"><%= t "project.show.manager" %></p>
+        <p><%= link_to @manager.name, user_path(@manager) %></p>
+        <p class="label"><%= t "project.show.member" %></p>
+        <p class="list-user">
+          <% @assignees.each do |assignee| %>
+            <%= link_to assignee.user_name, user_path(assignee.user) %>,
+          <% end %>
+        </p>
+      </div>
     </div>
   </div>
 </div>
