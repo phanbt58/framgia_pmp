@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 
   before_create :set_default_role
 
+  scope :fitler_by_role_not_manager, ->{where.not role: 2}
+
   def User.digest string
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
       BCrypt::Engine.cost
