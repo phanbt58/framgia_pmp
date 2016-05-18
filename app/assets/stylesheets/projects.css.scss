@@ -1,4 +1,12 @@
 #projects {
+  .title {
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: "Roboto Slab, serif";
+    color: #474647;
+    font-size: x-large;
+  }
+
   .box {
     margin-top: 27px;
     padding: 6px;
@@ -8,12 +16,38 @@
     line-height: 1.5em;
     border: 1px solid #e4e4e4;
     word-wrap: break-word;
+    font-size: 13px;
     ul li a {
       text-decoration: none;
     }
   }
 
-  .project-description {
-    margin-top: 40px;
+  .subject-content {
+    padding: 15px 25px;
+
   }
+  
+  .label {
+    text-transform: uppercase;
+    color: #9A6565;
+    padding-left: 0px;
+    font-size: 1em;
+  }
+
+  .project-description {
+    margin-top: 0px;
+  }
+
+  .custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+
+  .custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
 }

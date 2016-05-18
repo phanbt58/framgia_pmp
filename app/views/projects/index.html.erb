@@ -1,31 +1,29 @@
 <div id="projects">
-  <div class="row content">
-    <div class="col-md-5">
-      <h2><%= t :home %></h2>
+  <div class="title"><%= t "layout.projects" %></div>
+  <% if @projects.any? %>
+    <div class="row col-md-10 col-md-offset-1 custyle">
+      <table class="table table-striped custab">
+        <thead>
+          <tr>
+            <th><%= t "projects.table.thead.id" %></th>
+            <th><%= t "projects.table.thead.name" %></th>
+            <th><%= t "projects.table.thead.description" %></th>
+            <th><%= t "projects.table.thead.manager" %></th>
+            <th><%= t "projects.table.thead.start_date" %></th>
+            <th><%= t "projects.table.thead.end_date" %></th>
+          </tr>
+        </thead>
+        <% @projects.each_with_index.map do |project, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= link_to project.name, project_path(project) %></td>
+            <td><%= project.description %></td>
+            <td><%= project.manager_name %></td>
+            <td><%= project.start_date %></td>
+            <td><%= project.end_date %></td>
+          </tr>
+        <% end %>
+      </table>
     </div>
-    <div class="col-md-7">
-      <% if @projects.any? %>
-        <div class="project box">
-          <h2><%= t "projects.title" %></h2>
-          <ul>
-            <% @projects.each do |project| %>
-              <li><%= link_to project.name, project %></li>
-              <% if @sprints.any? %>
-                <div class="sprint box">
-                  <h5><%= t "sprints.title" %></h5>
-                  <ul>
-                    <% @sprints.each do |sprint| %>
-                      <% if project.sprints.include? sprint%>
-                        <li><%= link_to sprint.name, project_sprint_path(project, sprint) %></li>
-                      <% end %>
-                    <% end %>
-                  </ul>
-                </div>
-              <% end %>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <% end %>
 </div>

@@ -11,6 +11,14 @@ en:
     profile: Profile
     edit: "Update User"
   projects:
+    table:
+      thead:
+        id: "ID"
+        name: "Name"
+        description: "Description"
+        manager: "Manager"
+        start_date: "Start date"
+        end_date: "End date"
     title: "List project"
     show:
       overview: "Overview"
@@ -30,7 +38,7 @@ en:
     start_date: "Start date"
     end_date: "End date"
   work_performances:
-    view: "View work performance data"
+    view: "Work performance data"
     update: "Update"
   sprints:
     title: "List Sprint"

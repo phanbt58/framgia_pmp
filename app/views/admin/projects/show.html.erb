@@ -2,41 +2,45 @@
   active_tab: Settings.tabs.overview_project %>
 <div id="projects">
   <div class="button pull-right">
-    <%= link_to t("buttons.delete"), admin_project_path, method: :delete,
-      class: "btn btn-danger", data: {confirm: t("projects.delete.confirm")} %>
-    <%= link_to t("buttons.edit"), edit_admin_project_path(@project),
-      class: "btn btn-primary" %>
-  </div>
-  <div class="row">
-    <div class="col-md-9 project-description">
-      <ul>
-        <li><%= label_tag :project, t("projects.show.project_name") %></li>
-        <li><%= @project.name %></li>
-      </ul>
-      <ul>
-        <li><%= label_tag :description, t("projects.show.description") %></li>
-        <li><%= @project.description %></li>
-      </ul>
-      <ul>
-        <li><%= label_tag :start_date, t("projects.show.start_date") %></li>
-        <li><%= @project.start_date %></li>
-      </ul>
-      <ul>
-        <li><%= label_tag :end_date, t("projects.show.end_date") %></li>
-        <li><%= @project.end_date %></li>
+    <div class="dropdown pull-right">
+      <button id="dLabel" type="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false"
+        class="btn btn-default">
+        <span class="glyphicon glyphicon-align-justify"
+          aria-hidden="true"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right"
+        aria-labelledby="dLabel">
+        <li>
+          <%= link_to t("buttons.edit"), edit_admin_project_path %>
+        </li>
+        <li>
+          <%= link_to t("buttons.delete"), admin_project_path, method: :delete,
+            data: {confirm: t("projects.delete.confirm")} %>
+        </li>
       </ul>
     </div>
-    <div class="col-md-3 box">
-      <ul>
-        <li><%= label_tag :manager, t("project.show.manager") %></li>
-        <li><%= @manager.name %></li>
-      </ul>
-      <ul>
-        <li><%= label_tag :member, t("project.show.member") %></li>
-        <% @assignees.each do |assignee| %>
-          <li><%= assignee.user_name %></li>
-        <% end %>
-      </ul>
+  </div>
+  <div class="subject-content">
+    <div class="row">
+      <div class="col-md-9 project-description">
+        <h3><%= @project.name %></h3>
+        <p><i><%= @project.description %></i></p>
+        <p class="label"><%= t "projects.show.start_date" %></p>
+        <p><%= @project.start_date %></p>
+        <p class="label"><%= t "projects.show.end_date" %></p>
+        <p><%= @project.end_date %></p>
+      </div>
+      <div class="col-md-3 box">
+        <p class="label"><%= t "project.show.manager" %></li>
+        <p><%= link_to @manager.name, user_path(@manager) %></p>
+        <p class="label"><%= t "project.show.member" %></li>
+        <p class="list-user">
+          <% @assignees.each do |assignee| %>
+            <%= link_to assignee.user_name, user_path(assignee.user) %>,
+          <% end %>
+        </p>
+      </div>
     </div>
   </div>
 </div>
