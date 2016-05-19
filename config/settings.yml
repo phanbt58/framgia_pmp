@@ -3,3 +3,5 @@ tabs:
   overview_project: "overview project"
   new_sprint: "new sprint"
   project_backlog: "project_backlog"
+sprint:
+  default_days: 10

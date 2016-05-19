@@ -1,0 +1,40 @@
+#lost_hour_table {
+  margin: 10px 5px;
+
+  td {
+    margin: 0;
+    padding: 0;
+    min-width: 40px;
+    height: 21px;
+    input {
+      display: block;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      width: 100%;
+      height: 100%;
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+
+  .header_column {
+    min-width: 160px;
+    height: 25px;
+    overflow: hidden;
+    background-color: #366092;
+    font: bold 15px arial,sans-serif;
+    color: black;
+    text-indent: 5px;
+  }
+
+  .assignees_name {
+    background-color: darkgray;
+    text-indent: 5px;
+  }
+
+  .body_column {
+    background-color: #366092;
+  }
+}
