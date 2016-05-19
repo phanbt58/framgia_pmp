@@ -18,7 +18,7 @@ namespace :db do
         estimate = Faker::Number.between(4, 16)
         actual = Faker::Number.between(0, 4)
         remaining = estimate - actual
-        
+
         Fabricate :product_backlog, estimate: estimate, actual: actual,
           remaining: remaining, project_id: project.id
       end
@@ -56,12 +56,12 @@ namespace :db do
 
     puts "Creating activities for sprint 1"
     Sprint.first.assignees.each do |assignee|
-        Fabricate :activity, user_id: assignee.id, sprint_id: Sprint.first.id
+      Fabricate :activity, user_id: assignee.id, sprint_id: Sprint.first.id
     end
 
     puts "Creating phase"
     ["Line of code", "Unit Test", "Integration Test"].each do |phase|
-        Fabricate :phase, phase_name: phase
+      Fabricate :phase, phase_name: phase
     end
 
     puts "Creating work performance data"

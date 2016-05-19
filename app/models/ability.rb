@@ -11,6 +11,7 @@ class Ability
       can :manage, Sprint
       can :manage, User
       can :manage, WorkPerformance
+      can :manage, Phase
     end
   end
 end
