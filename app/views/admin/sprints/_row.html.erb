@@ -1,0 +1,15 @@
+<tr>
+  <td><input value="<%= activity.product_backlog_id %>"/></td>
+  <td><input value="<%= activity.id %>"/></td>
+  <td><input value="<%= activity.subject %>"/></td>
+  <td></td>
+  <td><input type="number" class="remaining"/></td>
+  <td><input type="number" class="estimate" value="<%= activity.estimate %>"/></td>
+  <% activity.log_works.each_with_index do |log_work, index| %>
+    <td class="panel-left"><input type="number" class="log-<%= index %>"
+      value="<%= log_work.remaining_time %>"/></td>
+  <% end %>
+  <% (@log_works_count..8).each do |index| %>
+    <td class="panel-left"><input type="number" class="log-<%= index %>"/></td>
+  <% end %>
+</tr>

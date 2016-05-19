@@ -19,6 +19,11 @@ class Admin::SprintsController < ApplicationController
     end
   end
 
+  def show
+    @activities = @sprint.activities
+    @log_works_count = @activities.first.log_works.count
+  end
+
   def update
     if @sprint.update_attributes sprint_params
       flash[:success] = flash_message "updated"
