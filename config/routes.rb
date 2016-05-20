@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :projects do
       resources :sprints do
         resources :work_performances, except: [:new, :create]
+        resources :phases
       end
     end
   end

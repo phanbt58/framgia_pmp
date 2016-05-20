@@ -46,6 +46,10 @@ en:
     name: "Name"
     edit: "Edit Sprint"
     description: "Description"
+  phases:
+    new: "Create Phase"
+    name: "Phase name"
+    description: "Description"
   buttons:
     create: "Create"
     delete: "Delete"
@@ -80,6 +84,7 @@ en:
       updated: "%{model_name} was updated successfully!"
       not_updated: "%{model_name} couldn't be updated"
       synchronized: "synchronized"
+      phase_not_create: "Don't create phase, phase name already exits"
   table:
     thead:
       activity: "Activity"
