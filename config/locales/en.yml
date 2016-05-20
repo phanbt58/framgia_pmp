@@ -50,6 +50,7 @@ en:
     new: "Create Phase"
     name: "Phase name"
     description: "Description"
+    start_date: "Start Date"
   buttons:
     create: "Create"
     delete: "Delete"
