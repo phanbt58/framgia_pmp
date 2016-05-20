@@ -5,6 +5,9 @@
         <li role="presentation" class="<%= tab_active Settings.tabs.overview_project, active_tab %>">
           <%= link_to t("projects.overview"), admin_project_path(project) %>
         </li>
+        <li role="presentation" class="<%= tab_active Settings.tabs.phases, active_tab %>">
+          <%= link_to t("projects.phase"), admin_project_phases_path(@project) %>
+        </li>
         <% project.sprints.each do |sprint| %>
           <li role="presentation" class="<%= tab_active sprint.id, active_tab %>">
             <%= link_to sprint.name, admin_project_sprint_path(project, sprint) %></li>
@@ -12,7 +15,7 @@
         <li role="presentation" class="<%= tab_active Settings.tabs.new_sprint, active_tab %>">
           <%= link_to t("sprints.new"), new_admin_project_sprint_path(@project) %></li>
       <% else %>
-       <li role="presentation" class="<%= tab_active Settings.tabs.overview_project, active_tab %>">
+        <li role="presentation" class="<%= tab_active Settings.tabs.overview_project, active_tab %>">
           <%= link_to t("projects.overview"), project_path(project) %>
         </li>
         <% @sprints.each do |sprint| %>

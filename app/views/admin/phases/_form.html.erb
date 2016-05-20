@@ -19,6 +19,7 @@
 
   </div><br>
   <div class="col-md-2 col-md-offset-2">
-    <%= f.submit t "buttons.create", class: "btn btn-primary" %>
+    <%= f.submit (f.object.new_record? ? t("buttons.create")
+        : t("buttons.update")), class: "btn btn-primary" %>
   </div>
 </div>

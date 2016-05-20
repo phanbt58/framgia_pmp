@@ -1,0 +1,29 @@
+<%= render "shared/category_tab", project: @project,
+  active_tab: Settings.tabs.phases %>
+<div id="phases">
+  <table class="table table-striped tbl-work-performance-datas">
+    <thead>
+      <th>#</th>
+      <th><%= t "phases.name" %></th>
+      <th><%= t "phases.description" %></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @phases.each.with_index do |phase, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= phase.phase_name %></td>
+          <td><%= phase.description %></td>
+          <td>
+            <%= link_to t("phases.buttons.edit"),
+              edit_admin_project_phase_path(@project, phase),
+              class: "btn btn-primary" %>
+            <%= link_to t("phases.buttons.delete"),
+              admin_project_phase_path(@project, phase), method: "delete",
+              class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
