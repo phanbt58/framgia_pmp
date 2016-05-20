@@ -109,3 +109,9 @@ en:
     mail_body: "To reset your password click the link below:"
   product_backlog:
     title: "Product Backlog"
+  activities:
+    story_id: "Story ID"
+    task_id: "Task ID"
+    task_name: "Task name"
+    worked: "W"
+    remaining: "R"

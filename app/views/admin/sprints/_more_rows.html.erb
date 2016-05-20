@@ -1,0 +1,21 @@
+<% 5.times do %>
+  <tr>
+    <td><input type="text"/></td>
+    <td><input type="text"/></td>
+    <td><input type="text"/></td>
+
+    <td><input type="text"/></td>
+    <td><input type="number" value="0" /></td>
+    <td><input type="number" value="0" /></td>
+
+    <% (1..@log_works_count).each do |index| %>
+      <td class="panel-left">
+        <input type="number" class="log-<%= index %>" value="0"/>
+      </td>
+    <% end %>
+    <% (@log_works_count..8).each do |index| %>
+      <td class="panel-left">
+        <input type="number" class="log-actual-<%= index+1 %>" value="0"/>
+      </td>
+    <% end %>
+<% end %>

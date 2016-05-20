@@ -1,0 +1,50 @@
+<tr>
+  <th rowspan="3" style="width: 5%; vertical-align: middle;">
+    <%= t "activities.story_id" %>
+  </th>
+  <th rowspan="3" style="width: 5%; vertical-align: middle;">
+    <%= t "activities.task_id" %>
+  </th>
+  <th rowspan="3" style="width: 25%; vertical-align: middle;">
+    <%= t "activities.task_name" %>
+  </th>
+  <th style="width: 10%;" class="panel-left">
+    <span data-toggle="tooltip" title="Worked" data-placement="right">
+      <%= t "activities.worked" %>
+    </span>
+  </th>
+  <th style="width: 5%;" class="panel-left">
+    <span data-toggle="tooltip" title="Remaining" data-placement="right">
+      <%= t "activities.remaining" %>
+    </span>
+  </th>
+  <th class="panel-left">1</th>
+  <% (1..@log_works_count).each do |index| %>
+    <th class="panel-left"><%= index + 1 %></th>
+  <% end %>
+  <% (@log_works_count..8).each do |index| %>
+    <th class="panel-left"><%= index + 2 %></th>
+  <% end %>
+</tr>
+<tr>
+  <th class="panel-left worked-percent"></th>
+  <th class="panel-left remaining-percent"></th>
+  <th class="panel-left actual-header"></th>
+  <% (1..@log_works_count).each do |index| %>
+    <th class="panel-left log-actual-<%= index+1 %>">0</th>
+  <% end %>
+  <% (@log_works_count..8).each do |index| %>
+    <th class="panel-left log-actual-<%= index+1 %>">0</th>
+  <% end %>
+</tr>
+<tr>
+  <th class="panel-left worked"></th>
+  <th class="panel-left remaining-header"></th>
+  <th class="panel-left estimate-header"></th>
+  <% (1..@log_works_count).each do |index| %>
+    <th class="panel-left log-estimate-<%= index+1 %>">0</th>
+  <% end %>
+  <% (@log_works_count..8).each do |index| %>
+    <th class="panel-left log-estimate-<%= index+1 %>">0</th>
+  <% end %>
+</tr>
