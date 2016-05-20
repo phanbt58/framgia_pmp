@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20160518032925) do
   create_table "sprints", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
+    t.date     "start_date"
     t.integer  "project_id",  limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false

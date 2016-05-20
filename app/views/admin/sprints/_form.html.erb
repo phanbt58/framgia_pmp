@@ -29,6 +29,14 @@
         </div>
       </div>
     </div><br>
+    <div class="row">
+      <div class="col-md-2 text-right">
+        <span><%= t "sprints.start_date" %></span>
+      </div>
+      <div class="col-md-2">
+        <%= f.text_field :start_date, class: "form-control datepicker", required: true %>
+      </div>
+    </div><br>
   </div><br>
   <div class="col-md-2 col-md-offset-2">
     <%= f.submit (f.object.new_record? ? t("buttons.create")
