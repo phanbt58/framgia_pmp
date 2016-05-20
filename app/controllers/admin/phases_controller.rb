@@ -23,6 +23,15 @@ class Admin::PhasesController < ApplicationController
     end
   end
 
+  def destroy
+    if @phase.destroy
+      flash[:success] = flash_message "deleted"
+    else
+      flash[:success] = flash_message "not_deleted"
+    end
+    redirect_to admin_project_phases_url
+  end
+
   private
   def phase_params
     params.require(:phase).permit Phase::PHASE_ATTRIBUTES_PARAMS
