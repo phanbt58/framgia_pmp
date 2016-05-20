@@ -1,0 +1,31 @@
+<%= form_tag(admin_project_sprint_time_logs_path project, sprint, id: "lost_hour_form") do %>
+  <div class="col-md-6 col-md-offset-5">
+    <table class="table table-bordered" id="lost_hour_table">
+      <tbody>
+        <tr>
+          <td class="header_column"><%= t "lost_hour.lost_hour" %></td>
+          <% Settings.sprint.default_days.times do %>
+              <td><input type="number" disabled class="body_column"></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td class="header_column"><%= t "lost_hour.work_hour" %></td>
+            <% Settings.sprint.default_days.times do %>
+              <td><input type="number" disabled class="body_column"></td>
+            <% end %>
+        </tr>
+        <% assignees.each_with_index do |assignee, column| %>
+          <tr>
+            <td class="assignees_name"><%= assignee.user.name %></td>
+            <% Settings.sprint.default_days.times do |row| %>
+              <td><input name="<%= column + 1 %>-<%= row + 1 %>" type="number"></td>
+            <% end %>
+          </tr>
+        <% end %>    
+      </tbody>
+    </table>
+  <div class="col-md-offset-11">
+    <button type="submit" class="btn btn-info"><%= t "lost_hour.save" %></button>
+  </div>
+  </div>
+<% end %>

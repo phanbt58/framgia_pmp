@@ -115,3 +115,7 @@ en:
     task_name: "Task name"
     worked: "W"
     remaining: "R"
+  lost_hour:
+    lost_hour: "Lost hour"
+    work_hour: "Work hour"
+    save: "Save"

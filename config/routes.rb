@@ -13,15 +13,18 @@ Rails.application.routes.draw do
       resources :work_performances, except: [:new, :create]
     end
   end
+
   namespace :api do
     resources :sprints
   end
+
   namespace :admin do
     root "projects#index"
     resources :projects do
       resources :sprints do
         resources :work_performances, except: [:new, :create]
         resources :phases
+        resources :time_logs, only: [:create]
       end
     end
   end

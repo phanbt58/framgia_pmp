@@ -31,3 +31,5 @@
 
   <%= render "activities" %>
 </div>
+<%= render "lost_hour", sprint: @sprint, project: @project,
+  assignees: @sprint.assignees %>
