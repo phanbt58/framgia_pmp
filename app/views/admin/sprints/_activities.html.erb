@@ -1,6 +1,12 @@
-<table class="table table-bordered">
+<table id="activities" class="table table-bordered" >
   <tbody>
     <%= render "header" %>
     <%= render "rows_input" %>
   </tbody>
 </table>
+<div class="col-md-12">
+  <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
+    "javascript:void(0)", class: "btn btn-primary", id: "load_more", type: "button" %>
+</div>
+
+<%= render "more_rows" %>
