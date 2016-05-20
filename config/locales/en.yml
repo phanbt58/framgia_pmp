@@ -49,13 +49,18 @@ en:
     description: "Description"
   phases:
     new: "Create Phase"
-    name: "Phase name"
-    description: "Description"
     start_date: "Start Date"
     edit: "Edit Phase"
     buttons:
       edit: "Edit"
       delete: "Delete"
+    table:
+      stt: "STT"
+      name: "Phase name"
+      description: "Description"
+      create_at: "Create At"
+      update_at: "Update At"
+      action: "Action"
   buttons:
     create: "Create"
     delete: "Delete"
@@ -113,6 +118,7 @@ en:
     sync_user: "Synchonize User"
     pass_reset: "Password reset"
     mail_body: "To reset your password click the link below:"
+    phases: "All Phase"
   product_backlog:
     title: "Product Backlog"
   activities:
@@ -125,3 +131,5 @@ en:
     lost_hour: "Lost hour"
     work_hour: "Work hour"
     save: "Save"
+  delete:
+      confirm: "You are sure?"

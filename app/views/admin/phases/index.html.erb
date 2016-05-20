@@ -1,12 +1,15 @@
 <%= render "shared/category_tab", project: @project,
   active_tab: Settings.tabs.phases %>
+<h2 class="text-center"><%= t "layouts.phases" %></h2>
 <div id="phases">
   <table class="table table-striped tbl-work-performance-datas">
     <thead>
-      <th>#</th>
-      <th><%= t "phases.name" %></th>
-      <th><%= t "phases.description" %></th>
-      <th></th>
+      <th><%= t "phases.table.stt" %></th>
+      <th><%= t "phases.table.name" %></th>
+      <th><%= t "phases.table.description" %></th>
+      <th><%= t "phases.table.create_at" %></th>
+      <th><%= t "phases.table.update_at" %></th>
+      <th><%= t "phases.table.action" %></th>
     </thead>
     <tbody>
       <% @phases.each.with_index do |phase, index| %>
@@ -14,13 +17,15 @@
           <td><%= index + 1 %></td>
           <td><%= phase.phase_name %></td>
           <td><%= phase.description %></td>
+          <td><%= phase.created_at %></td>
+          <td><%= phase.updated_at %></td>
           <td>
             <%= link_to t("phases.buttons.edit"),
               edit_admin_project_phase_path(@project, phase),
               class: "btn btn-primary" %>
             <%= link_to t("phases.buttons.delete"),
-              admin_project_phase_path(@project, phase), method: "delete",
-              class: "btn btn-danger" %>
+              admin_project_phase_path(@project, phase), method: :delete,
+              data: {confirm: t("delete.confirm")}, class: "btn btn-danger" %>
           </td>
         </tr>
       <% end %>
