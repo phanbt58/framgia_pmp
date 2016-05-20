@@ -1,4 +1,5 @@
 class Admin::SprintsController < ApplicationController
+  include SprintHelper
   load_and_authorize_resource
   before_action :load_project
   before_action :load_assignee, only: [:new, :edit]
@@ -22,6 +23,13 @@ class Admin::SprintsController < ApplicationController
   def show
     @activities = @sprint.activities
     @log_works_count = @activities.first.log_works.count
+    if @sprint.time_logs.empty?
+      @sprint.work_day.times do |work_date|
+        @sprint.assignees.each do |assignee|
+          @sprint.time_logs.build work_date: work_date, assignee: assignee
+        end
+      end
+    end
   end
 
   def update

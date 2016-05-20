@@ -4,6 +4,9 @@ class CreateSprints < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.date :start_date
+      t.integer :work_day, default: 10
+      t.integer :total_lost_hour
+      t.integer :work_hour
       t.references :project, index: true, foregin: true
 
       t.timestamps null: false

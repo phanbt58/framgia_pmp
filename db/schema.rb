@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20160518032925) do
   create_table "log_works", force: :cascade do |t|
     t.integer  "activity_id",    limit: 4
     t.integer  "remaining_time", limit: 4
-    t.date     "day"
+    t.integer  "day",            limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -113,12 +113,15 @@ ActiveRecord::Schema.define(version: 20160518032925) do
   add_index "sheets", ["user_id"], name: "index_sheets_on_user_id", using: :btree
 
   create_table "sprints", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
+    t.string   "name",            limit: 255
+    t.string   "description",     limit: 255
     t.date     "start_date"
-    t.integer  "project_id",  limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "work_day",        limit: 4,   default: 10
+    t.integer  "total_lost_hour", limit: 4
+    t.integer  "work_hour",       limit: 4
+    t.integer  "project_id",      limit: 4
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   add_index "sprints", ["project_id"], name: "index_sprints_on_project_id", using: :btree
@@ -135,7 +138,7 @@ ActiveRecord::Schema.define(version: 20160518032925) do
   create_table "time_logs", force: :cascade do |t|
     t.integer  "assignee_id", limit: 4
     t.integer  "sprint_id",   limit: 4
-    t.date     "work_date"
+    t.integer  "work_date",   limit: 4
     t.integer  "lost_hour",   limit: 4
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
