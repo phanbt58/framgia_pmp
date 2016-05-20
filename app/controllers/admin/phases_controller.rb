@@ -13,6 +13,16 @@ class Admin::PhasesController < ApplicationController
     end
   end
 
+  def update
+    if @phase.update_attributes phase_params
+      flash[:success] = flash_message "updated"
+      redirect_to admin_project_phases_path(@project)
+    else
+      flash[:failed] = flash_message "not_updated"
+      render :edit
+    end
+  end
+
   private
   def phase_params
     params.require(:phase).permit Phase::PHASE_ATTRIBUTES_PARAMS

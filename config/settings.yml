@@ -5,3 +5,4 @@ tabs:
   project_backlog: "project_backlog"
 sprint:
   default_days: 10
+  phases: "Phases"

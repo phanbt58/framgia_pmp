@@ -1,0 +1,6 @@
+<div id="phases">
+  <h2 class="text-center"><%= t "phases.edit" %></h2>
+  <%= form_for @phase, url: admin_project_phase_path(@project, @phase), method: :patch do |f| %>
+    <%= render "form", f: f %>
+  <% end %>
+</div>

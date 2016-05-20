@@ -31,6 +31,7 @@ en:
     delete:
       confirm: "You are sure?"
     overview: "Overview"
+    phase: "Phases"
     new: "New Project"
     edit: "Edit Project"
     name: "Name: "
@@ -51,10 +52,15 @@ en:
     name: "Phase name"
     description: "Description"
     start_date: "Start Date"
+    edit: "Edit Phase"
+    buttons:
+      edit: "Edit"
+      delete: "Delete"
   buttons:
     create: "Create"
     delete: "Delete"
     update: "Update"
+    submit: "Submit"
     edit: "Edit"
     login: "Login"
     login_hr: "Login HR System"

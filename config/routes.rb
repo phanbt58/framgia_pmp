@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root "projects#index"
     resources :projects do
+      resources :phases
       resources :sprints do
         resources :work_performances, except: [:new, :create]
         resources :phases
