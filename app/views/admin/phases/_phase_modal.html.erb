@@ -1,0 +1,15 @@
+<div id="PhaseModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 class="label-modal text-center"><%= t "phases.new" %></h3>
+      </div>
+      <div class="modal-body">
+        <%= form_for [:admin, @phase] do |f| %>
+          <%= render "form", f: f %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
