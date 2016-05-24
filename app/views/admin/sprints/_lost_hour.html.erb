@@ -1,24 +1,32 @@
 <%= form_for [:admin, project, sprint], id: "lost_hour_form" do |f| %>
   <div class="col-md-6 col-md-offset-5">
-    <table class="table table-bordered" id="lost_hour_table">
+    <table class="table table-bordered" id="lost_hour_table" 
+      data-number-assignees="<%= sprint.assignees.size %>"
+      data-number-work-day="<%= sprint.work_day %>">
       <tbody>
-        <tr>
+        <tr class="lost-hour-row">
           <td class="header_column"><%= t "lost_hour.lost_hour" %></td>
-          <% Settings.sprint.default_days.times do %>
-              <td><input type="number" disabled class="body_column"></td>
+          <% sprint.work_day.times do |index| %>
+              <td id="lost-hour-<%= index %>">
+                <%= text_field_tag nil, index == 0 ? total_lost_hour :
+                  sum_lost_hour[index], disabled: true, class: "body_column" %>
+              </td>
           <% end %>
         </tr>
         <tr>
           <td class="header_column"><%= t "lost_hour.work_hour" %></td>
-            <% Settings.sprint.default_days.times do %>
-              <td><input type="number" disabled class="body_column"></td>
+            <% sprint.work_day.times do |index| %>
+              <td id="work-hour-<%= index %>">
+                <%= text_field_tag nil, index == 0 ? sum_lost_hour[index] : "",
+                  disabled: true, class: "body_column" %>
+              </td>
             <% end %>
         </tr>
-        <% @sprint.time_logs.group_by(&:assignee).each do |assignee, time_logs| %>
-          <tr>
+        <% @sprint.time_logs.group_by(&:assignee).each_with_index do |(assignee,time_logs), index| %>
+          <tr class="assignee-row-<%= index %>">
             <td class="assignees_name"><%= assignee.user.name %></td>
             <%= f.fields_for :time_logs, time_logs do |time_log_builder| %>
-              <td>
+              <td class="assignee-col-<%= time_log_builder.object.work_date %>">
                 <%= time_log_builder.hidden_field :assignee_id,
                   value: assignee.id %>
                 <%= time_log_builder.hidden_field :work_date,

@@ -27,6 +27,7 @@
 //= require dhtmlxgrid
 //= require dhtmlxgridcell
 //= require dhtmlxdataprocessor
+//= require lost_hour
 
 $(document).on("page:change", function(){
   $(".datepicker").datepicker({
