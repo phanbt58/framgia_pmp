@@ -1,14 +1,16 @@
 class Admin::PhasesController < ApplicationController
   load_and_authorize_resource
-  load_and_authorize_resource :project
-  load_and_authorize_resource :sprint
+
+  def index
+    @phase = Phase.new
+  end
 
   def create
     if @phase.save
       flash[:success] = flash_message "created"
-      redirect_to admin_project_sprint_work_performances_path(@project, @sprint)
+      redirect_to admin_phases_path
     else
-      flash[:failed] = t "flashs.messages.phase_not_create"
+      flash[:failed] = t "not_created"
       render :new
     end
   end
@@ -16,7 +18,7 @@ class Admin::PhasesController < ApplicationController
   def update
     if @phase.update_attributes phase_params
       flash[:success] = flash_message "updated"
-      redirect_to admin_project_phases_path(@project)
+      redirect_to admin_phases_path
     else
       flash[:failed] = flash_message "not_updated"
       render :edit
@@ -29,7 +31,7 @@ class Admin::PhasesController < ApplicationController
     else
       flash[:success] = flash_message "not_deleted"
     end
-    redirect_to admin_project_phases_url
+    redirect_to admin_phases_path
   end
 
   private

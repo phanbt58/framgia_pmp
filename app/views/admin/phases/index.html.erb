@@ -1,14 +1,15 @@
-<%= render "shared/category_tab", project: @project,
-  active_tab: Settings.tabs.phases %>
-<h2 class="text-center"><%= t "layouts.phases" %></h2>
 <div id="phases">
+  <h2 class="text-center"><%= t "layouts.phases" %></h2>
+  <p class="pull-right">
+    <%= link_to t("buttons.new"), "#",
+      data: {toggle: "modal", target: "#PhaseModal"}, class: "btn btn-success" %>
+  </p>
+  <%= render "phase_modal" %>
   <table class="table table-striped tbl-work-performance-datas">
     <thead>
       <th><%= t "phases.table.stt" %></th>
       <th><%= t "phases.table.name" %></th>
       <th><%= t "phases.table.description" %></th>
-      <th><%= t "phases.table.create_at" %></th>
-      <th><%= t "phases.table.update_at" %></th>
       <th><%= t "phases.table.action" %></th>
     </thead>
     <tbody>
@@ -17,14 +18,12 @@
           <td><%= index + 1 %></td>
           <td><%= phase.phase_name %></td>
           <td><%= phase.description %></td>
-          <td><%= phase.created_at %></td>
-          <td><%= phase.updated_at %></td>
           <td>
             <%= link_to t("phases.buttons.edit"),
-              edit_admin_project_phase_path(@project, phase),
+              edit_admin_phase_path(phase),
               class: "btn btn-primary" %>
             <%= link_to t("phases.buttons.delete"),
-              admin_project_phase_path(@project, phase), method: :delete,
+              admin_phase_path(phase), method: :delete,
               data: {confirm: t("delete.confirm")}, class: "btn btn-danger" %>
           </td>
         </tr>
