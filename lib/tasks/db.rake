@@ -72,7 +72,8 @@ namespace :db do
     puts "Creating log works for activities in sprints"
     Sprint.first.activities.each_with_index do |activity|
       9.times do |index|
-        Fabricate :log_work, remaining_time: 9 - index, day: index + 1, activity_id: activity.id
+        Fabricate :log_work, remaining_time: 9 - index, day: index + 1,
+          activity_id: activity.id, sprint_id: Sprint.first.id
       end
     end
 

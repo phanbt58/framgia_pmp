@@ -62,11 +62,13 @@ ActiveRecord::Schema.define(version: 20160518032925) do
     t.integer  "activity_id",    limit: 4
     t.integer  "remaining_time", limit: 4
     t.integer  "day",            limit: 4
+    t.integer  "sprint_id",      limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
 
   add_index "log_works", ["activity_id"], name: "index_log_works_on_activity_id", using: :btree
+  add_index "log_works", ["sprint_id"], name: "index_log_works_on_sprint_id", using: :btree
 
   create_table "phases", force: :cascade do |t|
     t.string   "phase_name",  limit: 255
