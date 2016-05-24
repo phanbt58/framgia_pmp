@@ -36,6 +36,9 @@ class Admin::SprintsController < ApplicationController
     @sum_remaining_header = estimate.get_sum_remaining
     @estimate_header = estimate.get_estimate_activities
     @log_estimates = estimate.sum_remaining_for_day @all_log_works
+    @sum_worked = estimate.get_sum_worked
+    @percent_worked = estimate.get_percent_worked
+    @percent_remaining = estimate.get_percent_remaining
   end
 
   def update

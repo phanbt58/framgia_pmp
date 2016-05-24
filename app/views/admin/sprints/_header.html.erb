@@ -27,8 +27,8 @@
   <% end %>
 </tr>
 <tr>
-  <th class="panel-left worked-percent"></th>
-  <th class="panel-left remaining-percent"></th>
+  <th class="panel-left worked-percent"><%= @percent_worked %></th>
+  <th class="panel-left remaining-percent"><%= @percent_remaining %></th>
   <th class="panel-left actual-header"></th>
   <% (1..@log_works_count).each do |index| %>
     <th class="panel-left log-actual-<%= index+1 %>">0</th>
@@ -38,7 +38,7 @@
   <% end %>
 </tr>
 <tr>
-  <th class="panel-left worked"></th>
+  <th class="panel-left worked"><%= @sum_worked %></th>
   <th class="panel-left remaining-header"><%= @sum_remaining_header %></th>
   <th class="panel-left estimate-header"><%= @estimate_header %></th>
   <% (1..@log_works_count).each do |index| %>
