@@ -7,6 +7,8 @@ class Activity < ActiveRecord::Base
 
   has_many :log_works
 
+  scope :fitler_log_works, ->sprint{includes(:log_works).where(sprint: sprint)}
+
   delegate :plan, :actual, to: :work_performance, prefix: true, allow_nil: true
   delegate :name, to: :user, prefix: true, allow_nil: true
 end

@@ -39,10 +39,10 @@
 </tr>
 <tr>
   <th class="panel-left worked"></th>
-  <th class="panel-left remaining-header"></th>
-  <th class="panel-left estimate-header"></th>
+  <th class="panel-left remaining-header"><%= @sum_remaining_header %></th>
+  <th class="panel-left estimate-header"><%= @estimate_header %></th>
   <% (1..@log_works_count).each do |index| %>
-    <th class="panel-left log-estimate-<%= index+1 %>">0</th>
+    <th class="panel-left log-estimate-<%= index+1 %>"><%= @log_estimates[index - 1] %></th>
   <% end %>
   <% (@log_works_count..8).each do |index| %>
     <th class="panel-left log-estimate-<%= index+1 %>">0</th>

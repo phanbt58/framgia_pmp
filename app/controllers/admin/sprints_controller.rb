@@ -21,8 +21,9 @@ class Admin::SprintsController < ApplicationController
   end
 
   def show
-    @activities = @sprint.activities
-    @log_works_count = @activities.first.log_works.count
+    @activities = Activity.fitler_log_works @sprint
+    @all_log_works = @activities.first.log_works
+    @log_works_count = @all_log_works.size
     if @sprint.time_logs.empty?
       @sprint.work_day.times do |work_date|
         @sprint.assignees.each do |assignee|
@@ -30,6 +31,11 @@ class Admin::SprintsController < ApplicationController
         end
       end
     end
+
+    estimate = EstimateLogworkService.new @activities
+    @sum_remaining_header = estimate.get_sum_remaining
+    @estimate_header = estimate.get_estimate_activities
+    @log_estimates = estimate.sum_remaining_for_day @all_log_works
   end
 
   def update
