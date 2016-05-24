@@ -3,7 +3,9 @@
   <td><input value="<%= activity.id %>"/></td>
   <td><input value="<%= activity.subject %>"/></td>
   <td></td>
-  <td><input type="number" class="remaining"/></td>
+  <td>
+    <input type="number" class="remaining" value="<%= activity.get_remaining_activity %>"/>
+  </td>
   <td><input type="number" class="estimate" value="<%= activity.estimate %>"/></td>
   <% activity.log_works.each_with_index do |log_work, index| %>
     <td class="panel-left"><input type="number" class="log-<%= index %>"

@@ -1,4 +1,6 @@
 class EstimateLogworkService
+  include ActionView::Helpers::NumberHelper
+
   def initialize activities
     @activities = activities
   end
@@ -7,6 +9,20 @@ class EstimateLogworkService
     @activities.inject(0) do |sum, activity|
       sum + time_remaining_activity(activity)
     end
+  end
+
+  def get_sum_worked
+    get_estimate_activities - get_sum_remaining
+  end
+
+  def get_percent_worked
+    number_to_percentage(get_sum_worked.to_f / get_estimate_activities * 100,
+      precision: 0)
+  end
+
+  def get_percent_remaining
+    number_to_percentage(get_sum_remaining.to_f / get_estimate_activities * 100,
+      precision: 0)
   end
 
   def get_estimate_activities
