@@ -6,6 +6,7 @@ $(document).on('page:change', function(){
     $.each($('th[class*="log-estimate"]'), function(i, col) {
       var filter = function(v) {return v.indexOf('log-estimate') == 0}
       var className = col.className.split(' ').filter(filter)[0];
+      if(className.split('-').pop() == '0') return;
       $(col).text(totalColumnValue('log-' + className.split('-').pop()));
     });
   }
@@ -31,8 +32,18 @@ $(document).on('page:change', function(){
     return total;
   }
 
+  function setActual(col) {
+    var workHour = parseInt($("#work-hour-0" + " input").val());
+    
+    var cells = $('th[class*="log-actual"]');
+    for(++col; col < cells.length; col++) {
+      var lostHour = parseInt($("#lost-hour-" + col + " input").val());
+      $(cells[col]).text(parseInt($(cells[col-1]).text()) + lostHour - workHour);
+    }
+  }
+
   function worked() {
-    var estimated = parseInt($('.estimate-header').text());
+    var estimated = parseInt($('.log-estimate-0').text());
     var remaining = parseInt($('.remaining-header').text());
     var worked = estimated - remaining;
     var worked_percent = Math.round(worked/estimated*100);
@@ -113,8 +124,8 @@ $(document).on('page:change', function(){
       $(cell).val($(self).val());
     });
 
-    $('.estimate-header').text(totalColumnValue('estimate') + '');
-    $('.log-actual-0').text($('.estimate-header').text());
+    $('.log-estimate-0').text(totalColumnValue('estimate')).change();
+    $('.log-actual-0').text($('.log-estimate-0').text()).change();
 
     totalLogWorksCol();
     setRemainTime(rowClass);
@@ -135,6 +146,10 @@ $(document).on('page:change', function(){
     var cells = $('.' + rowClass);
 
     setRowColor(rowClass);
+  });
+
+  $('.log-actual-0').change(function() {
+    setActual(0);
   });
 
   $("#load_more").click(function() {
