@@ -23,7 +23,7 @@ $(document).on('page:change', function(){
   }
 
   function totalColumnValue(col) {
-    var cells = $('.activities .' + col);
+    var cells = $('#activities .' + col);
     var total = 0;
     $.each(cells, function(i, e) {
       var val = parseInt($(e).val());
@@ -34,7 +34,7 @@ $(document).on('page:change', function(){
 
   function setActual(col) {
     var workHour = parseInt($("#work-hour-0" + " input").val());
-    
+
     var cells = $('th[class*="log-actual"]');
     for(++col; col < cells.length; col++) {
       var lostHour = parseInt($("#lost-hour-" + col + " input").val());
@@ -106,7 +106,7 @@ $(document).on('page:change', function(){
     var logClass = this.className.split(' ').filter(filterLog)[0];
 
     var cells = $('.panel-left .' + rowClass);
-    var i = parseInt(logClass.split('-')[1]) + 2;
+    var i = parseInt(logClass.split('-')[1]) + 1;
     for(++i; i < cells.length; i++) {
       $(cells[i]).val($(this).val());
     }
