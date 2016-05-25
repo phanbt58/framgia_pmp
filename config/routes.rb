@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :product_backlogs
     resource :product_backlog_updates
-    resources :sprints do
+    resources :sprints, only: [:show, :update] do
       resources :work_performances, except: [:new, :create]
     end
   end
