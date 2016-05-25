@@ -1,0 +1,12 @@
+<table id="activities" class="table table-bordered activities" >
+  <tbody>
+    <%= render "shared/header" %>
+    <%= render "shared/rows_input" %>
+  </tbody>
+</table>
+<div class="col-md-12">
+  <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
+    "javascript:void(0)", class: "btn btn-primary", id: "load_more",
+    type: "button" %>
+</div>
+<%= render "shared/more_rows" %>
