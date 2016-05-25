@@ -6,13 +6,16 @@ class Sprint < ActiveRecord::Base
   has_many :product_backlogs
   has_many :activities
   has_many :time_logs
+  has_many :log_works
 
   SPRINT_ATTRIBUTES_PARAMS = [:name, :description, :project_id, :start_date,
-    user_ids: [], time_logs_attributes: [:id, :assignee_id, :lost_hour, :work_date]]
+    user_ids: [], time_logs_attributes: [:id, :assignee_id, :lost_hour, :work_date],
+    log_works_attributes: [:id, :activity_id, :remaining_time, :day]]
 
   scope :list_by_user, ->user do
     joins(:assignees).where assignees: {user_id: user.id}
   end
 
   accepts_nested_attributes_for :time_logs
+  accepts_nested_attributes_for :log_works
 end

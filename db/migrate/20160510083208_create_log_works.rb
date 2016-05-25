@@ -4,6 +4,7 @@ class CreateLogWorks < ActiveRecord::Migration
       t.references :activity, index: true, foreign_key: true
       t.integer :remaining_time
       t.integer :day
+      t.references :sprint, index: true, foregin: true
 
       t.timestamps null: false
     end

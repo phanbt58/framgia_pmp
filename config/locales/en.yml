@@ -62,6 +62,7 @@ en:
       update_at: "Update At"
       action: "Action"
   buttons:
+    save: "Save"
     create: "Create"
     delete: "Delete"
     update: "Update"

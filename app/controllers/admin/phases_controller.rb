@@ -8,11 +8,10 @@ class Admin::PhasesController < ApplicationController
   def create
     if @phase.save
       flash[:success] = flash_message "created"
-      redirect_to admin_phases_path
     else
-      flash[:failed] = t "not_created"
-      render :new
+      flash[:failed] = flash_message "not_created"
     end
+    redirect_to :back
   end
 
   def update

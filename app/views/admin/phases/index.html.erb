@@ -1,18 +1,19 @@
 <div id="phases">
-  <h2 class="text-center"><%= t "layouts.phases" %></h2>
-  <p class="pull-right">
-    <%= link_to t("buttons.new"), "#",
-      data: {toggle: "modal", target: "#PhaseModal"}, class: "btn btn-success" %>
-  </p>
-  <%= render "phase_modal" %>
-  <table class="table table-striped tbl-work-performance-datas">
-    <thead>
-      <th><%= t "phases.table.stt" %></th>
-      <th><%= t "phases.table.name" %></th>
-      <th><%= t "phases.table.description" %></th>
-      <th><%= t "phases.table.action" %></th>
-    </thead>
-    <tbody>
+  <div class="title"><%= t "layout.phases" %></div>
+  <div class="row col-md-10 col-md-offset-1 custyle">
+    <table class="table table-striped custab">
+      <thead>
+        <%= link_to t("buttons.new"), "#",
+          data: {toggle: "modal", target: "#PhaseModal"},
+          class: "btn btn-primary pull-right"%>
+        <%= render "phase_modal" %>
+        <tr>
+          <th><%= t "phases.table.stt" %></th>
+          <th><%= t "phases.table.name" %></th>
+          <th><%= t "phases.table.description" %></th>
+          <th><%= t "phases.table.action" %></th>
+        </tr>
+      </thead>
       <% @phases.each.with_index do |phase, index| %>
         <tr>
           <td><%= index + 1 %></td>
@@ -21,13 +22,13 @@
           <td>
             <%= link_to t("phases.buttons.edit"),
               edit_admin_phase_path(phase),
-              class: "btn btn-primary" %>
+              class: "text-primary" %>&nbsp;
             <%= link_to t("phases.buttons.delete"),
               admin_phase_path(phase), method: :delete,
-              data: {confirm: t("delete.confirm")}, class: "btn btn-danger" %>
+              data: {confirm: t("delete.confirm")}, class: "text-danger" %>
           </td>
         </tr>
       <% end %>
-    </tbody>
-  </table>
+    </table>
+  </div>
 </div>
