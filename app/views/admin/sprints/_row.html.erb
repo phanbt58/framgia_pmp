@@ -13,7 +13,7 @@
   <td class="panel-left">
     <input type="number" min=0 class="estimate row-<%= row %> <%= type %>" value="<%= activity.estimate %>"/>
   </td>
-  <%= f.fields_for :log_works, activity.log_works do |log_work_builder| %>
+  <%= f.fields_for :log_works, activity.log_works.order(day: :asc) do |log_work_builder| %>
     <td class="panel-left">
       <%= log_work_builder.hidden_field :activity_id, value: activity.id %>
       <%= log_work_builder.hidden_field :day,
