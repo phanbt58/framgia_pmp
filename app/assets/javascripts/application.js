@@ -28,6 +28,8 @@
 //= require dhtmlxgridcell
 //= require dhtmlxdataprocessor
 //= require lost_hour
+//= require highcharts
+//= require init_chart
 
 $(document).on("page:change", function(){
   $(".datepicker").datepicker({
