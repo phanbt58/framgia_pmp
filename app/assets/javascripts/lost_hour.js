@@ -7,7 +7,7 @@ function calculate_lost_hour(col) {
     if(value == "") value = 0;
     total += parseInt(value);
   }
-  
+
   if(col == 0) {
     $("#work-hour-" + col + " input").val(total);
   }
@@ -29,5 +29,22 @@ function total_lost_hour() {
 
 $(document).on("change click", "#lost_hour_table td input", function(){
   var col = parseInt($($(this).parent().attr("class").split("-")).last()[0]);
-    calculate_lost_hour(col);
+  calculate_lost_hour(col);
+  setTotoalRemaining(col);
 });
+
+function setTotoalRemaining(col) {
+  if(col == 0) return;
+  var remainBefore = parseInt($(".log-actual-" + (col - 1)).text());
+
+  var lostHour = parseInt($("#lost-hour-" + col + " input").val());
+  var workHour = parseInt($("#work-hour-0" + " input").val());
+
+  var remain = remainBefore + lostHour - workHour;
+  $(".log-actual-" + col).text(remain);
+
+  var cells = $('th[class*="log-actual"]');
+  for(++col; col < cells.length; col++) {
+    $(cells[col]).text(parseInt($(cells[col-1]).text()) - workHour);
+  }
+}

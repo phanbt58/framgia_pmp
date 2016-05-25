@@ -39,6 +39,9 @@ class Admin::SprintsController < ApplicationController
     @sum_worked = estimate.get_sum_worked
     @percent_worked = estimate.get_percent_worked
     @percent_remaining = estimate.get_percent_remaining
+
+    @assignees = @sprint.assignees
+    @activities_count = @activities.count
   end
 
   def update

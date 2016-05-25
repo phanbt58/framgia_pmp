@@ -17,6 +17,14 @@ module ApplicationHelper
     end
   end
 
+  def activity_class activity
+    if activity.user.nil?
+      activity.estimate.nil? ? "default" : "estimated"
+    else
+      activity.estimate.nil? ? "assigned" : "processed"
+    end
+  end
+
   def flash_message flash_type, *params
     if params.empty?
       t "flashs.messages.#{flash_type}", model_name: controller_name.classify
