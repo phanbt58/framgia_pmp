@@ -1,8 +1,10 @@
 class EstimateLogworkService
+  include SprintHelper
   include ActionView::Helpers::NumberHelper
 
-  def initialize activities
+  def initialize activities, sprint
     @activities = activities
+    @sprint = sprint
   end
 
   def get_sum_remaining
@@ -16,13 +18,19 @@ class EstimateLogworkService
   end
 
   def get_percent_worked
-    number_to_percentage(get_sum_worked.to_f / get_estimate_activities * 100,
-      precision: 0)
+    unless get_estimate_activities == 0
+      return number_to_percentage(get_sum_worked.to_f / get_estimate_activities * 100,
+        precision: 0)
+    end
+    return 0
   end
 
   def get_percent_remaining
-    number_to_percentage(get_sum_remaining.to_f / get_estimate_activities * 100,
-      precision: 0)
+    unless get_estimate_activities == 0
+      return number_to_percentage(get_sum_remaining.to_f / get_estimate_activities * 100,
+        precision: 0)
+    end
+    return 0
   end
 
   def get_estimate_activities
@@ -32,18 +40,39 @@ class EstimateLogworkService
   end
 
   def sum_remaining_for_day log_works
-    log_works.inject([]) do |results, log_work|
-      sum = @activities.inject(0) do |sum, activity|
-        time_logs = activity.log_works.collect{|log| log if log.day == log_work.day}
-          .compact
-        sum += time_logs.first.remaining_time
+    unless log_works.nil?
+      log_works.inject([]) do |results, log_work|
+        sum = @activities.inject(0) do |sum, activity|
+          time_logs = activity.log_works.collect{|log| log if log.day == log_work.day}
+            .compact
+          sum += time_logs.first.remaining_time
+        end
+        results << sum
       end
-      results << sum
     end
+  end
+
+  def get_time_remaining_team
+    arr = []
+    remaining = get_estimate_activities
+    get_arr_lost_hour.each do |rm|
+      wh = remaining - rm
+      arr << wh
+      remaining = wh
+    end
+    arr
   end
 
   private
   def time_remaining_activity activity
     activity.log_works.last.remaining_time
+  end
+
+  def get_arr_lost_hour
+    arr = []
+    sum_lost_hour.each_with_index do |lost_hour, index|
+      arr << sum_lost_hour[0] - sum_lost_hour[index] if index > 0
+    end
+    arr
   end
 end

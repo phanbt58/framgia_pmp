@@ -19,7 +19,7 @@ gem "cancancan", "~> 1.10"
 gem "select2-rails"
 
 group :development, :test do
-  gem "pry"
+  gem "pry-rails"
   gem "i18n-tasks"
   gem "rspec-rails"
   gem "fabrication"

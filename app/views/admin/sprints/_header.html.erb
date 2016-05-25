@@ -47,7 +47,7 @@
   <th class="panel-left remaining-percent"><%= @percent_remaining %></th>
   <th class="panel-left log-actual-0"><%= @estimate_header %></th>
   <% (1..@log_works_count).each do |index| %>
-    <th class="panel-left log-actual-<%= index %>">0</th>
+    <th class="panel-left log-actual-<%= index %>"><%= @arr_remaining[index - 1] %></th>
   <% end %>
   <% (@log_works_count..(@sprint.work_day - 3)).each do |index| %>
     <th class="panel-left log-actual-<%= index %>">0</th>
