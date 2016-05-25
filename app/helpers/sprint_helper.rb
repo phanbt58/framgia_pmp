@@ -5,7 +5,7 @@ module SprintHelper
 
   def sum_lost_hour
     sum_lost_hour = []
-    @sprint.work_day.times do |day|
+    @sprint.master_sprints.each_with_index do |_, day|
       lost_hour = TimeLog.total_lost_hour @sprint, day
       sum_lost_hour << lost_hour
     end

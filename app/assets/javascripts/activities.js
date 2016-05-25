@@ -42,7 +42,7 @@ $(document).on('page:change', function(){
   }
 
   function worked() {
-    var estimated = parseInt($('.log-estimate-0').text());
+    var estimated = parseInt($('.log-estimate-1').text());
     var remaining = parseInt($('.remaining-header').text());
     var worked = estimated - remaining;
     var worked_percent = Math.round(worked/estimated*100);
@@ -61,43 +61,43 @@ $(document).on('page:change', function(){
   function setRowColor(rowClass) {
     var assigneeValue = $('.assignee.' + rowClass).val();
     var remainingValue = $('.remaining.' + rowClass).val();
-    var estimateValue = $('.estimate.' + rowClass).val();
+    var estimateValue = $('.row-1.' + rowClass).val();
 
-    var cells = $('.' + rowClass);
+    var row = $('.' + rowClass).closest('tr');
 
     // assignee is empty
     if(assigneeValue == '') {
       if(estimateValue != '0') {
         if(remainingValue != '0') {
-          cells.addClass('estimated');
-          cells.removeClass('assigned default processed');
+          row.addClass('estimated');
+          row.removeClass('assigned default processed');
         } else {
-          cells.addClass('default');
-          cells.removeClass('assigned estimated processed');
+          row.addClass('default');
+          row.removeClass('assigned estimated processed');
         }
       }
       else {
-        cells.removeClass('estimated assigned processed');
-        cells.addClass('default');
+        row.removeClass('estimated assigned processed');
+        row.addClass('default');
       }
     } else {
       if(estimateValue != '0') {
         if(remainingValue != '0') {
-          cells.removeClass('assigned default estimated');
-          cells.addClass('processed');
+          row.removeClass('assigned default estimated');
+          row.addClass('processed');
         } else {
-          cells.removeClass('assigned processed estimated');
-          cells.addClass('default');
+          row.removeClass('assigned processed estimated');
+          row.addClass('default');
         }
       }
       else {
-        cells.removeClass('processed default estimated');
-        cells.addClass('assigned');
+        row.removeClass('processed default estimated');
+        row.addClass('assigned');
       }
     }
   }
 
-  $('.log').change(function() {
+  logWorkEventListener = function() {
     var filterRow = function(v) {return v.indexOf('row-') == 0}
     var rowClass = this.className.split(' ').filter(filterRow)[0];
 
@@ -105,16 +105,18 @@ $(document).on('page:change', function(){
     var logClass = this.className.split(' ').filter(filterLog)[0];
 
     var cells = $('.panel-left .' + rowClass);
-    var i = parseInt(logClass.split('-')[1]) + 1;
-    for(++i; i < cells.length; i++) {
+    var i = parseInt(logClass.split('-')[1]);
+    for(i; i < cells.length; i++) {
       $(cells[i]).val($(this).val());
     }
 
     totalLogWorksCol();
     setRemainTime(rowClass);
-  });
+  }
 
-  $('.estimate').change(function() {
+  $('.log').change(logWorkEventListener);
+
+  $('.log-1').change(function() {
     var self = this;
     var filterRow = function(v) {return v.indexOf('row-') == 0}
     var rowClass = this.className.split(' ').filter(filterRow)[0];
@@ -123,8 +125,8 @@ $(document).on('page:change', function(){
       $(cell).val($(self).val());
     });
 
-    $('.log-estimate-0').text(totalColumnValue('estimate')).change();
-    $('.log-actual-0').text($('.log-estimate-0').text()).change();
+    $('.log-estimate-1').text(totalColumnValue('log-1')).change();
+    $('.log-actual-0').text($('.log-estimate-1').text()).change();
 
     totalLogWorksCol();
     setRemainTime(rowClass);
@@ -150,4 +152,9 @@ $(document).on('page:change', function(){
   $('.log-actual-0').change(function() {
     setActual(0);
   });
+
+  $("#load_more").click(function() {
+    $("#activities tbody").append($("#more-rows table tbody").children().clone());
+  });
 });
+
