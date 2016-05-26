@@ -41,7 +41,8 @@
       </tbody>
     </table>
   <div class="col-md-offset-11">
-    <button type="submit" class="btn btn-info"><%= t "lost_hour.save" %></button>
+    <%= f.submit t("lost_hour.save"), data: {disable_with: t("lost_hour.saving")},
+      class: "btn btn-xs btn-info" %>
   </div>
   </div>
 <% end %>
