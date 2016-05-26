@@ -7,13 +7,13 @@ class SprintsController < ApplicationController
     all_log_works = @activities.first.log_works if @activities.any?
     @log_works_count = all_log_works.size rescue 0
     if @sprint.time_logs.empty?
-      @sprint.work_day.times do |work_date|
+      @sprint.master_sprints.each_with_index do |master_sprint, work_date|
         @sprint.assignees.each do |assignee|
-          @sprint.time_logs.build work_date: work_date, assignee: assignee
+          @sprint.time_logs.create work_date: work_date, assignee: assignee,
+            master_sprint_id: master_sprint.id
         end
       end
     end
-
     @estimate = EstimateLogworkService.new @activities, @sprint rescue nil
     @log_estimates = @estimate.sum_remaining_for_day all_log_works
   end
