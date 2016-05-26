@@ -2,9 +2,9 @@
   <tbody>
     <%= render "shared/header" %>
     <%= form_for [@project, @sprint] do |f| %>
-      <% @activities.each_with_index do |activity, row| %>
-        <%= render "shared/row", activity: activity, row: row,
-          type: activity_class(activity), f: f %>
+      <%= f.fields_for :activities, @sprint.activities do |activity_builder|%>
+        <%= render "shared/row", activity_builder: activity_builder, row: activity_builder.index,
+          type: activity_class(activity_builder.object), f: f %>
       <% end %>
       <div class="col-md-12">
         <%= f.submit t("buttons.save"), class: "btn btn-success" %>
