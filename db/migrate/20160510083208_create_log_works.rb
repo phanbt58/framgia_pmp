@@ -5,6 +5,7 @@ class CreateLogWorks < ActiveRecord::Migration
       t.integer :remaining_time
       t.integer :day
       t.references :sprint, index: true, foregin: true
+      t.references :master_sprint, index: true, foreign: true
 
       t.timestamps null: false
     end

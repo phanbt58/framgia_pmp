@@ -134,5 +134,6 @@ en:
     lost_hour: "Lost hour"
     work_hour: "Work hour"
     save: "Save"
+    saving: "Saving..."
   delete:
-      confirm: "You are sure?"
+      confirm: "Are you sure?"

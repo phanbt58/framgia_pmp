@@ -17,8 +17,7 @@ div.gridbox_dhx_blue table.hdr td {
   border: 1px solid;
   border-color : #FDFDFD #93AFBA #93AFBA #FDFDFD;
   background-color:transparent;
-  font-family:Tahoma;
-  font-size:14px;
+  font-size: 15px;
   font-weight:bold;
   color:#055A78;
   vertical-align:top;
@@ -37,7 +36,6 @@ div.gridbox_dhx_blue table.obj td {
   border-width: 0px 1px 0px 1px;
   border-left: 1px solid white;
   border-right: 1px solid #D6D6D6;
-  font-family:Tahoma;
   font-size:11px;
   padding-right:4px;
   padding-left:4px;

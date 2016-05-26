@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518032925) do
+ActiveRecord::Schema.define(version: 20160526041630) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "product_backlog_id", limit: 4
@@ -59,16 +59,23 @@ ActiveRecord::Schema.define(version: 20160518032925) do
   add_index "headers", ["sheet_id"], name: "index_headers_on_sheet_id", using: :btree
 
   create_table "log_works", force: :cascade do |t|
-    t.integer  "activity_id",    limit: 4
-    t.integer  "remaining_time", limit: 4
-    t.integer  "day",            limit: 4
-    t.integer  "sprint_id",      limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "activity_id",      limit: 4
+    t.integer  "remaining_time",   limit: 4
+    t.integer  "day",              limit: 4
+    t.integer  "sprint_id",        limit: 4
+    t.integer  "master_sprint_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "log_works", ["activity_id"], name: "index_log_works_on_activity_id", using: :btree
+  add_index "log_works", ["master_sprint_id"], name: "index_log_works_on_master_sprint_id", using: :btree
   add_index "log_works", ["sprint_id"], name: "index_log_works_on_sprint_id", using: :btree
+
+  create_table "master_sprints", force: :cascade do |t|
+    t.integer "day",  limit: 4
+    t.date    "date"
+  end
 
   create_table "phases", force: :cascade do |t|
     t.string   "phase_name",  limit: 255
@@ -138,14 +145,16 @@ ActiveRecord::Schema.define(version: 20160518032925) do
   end
 
   create_table "time_logs", force: :cascade do |t|
-    t.integer  "assignee_id", limit: 4
-    t.integer  "sprint_id",   limit: 4
-    t.integer  "work_date",   limit: 4
-    t.integer  "lost_hour",   limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "assignee_id",      limit: 4
+    t.integer  "sprint_id",        limit: 4
+    t.integer  "master_sprint_id", limit: 4
+    t.integer  "work_date",        limit: 4
+    t.integer  "lost_hour",        limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
+  add_index "time_logs", ["master_sprint_id"], name: "index_time_logs_on_master_sprint_id", using: :btree
   add_index "time_logs", ["sprint_id"], name: "index_time_logs_on_sprint_id", using: :btree
 
   create_table "triggers", force: :cascade do |t|
