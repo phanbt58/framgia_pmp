@@ -9,7 +9,7 @@ class EstimateLogworkService
 
   def get_sum_remaining
     @activities.inject(0) do |sum, activity|
-      sum + time_remaining_activity(activity)
+      sum += time_remaining_activity(activity)
     end
   end
 
@@ -35,18 +35,21 @@ class EstimateLogworkService
 
   def get_estimate_activities
     @activities.inject(0) do |sum, activity|
-      sum + activity.estimate
+      tem = activity.estimate.present? ?  activity.estimate : 0
+      sum += tem
     end
   end
 
   def sum_remaining_for_day log_works
     unless log_works.nil?
       log_works.inject([]) do |results, log_work|
-        sum = @activities.inject(0) do |sum, activity|
-          time_logs = activity.log_works.collect{|log| log if log.day == log_work.day}
-            .compact
-          sum += time_logs.first.remaining_time
-        end
+        sum = 0
+          @activities.each do |activity|
+            time_logs = activity.log_works.collect{|log| log if log.day == log_work.day}
+              .compact
+            tem = time_logs.first.remaining_time.present? ? time_logs.first.remaining_time : 0
+            sum += tem
+          end
         results << sum
       end
     end
@@ -65,7 +68,7 @@ class EstimateLogworkService
 
   private
   def time_remaining_activity activity
-    activity.log_works.last.remaining_time
+    activity.log_works.last.remaining_time.present? ?  activity.log_works.last.remaining_time : 0
   end
 
   def get_arr_lost_hour
