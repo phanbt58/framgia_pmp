@@ -24,6 +24,9 @@ namespace :db do
       end
     end
 
+    puts "master sprint"
+    master_sprint = Fabricate :master_sprint
+
     puts "Creating sprint"
     2.times do
       puts "Creating project"
@@ -57,6 +60,7 @@ namespace :db do
     puts "Creating activities for sprint 1"
     Sprint.first.assignees.each do |assignee|
       Fabricate :activity, user_id: assignee.id, sprint_id: Sprint.first.id
+      Fabricate :time_log, master_sprint_id: master_sprint.id
     end
 
     puts "Creating phase"
@@ -73,7 +77,8 @@ namespace :db do
     Sprint.first.activities.each_with_index do |activity|
       9.times do |index|
         Fabricate :log_work, remaining_time: 9 - index, day: index + 1,
-          activity_id: activity.id, sprint_id: Sprint.first.id
+          activity_id: activity.id, sprint_id: Sprint.first.id,
+          master_sprint_id: master_sprint.id
       end
     end
 
