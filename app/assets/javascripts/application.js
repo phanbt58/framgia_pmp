@@ -31,6 +31,12 @@
 //= require highcharts
 //= require init_chart
 
+function add_fields(link, association, content) {
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g");
+  $("#activities tr:last").after(content.replace(regexp, new_id));
+}
+
 $(document).on("page:change", function(){
   $(".datepicker").datepicker({
     format: I18n.t("date.format")
