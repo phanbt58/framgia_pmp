@@ -1,10 +1,13 @@
 <% @activities.each_with_index do |activity, row| %>
   $('tr.activity_<%= activity.id %>').append('<%= j render "log_work_cell", activity: activity, row: row %>')
+  setLastTimeLogValue("<%= activity.id %>");
 <% end %>
 
 <% ["master-sprint-working-day", "master-estimate-plan", "actual"].each do |header_class| %>
   $('tr.<%= header_class %>').append('<%= j render "header_cell", header_class: header_class %>')
 <% end %>
+
+setLastActual();
 
 <% @assignees.each_with_index do |assignee, row| %>
   $('tr.assignee-row-<%= assignee.id %>').append('<%= j render "log_time_cell", assignee: assignee, row: row %>')
@@ -15,4 +18,14 @@
 <% end %>
 
 $('.log-<%= @master_sprint.day %>').change(logWorkEventListener);
+totalLogWorksCol();
 
+function setLastTimeLogValue(activity_id) {
+  var value = $($('tr.activity_' + activity_id + ' td').eq(-2)).children().last().val();
+  $($('tr.activity_' + activity_id + ' td')).last().children().last().val(value);
+}
+
+function setLastActual() {
+  var value = $($('tr.actual th').eq(-2)).text();
+  $($('tr.actual th')).last().text(value);
+}

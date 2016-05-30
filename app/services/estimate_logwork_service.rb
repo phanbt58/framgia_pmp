@@ -47,7 +47,7 @@ class EstimateLogworkService
           @activities.each do |activity|
             time_logs = activity.log_works.collect{|log| log if log.day == log_work.day}
               .compact
-            tem = time_logs.first.remaining_time.present? ? time_logs.first.remaining_time : 0
+            tem = time_logs.first.present? ? time_logs.first.remaining_time : 0
             sum += tem
           end
         results << sum

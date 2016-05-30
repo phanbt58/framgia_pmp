@@ -31,27 +31,15 @@ function total_lost_hour() {
 $(document).on("change click", "#lost_hour_table td input", function(){
   var col = parseInt($($(this).parent().attr("class").split("-")).last()[0]);
   calculate_lost_hour(col);
-  setTotalRemaining(col);
+  setActual(col);
 });
 
-function setTotalRemaining(col) {
-  if(col == 0) return;
-  var remainBefore = parseInt($(".log-actual-" + (col - 1)).text());
-
-  var lostHour = parseInt($("#lost-hour-" + col + " input").val());
-  var workHour = parseInt($("#work-hour-0" + " input").val());
-
-  var remain = remainBefore + lostHour - workHour;
-  $(".log-actual-" + col).text(remain);
-
-  setActual(col);
-}
-
 function setActual(col) {
+  if(col == 0) return;
   var workHour = parseInt($("#work-hour-0" + " input").val());
 
   var cells = $('th[class*="log-actual"]');
-  for(++col; col < cells.length; col++) {
+  for(col; col < cells.length; col++) {
     var lostHour = parseInt($("#lost-hour-" + col + " input").val());
     $(cells[col]).text(parseInt($(cells[col - 1]).text()) + lostHour - workHour);
   }

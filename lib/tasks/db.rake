@@ -70,7 +70,7 @@ namespace :db do
 
     puts "Creating log works for activities in sprints"
     sprint = Sprint.first
-    9.times do |index|
+    10.times do |index|
       Fabricate :master_sprint, sprint: sprint, day: index + 1, date: (sprint.start_date + index.days)
     end
 

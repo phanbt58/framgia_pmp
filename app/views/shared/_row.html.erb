@@ -17,8 +17,8 @@
         <%= log_work_builder.hidden_field :activity_id,
           value: activity_builder.object.id %>
         <%= log_work_builder.hidden_field :day %>
-        <%= log_work_builder.text_field :remaining_time,
-          class: "log log-#{log_work_builder.object.day} row-#{row} text-center" %>
+          <%= log_work_builder.text_field :remaining_time,
+            class: "log log-#{log_work_builder.object.day} row-#{row} text-center" %>
       </td>
   <% end %>
 </tr>

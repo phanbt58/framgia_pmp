@@ -38,9 +38,13 @@
   <th class="panel-left worked-percent"><%= @estimate.get_percent_worked %></th>
   <th class="panel-left remaining-percent"><%= @estimate.get_percent_remaining %></th>
   <% @sprint.master_sprints.each_with_index do |_, index| %>
-    <th class="panel-left log-actual-<%= index + 1 %>">
-      <%= @estimate.get_time_remaining_team[index] %>
-    </th>
+    <% if index == 1 %>
+      <th class="panel-left log-actual-<%= index + 1 %>"><%= @estimate.get_estimate_activities %></th>
+    <% else %>
+      <th class="panel-left log-actual-<%= index + 1 %>">
+        <%= @estimate.get_time_remaining_team[index] %>
+      </th>
+    <% end %>
   <% end %>
   <% (@log_works_count..(@sprint.work_day - 3)).each do |index| %>
     <th class="panel-left log-actual-<%= index %>">0</th>
@@ -50,9 +54,13 @@
   <th class="panel-left worked"><%= @estimate.get_sum_worked %></th>
   <th class="panel-left remaining-header"><%= @estimate.get_sum_remaining %></th>
   <% @sprint.master_sprints.each_with_index do |_, index| %>
-    <th class="panel-left log-estimate-<%= index + 1 %>">
-      <%= @log_estimates.nil? ? 0 : @log_estimates[index] %>
-    </th>
+    <% if index == 1 %>
+      <th class="panel-left log-estimate-<%= index + 1 %>"><%= @estimate.get_estimate_activities %></th>
+    <% else %>
+      <th class="panel-left log-estimate-<%= index + 1 %>">
+        <%= @estimate.get_time_remaining_team[index] %>
+      </th>
+    <% end %>
   <% end %>
   <% (@log_works_count..(@sprint.work_day - 3)).each do |index| %>
     <th class="panel-left log-estimate-<%= index %>">0</th>
