@@ -1,7 +1,7 @@
 $(document).on('page:change', function(){
   $('[data-toggle="tooltip"]').tooltip();
   // total log_works
-  function totalLogWorksCol() {
+  totalLogWorksCol = function() {
     $.each($('th[class*="log-estimate"]'), function(i, col) {
       var filter = function(v) {return v.indexOf('log-estimate') == 0}
       var className = col.className.split(' ').filter(filter)[0];
