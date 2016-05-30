@@ -3,35 +3,43 @@
   <div class="col-md-12 pull-right" id="tracking-time">
     <table class="table table-bordered" id="lost_hour_table"
       data-number-assignees="<%= sprint.assignees.size %>"
-      data-number-work-day="<%= sprint.work_day %>">
+      data-number-work-day="<%= sprint.master_sprints.size %>">
       <tbody>
         <tr class="lost-hour-row">
           <td class="header_column"><%= t "lost_hour.lost_hour" %></td>
+          <td id="lost-hour-0"><%= text_field_tag nil, "#{total_lost_hour}", disabled: true,
+            class: "body_column" %></td>
           <% sprint.master_sprints.each_with_index do |_,index| %>
-            <td id="lost-hour-<%= index %>">
-              <%= text_field_tag nil, index == 0 ? total_lost_hour :
-              sum_lost_hour[index], disabled: true, class: "body_column" %>
+            <td id="lost-hour-<%= index + 1 %>">
+              <%= text_field_tag nil, "#{sum_lost_hour[index]}", disabled: true, class: "body_column" %>
             </td>
           <% end %>
         </tr>
         <tr class="work-hour">
           <td class="header_column"><%= t "lost_hour.work_hour" %></td>
-            <% sprint.master_sprints.each_with_index do |_,index| %>
-              <td id="work-hour-<%= index %>">
-                <%= text_field_tag nil, index == 0 ? sum_lost_hour[index] : "",
-                  disabled: true, class: "body_column" %>
-              </td>
-            <% end %>
+          <td id="work-hour-0"><%= text_field_tag nil, "#{total_work_hour}",
+            disabled: true, class: "body_column" %></td>
+          <% sprint.master_sprints.each_with_index do |_,index| %>
+            <td id="work-hour-<%= index + 1 %>">
+              <%= text_field_tag nil, "", disabled: true, class: "body_column" %>
+            </td>
+          <% end %>
         </tr>
-        <% @sprint.time_logs.group_by(&:assignee).each do |assignee, time_logs| %>
-          <tr class="assignee-row-<%= assignee.id %>">
-            <td class="assignees_name"><%= assignee.user.name %></td>
-            <%= f.fields_for :time_logs, time_logs do |time_log_builder| %>
-              <td class="assignee-col-<%= time_log_builder.object.master_sprint.day - 1 %>">
+
+        <%= f.fields_for :assignees, @sprint.assignees do |assignee_builder| %>
+          <tr class="assignee-row-<%= assignee_builder.object.id %>">
+            <td class="assignees_name"><%= assignee_builder.object.user.name %></td>
+            <td class="assignee-col-0">
+              <%= assignee_builder.hidden_field :assignee_id,
+                value: assignee_builder.object.id %>
+              <%= assignee_builder.text_field :work_hour %>
+            </td>
+            <%= f.fields_for :time_logs, assignee_builder.object.time_logs do |time_log_builder| %>
+              <td class="assignee-col-<%= time_log_builder.object.master_sprint.day %>">
                 <%= time_log_builder.hidden_field :assignee_id,
-                  value: assignee.id %>
-                <%= time_log_builder.hidden_field :work_date,
-                  value: get_work_date(time_log_builder.index, @sprint) %>
+                  value: assignee_builder.object.id %>
+                <%= time_log_builder.hidden_field :master_sprint_id,
+                  value: time_log_builder.object.master_sprint.id %>
                 <%= time_log_builder.text_field :lost_hour %>
               </td>
             <% end %>

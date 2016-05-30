@@ -2,7 +2,7 @@ class Activity < ActiveRecord::Base
   belongs_to :product_backlog
   belongs_to :sprint
   belongs_to :user
-
+  belongs_to :assignee
   has_one :work_performance
 
   has_many :log_works

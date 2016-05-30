@@ -13,7 +13,8 @@ class Sprint < ActiveRecord::Base
     user_ids: [], time_logs_attributes: [:id, :assignee_id, :lost_hour, :work_date],
     log_works_attributes: [:id, :activity_id, :remaining_time, :day],
     activities_attributes: [:id, :product_backlog_id, :subject, :description,
-      :spent_time, :estimate, :user_id, :sprint_id]]
+      :spent_time, :estimate, :user_id, :sprint_id],
+    assignees_attributes: [:id, :work_hour]]
 
   # after_create :build_master_sprint
 
@@ -25,6 +26,7 @@ class Sprint < ActiveRecord::Base
   accepts_nested_attributes_for :log_works
   accepts_nested_attributes_for :activities
   accepts_nested_attributes_for :master_sprints
+  accepts_nested_attributes_for :assignees
 
   private
   def build_master_sprint
