@@ -31,19 +31,24 @@ function initChart(){
     chart: {
       renderTo: "burndown_chart",
       height: 300,
-      width: $(window).outerWidth() - $('#tracking-time').outerWidth() - 30
+      width: 550,
+      borderWidth: 1
     },
     title: {
       text: "Burndown Chart"
     },
     colors: ["#BF0622", "#5559D6"],
     xAxis: {
+      allowDecimals: false,
+      tickInterval: 1,
       min: 1,
-      title: {text: "Working days"}
+      title: {text: "Working days"},
+      gridLineWidth: 1
     },
     yAxis: {
       title: {text: "Estimate time"},
-      lineWidth: 1
+      lineWidth: 1,
+      gridLineWidth: 1
     },
     credits: {
       enabled: false

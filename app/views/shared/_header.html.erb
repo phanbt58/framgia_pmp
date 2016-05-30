@@ -1,6 +1,6 @@
 <tr class="master-data">
-  <td rowspan="2" colspan="3" style="widtd: 35%; vertical-align: middle;"></td>
-  <td style="width: 10%; vertical-align: middle;"><%=  t "activities.start_date"%></td>
+  <td rowspan="2" colspan="3" class="left-side" ></td>
+  <td class="start-date"><%=  t "activities.start_date"%></td>
   <td colspan="5"><%= l @sprint.start_date %></td>
 </tr>
 <tr class="master-data">
@@ -11,21 +11,21 @@
   <% end %>
 </tr>
 <tr class="master-sprint-working-day">
-  <th rowspan="3" style="width: 5%; vertical-align: middle;">
+  <th rowspan="3" class="story-id" >
     <%= t "activities.story_id" %>
   </th>
-  <th rowspan="3" style="width: 5%; vertical-align: middle;">
+  <th rowspan="3" class="task-id" >
     <%= t "activities.task_id" %>
   </th>
-  <th rowspan="3" style="width: 25%; vertical-align: middle;">
+  <th rowspan="3" class="task-name" >
     <%= t "activities.task_name" %>
   </th>
-  <th style="width: 10%;" class="panel-left">
+  <th class="sprint-worked" >
     <span data-toggle="tooltip" title="Worked" data-placement="right">
       <%= t "activities.worked" %>
     </span>
   </th>
-  <th style="width: 5%;" class="panel-left">
+  <th class="sprint-remaining" >
     <span data-toggle="tooltip" title="Remaining" data-placement="right">
       <%= t "activities.remaining" %>
     </span>

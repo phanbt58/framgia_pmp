@@ -2,12 +2,13 @@
   th {
     background-color: #366092;
     margin: 0;
-    padding: 0;
+    padding: 0 5px;
+    min-width: 40px;
   }
 
   td {
     margin: 0;
-    padding: 0 0px;
+    padding: 0 5px;
     input, select {
       display: block;
       margin: 0;
@@ -32,6 +33,17 @@
     border-color: #FFF;
   }
 
+  .left-side {
+    width: 600px;
+    vertical-align: middle;
+  }
+
+  .start-date {
+    width: 140px;
+    vertical-align: middle;
+    text-align: center;
+  }
+
   .panel-left {
     text-align: center!important;
   }
@@ -50,5 +62,31 @@
 
   .processed {
     background-color: #3C763D;
+  }
+
+  .master-sprint-working-day {
+    vertical-align: middle;
+
+    .story-id {
+      min-width: 70px;
+    }
+
+    .task-id {
+      min-width: 70px;
+    }
+
+    .task-name {
+      min-width: 450px;
+    }
+
+    .sprint-worked {
+      min-width: 140px;
+      text-align: center;
+    }
+
+    .sprint-remaining {
+      min-width: 60px;
+      text-align: center;
+    }
   }
 }
