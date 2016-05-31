@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160526041630) do
   create_table "assignees", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "project_id", limit: 4
+    t.integer  "work_hour",  limit: 4
     t.integer  "sprint_id",  limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false

@@ -38,7 +38,6 @@ function add_fields(link, association, content) {
 }
 
 $(document).on("page:change", function(){
-  setLostHourWidth();
 
   $(".datepicker").datepicker({
     format: I18n.t("date.format")
@@ -50,12 +49,3 @@ $(document).on("page:change", function(){
     width: '100%'
   });
 });
-
-function setLostHourWidth() {
-  var totalWidth = 0;
-  $($('tr[class*=activity]')[0]).children('td').not('.story, .task-id, .task-name').each(function() {
-    totalWidth += $(this).outerWidth();
-  });
-
-  $('#tracking-time').width(totalWidth);
-}

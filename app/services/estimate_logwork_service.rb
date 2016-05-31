@@ -68,7 +68,7 @@ class EstimateLogworkService
 
   private
   def time_remaining_activity activity
-    activity.log_works.last.remaining_time.present? ?  activity.log_works.last.remaining_time : 0
+    activity.log_works.last.remaining_time.present? ? activity.log_works.last.remaining_time : 0
   end
 
   def get_arr_lost_hour
