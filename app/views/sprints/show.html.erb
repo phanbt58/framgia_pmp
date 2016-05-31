@@ -32,10 +32,10 @@
       </div>
     </div>
     <div class="row" id="chart">
-      <div class="col-md-6" id="burndown_chart"></div>
-    </div>
-    <%= render "shared/lost_hour", sprint: @sprint, project: @project,
+      <div class="col-md-5" id="burndown_chart"></div>
+      <%= render "shared/lost_hour", sprint: @sprint, project: @project,
       assignees: @sprint.assignees, f: f %>
+    </div>
     <%= render "shared/activities", f: f %>
   </div>
 <% end %>
