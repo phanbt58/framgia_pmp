@@ -12,13 +12,13 @@
       value="<%= activity_builder.object.get_remaining_activity %>"readonly/>
   </td>
   <%= f.fields_for :log_works,
-    activity_builder.object.log_works.order(day: :asc) do |log_work_builder| %>
+    activity_builder.object.log_works do |log_work_builder| %>
       <td class="panel-left">
         <%= log_work_builder.hidden_field :activity_id,
           value: activity_builder.object.id %>
         <%= log_work_builder.hidden_field :day %>
           <%= log_work_builder.text_field :remaining_time,
-            class: "log log-#{log_work_builder.object.day} row-#{row} text-center" %>
+            class: "log log-#{log_work_builder.object.master_sprint.day} row-#{row} text-center" %>
       </td>
   <% end %>
 </tr>

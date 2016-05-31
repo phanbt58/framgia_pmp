@@ -6,9 +6,13 @@
 <tr class="master-data">
   <td></td>
   <td><%= t "activities.date" %></td>
-  <% @sprint.master_sprints.each_with_index do |_, index| %>
-    <td class="panel-left"><input type="text"/></td>
-  <% end %>
+    <%= f.fields_for :master_sprints, @sprint.master_sprints do |master_sprints_builder| %>
+      <td class="panel-left">
+        <%= master_sprints_builder.hidden_field :date %>
+        <input type="text" class="master-sprint-day"
+          value="<%= master_sprints_builder.object.date.day %>"/>
+      </td>
+    <% end %>
 </tr>
 <tr class="master-sprint-working-day">
   <th rowspan="3" class="story-id" >
@@ -46,9 +50,6 @@
       </th>
     <% end %>
   <% end %>
-  <% (@log_works_count..(@sprint.work_day - 3)).each do |index| %>
-    <th class="panel-left log-actual-<%= index %>">0</th>
-  <% end %>
 </tr>
 <tr class="actual">
   <th class="panel-left worked"><%= @estimate.get_sum_worked %></th>
@@ -58,11 +59,8 @@
       <th class="panel-left log-estimate-<%= index + 1 %>"><%= @estimate.get_estimate_activities %></th>
     <% else %>
       <th class="panel-left log-estimate-<%= index + 1 %>">
-        <%= @log_estimates[index] %>
+        <%= @log_estimates[index] if @log_estimates.present? %>
       </th>
     <% end %>
-  <% end %>
-  <% (@log_works_count..(@sprint.work_day - 3)).each do |index| %>
-    <th class="panel-left log-estimate-<%= index %>">0</th>
   <% end %>
 </tr>

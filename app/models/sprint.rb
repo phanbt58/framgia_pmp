@@ -14,9 +14,10 @@ class Sprint < ActiveRecord::Base
     log_works_attributes: [:id, :activity_id, :remaining_time, :day],
     activities_attributes: [:id, :product_backlog_id, :subject, :description,
       :spent_time, :estimate, :user_id, :sprint_id],
-    assignees_attributes: [:id, :work_hour]]
+    assignees_attributes: [:id, :work_hour],
+    master_sprints_attributes: [:id, :date, :day]]
 
-  # after_create :build_master_sprint
+  after_create :build_master_sprint
 
   scope :list_by_user, ->user do
     joins(:assignees).where assignees: {user_id: user.id}

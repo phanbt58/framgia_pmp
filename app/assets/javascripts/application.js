@@ -43,6 +43,13 @@ $(document).on("page:change", function(){
     format: I18n.t("date.format")
   });
 
+
+  $(".master-sprint-day").datepicker({
+    format: "d"
+  }).on("changeDate", function(event){
+    $(this).prev().val(event.format(I18n.t("date.format")));
+  });
+
   $( "#assignee" ).select2({
     multiple: true,
     theme: "bootstrap",
