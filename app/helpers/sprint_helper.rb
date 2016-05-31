@@ -5,14 +5,20 @@ module SprintHelper
 
   def sum_lost_hour
     sum_lost_hour = []
-    @sprint.master_sprints.each_with_index do |_, day|
-      lost_hour = TimeLog.total_lost_hour @sprint, day
+    @sprint.master_sprints.order(day: :asc).each do |master_sprint|
+      lost_hour = TimeLog.total_lost_hour master_sprint
       sum_lost_hour << lost_hour
     end
     sum_lost_hour
   end
 
   def total_lost_hour
-    sum_lost_hour.drop(1).inject {|total, lost_hour| total + lost_hour}
+    sum_lost_hour.inject {|total, lost_hour| total + lost_hour}
+  end
+
+  def total_work_hour
+    @sprint.assignees.inject(0) do |total, assignee|
+      total + (assignee.work_hour.nil? ? 0 : assignee.work_hour)
+    end
   end
 end

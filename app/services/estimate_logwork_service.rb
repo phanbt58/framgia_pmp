@@ -35,8 +35,8 @@ class EstimateLogworkService
 
   def get_estimate_activities
     @activities.inject(0) do |sum, activity|
-      tem = activity.estimate.present? ?  activity.estimate : 0
-      sum += tem
+      log_works = activity.log_works.order(day: :asc)
+      sum + (log_works.any? ? log_works.first.remaining_time : 0)
     end
   end
 
@@ -73,8 +73,9 @@ class EstimateLogworkService
 
   def get_arr_lost_hour
     arr = []
+    wh = total_work_hour
     sum_lost_hour.each_with_index do |lost_hour, index|
-      arr << sum_lost_hour[0] - sum_lost_hour[index] if index > 0
+      arr << wh - sum_lost_hour[index]
     end
     arr
   end

@@ -31,13 +31,13 @@ $(document).on('page:change', function(){
     return total;
   }
 
-  function setActual(col) {
+  setActual = function(col) {
     var workHour = parseInt($("#work-hour-0" + " input").val());
 
     var cells = $('th[class*="log-actual"]');
-    for(++col; col < cells.length; col++) {
+    for(col; col < cells.length; col++) {
       var lostHour = parseInt($("#lost-hour-" + col + " input").val());
-      $(cells[col]).text(parseInt($(cells[col-1]).text()) + lostHour - workHour);
+      $(cells[col]).text(parseInt($(cells[col - 1]).text()) + lostHour - workHour);
     }
   }
 
@@ -126,7 +126,7 @@ $(document).on('page:change', function(){
     });
 
     $('.log-estimate-1').text(totalColumnValue('log-1')).change();
-    $('.log-actual-0').text($('.log-estimate-1').text()).change();
+    $('.log-actual-1').text($('.log-estimate-1').text()).change();
 
     totalLogWorksCol();
     setRemainTime(rowClass);
@@ -149,8 +149,8 @@ $(document).on('page:change', function(){
     setRowColor(rowClass);
   });
 
-  $('.log-actual-0').change(function() {
-    setActual(0);
+  $('.log-actual-1').change(function() {
+    setActual(1);
   });
 
   $("#load_more").click(function() {

@@ -7,8 +7,6 @@
   $('tr.<%= header_class %>').append('<%= j render "header_cell", header_class: header_class %>')
 <% end %>
 
-setLastActual();
-
 <% @assignees.each_with_index do |assignee, row| %>
   $('tr.assignee-row-<%= assignee.id %>').append('<%= j render "log_time_cell", assignee: assignee, row: row %>')
 <% end %>
@@ -19,6 +17,8 @@ setLastActual();
 
 $('.log-<%= @master_sprint.day %>').change(logWorkEventListener);
 totalLogWorksCol();
+setLastActual();
+setActual(<%= @total_master_sprint - 1 %>);
 
 function setLastTimeLogValue(activity_id) {
   var value = $($('tr.activity_' + activity_id + ' td').eq(-2)).children().last().val();
