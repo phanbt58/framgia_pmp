@@ -11,19 +11,20 @@ $(document).on("page:change", function (){
 });
 
 function getChartData() {
-  for(var i = 0; i < 10; i++) {
-    actual_data[i + 1] = parseInt($(".log-actual-" + i).text());
-    estimate_data[i + 1] = parseInt($(".log-estimate-" + i).text());
+  var workday = $("#lost_hour_table").data("numberWorkDay");
+  for(var i = 1; i <= workday; i++) {
+    actual_data[i] = parseInt($(".log-actual-" + i).text());
+    estimate_data[i] = parseInt($(".log-estimate-" + i).text());
   }
 }
 $(document).on("change click", "td input", function(){
   getChartData();
   chart.series[0].update({
-    data: actual_data
+    data: estimate_data
   });
 
   chart.series[1].update({
-    data: estimate_data
+    data: actual_data
   });
 });
 function initChart(){
@@ -67,13 +68,13 @@ function initChart(){
       layout: "vertical"
     },
     series: [{
-      name:"Actual",
-      data: actual_data
+      name:"Estimate",
+      data: estimate_data
       }]
   });
 
   chart.addSeries({
-    name: "Estimate",
-    data: estimate_data
+    name: "Plan",
+    data: actual_data
   });
 }
