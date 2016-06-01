@@ -106,6 +106,7 @@ en:
       actual: "A"
   date:
     format: "dd-mm-yyyy"
+    rb_format: "%d-%m-%Y"
   layouts:
     account: "Account"
     projects: "Projects"
