@@ -1,10 +1,10 @@
 <% if header_log_time == "lost-hour-row" %>
-  <td id="lost-hour-<%= @sprint.time_logs.size + 1 %>" >
+  <td id="lost-hour-<%= @sprint.master_sprints.size %>" >
     <%= text_field_tag nil, @master_sprint.day == 0 ? total_lost_hour :
       sum_lost_hour[@master_sprint.day], disabled: true, class: "body_column", value: "0" %>
   </td>
 <% elsif header_log_time == "work-hour" %>
-  <td id="work-hour-<%= @sprint.time_logs.size + 1 %>">
+  <td id="work-hour-<%= @sprint.master_sprints.size %>">
     <%= text_field_tag nil, "", disabled: true, class: "body_column" %>
   </td>
 <% end %>
