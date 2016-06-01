@@ -82,6 +82,7 @@ en:
     errors: "errors"
     wrong_end_date: "End date must bigger than start date "
   flashs:
+    not_authorize: "User not authorizes"
     access_denied: "Permisstion denied"
     password_reset: "Email sent with password reset instructions"
     not_email: "Email address not found"

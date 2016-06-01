@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :synchronizes, only: [:index, :create]
   resources :columns, only: [:create]
 
-  resources :projects do
+  resources :projects, only: [:index, :show] do
     resources :product_backlogs
     resource :product_backlog_updates
     resources :sprints, only: [:show, :update] do
