@@ -3,7 +3,7 @@
   setLastTimeLogValue("<%= activity.id %>");
 <% end %>
 
-<% ["master-sprint-working-day", "master-estimate-plan", "actual"].each do |header_class| %>
+<% ["master-data-date", "master-sprint-working-day", "master-estimate-plan", "actual"].each do |header_class| %>
   $('tr.<%= header_class %>').append('<%= j render "header_cell", header_class: header_class %>')
 <% end %>
 

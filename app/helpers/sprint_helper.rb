@@ -21,4 +21,16 @@ module SprintHelper
       total + (assignee.work_hour.nil? ? 0 : assignee.work_hour)
     end
   end
+
+  def get_time_log_by_assignee_master_sprint assignee, master_sprint
+    TimeLog.find_by(assignee: assignee, master_sprint: master_sprint)
+  end
+
+  def get_log_work_by_activity_master_sprint activity, master_sprint
+    LogWork.find_by(activity: activity, master_sprint: master_sprint)
+  end
+
+  def get_master_sprint_id
+    MasterSprint.last.id
+  end
 end
