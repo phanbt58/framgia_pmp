@@ -16,10 +16,15 @@ class Project < ActiveRecord::Base
 
   delegate :name, to: :manager, prefix: true, allow_nil: true
 
+  def include_assignee? current_user
+    self.assignees.map{|assignee| assignee.user_id}.include? current_user.id
+  end
+
   private
   def check_end_date
     if self.start_date.present? && self.end_date < self.start_date
       errors.add :end_date, I18n.t("errors.wrong_end_date")
     end
   end
+
 end
