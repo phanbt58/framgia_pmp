@@ -3,7 +3,7 @@
   <td class="start-date"><%=  t "activities.start_date"%></td>
   <td colspan="5"><%= l @sprint.start_date %></td>
 </tr>
-<tr class="master-data">
+<tr class="master-data-date">
   <td></td>
   <td><%= t "activities.date" %></td>
     <%= f.fields_for :master_sprints, @sprint.master_sprints do |master_sprints_builder| %>
