@@ -61,7 +61,7 @@ $(document).on('page:change', function(){
   function setRowColor(rowClass) {
     var assigneeValue = $('.assignee.' + rowClass).val();
     var remainingValue = $('.remaining.' + rowClass).val();
-    var estimateValue = $('.row-1.' + rowClass).val();
+    var estimateValue = $('.log-1.' + rowClass).val();
 
     var row = $('.' + rowClass).closest('tr');
 
@@ -114,9 +114,7 @@ $(document).on('page:change', function(){
     setRemainTime(rowClass);
   }
 
-  $('.log').change(logWorkEventListener);
-
-  $('.log-1').change(function() {
+  estimateEventListener = function() {
     var self = this;
     var filterRow = function(v) {return v.indexOf('row-') == 0}
     var rowClass = this.className.split(' ').filter(filterRow)[0];
@@ -132,29 +130,33 @@ $(document).on('page:change', function(){
     setRemainTime(rowClass);
 
     setRowColor(rowClass);
-  });
+  }
 
-  $('.assignee').change(function() {
+  assigneeEventListener = function() {
     var filterRow = function(v) {return v.indexOf('row-') == 0}
     var rowClass = this.className.split(' ').filter(filterRow)[0];
 
     setRowColor(rowClass);
-  });
+  }
 
-  $('.remaining').change(function() {
+  remainingEventListener = function() {
     var filterRow = function(v) {return v.indexOf('row-') == 0}
     var rowClass = this.className.split(' ').filter(filterRow)[0];
     var cells = $('.' + rowClass);
 
     setRowColor(rowClass);
-  });
+  }
+
+  $('.log').change(logWorkEventListener);
+
+  $('.log-1').change(estimateEventListener);
+
+  $('.assignee').change(assigneeEventListener);
+
+  $('.remaining').change(remainingEventListener);
 
   $('.log-actual-1').change(function() {
     setActual(1);
-  });
-
-  $("#load_more").click(function() {
-    $("#activities tbody").append($("#more-rows table tbody").children().clone());
   });
 });
 

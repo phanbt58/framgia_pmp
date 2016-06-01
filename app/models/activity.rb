@@ -20,10 +20,11 @@ class Activity < ActiveRecord::Base
   private
   def create_log_works
     self.sprint.master_sprints.each do |master_sprint|
-      master_sprint.log_works.create remaining_time: self.estimate, 
+      master_sprint.log_works.create remaining_time: 0,
         sprint: sprint, activity: self
     end
   end
 
 end
+
 

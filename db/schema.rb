@@ -129,12 +129,12 @@ ActiveRecord::Schema.define(version: 20160526041630) do
     t.string   "name",            limit: 255
     t.string   "description",     limit: 255
     t.date     "start_date"
-    t.integer  "work_day",        limit: 4,   default: 10
+    t.integer  "work_day",        limit: 4
     t.integer  "total_lost_hour", limit: 4
     t.integer  "work_hour",       limit: 4
     t.integer  "project_id",      limit: 4
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "sprints", ["project_id"], name: "index_sprints_on_project_id", using: :btree

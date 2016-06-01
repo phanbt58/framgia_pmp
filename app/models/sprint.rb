@@ -29,6 +29,11 @@ class Sprint < ActiveRecord::Base
   accepts_nested_attributes_for :master_sprints
   accepts_nested_attributes_for :assignees
 
+  def initialize attributes
+    super
+    self.work_day = 3
+  end
+
   private
   def build_master_sprint
     if self.master_sprints.empty?

@@ -8,7 +8,7 @@
         type: "button", method: :post, remote: true,
         title: "Add more column" %>
     </div>
-    <div class="row">
+  </div>
   <div class="col-md-12">
     <%= f.hidden_field :work_day, value: @sprint.work_day, class: "work_day" %>
     <table id="activities" class="table table-bordered" >
@@ -23,6 +23,11 @@
     </table>
   </div>
   <div class="col-md-12">
-    <%= link_to_add_fields t("activities.add"), f, :activities %>
+    <div class="pull-left">
+      <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
+        rows_path({sprint_id: @sprint.id}),
+        class: "btn btn-xs btn-primary pull-left", id: "add-more-row",
+        type: "button", method: :post, remote: true, title: "Add more rows" %>
+    </div>
   </div>
 </div>
