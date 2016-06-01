@@ -10,7 +10,7 @@ class InviteUsersController < ApplicationController
       flash[:success] = t "flashs.password_reset"
       redirect_to root_url
     else
-      flash[:failed] = t "flashs.not_email"
+      flash[:alert] = t "flashs.not_email"
       redirect_to new_invite_user_url
     end
   end
@@ -21,7 +21,7 @@ class InviteUsersController < ApplicationController
       flash[:success] = t "flashs.reset_success"
       redirect_to @user
     else
-      flash[:failed] = flash_message "not_updated"
+      flash[:alert] = flash_message "not_updated"
       render :edit
     end
   end

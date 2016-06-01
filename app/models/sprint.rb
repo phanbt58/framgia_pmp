@@ -34,6 +34,10 @@ class Sprint < ActiveRecord::Base
     self.work_day = 3
   end
 
+  def include_user? current_user, project
+    check_manager? current_user, project or include_assignee? current_user
+  end
+
   private
   def build_master_sprint
     if self.master_sprints.empty?
@@ -41,5 +45,13 @@ class Sprint < ActiveRecord::Base
         self.master_sprints.create date: self.start_date + day, day: day
       end
     end
+  end
+
+  def check_manager? current_user, project
+    current_user.id == project.manager_id
+  end
+
+  def include_assignee? current_user
+    self.assignees.map{|assignee| assignee.user_id}.include? current_user.id
   end
 end
