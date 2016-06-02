@@ -1,0 +1,5 @@
+$('table#activities tbody').append('<%= j render "row" %>');
+$('.log.row-<%= @row_number %>').change(logWorkEventListener);
+$('.log-1.row-<%= @row_number %>').change(estimateEventListener);
+$('.assignee.row-<%= @row_number %>').change(assigneeEventListener);
+$('.remaining.row-<%= @row_number %>').change(remainingEventListener);

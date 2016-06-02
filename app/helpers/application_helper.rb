@@ -19,7 +19,8 @@ module ApplicationHelper
 
   def activity_class activity
     assignee = activity.user
-    estimate = activity.estimate.nil? ? 0 : activity.estimate
+    log_works = activity.log_works
+    estimate = log_works.any? ? log_works.first.remaining_time : 0
     remaining = activity.log_works.empty? ? 0 : activity.log_works.last.remaining_time
 
     if assignee.nil?

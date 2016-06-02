@@ -6,8 +6,8 @@ class ColumnsController < ApplicationController
       @sprint = @master_sprint.sprint
       @activities = @sprint.activities
       @assignees = @sprint.assignees
-      @total_lost_hour = @sprint.log_works.size
-      @total_time_log = @sprint.time_logs.size
+      @total_lost_hour = @sprint.time_logs.size
+      @total_time_log = @sprint.log_works.size
       @total_master_sprint = @sprint.master_sprints.size
     end
 

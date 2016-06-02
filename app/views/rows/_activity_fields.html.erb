@@ -1,0 +1,24 @@
+<td class="story">
+  <input class="row-<%= @row_number %>" type="text"
+    name="sprint[activities_attributes][<%= @row_number %>][product_backlog_id]"
+    id="sprint_activities_attributes_<%= @row_number %>_product_backlog_id"/>
+</td>
+<td class="task-id">
+  <input class="row-<%= @row_number %>" type="text"
+    name="sprint[activities_attributes][<%= @row_number %>][id]"
+    id="sprint_activities_attributes_<%= @row_number %>_id"
+    value="<%= @activity.id %>">
+</td>
+<td class="task-name text-left">
+  <input class="row-<%= @row_number %>" type="text" value=""
+    name="sprint[activities_attributes][<%= @row_number %>][subject]"
+    id="sprint_activities_attributes_<%= @row_number %>_subject">
+</td>
+<td>
+  <%= select_tag "sprint[activities_attributes][#{@row_number}][user_id]",
+    options_for_select(@assignees.collect {|assignee|
+      [assignee.user_name, assignee.user_id]}),
+      {include_blank: true,
+        class: "row-#{@row_number} assignee",
+        id: "sprint_activities_attributes_#{@row_number}_user_id"} %>
+</td>

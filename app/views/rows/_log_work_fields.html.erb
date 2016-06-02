@@ -1,0 +1,18 @@
+<td class="panel-left">
+  <input type="text" class="remaining row-<%= @row_number %> text-center" value="0" readonly=""/>
+</td>
+
+<% @master_sprints.each_with_index do |master_sprint, index| %>
+  <td class="panel-left">
+    <input value="<%= @activity.id %>" type="hidden"
+      name="sprint[log_works_attributes][<%= @log_work_count - index %>][activity_id]"
+      id="sprint_log_works_attributes_<%= @log_work_count - index  %>_activity_id"/>
+    <input type="hidden" name="sprint[log_works_attributes][<%= @log_work_count - index %>][id]"
+      id="sprint_log_works_attributes_<%= @log_work_count - index %>_id"
+      value="<%= get_log_work_by_activity_master_sprint(@activity, master_sprint).id %>"/>
+    <input class="log log-<%= master_sprint.day %> row-<%= @row_number %> text-center"
+      name="sprint[log_works_attributes][<%= @log_work_count - index %>][remaining_time]"
+      id="sprint_log_works_attributes_<%= @log_work_count - index %>_remaining_time"
+      type="text" value="0"/>
+  </td>
+<% end %>

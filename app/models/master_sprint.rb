@@ -16,8 +16,8 @@ class MasterSprint < ActiveRecord::Base
     end
 
     sprint.activities.each do |activity|
-      activity.log_works.create master_sprint: self, remaining_time: activity.estimate, day: day,
-        sprint: sprint
+      activity.log_works.create master_sprint: self,
+        remaining_time: 0, day: day, sprint: sprint
     end
   end
 
