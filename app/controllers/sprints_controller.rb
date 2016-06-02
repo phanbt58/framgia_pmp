@@ -4,10 +4,15 @@ class SprintsController < ApplicationController
   before_action :load_sprint, :load_activities
 
   def show
-    all_log_works = @activities.first.log_works if @activities.any?
-    @log_works_count = all_log_works.size rescue 0
-    @estimate = EstimateLogworkService.new @activities, @sprint rescue nil
-    @log_estimates = @estimate.sum_remaining_for_day all_log_works
+    if @sprint.include_user? current_user, @project
+      all_log_works = @activities.first.log_works if @activities.any?
+      @log_works_count = all_log_works.size rescue 0
+      @estimate = EstimateLogworkService.new @activities, @sprint rescue nil
+      @log_estimates = @estimate.sum_remaining_for_day all_log_works
+    else
+      flash[:alert] = t "flashs.not_authorize"
+      redirect_to root_path
+    end
   end
 
   def update
