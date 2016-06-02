@@ -41,20 +41,17 @@ class EstimateLogworkService
     end
   end
 
-  def sum_remaining_for_day log_works
-    unless log_works.nil?
-      log_works.inject([]) do |results, log_work|
-        sum = 0
-          @activities.each do |activity|
-            log_works = activity.log_works.collect{|log| log if log.day == log_work.day}
-              .compact
-            tem = log_works.any? ?
-              (log_works.first.remaining_time.present? ? log_works.first.remaining_time : 0) : 0
-            sum += tem
-          end
-        results << sum
-      end
+  def sum_logwork_day day
+    sum = 0
+    @activities.each do |activity|
+      logwork_day = activity.log_works.map{|log| log.remaining_time}
+      sum += logwork_day[day] || 0
     end
+    return sum
+  end
+
+  def sum_remaining_for_day log_works
+    (0..log_works.size - 1).map {|day| sum_logwork_day day} unless log_works.nil?
   end
 
   def get_time_remaining_team
