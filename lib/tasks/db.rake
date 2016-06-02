@@ -53,19 +53,14 @@ namespace :db do
       Fabricate :assignee, user_id: user.id, project_id: nil, sprint_id: Sprint.first.id
     end
 
-    puts "Creating activities for sprint 1"
-    Sprint.first.assignees.each do |assignee|
-      Fabricate :activity, user_id: assignee.id, sprint_id: Sprint.first.id
-    end
-
     puts "Creating phase"
     ["Line of code", "Unit Test", "Integration Test"].each do |phase|
       Fabricate :phase, phase_name: phase
     end
 
-    puts "Creating work performance data"
-    Activity.all.each do |activity|
-      Fabricate :work_performance, phase_id: Phase.first.id, activity_id: activity.id
+    puts "Creating activities for sprint 1"
+    Sprint.first.assignees.each do |assignee|
+      Fabricate :activity, user_id: assignee.id, sprint_id: Sprint.first.id
     end
 
     puts "Success remake data"

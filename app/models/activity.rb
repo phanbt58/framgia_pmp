@@ -6,7 +6,7 @@ class Activity < ActiveRecord::Base
   has_one :work_performance
 
   has_many :log_works
-  after_create :create_log_works
+  after_create :create_log_works, :create_work_performance
 
   scope :fitler_log_works, ->sprint{includes(:log_works).where(sprint: sprint)}
 
@@ -25,6 +25,9 @@ class Activity < ActiveRecord::Base
     end
   end
 
+  def create_work_performance
+    WorkPerformance.create activity: self, phase: Phase.first
+  end
 end
 
 

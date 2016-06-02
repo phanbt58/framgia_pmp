@@ -32,10 +32,10 @@
           <% @phases.each do |phase| %>
             <% if activity.work_performance.present? &&
               activity.work_performance.phase == phase %>
-              <td class="phase-value", id="plan-<%= phase.id %>">
+              <td class="phase-value", id="plan-<%= activity.id %>">
                 <%= activity.work_performance_plan %>
               </td>
-              <td class="phase-value" id="actual-<%= phase.id %>">
+              <td class="phase-value" id="actual-<%= activity.id %>">
                 <%= activity.work_performance_actual %>
               </td>
             <% else %>
