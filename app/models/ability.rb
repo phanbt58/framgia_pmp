@@ -12,6 +12,7 @@ class Ability
       can :manage, User
       can :manage, WorkPerformance
       can :manage, Phase
+      can [:update], User
     end
   end
 end
