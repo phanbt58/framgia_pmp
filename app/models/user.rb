@@ -18,15 +18,9 @@ class User < ActiveRecord::Base
 
   scope :fitler_by_role_not_manager, ->{where.not role: 2}
 
-  def User.digest string
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-      BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
-  end
-
   def create_invite_digest
-    self.reset_token = SecureRandom.urlsafe_base64
-    update_attributes(reset_password_token: User.digest(reset_token),
+    self.reset_token = SecureRandom.urlsafe_base64(64)
+    update_attributes(reset_password_token: reset_token,
       reset_password_sent_at: Time.zone.now)
   end
 
