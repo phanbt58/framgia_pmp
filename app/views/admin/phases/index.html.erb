@@ -1,12 +1,12 @@
 <div id="phases">
   <div class="title"><%= t "layout.phases" %></div>
   <div class="row col-md-10 col-md-offset-1 custyle">
+    <%= link_to t("buttons.new"), "#",
+      data: {toggle: "modal", target: "#PhaseModal"},
+      class: "btn btn-primary pull-right"%>
+    <%= render "phase_modal" %>
     <table class="table table-striped custab">
       <thead>
-        <%= link_to t("buttons.new"), "#",
-          data: {toggle: "modal", target: "#PhaseModal"},
-          class: "btn btn-primary pull-right"%>
-        <%= render "phase_modal" %>
         <tr>
           <th><%= t "phases.table.stt" %></th>
           <th><%= t "phases.table.name" %></th>
