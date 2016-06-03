@@ -11,13 +11,16 @@ $(document).on("page:change", function (){
 });
 
 function getChartData() {
-  var workday = $("#lost_hour_table").data("numberWorkDay");
+  var workday = $("th[class*='log-estimate']").length;
+  estimate_data.length = 1;
+  actual_data.length = 1;
   for(var i = 1; i <= workday; i++) {
-    actual_data[i] = parseInt($(".log-actual-" + i).text());
-    estimate_data[i] = parseInt($(".log-estimate-" + i).text());
+    actual_data.push(parseInt($(".log-actual-" + i).text()));
+    estimate_data.push(parseInt($(".log-estimate-" + i).text()));
   }
 }
-$(document).on("change click", "td input", function(){
+
+updateBurnDownChart = function(){
   getChartData();
   chart.series[0].update({
     data: estimate_data
@@ -26,7 +29,10 @@ $(document).on("change click", "td input", function(){
   chart.series[1].update({
     data: actual_data
   });
-});
+}
+
+$(document).on("change click", "td input", updateBurnDownChart);
+
 function initChart(){
   chart = new Highcharts.Chart({
     chart: {
@@ -60,21 +66,21 @@ function initChart(){
       hideDelay: 10,
       borderColor: "#7cb5ec",
       headerFormat: "<div style='text-align: center'>Day" + ": <b>{point.key}</b></div>",
-      valueSuffix: " (h)",
-
+      valueSuffix: " (h)"
     },
     legend: {
       align: "right",
       layout: "vertical"
     },
-    series: [{
-      name:"Estimate",
-      data: estimate_data
-      }]
-  });
-
-  chart.addSeries({
-    name: "Plan",
-    data: actual_data
+    series: [
+      {
+        name:"Estimate",
+        data: estimate_data
+      },
+      {
+        name: "Plan",
+        data: actual_data
+      }
+    ]
   });
 }
