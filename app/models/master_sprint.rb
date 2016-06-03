@@ -27,7 +27,7 @@ class MasterSprint < ActiveRecord::Base
       self.date = sprint.start_date
     else
       self.day = sprint.master_sprints.size + 1
-      self.date = sprint.start_date + sprint.master_sprints.size.days
+      self.date = sprint.master_sprints.last.date + 1
     end
   end
 end
