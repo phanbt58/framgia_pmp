@@ -19,6 +19,7 @@ $('.log-<%= @master_sprint.day %>').change(logWorkEventListener);
 totalLogWorksCol();
 setLastActual();
 setActual(<%= @total_master_sprint - 1 %>);
+updateBurnDownChart();
 
 function setLastTimeLogValue(activity_id) {
   var value = $($('tr.activity_' + activity_id + ' td').eq(-2)).children().last().val();
