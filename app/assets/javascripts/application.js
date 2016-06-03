@@ -30,6 +30,9 @@
 //= require lost_hour
 //= require highcharts
 //= require init_chart
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require users
 
 function add_fields(link, association, content) {
   var new_id = new Date().getTime();
