@@ -40,12 +40,13 @@ function add_fields(link, association, content) {
 $(document).on("page:change", function(){
 
   $(".datepicker").datepicker({
-    format: I18n.t("date.format")
+    format: I18n.t("date.format"),
+    autoclose: true
   });
 
-
   $(".master-sprint-day").datepicker({
-    format: "d"
+    format: I18n.t("date.day"),
+    autoclose: true
   }).on("changeDate", function(event){
     $(this).prev().val(event.format(I18n.t("date.format")));
   });
