@@ -38,6 +38,13 @@ class Sprint < ActiveRecord::Base
     check_manager? current_user, project or include_assignee? current_user
   end
 
+  def update_master_sprint
+    self.master_sprints.each_with_index do |master_sprint, index|
+      master_sprint.update_attributes date: self.start_date + index,
+        day: index + 1
+    end
+  end
+
   private
   def build_master_sprint
     if self.master_sprints.empty?
