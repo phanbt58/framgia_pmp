@@ -56,4 +56,12 @@ $(document).on("page:change", function(){
     theme: "bootstrap",
     width: '100%'
   });
+
+  $("#add-more-row").click(function(){
+    $("html, body").animate({scrollTop: $(document).height()}, "fast");
+  });
+
+  $("#add-more-column").click(function(){
+    $("html, body").animate({scrollLeft: $(document).width()}, "fast");
+  });
 });
