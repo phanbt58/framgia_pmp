@@ -52,23 +52,28 @@ $(document).on('page:change', function(){
   }
 
   function setRemainTime(row) {
-    var cells = $('.' + row);
-    $('.remaining.' + row).val(cells.last().val()).change();
+    var cells = $('.log.' + row);
+    var min = parseInt($(cells[0]).val());
+    $.each(cells, function(i, cell) {
+      var val = parseInt($(cell).val())
+      min = min > val ? val : min;
+    })
+    $('.remaining.' + row).val(min).change();
     $('.remaining-header').text(totalColumnValue('remaining') + '');
     worked();
   }
 
   function setRowColor(rowClass) {
     var assigneeValue = $('.assignee.' + rowClass).val();
-    var remainingValue = $('.remaining.' + rowClass).val();
-    var estimateValue = $('.log-1.' + rowClass).val();
+    var remainingValue = parseInt($('.remaining.' + rowClass).val());
+    var estimateValue = parseInt($('.log-1.' + rowClass).val());
 
     var row = $('.' + rowClass).closest('tr');
 
     // assignee is empty
     if(assigneeValue == '') {
-      if(estimateValue != '0') {
-        if(remainingValue != '0') {
+      if(estimateValue != 0) {
+        if(remainingValue != 0) {
           row.addClass('estimated');
           row.removeClass('assigned default processed');
         } else {
@@ -81,8 +86,8 @@ $(document).on('page:change', function(){
         row.addClass('default');
       }
     } else {
-      if(estimateValue != '0') {
-        if(remainingValue != '0') {
+      if(estimateValue != 0) {
+        if(remainingValue != 0) {
           row.removeClass('assigned default estimated');
           row.addClass('processed');
         } else {
@@ -117,9 +122,13 @@ $(document).on('page:change', function(){
     var logClass = this.className.split(' ').filter(filterLog)[0];
 
     var cells = $('.panel-left .' + rowClass);
+
+    var value = parseInt($(this).val());
+    value = isNaN(value) ? 0 : value;
+
     var i = parseInt(logClass.split('-')[1]);
     for(i; i < cells.length; i++) {
-      $(cells[i]).val($(this).val());
+      $(cells[i]).val(value);
     }
 
     totalLogWorksCol();
