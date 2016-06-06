@@ -21,6 +21,7 @@ totalLogWorksCol();
 setLastActual();
 setActual(<%= @total_master_sprint - 1 %>);
 updateBurnDownChart();
+updateDatePicker();
 
 function setLastTimeLogValue(activity_id) {
   var value = $($('tr.activity_' + activity_id + ' td').eq(-2)).children().last().val();
@@ -30,4 +31,13 @@ function setLastTimeLogValue(activity_id) {
 function setLastActual() {
   var value = $($('tr.actual th').eq(-2)).text();
   $($('tr.actual th')).last().text(value);
+}
+
+function updateDatePicker() {
+  $(".master-sprint-day").datepicker({
+    format: I18n.t("date.day"),
+    autoclose: true
+  }).on("changeDate", function(event){
+    $(this).prev().val(event.format(I18n.t("date.format")));
+  });
 }
