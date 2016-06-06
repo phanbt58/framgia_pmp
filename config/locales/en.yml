@@ -108,6 +108,8 @@ en:
   date:
     format: "dd-mm-yyyy"
     rb_format: "%d-%m-%Y"
+    iso_format: "%Y-%m-%d"
+    js_format: "yyyy-mm-dd"
     day: "d"
   layouts:
     account: "Account"

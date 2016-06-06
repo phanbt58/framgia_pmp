@@ -8,7 +8,8 @@
   <td><%= t "activities.date" %></td>
     <%= f.fields_for :master_sprints, @sprint.master_sprints do |master_sprints_builder| %>
       <td class="panel-left <%= "today" if master_sprints_builder.object.date.today? %>">
-        <%= master_sprints_builder.hidden_field :date %>
+        <%= master_sprints_builder.hidden_field :date,
+          class: "newest_master_sprint" if master_sprints_builder.object == @sprint.master_sprints.last %>
         <input type="text" class="master-sprint-day text-center"
           value="<%= master_sprints_builder.object.date.day %>"/>
       </td>

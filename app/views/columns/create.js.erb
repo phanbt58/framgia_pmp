@@ -38,6 +38,6 @@ function updateDatePicker() {
     format: I18n.t("date.day"),
     autoclose: true
   }).on("changeDate", function(event){
-    $(this).prev().val(event.format(I18n.t("date.format")));
+    $(this).prev().val(event.format(I18n.t("date.js_format")));
   });
 }
