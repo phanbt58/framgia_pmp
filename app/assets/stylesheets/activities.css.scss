@@ -68,15 +68,18 @@
     vertical-align: middle;
 
     .story-id {
+      width: 70px;
       min-width: 70px;
     }
 
     .task-id {
+      width: 70px;
       min-width: 70px;
     }
 
     .task-name {
-      min-width: 450px;
+      width: 425px;
+      min-width: 425px;
     }
 
     .sprint-worked {
