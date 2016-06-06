@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 20160526041630) do
   create_table "log_works", force: :cascade do |t|
     t.integer  "activity_id",      limit: 4
     t.integer  "remaining_time",   limit: 4
-    t.integer  "day",              limit: 4
     t.integer  "sprint_id",        limit: 4
     t.integer  "master_sprint_id", limit: 4
     t.datetime "created_at",                 null: false

@@ -11,7 +11,7 @@ class Sprint < ActiveRecord::Base
 
   SPRINT_ATTRIBUTES_PARAMS = [:name, :description, :project_id, :start_date, :work_day,
     user_ids: [], time_logs_attributes: [:id, :assignee_id, :lost_hour],
-    log_works_attributes: [:id, :activity_id, :remaining_time, :day],
+    log_works_attributes: [:id, :activity_id, :remaining_time],
     activities_attributes: [:id, :product_backlog_id, :subject, :description,
       :spent_time, :estimate, :user_id, :sprint_id],
     assignees_attributes: [:id, :work_hour],
