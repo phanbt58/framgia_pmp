@@ -152,7 +152,6 @@ ActiveRecord::Schema.define(version: 20160526041630) do
     t.integer  "assignee_id",      limit: 4
     t.integer  "sprint_id",        limit: 4
     t.integer  "master_sprint_id", limit: 4
-    t.integer  "work_date",        limit: 4
     t.integer  "lost_hour",        limit: 4
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false

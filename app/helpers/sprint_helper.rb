@@ -1,8 +1,4 @@
 module SprintHelper
-  def get_work_date work_date, sprint
-    work_date % sprint.work_day
-  end
-
   def sum_lost_hour
     sum_lost_hour = []
     @sprint.master_sprints.order(day: :asc).each do |master_sprint|
