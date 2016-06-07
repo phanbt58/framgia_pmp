@@ -67,4 +67,6 @@ $(document).on("page:change", function(){
   $("#add-more-column").click(function(){
     $("html, body").animate({scrollLeft: $(document).width()}, "fast");
   });
+
+  $(".hide-flash").delay(2000).fadeOut("slow");
 });
