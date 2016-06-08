@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
     UserMailer.invite_user(self).deliver_now
   end
 
+  def is_user? user
+    self == user
+  end
+
   private
   def set_default_role
     self.role ||= :member
