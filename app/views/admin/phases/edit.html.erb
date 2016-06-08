@@ -1,5 +1,5 @@
-<div id="phases">
-  <h2 class="text-center"><%= t "phases.edit" %></h2>
+<h2 class="text-center"><%= t "phases.edit" %></h2>
+<div id="phases" class="edit-phase">
   <%= form_for [:admin, @phase] do |f| %>
     <%= render "form", f: f %>
   <% end %>

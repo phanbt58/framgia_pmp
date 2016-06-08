@@ -1,6 +1,6 @@
 class Admin::ProjectsController < ApplicationController
   load_and_authorize_resource
-  before_action :load_assignee, only: [:new, :edit, :show, :update]
+  before_action :load_assignee
 
   def create
     if @project.save
@@ -31,7 +31,7 @@ class Admin::ProjectsController < ApplicationController
     if @project.destroy
       flash[:success] = flash_message "deleted"
     else
-      flash[:success] = flash_message "not_deleted"
+      flash[:failed] = flash_message "not_deleted"
     end
     redirect_to admin_root_path
   end
