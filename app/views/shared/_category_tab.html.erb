@@ -18,6 +18,9 @@
         <li role="presentation" class="<%= tab_active Settings.tabs.overview_project, active_tab %>">
           <%= link_to t("projects.overview"), project_path(project) %>
         </li>
+        <li role="presentation" id="pb_tab_show" class="<%= tab_active Settings.tabs.project_backlog, active_tab %>">
+          <%= link_to t("product_backlog.title"), project_product_backlogs_path(project) %>
+        </li>
         <% @sprints.each do |sprint| %>
           <% if project.sprints.include? sprint%>
             <li role="presentation" class="<%= tab_active sprint.id, active_tab %>">
