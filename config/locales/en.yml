@@ -136,6 +136,8 @@ en:
     start_date: "Start Date"
     date: "Date"
     add: "Add Activity"
+    add_more_row: "Add more rows"
+    add_more_column: "Add more columns"
   lost_hour:
     lost_hour: "Lost hour"
     work_hour: "Work hour"

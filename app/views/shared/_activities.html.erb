@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-12">
+  <div class="activities-panel">
     <div class="pull-right">
       <%= hidden_field_tag :sprint_id, @sprint.id %>
       <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
@@ -7,27 +7,27 @@
         class: "btn btn-xs btn-primary pull-right",
         id: "add-more-column",
         type: "button",
-        title: "Add more column" %>
+        title: t("activities.add_more_column") %>
     </div>
-  </div>
-  <div class="col-md-12">
-    <table id="activities" class="table table-bordered" >
-      <tbody>
-        <%= render "shared/header", f: f %>
-        <%= f.fields_for :activities, @sprint.activities do |activity_builder| %>
-          <%= render "shared/row", activity_builder: activity_builder,
-            row: activity_builder.index,
-            type: activity_class(activity_builder.object), f: f %>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="col-md-12">
-    <div class="pull-left">
-      <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
-        rows_path({sprint_id: @sprint.id}),
-        class: "btn btn-xs btn-primary pull-left", id: "add-more-row",
-        type: "button", method: :post, remote: true, title: "Add more rows" %>
+    <div>
+      <table id="activities" class="table table-bordered" >
+        <tbody>
+          <%= render "shared/header", f: f %>
+          <%= f.fields_for :activities, @sprint.activities do |activity_builder| %>
+            <%= render "shared/row", activity_builder: activity_builder,
+              row: activity_builder.index,
+              type: activity_class(activity_builder.object), f: f %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="pull-left">
+        <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
+          rows_path({sprint_id: @sprint.id}),
+          class: "btn btn-xs btn-primary pull-left", id: "add-more-row",
+          type: "button", method: :post, remote: true, title: t("activities.add_more_row") %>
+      </div>
     </div>
   </div>
 </div>
