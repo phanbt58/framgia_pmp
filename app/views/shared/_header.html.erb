@@ -60,7 +60,7 @@
       <th class="panel-left log-estimate-<%= index + 1 %>"><%= @estimate.get_estimate_activities %></th>
     <% else %>
       <th class="panel-left log-estimate-<%= index + 1 %>">
-        <%= @log_estimates[index] if @log_estimates.present? %>
+        <%= @log_estimates.present? ? @log_estimates[index] : 0 %>
       </th>
     <% end %>
   <% end %>
