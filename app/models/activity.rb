@@ -14,7 +14,7 @@ class Activity < ActiveRecord::Base
   delegate :name, to: :user, prefix: true, allow_nil: true
 
   def get_remaining_activity
-    self.log_works.any? ? self.log_works.last.remaining_time : 0
+    self.log_works.any? ? self.log_works.pluck(:remaining_time).min : 0
   end
 
   private

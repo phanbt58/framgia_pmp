@@ -45,10 +45,10 @@ $(document).on('page:change', function(){
     var estimated = parseInt($('.log-estimate-1').text());
     var remaining = parseInt($('.remaining-header').text());
     var worked = estimated - remaining;
-    var worked_percent = Math.round(worked/estimated*100);
+    var worked_percent = worked == 0 ? 0 : Math.round(worked / estimated * 100);
     $('.worked').text(worked);
     $('.worked-percent').text(worked_percent + '%');
-    $('.remaining-percent').text((100 - worked_percent) + '%');
+    $('.remaining-percent').text((remaining == 0 ? 0 : (100 - worked_percent)) + '%');
   }
 
   function setRemainTime(row) {
