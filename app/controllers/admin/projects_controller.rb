@@ -1,6 +1,6 @@
 class Admin::ProjectsController < ApplicationController
   load_and_authorize_resource
-  before_action :load_assignee, only: [:new, :edit, :show]
+  before_action :load_assignee, only: [:new, :edit, :show, :update]
 
   def create
     if @project.save
