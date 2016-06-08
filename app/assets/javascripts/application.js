@@ -19,9 +19,6 @@
 //= require_tree .
 //= require i18n
 //= require i18n/translations
-//= require bootstrap-datepicker/core
-//= require bootstrap-datepicker/locales/bootstrap-datepicker.ja.js
-//= require bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.js
 //= require select2
 //= require dhtmlxcommon
 //= require dhtmlxgrid
@@ -32,6 +29,7 @@
 //= require init_chart
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require bootstrap-datepicker
 //= require users
 
 function add_fields(link, association, content) {
