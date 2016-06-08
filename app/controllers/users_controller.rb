@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes user_params
-      sign_in(@user, bypass: true)
+      sign_in(@user, bypass: true) if @user.is_user? current_user 
       flash[:success] = flash_message "updated"
       redirect_to @user
     else
