@@ -1,11 +1,12 @@
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
+      <%= hidden_field_tag :sprint_id, @sprint.id %>
       <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
-        columns_path({master_sprint: {sprint_id: @sprint.id}}),
+        "javascript:void(0);",
         class: "btn btn-xs btn-primary pull-right",
         id: "add-more-column",
-        type: "button", method: :post, remote: true,
+        type: "button",
         title: "Add more column" %>
     </div>
   </div>

@@ -181,3 +181,14 @@ $(document).on('page:change', function(){
   });
 });
 
+$(document).on("click", "#add-more-column", function(e){
+  lastest_date = new Date($(".newest_master_sprint").last().val());
+  lastest_date.setDate(lastest_date.getDate() + 1)
+  sprint_id = $("#sprint_id").val();
+  $.ajax({
+    type: "POST",
+    url: "/columns/",
+    data: {master_sprint: {sprint_id: sprint_id, date: lastest_date}},
+    success: function(){}
+  })
+})
