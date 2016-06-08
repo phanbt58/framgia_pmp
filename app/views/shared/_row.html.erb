@@ -1,7 +1,7 @@
 <tr class="activity_<%= activity_builder.object.id %> <%= type %>">
   <td class="story"><%= activity_builder.text_field :product_backlog_id,
     class: "row-#{row}" %></td>
-  <td class="task-id"><%= activity_builder.text_field :id, class: "row-#{row}" %></td>
+  <td class="task-id text-center"><%= row + 1 %></td>
   <td class="task-name text-left"><%= activity_builder.text_field :subject, class: "row-#{row}" %></td>
   <td><%= activity_builder.select :user_id,
     options_for_select(@sprint.assignees.collect {|assignee|
