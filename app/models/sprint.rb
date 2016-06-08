@@ -9,7 +9,8 @@ class Sprint < ActiveRecord::Base
   has_many :log_works
   has_many :master_sprints
 
-  SPRINT_ATTRIBUTES_PARAMS = [:name, :description, :project_id, :start_date, :work_day,
+  DEFAULT_MASTER_SPRINT = 3
+  SPRINT_ATTRIBUTES_PARAMS = [:name, :description, :project_id, :start_date,
     user_ids: [], time_logs_attributes: [:id, :assignee_id, :lost_hour],
     log_works_attributes: [:id, :activity_id, :remaining_time],
     activities_attributes: [:id, :product_backlog_id, :subject, :description,
@@ -29,11 +30,6 @@ class Sprint < ActiveRecord::Base
   accepts_nested_attributes_for :master_sprints
   accepts_nested_attributes_for :assignees
 
-  def initialize attributes
-    super
-    self.work_day = 3
-  end
-
   def include_user? current_user, project
     check_manager? current_user, project or include_assignee? current_user
   end
@@ -48,7 +44,7 @@ class Sprint < ActiveRecord::Base
   private
   def build_master_sprint
     if self.master_sprints.empty?
-      self.work_day.times do |day|
+      DEFAULT_MASTER_SPRINT.times do |day|
         self.master_sprints.create date: self.start_date + day, day: day
       end
     end
