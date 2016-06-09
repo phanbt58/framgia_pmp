@@ -12,9 +12,9 @@
     <div>
       <table id="activities" class="table table-bordered" >
         <tbody>
-          <%= render "shared/header", f: f %>
+          <%= render "header", f: f %>
           <%= f.fields_for :activities, @sprint.activities do |activity_builder| %>
-            <%= render "shared/row", activity_builder: activity_builder,
+            <%= render "row", activity_builder: activity_builder,
               row: activity_builder.index,
               type: activity_class(activity_builder.object), f: f %>
           <% end %>

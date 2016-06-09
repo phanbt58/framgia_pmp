@@ -1,9 +1,0 @@
-<tr>
-  <td><%= f.text_field :product_backlog_id %></td>
-  <td><%= f.text_field :id %></td>
-  <td><%= f.text_field :subject %></td>
-  <td><%= f.select :user_id,
-    options_for_select(@sprint.assignees.collect {|assignee|
-    [assignee.user_name, assignee.user_id]}, f.object.user_id),
-    {include_blank: true} %></td>
-</tr>
