@@ -3,14 +3,14 @@ class Admin::SprintsController < ApplicationController
   load_and_authorize_resource
   load_and_authorize_resource :project, except: :show
   load_and_authorize_resource :sprint, except: :show
-  before_action :load_assignee, only: [:new, :edit]
+  before_action :load_assignee, except: :destroy
 
   def create
     if @sprint.save
       flash[:success] = flash_message "created"
       redirect_to admin_project_path(@project)
     else
-      flash[:failed] = flash_messages "not_created"
+      flash.now[:failed] = flash_message "not_created"
       render :new
     end
   end
@@ -21,7 +21,7 @@ class Admin::SprintsController < ApplicationController
       flash[:success] = flash_message "updated"
       redirect_to project_sprint_path(@project, @sprint)
     else
-      flash[:failed] = flash_message "not_updated"
+      flash.now[:failed] = flash_message "not_updated"
       render :edit
     end
   end
@@ -31,7 +31,7 @@ class Admin::SprintsController < ApplicationController
       flash[:success] = flash_message "deleted"
       redirect_to admin_project_path(@project)
     else
-      flash[:failed] = flash_message "not_updated"
+      flash.now[:failed] = flash_message "not_updated"
       redirect_to admin_project_sprint_path(@project, @sprint)
     end
   end

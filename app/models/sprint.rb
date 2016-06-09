@@ -9,6 +9,9 @@ class Sprint < ActiveRecord::Base
   has_many :log_works
   has_many :master_sprints
 
+  validates :name, presence: true
+  validates :start_date, presence: true
+
   DEFAULT_MASTER_SPRINT = 3
   SPRINT_ATTRIBUTES_PARAMS = [:name, :description, :project_id, :start_date,
     user_ids: [], time_logs_attributes: [:id, :assignee_id, :lost_hour],
