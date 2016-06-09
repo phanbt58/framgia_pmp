@@ -77,10 +77,9 @@ en:
     change_pass: "Change Password"
   errors:
     update: "Update"
-  errors:
     form: "Form"
     errors: "errors"
-    wrong_end_date: "End date must bigger than start date "
+    wrong_end_date: "must bigger than start date "
   flashs:
     not_authorize: "User not authorizes"
     access_denied: "Permisstion denied"

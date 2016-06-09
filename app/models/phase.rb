@@ -3,5 +3,5 @@ class Phase < ActiveRecord::Base
 
   PHASE_ATTRIBUTES_PARAMS = [:phase_name, :description]
 
-  validates :phase_name, uniqueness: true
+  validates :phase_name, uniqueness: true, presence: true
 end

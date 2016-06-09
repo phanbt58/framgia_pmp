@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       flash[:success] = flash_message "updated"
       redirect_to @user
     else
-      flash[:failed] = flash_message "not_updated"
+      flash.now[:failed] = flash_message "not_updated"
       render :edit
     end
   end
