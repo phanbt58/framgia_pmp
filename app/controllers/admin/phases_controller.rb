@@ -19,7 +19,7 @@ class Admin::PhasesController < ApplicationController
       flash[:success] = flash_message "updated"
       redirect_to admin_phases_path
     else
-      flash[:failed] = flash_message "not_updated"
+      flash.now[:failed] = flash_message "not_updated"
       render :edit
     end
   end
@@ -28,7 +28,7 @@ class Admin::PhasesController < ApplicationController
     if @phase.destroy
       flash[:success] = flash_message "deleted"
     else
-      flash[:success] = flash_message "not_deleted"
+      flash.now[:failed] = flash_message "not_deleted"
     end
     redirect_to admin_phases_path
   end

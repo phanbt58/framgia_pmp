@@ -22,7 +22,7 @@ class Admin::ProjectsController < ApplicationController
       flash[:success] = flash_message "updated"
       redirect_to admin_project_path(@project)
     else
-      flash[:failed] = flash_message "not_updated"
+      flash.now[:failed] = flash_message "not_updated"
       render :edit
     end
   end
@@ -31,7 +31,7 @@ class Admin::ProjectsController < ApplicationController
     if @project.destroy
       flash[:success] = flash_message "deleted"
     else
-      flash[:failed] = flash_message "not_deleted"
+      flash.now[:failed] = flash_message "not_deleted"
     end
     redirect_to admin_root_path
   end
