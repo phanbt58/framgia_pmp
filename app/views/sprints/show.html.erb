@@ -3,9 +3,9 @@
   <div id="sprints">
     <div class="row" id="chart">
       <div id="burndown_chart"></div>
-      <%= render "shared/lost_hour", sprint: @sprint, project: @project,
+      <%= render "lost_hour", sprint: @sprint, project: @project,
         assignees: @sprint.assignees, f: f %>
     </div>
-    <%= render "shared/activities", f: f %>
+    <%= render "activities", f: f %>
   </div>
 <% end %>

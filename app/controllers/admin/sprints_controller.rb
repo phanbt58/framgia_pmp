@@ -8,7 +8,7 @@ class Admin::SprintsController < ApplicationController
   def create
     if @sprint.save
       flash[:success] = flash_message "created"
-      redirect_to admin_project_path(@project)
+      redirect_to project_sprint_path(@project, @sprint)
     else
       flash.now[:failed] = flash_message "not_created"
       render :new
