@@ -1,4 +1,5 @@
-<%= render "shared/category_tab", active_tab: Settings.tabs.new_sprint, project: @project, f: nil %>
+<%= render "shared/category_tab", active_tab: Settings.tabs.new_sprint,
+  project: @project, f: nil %>
 <div id="sprints" class="new_sprint">
   <%= form_for @sprint, url: admin_project_sprints_path(@project) do |f| %>
     <%= render "form", f: f %>
