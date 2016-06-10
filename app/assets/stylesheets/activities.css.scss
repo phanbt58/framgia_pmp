@@ -36,6 +36,8 @@
   .left-side {
     width: 565px;
     vertical-align: middle;
+    border-left-width: 1px;
+    border-color: #FFF;
   }
 
   .start-date {
@@ -67,6 +69,15 @@
 
   .story {
     width: 70px;
+  }
+
+  .underline {
+    text-decoration: underline;
+  }
+
+  .none-border {
+    border-top-width: 1px;
+    border-top-color: #FFF;
   }
 
   .master-sprint-working-day {

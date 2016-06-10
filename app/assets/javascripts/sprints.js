@@ -9,18 +9,6 @@ $(document).on('page:change', function() {
     $("#sprints").outerHeight($(window).height() - $("header").outerHeight() - $("#category-tab").outerHeight() - 4);
   }
 
-  $("#add-more-row").click(function(){
-    $("#sprints").animate({
-      scrollTop: $(".activities-panel").height()
-    }, "fast");
-  });
-
-  $("#add-more-column").click(function(){
-    $("#sprints").animate({
-      scrollLeft: $(".activities-panel").width()
-    }, "fast");
-  });
-
   $(".master-sprint-day").datepicker({
     format: I18n.t("date.day"),
     autoclose: true
