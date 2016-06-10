@@ -6,7 +6,8 @@
       <span><%= t "sprints.name" %></span>
     </div>
     <div class="col-md-7">
-      <%= f.text_field :name, class: "form-control", required: true %>
+      <%= f.text_field :name, class: "form-control",
+        placeholder: t("placeholders.name"), required: true %>
     </div>
   </div><br>
   <div class="row">
@@ -14,7 +15,8 @@
       <span><%= t "sprints.description" %></span>
     </div>
     <div class="col-md-7">
-      <%= f.text_area :description, class: "form-control" %>
+      <%= f.text_area :description, class: "form-control",
+        placeholder: t("placeholders.description") %>
     </div>
   </div><br>
   <div class="row">
@@ -35,7 +37,8 @@
     </div>
     <div class="col-md-2">
       <%= f.text_field :start_date, class: "form-control datepicker",
-        value: @sprint.start_date.nil? ? "" : @sprint.start_date.strftime(t "date.rb_format")%>
+        value: @sprint.start_date.nil? ? DateTime.now.strftime(t "date.rb_format") :
+        @sprint.start_date.strftime(t "date.rb_format")%>
     </div>
     <br>
   </div><br>

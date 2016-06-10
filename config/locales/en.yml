@@ -47,6 +47,7 @@ en:
     name: "Name"
     edit: "Edit Sprint"
     description: "Description"
+
   phases:
     new: "Create Phase"
     start_date: "Start Date"
@@ -149,3 +150,8 @@ en:
     name: "Name"
     email: "Email"
     role: "Role"
+  placeholders:
+    name: "Enter name"
+    description: "Enter description"
+    email: "Enter email"
+    password: "Enter password"
