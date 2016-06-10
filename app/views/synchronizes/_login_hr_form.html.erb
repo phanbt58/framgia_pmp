@@ -3,10 +3,12 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <%= label_tag :email %><br/>
-      <%= email_field_tag :email, "", class: "form-control" %><br/>
+      <%= email_field_tag :email, "", class: "form-control",
+        placeholder: t("placeholders.email") %><br/>
 
       <%= label_tag :password %><br/>
-      <%= password_field_tag :password, "", class: "form-control" %><br/>
+      <%= password_field_tag :password, "", class: "form-control",
+        placeholder: t("placeholders.password") %><br/>
 
       <%= button_tag t("buttons.login_hr"),
         class: "btn btn-primary center-block" %>
