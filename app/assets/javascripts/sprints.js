@@ -26,7 +26,7 @@ $(document).on('page:change', function() {
     autoclose: true
   }).on("changeDate", function(event){
     var old_date = $(this).prev().val();
-    var new_date = $(this).prev().val(event.format(I18n.t("date.js_format")));
+    var new_date = $(this).prev().val(event.format(I18n.t("date.js_format"))).change();
     var changeDate = new Date(new_date.val()).getTime() - new Date(old_date).getTime();
     var filterRow = function(v) {return v.indexOf('day-') == 0};
     var colClass = this.className.split(' ').filter(filterRow)[0];

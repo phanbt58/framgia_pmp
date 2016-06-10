@@ -22,6 +22,7 @@ class Sprint < ActiveRecord::Base
     master_sprints_attributes: [:id, :date, :day]]
 
   after_create :build_master_sprint
+  before_update :set_start_date
 
   scope :list_by_user, ->user do
     joins(:assignees).where assignees: {user_id: user.id}
@@ -59,5 +60,9 @@ class Sprint < ActiveRecord::Base
 
   def include_assignee? current_user
     self.assignees.map{|assignee| assignee.user_id}.include? current_user.id
+  end
+
+  def set_start_date
+    self.start_date = self.master_sprints.first.date
   end
 end

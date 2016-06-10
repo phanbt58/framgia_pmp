@@ -1,7 +1,7 @@
 <tr class="master-data">
   <td rowspan="2" colspan="3" class="left-side" ></td>
   <td class="start-date"><%=  t "activities.start_date"%></td>
-  <td colspan="5"><%= l @sprint.start_date %></td>
+  <td colspan="5" id="sprint-start-date"><%= l @sprint.start_date %></td>
 </tr>
 <tr class="master-data-date">
   <td></td>
@@ -9,7 +9,8 @@
     <%= f.fields_for :master_sprints, @sprint.master_sprints do |master_sprints_builder| %>
       <td class="panel-left <%= "today" if master_sprints_builder.object.date.today? %>">
         <%= master_sprints_builder.hidden_field :date,
-          class: "#{'newest_master_sprint' if master_sprints_builder.object == @sprint.master_sprints.last}" %>
+          class: "#{'newest_master_sprint' if master_sprints_builder.object == @sprint.master_sprints.last}
+                  #{'first_day' if master_sprints_builder.index == 0}" %>
         <input type="text" class="master-sprint-day text-center day-<%= master_sprints_builder.object.day %>"
           value="<%= master_sprints_builder.object.date.day %>"/>
       </td>
