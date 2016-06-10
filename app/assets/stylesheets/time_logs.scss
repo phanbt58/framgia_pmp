@@ -1,9 +1,9 @@
 #lost_hour_table {
-margin-left: 15px;
   td {
     margin: 0;
     padding: 0;
     min-width: 47px;
+    width: 47px;
     height: 21px;
     position: relative;
     input {
@@ -22,6 +22,7 @@ margin-left: 15px;
 
   .header_column {
     min-width: 200px;
+    width: 200px;
     height: 25px;
     overflow: hidden;
     background-color: #366092;
@@ -44,4 +45,9 @@ margin-left: 15px;
   .btn-info {
     margin-bottom: 20px;
   }
+}
+
+#tracking-time {
+  margin-right: 15px;
+  display: inline-block;
 }
