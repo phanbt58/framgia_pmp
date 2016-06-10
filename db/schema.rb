@@ -34,31 +34,6 @@ ActiveRecord::Schema.define(version: 20160526041630) do
     t.datetime "updated_at",           null: false
   end
 
-  create_table "cells", force: :cascade do |t|
-    t.integer  "sheet_id",   limit: 4
-    t.integer  "column_id",  limit: 4
-    t.integer  "row_id",     limit: 4
-    t.string   "data",       limit: 255
-    t.string   "style",      limit: 255
-    t.string   "parsed",     limit: 255
-    t.string   "calc",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "cells", ["sheet_id"], name: "index_cells_on_sheet_id", using: :btree
-
-  create_table "headers", force: :cascade do |t|
-    t.integer  "sheet_id",   limit: 4
-    t.integer  "column_id",  limit: 4
-    t.string   "label",      limit: 255
-    t.integer  "width",      limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "headers", ["sheet_id"], name: "index_headers_on_sheet_id", using: :btree
-
   create_table "log_works", force: :cascade do |t|
     t.integer  "activity_id",      limit: 4
     t.integer  "remaining_time",   limit: 4
@@ -113,17 +88,6 @@ ActiveRecord::Schema.define(version: 20160526041630) do
     t.datetime "updated_at",                null: false
   end
 
-  create_table "sheets", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.string   "name",       limit: 255
-    t.string   "key",        limit: 255
-    t.string   "cfg",        limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "sheets", ["user_id"], name: "index_sheets_on_user_id", using: :btree
-
   create_table "sprints", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.string   "description",     limit: 255
@@ -157,16 +121,6 @@ ActiveRecord::Schema.define(version: 20160526041630) do
 
   add_index "time_logs", ["master_sprint_id"], name: "index_time_logs_on_master_sprint_id", using: :btree
   add_index "time_logs", ["sprint_id"], name: "index_time_logs_on_sprint_id", using: :btree
-
-  create_table "triggers", force: :cascade do |t|
-    t.integer  "sheet_id",   limit: 4
-    t.string   "trigger",    limit: 255
-    t.string   "source",     limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "triggers", ["sheet_id"], name: "index_triggers_on_sheet_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                                      null: false
@@ -202,9 +156,5 @@ ActiveRecord::Schema.define(version: 20160526041630) do
 
   add_index "work_performances", ["phase_id"], name: "index_work_performances_on_phase_id", using: :btree
 
-  add_foreign_key "cells", "sheets"
-  add_foreign_key "headers", "sheets"
   add_foreign_key "log_works", "activities"
-  add_foreign_key "sheets", "users"
-  add_foreign_key "triggers", "sheets"
 end
