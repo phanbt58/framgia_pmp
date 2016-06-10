@@ -1,14 +1,24 @@
 $(document).on('page:change', function() {
+  setSprintHeight();
+
+  $(window).resize(function() {
+    setSprintHeight();
+  });
+
+  function setSprintHeight() {
+    $("#sprints").outerHeight($(window).height() - $("header").outerHeight() - $("#category-tab").outerHeight() - 4);
+  }
+
   $("#add-more-row").click(function(){
     $("#sprints").animate({
       scrollTop: $(".activities-panel").height()
-    }, 500);
+    }, "fast");
   });
 
   $("#add-more-column").click(function(){
     $("#sprints").animate({
       scrollLeft: $(".activities-panel").width()
-    }, 500);
+    }, "fast");
   });
 
   $(".master-sprint-day").datepicker({

@@ -35,7 +35,6 @@
 }
 
 .wrapper {
-  height: 92%;
   margin-top: 4px;
   .error_explanation {
     padding-left: 150px;
@@ -56,4 +55,8 @@
 
 html, body {
   height: 100%;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  color: #576980;
 }

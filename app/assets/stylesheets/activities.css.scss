@@ -34,7 +34,7 @@
   }
 
   .left-side {
-    width: 600px;
+    width: 565px;
     vertical-align: middle;
   }
 
@@ -46,6 +46,7 @@
 
   .panel-left {
     text-align: center!important;
+    width: 47px;
   }
 
   .estimated {
@@ -62,6 +63,10 @@
 
   .processed {
     background-color: #FFFFFF;
+  }
+
+  .story {
+    width: 70px;
   }
 
   .master-sprint-working-day {
