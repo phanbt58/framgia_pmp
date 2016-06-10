@@ -167,6 +167,11 @@ $(document).on('page:change', function(){
     setRowColor(rowClass);
   }
 
+  function resetStartDate() {
+    var newStartDate = $(".first_day").val();
+    $("#sprint-start-date").text(newStartDate);
+  }
+
   setColorToday();
   $('.log').change(logWorkEventListener);
 
@@ -179,6 +184,8 @@ $(document).on('page:change', function(){
   $('.log-actual-1').change(function() {
     setActual(1);
   });
+
+  $('.first_day').change(resetStartDate);
 });
 
 $(document).on("click", "#add-more-column", function(e){
