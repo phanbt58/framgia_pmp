@@ -1,3 +1,5 @@
 Fabricator :time_log do
-  master_sprint_id
+  assignee_id
+  sprint_id
+  lost_hour
 end

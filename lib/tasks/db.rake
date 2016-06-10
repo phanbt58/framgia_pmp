@@ -24,9 +24,11 @@ namespace :db do
       end
     end
 
-    puts "Creating sprint"
-    2.times do
-      Fabricate :sprint, project_id: 1
+    puts "Creating sprint for each project"
+    Project.all.each do |project|
+      2.times do
+        Fabricate :sprint, project_id: project.id
+      end
     end
 
     puts "Creating member"
@@ -45,12 +47,17 @@ namespace :db do
 
     puts "Add asignee to project 1"
     User.all.each do |user|
-      Fabricate :assignee, user_id: user.id, project_id: Project.first.id, sprint_id: nil
+      Fabricate :assignee, user_id: user.id, project_id: Project.first.id,
+        sprint_id: nil, work_hour: 0
     end
 
     puts "Add asignee to sprints 1"
     User.all.each do |user|
-      Fabricate :assignee, user_id: user.id, project_id: nil, sprint_id: Sprint.first.id
+      as = Fabricate :assignee, user_id: user.id, project_id: nil,
+        sprint_id: Sprint.first.id, work_hour: 8
+      as.time_logs.each do |time_log|
+        time_log.update_attributes lost_hour: 1
+      end
     end
 
     puts "Creating phase"
@@ -58,9 +65,14 @@ namespace :db do
       Fabricate :phase, phase_name: phase
     end
 
-    puts "Creating activities for sprint 1"
+    puts "Creating activities for the first sprint of project 1"
     Sprint.first.assignees.each do |assignee|
-      Fabricate :activity, user_id: assignee.id, sprint_id: Sprint.first.id
+      ac = Fabricate :activity, user_id: assignee.user.id, sprint_id: Sprint.first.id
+      start_log_work = 8
+      ac.log_works.each do |log_work|
+        log_work.update_attributes remaining_time: start_log_work - 1
+        start_log_work -= 1
+      end
     end
 
     puts "Success remake data"
