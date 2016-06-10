@@ -23,6 +23,10 @@ updateBurnDownChart();
 updateDatePicker();
 setColorToday();
 
+$("#sprints").animate({
+  scrollLeft: $(".activities-panel").width()
+}, "fast");
+
 function setLastTimeLogValue(activity_id) {
   var value = $($('tr.activity_' + activity_id + ' td').eq(-2)).children().last().val();
   $($('tr.activity_' + activity_id + ' td')).last().children().last().val(value);

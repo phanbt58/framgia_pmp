@@ -1,10 +1,10 @@
 <tr class="master-data">
   <td rowspan="2" colspan="3" class="left-side" ></td>
-  <td class="start-date"><%=  t "activities.start_date"%></td>
-  <td colspan="5" id="sprint-start-date"><%= l @sprint.start_date %></td>
+  <td class="start-date underline"><%= t "activities.start_date"%></td>
+  <td colspan="5" id="sprint-start-date" class="underline"><%= l @sprint.start_date %></td>
 </tr>
 <tr class="master-data-date">
-  <td></td>
+  <td class="none-border"></td>
   <td><%= t "activities.date" %></td>
     <%= f.fields_for :master_sprints, @sprint.master_sprints do |master_sprints_builder| %>
       <td class="panel-left <%= "today" if master_sprints_builder.object.date.today? %>">
