@@ -6,15 +6,16 @@
 <tr class="master-data-date">
   <td class="none-border"></td>
   <td><%= t "activities.date" %></td>
-    <%= f.fields_for :master_sprints, @sprint.master_sprints do |master_sprints_builder| %>
-      <td class="panel-left <%= "today" if master_sprints_builder.object.date.today? %>">
-        <%= master_sprints_builder.hidden_field :date,
-          class: "#{'newest_master_sprint' if master_sprints_builder.object == @sprint.master_sprints.last}
-                  #{'first_day' if master_sprints_builder.index == 0}" %>
-        <input type="text" class="master-sprint-day text-center day-<%= master_sprints_builder.object.day %>"
-          value="<%= master_sprints_builder.object.date.day %>"/>
-      </td>
-    <% end %>
+  <%= f.fields_for :master_sprints, @sprint.master_sprints do |master_sprints_builder| %>
+    <td class="panel-left master-column-<%= master_sprints_builder.object.id %>
+      <%= "today" if master_sprints_builder.object.date.today? %>">
+      <%= master_sprints_builder.hidden_field :date,
+        class: "#{'newest_master_sprint' if master_sprints_builder.object == @sprint.master_sprints.last}
+                #{'first_day' if master_sprints_builder.index == 0} master-sprint-date" %>
+      <input type="text" class="master-sprint-day text-center day-<%= master_sprints_builder.object.day %>"
+        value="<%= master_sprints_builder.object.date.day %>"/>
+    </td>
+  <% end %>
 </tr>
 <tr class="master-sprint-working-day">
   <th rowspan="3" class="story-id" >
@@ -37,17 +38,21 @@
     </span>
   </th>
   <% @sprint.master_sprints.each do |master_sprint| %>
-    <th class="panel-left"><%= master_sprint.day %></th>
+    <th class="panel-left master-column-<%= master_sprint.id %>">
+      <%= master_sprint.day %>
+    </th>
   <% end %>
 </tr>
 <tr class="master-estimate-plan">
   <th class="panel-left worked-percent"><%= @estimate.get_percent_worked %></th>
   <th class="panel-left remaining-percent"><%= @estimate.get_percent_remaining %></th>
-  <% @sprint.master_sprints.each_with_index do |_, index| %>
+  <% @sprint.master_sprints.each_with_index do |master_sprint, index| %>
     <% if index == 0 %>
-      <th class="panel-left log-actual-<%= index + 1 %>"><%= @estimate.get_estimate_activities %></th>
+      <th class="panel-left log-actual-1 master-column-<%= master_sprint.id %>">
+        <%= @estimate.get_estimate_activities %>
+      </th>
     <% else %>
-      <th class="panel-left log-actual-<%= index + 1 %>">
+      <th class="panel-left log-actual-<%= index + 1 %> master-column-<%= master_sprint.id %>">
         <%= @estimate.get_time_remaining[index-1] %>
       </th>
     <% end %>
@@ -56,11 +61,13 @@
 <tr class="actual">
   <th class="panel-left worked"><%= @estimate.get_sum_worked %></th>
   <th class="panel-left remaining-header"><%= @estimate.get_sum_remaining %></th>
-  <% @sprint.master_sprints.each_with_index do |_, index| %>
+  <% @sprint.master_sprints.each_with_index do |master_sprint, index| %>
     <% if index == 0 %>
-      <th class="panel-left log-estimate-<%= index + 1 %>"><%= @estimate.get_estimate_activities %></th>
+      <th class="panel-left log-estimate-1 master-column-<%= master_sprint.id %>">
+        <%= @estimate.get_estimate_activities %>
+      </th>
     <% else %>
-      <th class="panel-left log-estimate-<%= index + 1 %>">
+      <th class="panel-left log-estimate-<%= index + 1 %> master-column-<%= master_sprint.id %>">
         <%= @log_estimates.present? ? @log_estimates[index] : 0 %>
       </th>
     <% end %>

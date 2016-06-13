@@ -1,13 +1,13 @@
 <% if header_class == "master-sprint-working-day" %>
-  <th class="panel-left"><%= @master_sprint.day %></th>
+  <th class="panel-left master-column-<%= @master_sprint.id %>"><%= @master_sprint.day %></th>
 <% elsif header_class == "master-estimate-plan" %>
-  <th class="panel-left log-actual-<%= @master_sprint.day %>">
+  <th class="panel-left log-actual-<%= @master_sprint.day %> master-column-<%= @master_sprint.id %>">
   </th>
 <% elsif header_class == "actual" %>
-  <th class="panel-left log-estimate-<%= @master_sprint.day %>">
+  <th class="panel-left log-estimate-<%= @master_sprint.day %> master-column-<%= @master_sprint.id %>">
   </th>
 <% elsif header_class == "master-data-date" %>
-  <td class="panel-left  <%= "today" if @master_sprint.date.today? %>">
+  <td class="panel-left  <%= "today" if @master_sprint.date.today? %> master-column-<%= @master_sprint.id %>">
     <input type="hidden" value="<%= @master_sprint.date.strftime(t "date.iso_format") %>"
       class="newest_master_sprint" name="sprint[master_sprints_attributes][<%= @master_sprint.day + 1 %>][date]"
       id="sprint_master_sprints_attributes_<%= @master_sprint.day + 1 %>_date">

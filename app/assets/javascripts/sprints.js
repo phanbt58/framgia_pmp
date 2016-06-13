@@ -9,10 +9,17 @@ $(document).on('page:change', function() {
     $("#sprints").outerHeight($(window).height() - $("header").outerHeight() - $("#category-tab").outerHeight() - 4);
   }
 
-  $(".master-sprint-day").datepicker({
-    format: I18n.t("date.day"),
-    autoclose: true
-  }).on("changeDate", function(event){
+  masterSprintDateListener = function() {
+    if(new Date($(this).val()).toDateString() == new Date().toDateString()) {
+      $(".today").removeClass("today");
+      $(this).closest("td").addClass("today");
+      setColorToday();
+    } else if($(this).closest("td").hasClass("today")) {
+      $(".today").removeClass("today");
+    }
+  }
+
+  changeDateListener = function(event) {
     var old_date = $(this).prev().val();
     var new_date = $(this).prev().val(event.format(I18n.t("date.js_format"))).change();
     var changeDate = new Date(new_date.val()).getTime() - new Date(old_date).getTime();
@@ -25,10 +32,17 @@ $(document).on('page:change', function() {
       var tmp = new Date(next_date);
       var next_date_new = new Date(tmp.getTime() + changeDate);
       var d = next_date_new.getDate();
-      var m = next_date_new.getMonth() + 1;
+      var m = next_date_new.getMonth();
       var y = next_date_new.getFullYear();
-      $('.day-' + i).prev().val(y + '-' + m + '-' + d);
+      $('.day-' + i).prev().val(y + '-' + (m  + 1) + '-' + d).change();
       $('.day-' + i).datepicker('update', new Date(y, m, d));
     }
-  });
+  }
+
+  $(".master-sprint-day").datepicker({
+    format: I18n.t("date.day"),
+    autoclose: true
+  }).on("changeDate", changeDateListener);
+
+  $(".master-sprint-date").change(masterSprintDateListener);
 })
