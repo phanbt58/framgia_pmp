@@ -103,13 +103,10 @@ $(document).on('page:change', function(){
   }
 
   setColorToday = function() {
-    if ($("#activities").length && $(".today").length) {
-      activity_column_index = $(".today").index() / 2 + 5;
-      header_index = activity_column_index - 3;
-      $('#activities tr[class*="activity_"] td:nth-child(' + activity_column_index + ')').css("background-color", "#F00");
-      $('#activities .master-sprint-working-day th:nth-child(' + activity_column_index + ')').css("background-color", "#F00");
-      $('#activities .master-estimate-plan th:nth-child(' + header_index + '), .actual th:nth-child(' + header_index + ')').css("background-color", "#F00");
-      $(".today").css("background-color", "#F00");
+    if ($('#activities').length && $('.today').length) {
+      var filterCol = function(v) {return v.indexOf('master-column') == 0}
+      var colClass = $('.today')[0].className.split(' ').filter(filterCol)[0];
+      $('.' + colClass).addClass('today');
     }
   }
 

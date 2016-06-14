@@ -13,7 +13,7 @@
   </td>
   <%= f.fields_for :log_works,
     activity_builder.object.log_works do |log_work_builder| %>
-      <td class="panel-left">
+      <td class="panel-left master-column-<%= log_work_builder.object.master_sprint.id %>">
         <%= log_work_builder.hidden_field :activity_id,
           value: activity_builder.object.id %>
         <%= log_work_builder.hidden_field :id %>

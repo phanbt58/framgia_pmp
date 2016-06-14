@@ -16,6 +16,7 @@
 <% end %>
 
 $('.log-<%= @master_sprint.day %>').change(logWorkEventListener);
+$('.newest_master_sprint').last().change(masterSprintDateListener);
 totalLogWorksCol();
 setLastActual();
 setActual(<%= @total_master_sprint - 1 %>);
@@ -38,10 +39,8 @@ function setLastActual() {
 }
 
 function updateDatePicker() {
-  $(".master-sprint-day").datepicker({
+  $(".day-<%= @master_sprint.day %>").datepicker({
     format: I18n.t("date.day"),
     autoclose: true
-  }).on("changeDate", function(event){
-    $(this).prev().val(event.format(I18n.t("date.js_format")));
-  });
+  }).on("changeDate", changeDateListener);
 }
