@@ -39,8 +39,5 @@ function setLastActual() {
 }
 
 function updateDatePicker() {
-  $(".day-<%= @master_sprint.day %>").datepicker({
-    format: I18n.t("date.day"),
-    autoclose: true
-  }).on("changeDate", changeDateListener);
+  $(".day-<%= @master_sprint.day %>").click(clickDateMasterSprintListener);
 }
