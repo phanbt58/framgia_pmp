@@ -17,6 +17,7 @@ class SprintsController < ApplicationController
 
   def update
     if @sprint.update_attributes sprint_params
+      @sprint.update_start_date
       flash[:success] = flash_message "updated"
       redirect_to project_sprint_path(@project, @sprint)
     else
