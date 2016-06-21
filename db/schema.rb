@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160526041630) do
     t.integer  "spent_time",         limit: 4
     t.integer  "estimate",           limit: 4
     t.integer  "user_id",            limit: 4
+    t.string   "task_id",            limit: 255
     t.integer  "sprint_id",          limit: 4
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false

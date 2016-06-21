@@ -4,11 +4,9 @@
     id="sprint_activities_attributes_<%= @row_number %>_product_backlog_id"/>
 </td>
 <td class="task-id text-center">
-  <input class="row-<%= @row_number %>" type="hidden"
-    name="sprint[activities_attributes][<%= @row_number %>][id]"
-    id="sprint_activities_attributes_<%= @row_number %>_id"
-    value="<%= @activity.id %>">
-  <%= @row_number + 1 %>
+  <input class="row-<%= @row_number %>" type="text"
+    name="sprint[activities_attributes][<%= @row_number %>][task_id]"
+    id="sprint_activities_attributes_<%= @row_number %>_id" />
 </td>
 <td class="task-name text-left">
   <input class="row-<%= @row_number %>" type="text" value=""

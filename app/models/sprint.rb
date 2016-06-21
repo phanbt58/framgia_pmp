@@ -12,11 +12,11 @@ class Sprint < ActiveRecord::Base
   validates :name, presence: true
   validates :start_date, presence: true
 
-  DEFAULT_MASTER_SPRINT = 3
+  DEFAULT_MASTER_SPRINT = 10
   SPRINT_ATTRIBUTES_PARAMS = [:name, :description, :project_id, :start_date,
     user_ids: [], time_logs_attributes: [:id, :assignee_id, :lost_hour],
     log_works_attributes: [:id, :activity_id, :remaining_time],
-    activities_attributes: [:id, :product_backlog_id, :subject, :description,
+    activities_attributes: [:id, :product_backlog_id, :task_id, :subject, :description,
       :spent_time, :estimate, :user_id, :sprint_id],
     assignees_attributes: [:id, :work_hour],
     master_sprints_attributes: [:id, :date, :day]]
