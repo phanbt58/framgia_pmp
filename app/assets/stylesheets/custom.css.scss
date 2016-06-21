@@ -60,3 +60,23 @@ html, body {
 .nav > li > a:hover, .nav > li > a:focus {
   color: #576980;
 }
+
+#category-tab {
+  position: fixed;
+  bottom: 0px;
+  height: 50px;
+  width: 100%;
+  padding-top: 5px;
+  background: #EEEEEE;
+  ul li a {
+    border-style: solid;
+    border-color: #D1D1D1;
+    border-width: 1px;
+    padding: 5px;
+    color: #252C3A;
+    margin: 0px;
+  }
+  .dropup li a {
+    border-style: hidden;
+  }
+}

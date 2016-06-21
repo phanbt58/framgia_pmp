@@ -13,7 +13,8 @@
             <%= link_to sprint.name, project_sprint_path(project, sprint) %></li>
         <% end %>
         <li role="presentation" class="<%= tab_active Settings.tabs.new_sprint, active_tab %>">
-          <%= link_to t("sprints.new"), new_admin_project_sprint_path(@project) %></li>
+          <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
+            new_admin_project_sprint_path(@project) %></li>
       <% else %>
         <li role="presentation" class="<%= tab_active Settings.tabs.overview_project, active_tab %>">
           <%= link_to t("projects.overview"), project_path(project) %>
@@ -38,7 +39,7 @@
         <% end %>
 
         <% if @sprint.present? && @sprint.persisted? %>
-          <div class="dropdown pull-right">
+          <div class="dropup pull-right">
             <button id="dLabel" type="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false" class="btn btn-default">
               <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
@@ -68,7 +69,7 @@
           </div>
         <% elsif @sprint.nil? && @sprints.nil? %>
           <div class="button pull-right">
-            <div class="dropdown pull-right">
+            <div class="dropup pull-right">
               <button id="dLabel" type="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false"
                 class="btn btn-default">
