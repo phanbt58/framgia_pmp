@@ -7,6 +7,7 @@ class CreateActivities < ActiveRecord::Migration
       t.integer :spent_time
       t.integer :estimate
       t.integer :user_id
+      t.string :task_id
       t.references :sprint
 
       t.timestamps null: false
