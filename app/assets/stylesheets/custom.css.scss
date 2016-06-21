@@ -21,7 +21,7 @@
   font-size: 1.7em;
   color: #FFFFFF;
   letter-spacing: -1px;
-  padding-top: 9px;
+  padding-top: 6px;
   font-weight: bold;
 }
 
@@ -64,19 +64,48 @@ html, body {
 #category-tab {
   position: fixed;
   bottom: 0px;
-  height: 50px;
+  height: 38px;
   width: 100%;
-  padding-top: 5px;
+  border-top-style: solid;
+  border-color: #C4C4C4;
+  border-width: 1px;
   background: #EEEEEE;
+  .active {
+    background-color: #FFFFFF;
+  }
   ul li a {
     border-style: solid;
     border-color: #D1D1D1;
     border-width: 1px;
-    padding: 5px;
+    border-top-width: 0px;
+    height: 30px;
+    padding: 5px 10px 10px 10px;
     color: #252C3A;
-    margin: 0px;
+    margin: 7px 0 0 0;
   }
   .dropup li a {
     border-style: hidden;
   }
+  .navbar-header {
+    margin: 15px 20px 10px 10px;
+    .glyphicon{
+      color: #6F7682;
+    }
+  }
+  .navbar-right {
+    margin: 7px 0 0 0;
+  }
+}
+
+textarea {
+  resize: none;
+}
+
+.navbar-nav > li > a {
+  height: 44px;
+  padding-top: 14px;
+}
+
+.navbar {
+  min-height: 44px !important;
 }
