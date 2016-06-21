@@ -4,6 +4,7 @@ class SprintsController < ApplicationController
   before_action :load_sprint, :load_activities
 
   def show
+    @product_backlogs = @project.product_backlogs
     if @sprint.include_user? current_user, @project
       all_log_works = @activities.first.log_works if @activities.any?
       @log_works_count = all_log_works.size rescue 0
