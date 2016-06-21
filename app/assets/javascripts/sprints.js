@@ -58,4 +58,23 @@ $(document).on('page:change', function() {
 
   $(".master-sprint-day").click(clickDateMasterSprintListener);
   $(".master-sprint-date").change(masterSprintDateListener);
+
+  function autoSaveForm() {
+    var project_id = $("#project_id").val();
+    var sprint_id = $("#sprint_id").val();
+    $.ajax({
+      type: "POST",
+      url: "/projects/" + project_id + "/sprints/" + sprint_id,
+      data: $("#lost_hour_form").serialize(),
+      dataType: "script",
+      success: function(data) {
+      }
+    });
+  }
+
+  if ($("#lost_hour_form").length){
+    setInterval(function() {
+      autoSaveForm();
+    }, 5000);
+  }
 })
