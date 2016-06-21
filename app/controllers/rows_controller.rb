@@ -2,6 +2,7 @@ class RowsController < ApplicationController
   def create
     @sprint = Sprint.find_by id: params[:sprint_id]
     @activity = @sprint.activities.build
+    @product_backlogs = @sprint.project.product_backlogs
 
     if @activity.save
       @assignees = @sprint.assignees

@@ -1,6 +1,10 @@
 <tr class="activity_<%= activity_builder.object.id %> <%= type %>">
-  <td class="story"><%= activity_builder.text_field :product_backlog_id,
-    class: "row-#{row}" %></td>
+  <td class="story">
+    <%= activity_builder.select :product_backlog_id,
+      options_for_select(@product_backlogs.collect {|p| [p.story, p.id]},
+      activity_builder.object.product_backlog_id),
+      {include_blank: true}, class: "row-#{row}" %>
+  </td>
   <td class="task-id text-center"><%= activity_builder.text_field :task_id,
     class: "row-#{row}" %></td>
   <td class="task-name text-left"><%= activity_builder.text_field :subject,

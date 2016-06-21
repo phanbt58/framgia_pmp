@@ -1,12 +1,14 @@
 <td class="story">
-  <input class="row-<%= @row_number %>" type="text"
-    name="sprint[activities_attributes][<%= @row_number %>][product_backlog_id]"
-    id="sprint_activities_attributes_<%= @row_number %>_product_backlog_id"/>
+  <%= select_tag "sprint[activities_attributes][#{@row_number}][product_backlog_id]",
+    options_for_select(@product_backlogs.collect {|p| [p.story, p.id]}),
+    {include_blank: true,
+    id: "sprint_activities_attributes_#{@row_number}_product_backlog_id",
+    class: "row-#{@row_number}"} %>
 </td>
 <td class="task-id text-center">
-  <input class="row-<%= @row_number %>" type="text"
+  <input class="row-<%= @row_number %>" type="text" value=""
     name="sprint[activities_attributes][<%= @row_number %>][task_id]"
-    id="sprint_activities_attributes_<%= @row_number %>_id" />
+    id="sprint_activities_attributes_<%= @row_number %>_task_id" />
 </td>
 <td class="task-name text-left">
   <input class="row-<%= @row_number %>" type="text" value=""
