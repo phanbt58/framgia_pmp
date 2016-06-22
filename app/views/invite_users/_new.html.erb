@@ -1,12 +1,12 @@
-<h2 class=text-center><%= t "layouts.invite" %></h2><br/>
+<h2><%= t "layouts.invite" %></h2><br/>
 <%= form_for(:invite_user, url: invite_users_path, html: {method: :post}) do |f| %>
   <div class="row">
-    <div class="col-md-6 col-md-offset-4">
-      <div class="col-md-8">
+    <div class="col-md-5 email-form">
+      <div class="col-md-10">
         <%= f.email_field :email, class: "form-control", autofocus: true,
           required: true, placeholder: t("users.email") %><br/><br/>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-2">
         <%= f.submit t("buttons.send"), class: "btn btn-primary" %>
       </div>
     </div>
