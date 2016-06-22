@@ -8,7 +8,7 @@
   <td class="task-id text-center"><%= activity_builder.text_field :task_id,
     class: "row-#{row}" %></td>
   <td class="task-name text-left"><%= activity_builder.text_field :subject,
-    class: "row-#{row}" %></td>
+    class: "row-#{row} subject-activity", title: "#{activity_builder.object.subject}" %></td>
   <td><%= activity_builder.select :user_id,
     options_for_select(@sprint.assignees.collect {|assignee|
     [assignee.user_name, assignee.user_id]}, activity_builder.object.user_id),

@@ -80,3 +80,7 @@ $(document).on('page:change', function() {
     autoSaveForm();
   });
 })
+
+$(document).ready(function(){
+  $(".subject-activity").tooltip();
+});
