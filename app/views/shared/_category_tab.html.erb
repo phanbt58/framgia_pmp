@@ -36,9 +36,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if f %>
-            <li>
-              <%= f.submit t("buttons.save"), class: "btn btn-default" %>
-            </li>
+            <h5  id="notify-message" class="pull-left"></h5>
           <% end %>
 
           <% if @sprint.present? && @sprint.persisted? %>

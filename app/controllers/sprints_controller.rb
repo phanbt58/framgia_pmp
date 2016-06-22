@@ -20,16 +20,9 @@ class SprintsController < ApplicationController
     respond_to do |format|
       if @sprint.update_attributes sprint_params
         @sprint.update_start_date
-        format.html {
-          flash[:success] = flash_message "updated"
-          redirect_to project_sprint_path(@project, @sprint)
-        }
-        format.js {
-          head :ok
-        }
+        format.js {head :ok} 
       else
-        flash[:failed] = flash_message "not_updated"
-        render :edit
+        format.js {head :internal_server_error} 
       end
     end
   end

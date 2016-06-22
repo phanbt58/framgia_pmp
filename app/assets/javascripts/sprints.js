@@ -68,13 +68,15 @@ $(document).on('page:change', function() {
       data: $("#lost_hour_form").serialize(),
       dataType: "script",
       success: function(data) {
+        $("#notify-message").text(I18n.t("sprints.success")).css("color", "green");
+      },
+      error: function(data){
+        $("#notify-message").text(I18n.t("sprints.failed")).css("color", "red");
       }
     });
   }
-
-  if ($("#lost_hour_form").length){
-    setInterval(function() {
-      autoSaveForm();
-    }, 5000);
-  }
+  $("#lost_hour_form").on("change", "input, select", function(){
+    $("#notify-message").text(I18n.t("sprints.saving"));
+    autoSaveForm();
+  });
 })
