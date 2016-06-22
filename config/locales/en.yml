@@ -47,6 +47,9 @@ en:
     name: "Name"
     edit: "Edit Sprint"
     description: "Description"
+    saving: "Saving..."
+    success: "Saved!"
+    failed: "Not Save"
 
   phases:
     new: "Create Phase"
