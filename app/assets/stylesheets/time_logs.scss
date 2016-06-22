@@ -6,6 +6,7 @@
     width: 47px;
     height: 21px;
     position: relative;
+    border-color: #F3F3F3;
     input {
       display: block;
       padding: 0;
@@ -25,19 +26,21 @@
     width: 200px;
     height: 25px;
     overflow: hidden;
-    background-color: #366092;
+    background-color: #628DB6;
+    color: #fff;
     font: bold 15px arial,sans-serif;
-    color: black;
     text-indent: 5px;
   }
 
   .assignees_name {
-    background-color: darkgray;
+    background-color: #fff;
     text-indent: 5px;
   }
 
   .body_column {
-    background-color: #366092;
+    background-color: #628DB6;
+    color: #fff;
+    font-weight: bold;
   }
 }
 
