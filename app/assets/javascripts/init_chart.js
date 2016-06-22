@@ -44,16 +44,16 @@ function initChart(){
     title: {
       text: "Burndown Chart"
     },
-    colors: ["#BF0622", "#5559D6"],
+    colors: ["#BF0622", "#7696B3"],
     xAxis: {
       allowDecimals: false,
       tickInterval: 1,
       min: 1,
-      title: {text: "Working days"},
+      title: {text: "Working days (day)"},
       gridLineWidth: 1
     },
     yAxis: {
-      title: {text: "Estimate time"},
+      title: {text: "Estimate time (hour)"},
       lineWidth: 1,
       gridLineWidth: 1
     },
