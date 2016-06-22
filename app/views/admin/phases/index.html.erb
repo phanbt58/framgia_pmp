@@ -1,34 +1,32 @@
 <div id="phases">
-  <h2 class="text-center"><%= t "layout.phases" %></h2>
-  <div class="row col-md-10 col-md-offset-1 custyle">
-    <%= link_to t("buttons.new"), "#",
-      data: {toggle: "modal", target: "#PhaseModal"},
-      class: "btn btn-primary pull-right"%>
-    <%= render "phase_modal" %>
-    <table class="table table-striped custab">
-      <thead>
-        <tr>
-          <th><%= t "phases.table.stt" %></th>
-          <th><%= t "phases.table.name" %></th>
-          <th><%= t "phases.table.description" %></th>
-          <th><%= t "phases.table.action" %></th>
-        </tr>
-      </thead>
-      <% @phases.each.with_index do |phase, index| %>
-        <tr>
-          <td><%= index + 1 %></td>
-          <td><%= phase.phase_name %></td>
-          <td><%= phase.description %></td>
-          <td>
-            <%= link_to t("phases.buttons.edit"),
-              edit_admin_phase_path(phase),
-              class: "text-primary" %>&nbsp;
-            <%= link_to t("phases.buttons.delete"),
-              admin_phase_path(phase), method: :delete,
-              data: {confirm: t("delete.confirm")}, class: "text-danger" %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
+  <h2><%= t "layout.phases" %></h2>
+  <a href="#" class="btn btn-default pull-right" data-toggle="modal" data-target ="#PhaseModal">
+    <i class="fa fa-plus" aria-hidden="true"></i></a>
+  <%= render "phase_modal" %>
+  <table class="table table-striped" id="tbl-list-project">
+    <thead>
+      <tr>
+        <th class="id"><%= t "phases.table.stt" %></th>
+        <th class="name"><%= t "phases.table.name" %></th>
+        <th class="description"><%= t "phases.table.description" %></th>
+        <th class="action"><%= t "phases.table.action" %></th>
+      </tr>
+    </thead>
+    <% @phases.each.with_index do |phase, index| %>
+      <tr>
+        <td class="id"><%= index + 1 %></td>
+        <td class="name"><%= phase.phase_name %></td>
+        <td class="description"><%= phase.description %></td>
+        <td class="action">
+          <a href="<%= edit_admin_phase_path phase %>" class="btn btn-primary btn-xs">
+            <i class="fa fa-pencil" aria-hidden="true"></i></a>
+          <a href="<%= admin_phase_path phase %>",
+            data-method="delete", data-confirm="<%= t "delete.confirm" %>" class="btn btn-danger btn-xs">
+            <span class="glyphicon glyphicon-remove"></span>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
+

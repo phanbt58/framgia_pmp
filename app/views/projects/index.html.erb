@@ -1,29 +1,27 @@
 <div id="projects">
-  <div class="title"><%= t "layout.projects" %></div>
+  <h2><%= t "layout.projects" %></h2>
   <% if @projects.any? %>
-    <div class="row col-md-10 col-md-offset-1 custyle">
-      <table class="table table-striped custab">
-        <thead>
-          <tr>
-            <th><%= t "projects.table.thead.id" %></th>
-            <th><%= t "projects.table.thead.name" %></th>
-            <th><%= t "projects.table.thead.description" %></th>
-            <th><%= t "projects.table.thead.manager" %></th>
-            <th><%= t "projects.table.thead.start_date" %></th>
-            <th><%= t "projects.table.thead.end_date" %></th>
-          </tr>
-        </thead>
-        <% @projects.each_with_index.map do |project, index| %>
-          <tr>
-            <td><%= index + 1 %></td>
-            <td><%= link_to project.name, project_path(project) %></td>
-            <td><%= project.description %></td>
-            <td><%= project.manager_name %></td>
-            <td><%= project.start_date %></td>
-            <td><%= project.end_date %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
+    <table class="table table-striped" id="tbl-list-project">
+      <thead>
+        <tr>
+          <th class="id"><%= t "projects.table.thead.id" %></th>
+          <th class="name"><%= t "projects.table.thead.name" %></th>
+          <th class="description"><%= t "projects.table.thead.description" %></th>
+          <th class="manager"><%= t "projects.table.thead.manager" %></th>
+          <th class="start-date"><%= t "projects.table.thead.start_date" %></th>
+          <th class="end-date"><%= t "projects.table.thead.end_date" %></th>
+        </tr>
+      </thead>
+      <% @projects.each_with_index do |project, index| %>
+        <tr>
+          <td class="id"><%= index + 1 %></td>
+          <td class="name"><%= link_to project.name, project_path(project) %></td>
+          <td class="description"><%= project.description %></td>
+          <td class="manager"><%= project.manager_name %></td>
+          <td class="start-date"><%= project.start_date %></td>
+          <td class="end-date"><%= project.end_date %></td>
+        </tr>
+      <% end %>
+    </table>
   <% end %>
 </div>

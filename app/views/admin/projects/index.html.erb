@@ -1,29 +1,36 @@
-<h2 class="text-center"><%= t "layout.projects" %></h2>
 <div id="projects">
-  <div class="row col-md-10 col-md-offset-1 custyle">
-    <table class="table table-striped custab">
-      <thead>
-        <a href="/admin/projects/new" class="btn btn-primary pull-right">
-          <%= t "buttons.new" %></a>
-          <tr>
-            <th><%= t "projects.table.thead.id" %></th>
-            <th><%= t "projects.table.thead.name" %></th>
-            <th><%= t "projects.table.thead.description" %></th>
-            <th><%= t "projects.table.thead.manager" %></th>
-            <th><%= t "projects.table.thead.start_date" %></th>
-            <th><%= t "projects.table.thead.end_date" %></th>
-          </tr>
-      </thead>
-      <% @projects.each_with_index.map do |project, index| %>
+  <h2><%= t "layout.projects" %></h2>
+  <table class="table table-striped" id="tbl-list-project">
+    <thead>
+      <a href="/admin/projects/new" class="btn btn-default pull-right">
+        <i class="fa fa-plus" aria-hidden="true"></i></a>
         <tr>
-          <td><%= index + 1 %></td>
-          <td><%= link_to project.name, admin_project_path(project) %></td>
-          <td><%= project.description %></td>
-          <td><%= project.manager_name %></td>
-          <td><%= project.start_date %></td>
-          <td><%= project.end_date %></td>
+          <th class="id"><%= t "projects.table.thead.id" %></th>
+          <th class="name"><%= t "projects.table.thead.name" %></th>
+          <th class="description"><%= t "projects.table.thead.description" %></th>
+          <th class="manager"><%= t "projects.table.thead.manager" %></th>
+          <th class="start-date"><%= t "projects.table.thead.start_date" %></th>
+          <th class="end-date"><%= t "projects.table.thead.end_date" %></th>
+          <th class="action"></th>
         </tr>
-      <% end %>
-    </table>
-  </div>
+    </thead>
+    <% @projects.each_with_index do |project, index| %>
+      <tr>
+        <td class="id"><%= index + 1 %></td>
+        <td class="name"><%= link_to project.name, admin_project_path(project) %></td>
+        <td class="description"><%= project.description %></td>
+        <td class="manager"><%= project.manager_name %></td>
+        <td class="start-date"><%= project.start_date %></td>
+        <td class="end-date"><%= project.end_date %></td>
+        <td class="action">
+          <a href="<%= edit_admin_project_path project %>" class="btn btn-primary btn-xs">
+            <i class="fa fa-pencil" aria-hidden="true"></i></a>
+          <a href="<%= admin_project_path project %>",
+            data-method="delete", data-confirm="<%= t "projects.delete.confirm" %>" class="btn btn-danger btn-xs">
+            <span class="glyphicon glyphicon-remove"></span>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
