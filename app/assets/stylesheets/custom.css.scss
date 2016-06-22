@@ -73,15 +73,19 @@ html, body {
   .active {
     background-color: #FFFFFF;
   }
-  ul li a {
-    border-style: solid;
-    border-color: #D1D1D1;
-    border-width: 1px;
-    border-top-width: 0px;
+  li {
     height: 30px;
-    padding: 5px 10px 10px 10px;
-    color: #252C3A;
     margin: 7px 0 0 0;
+    a {
+      border-style: solid;
+      border-color: #D1D1D1;
+      border-width: 1px;
+      border-top-width: 0px;
+      height: 30px;
+      padding: 5px 10px 10px 10px;
+      color: #252C3A;
+      margin: 0px;
+    }
   }
   .dropup li a {
     border-style: hidden;
@@ -93,7 +97,7 @@ html, body {
     }
   }
   .navbar-right {
-    margin: 7px 0 0 0;
+    margin: 0px;
   }
 }
 

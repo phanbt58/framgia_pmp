@@ -84,3 +84,9 @@ $(document).on('page:change', function() {
 $(document).ready(function(){
   $(".subject-activity").tooltip();
 });
+
+$(document).on("keyup", ".task-name", function(event) {
+  if(event.which == 13) {
+    $("#add-more-row").click();
+  }
+});
