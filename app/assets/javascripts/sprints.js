@@ -79,6 +79,20 @@ $(document).on('page:change', function() {
     $("#notify-message").text(I18n.t("sprints.saving"));
     autoSaveForm();
   });
+
+  var sumWidth = 0;
+  $("#scroll li").each(function(index) {
+    sumWidth += $(this).width();
+  });
+
+  if (sumWidth < $("#scroll").width()) {
+    $(".scroll").hide();
+  }
+
+  $("#right, #left").click(function() {
+    var dir = this.id == "right" ? "+=" : "-=" ;
+    $("#scroll").animate({scrollLeft: dir + "300"}, 500);
+  });
 })
 
 $(document).ready(function(){
