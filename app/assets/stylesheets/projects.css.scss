@@ -1,5 +1,6 @@
 #projects {
-  padding-top: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
   .title {
     margin-bottom: 10px;
     text-align: center;
@@ -51,6 +52,28 @@
     box-shadow: 3px 3px 0px transparent;
     transition: 0.5s;
     }
+
+  #tbl-list-project {
+    .id {
+      width: 5%;
+    }
+
+    .name {
+      width: 20%;
+    }
+
+    .description {
+      width: 30%;
+    }
+
+    .manager {
+      width: 15%;
+    }
+
+    .start-date, .end_date, .action {
+      width: 10%;
+    }
+  }
 }
 
 #sprints {
