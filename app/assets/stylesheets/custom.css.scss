@@ -26,7 +26,7 @@
 }
 
 #logo:hover {
-  color: #576980;
+  color: #F8F8F8;
   text-decoration: none;
 }
 
@@ -76,34 +76,69 @@ html, body {
   border-color: #C4C4C4;
   border-width: 1px;
   background: #EEEEEE;
-  .active {
-    background-color: #FFFFFF;
+
+  .container-fluid {
+    margin-top: -7px;
   }
+
+  #sprint-view ul {
+  width: 70%;
+  height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-top: 13px;
+  padding-top: 3px;
+
   li {
-    height: 30px;
-    margin: 7px 0 0 0;
+    float: none;
+    display: inline;
     a {
+      color: #252C3A;
       border-style: solid;
       border-color: #D1D1D1;
       border-width: 1px;
       border-top-width: 0px;
-      height: 30px;
-      padding: 5px 10px 10px 10px;
-      color: #252C3A;
-      margin: 0px;
+      display: inline;
+      margin: 0 -5px 0 0;
+      padding: 7px 5px 7px 5px;
+    }
+    a:hover {
+      background-color: #F8F8F8;
     }
   }
-  .dropup li a {
-    border-style: hidden;
-  }
-  .navbar-header {
-    margin: 15px 20px 10px 10px;
-    .glyphicon{
-      color: #6F7682;
+  .active {
+    a {
+      background-color: white;
     }
   }
-  .navbar-right {
-    margin: 0px;
+  }
+  #left, #right {
+    a {
+    margin-top: 13px;
+    width: 20px;
+    height: 30px;
+    padding: 6px;
+    }
+  }
+  #dLabel {
+    margin-top: 12px;
+    margin-right: 10px;
+  }
+
+  #notify-message {
+    margin-top: 22px;
+    margin-right: 22px;
+  }
+
+  .glyphicon-plus {
+    color: #6F7682;
+    margin-top: 18px;
+    margin-right: 8px;
+  }
+
+  .navbar-right .dropdown-menu {
+    right: 10px;
+    bottom: 35px;
   }
 }
 
