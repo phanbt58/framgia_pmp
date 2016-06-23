@@ -1,7 +1,7 @@
-<%= render "invite_users/new" %>
-<div id="list-users">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+<div class="invite-user">
+  <%= render "invite_users/new" %>
+  <div id="list-users">
+    <div class="row">
       <table id="users" class="table table-bordered display" data-source="<%= users_path(format: "json") %>" >
         <thead>
           <tr class="active">
