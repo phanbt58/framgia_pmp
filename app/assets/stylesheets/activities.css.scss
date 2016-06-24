@@ -31,6 +31,12 @@
     }
   }
 
+  td, th {
+    width: 40px;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
   .master-data > td {
     border-color: #FFF;
   }
@@ -50,7 +56,6 @@
 
   .panel-left {
     text-align: center!important;
-    width: 40px;
   }
 
   .estimated {
