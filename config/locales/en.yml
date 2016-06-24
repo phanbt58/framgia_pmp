@@ -59,7 +59,7 @@ en:
       edit: "Edit"
       delete: "Delete"
     table:
-      stt: "STT"
+      id: "ID"
       name: "Phase name"
       description: "Description"
       create_at: "Create At"

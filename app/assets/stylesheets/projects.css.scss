@@ -65,6 +65,10 @@
 
     .description {
       width: 30%;
+      max-width: 250px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .manager {

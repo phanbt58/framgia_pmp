@@ -5,7 +5,7 @@ function initGrid(){
   myGrid.setImagePath("/assets/imgs/");
   myGrid.setHeader("Category, Story, Priority, Estimate, Actual, Remaining," +
     "Project name, Remove");
-  myGrid.setInitWidths("150,150,100,100,100,100,200,70");
+  myGrid.setInitWidths("350,250,100,100,100,100,200,70");
   myGrid.setColAlign("center,center,center,center,center,center,center,center");
   myGrid.setColTypes("ed,ed,ed,ed,ed,ed,ro,ro");
   myGrid.setColSorting("str,str,int,int,int,int,str");
