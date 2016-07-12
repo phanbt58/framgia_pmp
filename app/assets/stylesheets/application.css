@@ -15,7 +15,6 @@
  *= require_self
  *= require select2
  *= require select2-bootstrap
- *= require skins/dhtmlxgrid_dhx_blue
  *= require admin/work_performances
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require datepicker

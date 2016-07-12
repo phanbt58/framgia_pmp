@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require product_backlog
 //= require_tree .
 //= require i18n
 //= require i18n/translations
