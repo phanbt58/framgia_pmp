@@ -13,6 +13,7 @@ class Ability
       can :manage, WorkPerformance
       can :manage, Phase
       can [:update], User
+      can :manage, ProductBacklog
     end
   end
 end
