@@ -129,6 +129,16 @@ en:
     mail_body: "To reset your password click the link below:"
     phases: "Phases"
   product_backlog:
+    index:
+      category: "Category"
+      story: "Story"
+      priority: "Priority"
+      estimate: "Estimate"
+      actual: "Actual"
+      remaining: "Remaining"
+      project: "Project Name"
+      action: "Action"
+      productbacklog: "Product Backlog"
     title: "Product Backlog"
   activities:
     story_id: "Story ID"
