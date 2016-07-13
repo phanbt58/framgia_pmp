@@ -133,6 +133,7 @@ en:
     phases: "Phases"
   product_backlog:
     index:
+      id: "StoryID"
       category: "Category"
       story: "Story"
       priority: "Priority"
