@@ -1,0 +1,25 @@
+<tr id="backlog-row-<%= @product_backlog.id %>">
+  <td><%= @row_number %></td>
+  <%= hidden_field_tag "product_backlogs[#{@product_backlog.id}][id]",
+    @product_backlog.id %>
+  <td><%= text_field_tag "product_backlogs[#{@product_backlog.id}][category]",
+    @product_backlog.category %></td>
+  <td><%= text_field_tag "product_backlogs[#{@product_backlog.id}][story]",
+    @product_backlog.story %></td>
+  <td><%= select_tag "product_backlogs[#{@product_backlog.id}][sprint_id]",
+    options_for_select(@sprints.collect {|p| [p.name, p.id]}, @product_backlog.sprint_id),
+    include_blank: true %></td>
+  <td><%= text_field_tag "product_backlogs[#{@product_backlog.id}][priority]",
+    @product_backlog.priority %></td>
+  <td><%= text_field_tag "product_backlogs[#{@product_backlog.id}][estimate]",
+    @product_backlog.estimate %></td>
+  <td><%= text_field_tag "product_backlogs[#{@product_backlog.id}][actual]",
+    @product_backlog.actual %></td>
+  <td><%= text_field_tag "product_backlogs[#{@product_backlog.id}][remaining]",
+    @product_backlog.remaining %></td>
+  <td>
+    <i class="fa fa-trash fa-2x delete_icon delete-product-backlog" aria-hidden="true"
+      data-project-id="<%= @project.id %>" data-product-backlog-id="<%= @product_backlog.id %>">
+    </i>
+  </td>
+</tr>
