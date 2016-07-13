@@ -5,4 +5,5 @@ class ProductBacklog < ActiveRecord::Base
   has_many :activities
 
   delegate :name, to: :project, prefix: true
+  delegate :name, to: :sprint, prefix: true, allow_nil: true
 end

@@ -19,6 +19,7 @@
                 <li role="presentation" class="<%= tab_active sprint.id, active_tab %>">
                   <%= link_to sprint.name, project_sprint_path(project, sprint) %></li>
               <% end %>
+              <h5 id="notify-message" class="pull-right"></h5>
             <% else %>
               <li role="presentation" class="<%= tab_active Settings.tabs.overview_project, active_tab %>">
                 <%= link_to t("projects.overview"), project_path(project) %>
