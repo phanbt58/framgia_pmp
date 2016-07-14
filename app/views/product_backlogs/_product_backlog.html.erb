@@ -1,13 +1,15 @@
-<tr>
+<tr id="backlog-row-<%= product_backlog.id %>">
   <td><%= product_backlog.category %></td>
   <td><%= product_backlog.story %></td>
+  <td><%= product_backlog.sprint_name %></td>
   <td class="point_number"><%= product_backlog.priority %></td>
   <td class="point_number"><%= product_backlog.estimate %></td>
   <td class="point_number"><%= product_backlog.actual %></td>
   <td class="point_number"><%= product_backlog.remaining %></td>
-  <td><%= product_backlog.project_name %></td>
   <td>
     <i class="fa fa-pencil-square-o fa-2x edit_icon" aria-hidden="true"></i>
-    <i class="fa fa-trash fa-2x delete_icon" aria-hidden="true"></i>
+    <i class="fa fa-trash fa-2x delete_icon delete-product-backlog" aria-hidden="true"
+      data-project-id="<%= @project.id %>" data-product-backlog-id="<%= product_backlog.id %>">
+    </i>
   </td>
 </tr>
