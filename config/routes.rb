@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :update_product_backlogs
+
   resources :synchronizes, only: [:index, :create]
   resources :users, except: [:new, :create]
   resources :invite_users
