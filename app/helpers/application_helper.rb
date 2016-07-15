@@ -31,6 +31,15 @@ module ApplicationHelper
     end
   end
 
+  def product_backlog_class product_backlog
+    remaining_time = product_backlog.remaining
+    if remaining_time.nil?
+      "default"
+    else
+      remaining_time == 0 ? "finished" : "in_progress"
+    end
+  end
+
   def flash_message flash_type, *params
     if params.empty?
       t "flashs.messages.#{flash_type}", model_name: controller_name.classify

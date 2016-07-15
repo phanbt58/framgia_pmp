@@ -1,8 +1,26 @@
 #product_backlogs {
+  .default {
+    background-color: white;
+  }
+
+  .in_progress {
+    background-color: rgb(0, 176, 240);
+    color: white;
+  }
+
+  .finished {
+    background-color: black;
+    color: white;
+  }
+
+  .fa-2x {
+    font-size: 1em;
+  }
+
   th {
+    height: 30px;
     background-color: #628DB6;
     margin: 0;
-    padding: 0 5px;
     min-width: 40px;
     color: #fff;
   }
@@ -12,13 +30,13 @@
     padding: 0 5px;
     border-color: #F3F3F3;
     input, select {
+      padding-top: 5px;
       display: block;
       margin: 0;
       border: 0;
       width: 100%;
       line-height: 1.3em;
       background: transparent;
-      text-align: center;
 
       &:focus{
         outline: none;
@@ -37,5 +55,43 @@
     width: 40px;
     padding-right: 0px;
     padding-left: 0px;
+  }
+}
+
+#tbl-product-backlog {
+  .id {
+    width: 5%;
+  }
+
+  .category {
+    width: 15%;
+  }
+
+  .story {
+    width: 45%;
+  }
+
+  .sprint {
+    width: 10%
+  }
+
+  .priority {
+    width: 5%
+  }
+
+  .estimate {
+    width: 5%;
+  }
+
+  .actual {
+    width: 5%;
+  }
+
+  .remaining {
+    width: 5%;
+  }
+
+  .action {
+    width: 5%;
   }
 }
