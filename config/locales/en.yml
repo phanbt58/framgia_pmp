@@ -54,6 +54,9 @@ en:
     delete:
       success: "Deleted"
       failed: "Failed"
+    saved: "Saved"
+    failed: "Failed"
+    saving: "Saving"
   phases:
     new: "Create Phase"
     start_date: "Start Date"
