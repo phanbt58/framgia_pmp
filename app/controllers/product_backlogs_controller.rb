@@ -30,6 +30,7 @@ class ProductBacklogsController < ApplicationController
     respond_to do |format|
       format.json do
         render json: {
+          row_number: @row_number,
           content: render_to_string(
             partial: "product_backlogs/row",
             layout: false,
