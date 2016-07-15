@@ -8,16 +8,20 @@ class ProductBacklog < ActiveRecord::Base
   delegate :name, :id, to: :sprint, prefix: true, allow_nil: true
 
   def total_estimation_time
-    Activity.includes(:log_works)
+    estimate = Activity.includes(:log_works)
       .of_product_backlog_and_sprint(id, sprint_id).map do |activity|
       activity.log_works.first.remaining_time
     end.sum rescue 0
+    save
+    estimate
   end
 
   def total_remaining_time
-    Activity.includes(:log_works)
+    remaining = Activity.includes(:log_works)
       .of_product_backlog_and_sprint(id, sprint_id).map do |activity|
       activity.log_works.last.remaining_time
     end.sum rescue 0
+    save
+    remaining
   end
 end
