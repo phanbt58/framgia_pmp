@@ -20,4 +20,23 @@ class ProductBacklogsController < ApplicationController
       end
     end
   end
+
+  def create
+    @sprints = Sprint.list_by_user current_user
+    @product_backlog = @project.product_backlogs.build
+    if @product_backlog.save
+      @row_number = @project.product_backlogs.size.pred
+    end
+    respond_to do |format|
+      format.json do
+        render json: {
+          content: render_to_string(
+            partial: "product_backlogs/row",
+            layout: false,
+            formats: "html"
+          )
+        }
+      end
+    end
+  end
 end

@@ -1,41 +1,45 @@
-<div class="container" id="product_backlogs">
-  <div class="product_backlog">
-    <h1><%= t "product_backlog.index.productbacklog" %></h1>
-    <table class="table table-hover table-striped table-bordered">
-        <thead class="thead_table">
-          <tr>
-            <th><%= t "product_backlog.index.id" %></th>
-            <th><%= t "product_backlog.index.category" %></th>
-            <th><%= t "product_backlog.index.story" %></th>
-            <th><%= t "product_backlog.index.sprint" %></th>
-            <th><%= t "product_backlog.index.priority" %></th>
-            <th><%= t "product_backlog.index.estimate" %></th>
-            <th><%= t "product_backlog.index.actual" %></th>
-            <th><%= t "product_backlog.index.remaining" %></th>
-            <th><%= t "product_backlog.index.action" %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= form_for :product_backlog, url: update_product_backlogs_path,
-            method: :patch do |f| %>
-            <% @product_backlogs.each_with_index do |product_backlog, index| %>
-              <%= render "product_backlog", product_backlog: product_backlog, index: index %>
+<div id="row_product_backlog">
+  <div class="container" id="product_backlogs">
+    <div class="product_backlog">
+      <h1><%= t "product_backlog.index.productbacklog" %></h1>
+      <table id="product_backlogs" class="table table-hover table-striped table-bordered">
+          <thead class="thead_table">
+            <tr>
+              <th><%= t "product_backlog.index.id" %></th>
+              <th><%= t "product_backlog.index.category" %></th>
+              <th><%= t "product_backlog.index.story" %></th>
+              <th><%= t "product_backlog.index.sprint" %></th>
+              <th><%= t "product_backlog.index.priority" %></th>
+              <th><%= t "product_backlog.index.estimate" %></th>
+              <th><%= t "product_backlog.index.actual" %></th>
+              <th><%= t "product_backlog.index.remaining" %></th>
+              <th><%= t "product_backlog.index.action" %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= form_for :product_backlog, url: update_product_backlogs_path,
+              method: :patch do |f| %>
+              <% @product_backlogs.each_with_index do |product_backlog, index| %>
+                <%= render "product_backlog", product_backlog: product_backlog, index: index %>
+              <% end %>
+              <%= submit_tag %>
             <% end %>
-            <%= submit_tag %>
-          <% end %>
-        </tbody>
-    </table>
-    <div class="col-md-12" id="has_product_backlog_api">
-    </div>
+          </tbody>
+      </table>
+      <div class="col-md-12" id="has_product_backlog_api">
+      </div>
       <br>
       <div class="col-md-4" id="product_backlog">
-        <button class="btn btn-xs btn-info" id="add_more_pb">
-          <span class="glyphicon glyphicon-plus"></span></button>
+        <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus",
+          project_id: @project.id), project_product_backlogs_path({project_id: @project.id}),
+          class: "btn btn-xs btn-primary pull-left", id: "add-more-row",
+          type: "button",  title: t("activities.add_more_row") %>
       </div>
-  </div>
-  <div class="clearfix"></div>
-  <div class="row">
-    <%= render "shared/category_tab", project: @project,
-    active_tab: Settings.tabs.project_backlog, f: nil %>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row">
+      <%= render "shared/category_tab", project: @project,
+      active_tab: Settings.tabs.project_backlog, f: nil %>
+    </div>
   </div>
 </div>
