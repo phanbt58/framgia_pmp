@@ -32,5 +32,3 @@ class Activity < ActiveRecord::Base
     WorkPerformance.create activity: self, phase: Phase.first
   end
 end
-
-
