@@ -8,6 +8,9 @@ class Activity < ActiveRecord::Base
   has_many :log_works
   after_create :create_log_works, :create_work_performance
 
+  scope :of_product_backlog_and_sprint, ->product_backlog_id, sprint_id do
+    where product_backlog_id: product_backlog_id, sprint_id: sprint_id
+  end
   scope :fitler_log_works, ->sprint{includes(:log_works).where(sprint: sprint)}
 
   delegate :plan, :actual, to: :work_performance, prefix: true, allow_nil: true
