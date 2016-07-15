@@ -1,4 +1,8 @@
 #product_backlogs {
+  padding-top: 15px;
+  .center {
+    text-align: center;
+  }
   .default {
     background-color: white;
   }
@@ -6,11 +10,17 @@
   .in_progress {
     background-color: rgb(0, 176, 240);
     color: white;
+    option {
+      color: black;
+    }
   }
 
   .finished {
     background-color: black;
     color: white;
+    option {
+      color: black;
+    }
   }
 
   .fa-2x {
@@ -58,6 +68,10 @@
   }
 }
 
+#product_backlog {
+  padding-left: 0px;
+}
+
 #tbl-product-backlog {
   .id {
     width: 5%;
@@ -72,11 +86,11 @@
   }
 
   .sprint {
-    width: 10%
+    width: 10%;
   }
 
   .priority {
-    width: 5%
+    width: 5%;
   }
 
   .estimate {

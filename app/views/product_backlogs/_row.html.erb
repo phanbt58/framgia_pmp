@@ -4,7 +4,7 @@
     @product_backlog.id %>
   <td class="category"><%= text_field_tag "product_backlogs[#{@product_backlog.id}][category]",
     @product_backlog.category,
-    title: "#{@product_backlog.category}", class: "product-backlog-category" %></td>
+    title: "#{@product_backlog.category}", class: "product-backlog-category-#{@row_number}" %></td>
   <td class="story"><%= text_field_tag "product_backlogs[#{@product_backlog.id}][story]",
     @product_backlog.story, title: "#{@product_backlog.story}",
     class: "product-backlog-story" %></td>
