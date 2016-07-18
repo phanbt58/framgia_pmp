@@ -62,7 +62,8 @@ namespace :db do
 
     puts "Creating activities for the first sprint of project 1"
     Sprint.first.assignees.each do |assignee|
-      ac = Fabricate :activity, user_id: assignee.user.id, sprint_id: Sprint.first.id
+      ac = Fabricate :activity, user_id: assignee.user.id, sprint_id: Sprint.first.id,
+        product_backlog_id: ProductBacklog.first.id
       start_log_work = 8
       ac.log_works.each do |log_work|
         log_work.update_attributes remaining_time: start_log_work - 1

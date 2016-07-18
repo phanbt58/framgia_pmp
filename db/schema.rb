@@ -146,13 +146,18 @@ ActiveRecord::Schema.define(version: 20160526041630) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "work_performances", force: :cascade do |t|
-    t.integer  "phase_id",    limit: 4
-    t.string   "description", limit: 255
-    t.integer  "plan",        limit: 4
-    t.integer  "actual",      limit: 4
-    t.integer  "activity_id", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "phase_id",        limit: 4
+    t.string   "description",     limit: 255
+    t.integer  "plan",            limit: 4
+    t.integer  "actual",          limit: 4
+    t.integer  "spent_hour",      limit: 4
+    t.integer  "burned_hour",     limit: 4
+    t.integer  "estimated_story", limit: 4
+    t.integer  "burned_story",    limit: 4
+    t.integer  "estimated_task",  limit: 4
+    t.integer  "activity_id",     limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "work_performances", ["phase_id"], name: "index_work_performances_on_phase_id", using: :btree
