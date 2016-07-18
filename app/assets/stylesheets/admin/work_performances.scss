@@ -1,28 +1,29 @@
 #work-performance-datas {
   margin-top: 20px;
+  .assigned {
+    width: 15%;
+    text-align: center;
+    padding: 5px;
+  }
+  .activity {
+    width: 25%;
+    text-align: center;
+  }
 
   .tbl-work-performance-datas {
-    td, th {
-      border: 1px solid;
-    }
+    th {
+      background-color: #628DB6;
+      margin: 0;
+      padding: 5px;
+      min-width: 40px;
+      color: #fff;
+      border: 1px solid #F3F3F3;
+     }
 
-    .th {
-      width: 1%;
-    }
-
-    .activity {
-      width: 30%;
-    }
-
-    .assgined {
-      width: 15%;
-    }
-
-    .phase-name {
-      text-align: center;
-    }
-
-    .phase-value {
+    td {
+      margin: 0;
+      padding: 5px;
+      border: 1px solid #F3F3F3;
       text-align: center;
     }
   }

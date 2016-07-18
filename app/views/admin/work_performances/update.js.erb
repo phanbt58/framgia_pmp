@@ -1,2 +1,7 @@
 $('#plan-<%= @work_performance.activity.id %>').text("<%= @work_performance.plan %>");
+$('#spent_hour-<%= @work_performance.activity.id %>').text("<%= @work_performance.spent_hour %>");
+$('#burned_hour-<%= @work_performance.activity.id %>').text("<%= @work_performance.burned_hour %>");
+$('#estimated_story-<%= @work_performance.activity.id %>').text("<%= @work_performance.estimated_story %>");
+$('#burned_story-<%= @work_performance.activity.id %>').text("<%= @work_performance.burned_story %>");
+$('#estimated_task-<%= @work_performance.activity.id %>').text("<%= @work_performance.estimated_task %>");
 $('#dialog').modal('toggle');
