@@ -3,5 +3,5 @@ Fabricator :product_backlog do
   story {sequence(:story, 1) {|i| "Story #{i}"}}
   priority {Faker::Number.between(1, 5)}
   project_id
-  remaining
+  sprint_id
 end

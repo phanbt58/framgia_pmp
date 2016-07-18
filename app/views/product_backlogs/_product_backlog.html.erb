@@ -14,11 +14,11 @@
   <td class="priority"><%= text_field_tag "product_backlogs[#{product_backlog.id}][priority]",
     product_backlog.priority, class: "center" %></td>
   <td class="estimate"><%= text_field_tag "product_backlogs[#{product_backlog.id}][estimate]",
-    product_backlog.total_estimation_time, class: "center" %></td>
+    product_backlog.estimate, class: "center" %></td>
   <td class="actual"><%= text_field_tag "product_backlogs[#{product_backlog.id}][actual]",
     product_backlog.actual, class: "center" %></td>
   <td class="remaining"><%= text_field_tag "product_backlogs[#{product_backlog.id}][remaining]",
-    product_backlog.total_remaining_time, class: "center" %></td>
+    product_backlog.remaining, class: "center" %></td>
   <td class="action">
     <i class="fa fa-trash fa-2x delete_icon delete-product-backlog" aria-hidden="true"
       data-project-id="<%= @project.id %>" data-product-backlog-id="<%= product_backlog.id %>">

@@ -12,22 +12,17 @@ namespace :db do
       Fabricate :project, manager_id: user.id
     end
 
-    puts "Creating product backlog"
-    Project.all.each do |project|
-      5.times do
-        estimate = Faker::Number.between(4, 16)
-        actual = Faker::Number.between(0, 4)
-        remaining = estimate - actual
-
-        Fabricate :product_backlog, estimate: estimate, actual: actual,
-          remaining: remaining, project_id: project.id
-      end
-    end
-
     puts "Creating sprint for each project"
     Project.all.each do |project|
       2.times do
         Fabricate :sprint, project_id: project.id
+      end
+    end
+
+    puts "Creating product backlog"
+    Project.all.each do |project|
+      5.times do
+        Fabricate :product_backlog, project_id: project.id, sprint_id: Sprint.first.id
       end
     end
 
