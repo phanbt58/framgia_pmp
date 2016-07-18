@@ -12,7 +12,6 @@ class ProductBacklog < ActiveRecord::Base
       .of_product_backlog_and_sprint(id, sprint_id).map do |activity|
       activity.log_works.first.remaining_time
     end.sum rescue 0
-    self.update_attributes estimate: estimate
     estimate
   end
 
@@ -23,5 +22,11 @@ class ProductBacklog < ActiveRecord::Base
     end.sum rescue 0
     self.update_attributes remaining: remaining
     remaining
+  end
+
+  def calculate_actual_time
+    actual_time = total_estimation_time - total_remaining_time
+    self.update_attributes actual: actual_time
+    actual_time
   end
 end

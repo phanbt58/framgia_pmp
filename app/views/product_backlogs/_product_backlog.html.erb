@@ -4,21 +4,28 @@
   <td class="id"><%= index + 1 %></td>
   <td class="category"><%= text_field_tag "product_backlogs[#{product_backlog.id}][category]",
     product_backlog.category, title: "#{product_backlog.category}",
-    class: "product-backlog-category-#{index}" %></td>
+    class: "product-backlog-category-#{index}" %>
+  </td>
   <td class="story"><%= text_field_tag "product_backlogs[#{product_backlog.id}][story]",
     product_backlog.story, title: "#{product_backlog.story}",
-    class: "product-backlog-story" %></td>
+    class: "product-backlog-story" %>
+  </td>
   <td class="sprint"><%= select_tag "product_backlogs[#{product_backlog.id}][sprint_id]",
     options_for_select(@sprints.collect {|p| [p.name, p.id]}, product_backlog.sprint_id),
-    include_blank: true %></td>
+    include_blank: true %>
+  </td>
   <td class="priority"><%= text_field_tag "product_backlogs[#{product_backlog.id}][priority]",
-    product_backlog.priority, class: "center" %></td>
+    product_backlog.priority, class: "center" %>
+  </td>
   <td class="estimate"><%= text_field_tag "product_backlogs[#{product_backlog.id}][estimate]",
-    product_backlog.total_estimation_time, class: "center" %></td>
+    product_backlog.estimate, class: "center" %>
+  </td>
   <td class="actual"><%= text_field_tag "product_backlogs[#{product_backlog.id}][actual]",
-    product_backlog.actual, class: "center" %></td>
+    product_backlog.calculate_actual_time, class: "center" %>
+  </td>
   <td class="remaining"><%= text_field_tag "product_backlogs[#{product_backlog.id}][remaining]",
-    product_backlog.total_remaining_time, class: "center" %></td>
+    product_backlog.total_remaining_time, class: "center" %>
+  </td>
   <td class="action">
     <i class="fa fa-trash fa-2x delete_icon delete-product-backlog" aria-hidden="true"
       data-project-id="<%= @project.id %>" data-product-backlog-id="<%= product_backlog.id %>">
