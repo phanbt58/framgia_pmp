@@ -114,6 +114,11 @@ en:
       assigned: "Assigned for"
       plan: "P"
       actual: "A"
+      spent_hour: "S_H"
+      burned_hour: "B_H"
+      estimated_story: "E_S"
+      burned_story: "B_S"
+      estimated_task: "E_T"
   date:
     format: "dd-mm-yyyy"
     rb_format: "%d-%m-%Y"
@@ -176,3 +181,11 @@ en:
     description: "Enter description"
     email: "Enter email"
     password: "Enter password"
+  phase_value:
+    plan: "Plan"
+    actual: "Actual"
+    spent_hour: "Spent Hour"
+    burned_hour: "Burned Hour"
+    estimated_story: "Estimated Story"
+    burned_story: "Burned Story"
+    estimated_task: "Estimated Task"

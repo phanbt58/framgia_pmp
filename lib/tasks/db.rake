@@ -35,6 +35,7 @@ namespace :db do
       "Nguyen Van Hien": "nguyen.van.hien",
       "Dao Duy Dat": "dao.duy.dat",
       "Nguyen Dac Truong": "nguyen.dac.truong",
+      "Vu Dinh Hao": "vu.dinh.hao",
     }
     user_hash.each do |key, value|
       user = Fabricate :user, name: key, email: value+"@framgia.com"
