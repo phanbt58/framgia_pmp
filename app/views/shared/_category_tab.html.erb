@@ -55,11 +55,10 @@
           <% end %>
 
           <% if @sprint.present? && @sprint.persisted? %>
-            <li class="dropup">
-              <button id="dLabel" type="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false" class="btn btn-default">
-                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-              </button>
+            <li class="dropup work-performent">
+              <%= link_to "", "", "data-toggle": "dropdown",
+                "aria-haspopup": "true", "aria-expanded": "false",
+                class: "glyphicon glyphicon-align-justify dropdown-toggle" %>
               <ul class="dropdown-menu" aria-labelledby="dLabel">
                 <% if can? :edit, @sprint %>
                   <li>
@@ -82,16 +81,13 @@
                   </li>
                 <% end %>
               </ul>
-              </li>
+            </li>
           <% elsif @sprint.nil? && @sprints.nil? %>
             <div class="button">
-              <li class="dropup">
-                <button id="dLabel" type="button" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false"
-                  class="btn btn-default">
-                  <span class="glyphicon glyphicon-align-justify"
-                    aria-hidden="true"></span>
-                </button>
+              <li class="dropup over-view-project">
+                <%= link_to "", "", "data-toggle": "dropdown",
+                  "aria-haspopup": "true", "aria-expanded": "false",
+                  class: "glyphicon glyphicon-align-justify dropdown-toggle" %>
                 <ul class="dropdown-menu"
                   aria-labelledby="dLabel">
                   <li>
