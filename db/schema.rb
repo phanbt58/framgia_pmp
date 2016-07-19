@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20160526041630) do
     t.string   "category",   limit: 255
     t.string   "story",      limit: 255
     t.integer  "priority",   limit: 4
-    t.float    "estimate",   limit: 24
+    t.integer  "estimate",   limit: 4
     t.float    "actual",     limit: 24
     t.float    "remaining",  limit: 24
     t.integer  "project_id", limit: 4

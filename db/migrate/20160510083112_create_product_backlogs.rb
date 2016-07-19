@@ -4,7 +4,7 @@ class CreateProductBacklogs < ActiveRecord::Migration
       t.string :category
       t.string :story
       t.integer :priority
-      t.float :estimate
+      t.integer :estimate
       t.float :actual
       t.float :remaining
       t.references :project, index: true, foreign: true
