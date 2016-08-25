@@ -1,9 +1,11 @@
 <tr class="master-data">
+  <td></td>
   <td rowspan="2" colspan="3" class="left-side" ></td>
   <td class="start-date underline"><%= t "activities.start_date"%></td>
   <td colspan="5" id="sprint-start-date" class="underline"><%= l @sprint.start_date %></td>
 </tr>
 <tr class="master-data-date">
+  <td class="none-border"></td>
   <td class="none-border"></td>
   <td><%= t "activities.date" %></td>
   <%= f.fields_for :master_sprints, @sprint.master_sprints do |master_sprints_builder| %>
@@ -18,6 +20,9 @@
   <% end %>
 </tr>
 <tr class="master-sprint-working-day">
+  <th rowspan="3" class="action" >
+    <%= t "activities.action" %>
+  </th>
   <th rowspan="3" class="story-id" >
     <%= t "activities.story_id" %>
   </th>

@@ -100,9 +100,14 @@
       min-width: 70px;
     }
 
+    .action {
+      width: 40px;
+      min-width: 40px;
+    }
+
     .task-name {
-      width: 425px;
-      min-width: 425px;
+      width: 380px;
+      min-width: 380px;
     }
 
     .sprint-worked {
@@ -119,4 +124,8 @@
   .today {
     background-color: #f00;
   }
+}
+.delete-activity {
+  text-align: center;
+  margin-left: 15px;
 }

@@ -1,3 +1,10 @@
+<td>
+  <i class="fa fa-trash delete_icon delete-activity" aria-hidden="true"
+    data-project-id="<%= @project.id %>"
+    data-activity-id="<%= @activity.id %>"
+    data-sprint-id="<%= @sprint.id %>">
+  </i>
+</td>
 <td class="story">
   <%= select_tag "sprint[activities_attributes][#{@row_number}][product_backlog_id]",
     options_for_select(@product_backlogs.collect {|p| [p.story, p.id]}),
