@@ -154,6 +154,7 @@ en:
       sprint: "Sprint"
     title: "Product Backlog"
   activities:
+    action: "Action"
     story_id: "Story ID"
     task_id: "Task ID"
     task_name: "Task name"

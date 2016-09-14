@@ -20,9 +20,9 @@ class SprintsController < ApplicationController
     respond_to do |format|
       if @sprint.update_attributes sprint_params
         @sprint.update_start_date
-        format.js {head :ok} 
+        format.js {head :ok}
       else
-        format.js {head :internal_server_error} 
+        format.js {head :internal_server_error}
       end
     end
   end

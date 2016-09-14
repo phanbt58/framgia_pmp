@@ -5,7 +5,7 @@ class Activity < ActiveRecord::Base
   belongs_to :assignee
   has_one :work_performance
 
-  has_many :log_works
+  has_many :log_works, dependent: :destroy
   after_create :create_log_works, :create_work_performance
 
   scope :of_product_backlog_and_sprint, ->product_backlog_id, sprint_id do
