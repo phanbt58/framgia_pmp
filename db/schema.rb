@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526041630) do
+ActiveRecord::Schema.define(version: 20160915021251) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "product_backlog_id", limit: 4
@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(version: 20160526041630) do
     t.datetime "updated_at",           null: false
   end
 
+  create_table "item_performances", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "log_works", force: :cascade do |t|
     t.integer  "activity_id",      limit: 4
     t.integer  "remaining_time",   limit: 4
@@ -55,6 +62,13 @@ ActiveRecord::Schema.define(version: 20160526041630) do
   end
 
   add_index "master_sprints", ["sprint_id"], name: "index_master_sprints_on_sprint_id", using: :btree
+
+  create_table "phase_items", force: :cascade do |t|
+    t.integer  "phase_id",            limit: 4
+    t.integer  "item_performance_id", limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
   create_table "phases", force: :cascade do |t|
     t.string   "phase_name",  limit: 255
@@ -78,6 +92,13 @@ ActiveRecord::Schema.define(version: 20160526041630) do
 
   add_index "product_backlogs", ["project_id"], name: "index_product_backlogs_on_project_id", using: :btree
   add_index "product_backlogs", ["sprint_id"], name: "index_product_backlogs_on_sprint_id", using: :btree
+
+  create_table "project_phases", force: :cascade do |t|
+    t.integer  "project_id", limit: 4
+    t.integer  "phase_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -146,21 +167,27 @@ ActiveRecord::Schema.define(version: 20160526041630) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "work_performances", force: :cascade do |t|
-    t.integer  "phase_id",        limit: 4
-    t.string   "description",     limit: 255
-    t.integer  "plan",            limit: 4
-    t.integer  "actual",          limit: 4
-    t.integer  "spent_hour",      limit: 4
-    t.integer  "burned_hour",     limit: 4
-    t.integer  "estimated_story", limit: 4
-    t.integer  "burned_story",    limit: 4
-    t.integer  "estimated_task",  limit: 4
-    t.integer  "activity_id",     limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "phase_id",            limit: 4
+    t.string   "description",         limit: 255
+    t.integer  "activity_id",         limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "sprint_id",           limit: 4
+    t.integer  "item_performance_id", limit: 4
+    t.integer  "master_sprint_id",    limit: 4
+    t.integer  "assignee_id",         limit: 4
+    t.float    "performance_value",   limit: 24
   end
 
+  add_index "work_performances", ["assignee_id"], name: "index_work_performances_on_assignee_id", using: :btree
+  add_index "work_performances", ["item_performance_id"], name: "index_work_performances_on_item_performance_id", using: :btree
+  add_index "work_performances", ["master_sprint_id"], name: "index_work_performances_on_master_sprint_id", using: :btree
   add_index "work_performances", ["phase_id"], name: "index_work_performances_on_phase_id", using: :btree
+  add_index "work_performances", ["sprint_id"], name: "index_work_performances_on_sprint_id", using: :btree
 
   add_foreign_key "log_works", "activities"
+  add_foreign_key "work_performances", "assignees"
+  add_foreign_key "work_performances", "item_performances"
+  add_foreign_key "work_performances", "master_sprints"
+  add_foreign_key "work_performances", "sprints"
 end

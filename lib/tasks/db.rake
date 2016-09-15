@@ -8,34 +8,25 @@ namespace :db do
       name: "Chu Anh Tuan"
 
     puts "Creating project"
-    5.times do
-      Fabricate :project, manager_id: user.id
-    end
+    project = Fabricate :project, manager_id: user.id
 
     puts "Creating sprint for each project"
-    Project.all.each do |project|
-      2.times do
-        Fabricate :sprint, project_id: project.id
-      end
+    2.times do
+      Fabricate :sprint, project_id: project.id
     end
 
     puts "Creating product backlog"
-    Project.all.each do |project|
-      5.times do
-        Fabricate :product_backlog, project_id: project.id, sprint_id: Sprint.first.id
-      end
+    5.times do
+      Fabricate :product_backlog, project_id: project.id, sprint_id: Sprint.first.id
     end
 
     puts "Creating member"
     user_hash = {
       "Nguyen Binh Dieu": "nguyen.binh.dieu",
-      "Nguyen Thai Son": "nguyen.thai.son",
-      "Vu Thi Ngoc": "vu.thi.ngoc",
-      "Nguyen Hoang Nam": "nguyen.hoang.nam",
-      "Nguyen Van Hien": "nguyen.van.hien",
-      "Dao Duy Dat": "dao.duy.dat",
-      "Nguyen Dac Truong": "nguyen.dac.truong",
-      "Vu Dinh Hao": "vu.dinh.hao",
+      "Hoang Thi Nhung": "hoang.thi.nhung",
+      "Luu Thi Thom": "luu.thi.thom",
+      "Bui Thi Phan": "bui.thi.phan",
+      "Nguyen Thi Phuong B": "nguyen.thi.phuongb",
     }
     user_hash.each do |key, value|
       user = Fabricate :user, name: key, email: value+"@framgia.com"
@@ -43,7 +34,7 @@ namespace :db do
 
     puts "Add asignee to project 1"
     User.all.each do |user|
-      Fabricate :assignee, user_id: user.id, project_id: Project.first.id,
+      Fabricate :assignee, user_id: user.id, project_id: project.id,
         sprint_id: nil, work_hour: 0
     end
 
@@ -57,9 +48,12 @@ namespace :db do
     end
 
     puts "Creating phase"
-    ["Line of code", "Unit Test", "Integration Test"].each do |phase|
+    ["Design", "Developing", "Testing"].each do |phase|
       Fabricate :phase, phase_name: phase
     end
+
+    puts "Chose phase for project"
+    Fabricate :project_phase, project_id: project.id, phase_id: 2
 
     puts "Creating activities for the first sprint of project 1"
     Sprint.first.assignees.each do |assignee|
@@ -67,8 +61,38 @@ namespace :db do
         product_backlog_id: ProductBacklog.first.id
       start_log_work = 8
       ac.log_works.each do |log_work|
-        log_work.update_attributes remaining_time: start_log_work - 1
-        start_log_work -= 1
+        if start_log_work > 0
+          log_work.update_attributes remaining_time: start_log_work - 1
+          start_log_work -= 1
+        else
+          log_work.update_attributes remaining_time: start_log_work
+        end
+      end
+    end
+
+    puts "Creating item performances"
+    Fabricate :item_performance, name: "Scope"
+    Fabricate :item_performance, name: "Time"
+    Fabricate :item_performance, name: "Cost"
+    Fabricate :item_performance, name: "Quanlity"
+    Fabricate :item_performance, name: "Communications"
+    Fabricate :item_performance, name: "Risk"
+    Fabricate :item_performance, name: "Procurement"
+
+    puts "Add item performances to phase"
+    ItemPerformance.all.each do |item|
+      Fabricate :phase_item, phase_id: 2, item_performance_id: item.id
+    end
+
+    puts "Create work performances value"
+    Activity.all.each do |activity|
+      assignee = project.assignees.sample
+      Sprint.first.master_sprints.each do |day|
+        project.phase_items.each do |item|
+          Fabricate :work_performance, phase_id: 2, sprint_id: 1, master_sprint_id: day.id,
+            assignee_id: assignee.id, activity_id: activity.id, item_performance_id: item.item_performance_id,
+            performance_value: Random.rand(10 .. 30)
+        end
       end
     end
 

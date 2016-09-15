@@ -3,7 +3,7 @@ class Activity < ActiveRecord::Base
   belongs_to :sprint
   belongs_to :user
   belongs_to :assignee
-  has_one :work_performance
+  has_many :work_performances
 
   has_many :log_works, dependent: :destroy
   after_create :create_log_works, :create_work_performance
@@ -13,8 +13,6 @@ class Activity < ActiveRecord::Base
   end
   scope :fitler_log_works, ->sprint{includes(:log_works).where(sprint: sprint)}
 
-  delegate :plan, :actual, :spent_hour, :burned_hour, :estimated_story,
-    :burned_story, :estimated_task, to: :work_performance, prefix: true, allow_nil: true
   delegate :name, to: :user, prefix: true, allow_nil: true
 
   def get_remaining_activity

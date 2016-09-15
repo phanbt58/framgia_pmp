@@ -5,6 +5,9 @@ class Project < ActiveRecord::Base
   has_many :product_backlogs
   has_many :assignees
   has_many :users, through: :assignees
+  has_many :project_phases
+  has_many :phases, through: :project_phases
+  has_many :phase_items, through: :phases
 
   scope :list_by_assignee, ->user do
     joins(:assignees).where assignees: {user_id: user.id}
