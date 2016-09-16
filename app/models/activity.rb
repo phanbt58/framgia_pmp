@@ -6,7 +6,7 @@ class Activity < ActiveRecord::Base
   has_many :work_performances
 
   has_many :log_works, dependent: :destroy
-  after_create :create_log_works, :create_work_performance
+  after_create :create_log_works
 
   scope :of_product_backlog_and_sprint, ->product_backlog_id, sprint_id do
     where product_backlog_id: product_backlog_id, sprint_id: sprint_id
@@ -25,9 +25,5 @@ class Activity < ActiveRecord::Base
       master_sprint.log_works.create remaining_time: 0,
         sprint: sprint, activity: self
     end
-  end
-
-  def create_work_performance
-    WorkPerformance.create activity: self, phase: Phase.first
   end
 end
