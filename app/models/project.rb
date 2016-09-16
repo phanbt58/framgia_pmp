@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
   has_many :project_phases
   has_many :phases, through: :project_phases
   has_many :phase_items, through: :phases
+  has_many :item_performances, through: :phase_items
 
   scope :list_by_assignee, ->user do
     joins(:assignees).where assignees: {user_id: user.id}
