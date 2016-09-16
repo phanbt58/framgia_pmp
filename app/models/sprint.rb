@@ -8,6 +8,9 @@ class Sprint < ActiveRecord::Base
   has_many :activities
   has_many :log_works
   has_many :master_sprints
+  has_many :item_performances, through: :project
+
+  delegate :phases, to: :project, prefix: true, allow_nil: true
 
   validates :name, presence: true
   validates :start_date, presence: true
