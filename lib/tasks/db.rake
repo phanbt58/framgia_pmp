@@ -90,7 +90,7 @@ namespace :db do
       Sprint.first.master_sprints.each do |day|
         project.phase_items.each do |item|
           Fabricate :work_performance, phase_id: 2, sprint_id: 1, master_sprint_id: day.id,
-            assignee_id: assignee.id, activity_id: activity.id, item_performance_id: item.item_performance_id,
+            assignee_id: activity.user_id, activity_id: activity.id, item_performance_id: item.item_performance_id,
             performance_value: Random.rand(10 .. 30)
         end
       end

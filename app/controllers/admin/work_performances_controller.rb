@@ -1,11 +1,12 @@
 class Admin::WorkPerformancesController < ApplicationController
+  include WorkPerformanceHelper
   load_and_authorize_resource
   load_and_authorize_resource :project
   load_and_authorize_resource :sprint
 
   def index
-    @phases = Phase.all
     @activities = @sprint.activities
+    @work_performances = work_performances @sprint, @sprint.users.pluck(:id)
   end
 
   def update
