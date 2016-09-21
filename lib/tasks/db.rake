@@ -75,23 +75,22 @@ namespace :db do
     Fabricate :item_performance, name: "Time"
     Fabricate :item_performance, name: "Cost"
     Fabricate :item_performance, name: "Quanlity"
-    Fabricate :item_performance, name: "Communications"
-    Fabricate :item_performance, name: "Risk"
-    Fabricate :item_performance, name: "Procurement"
 
     puts "Add item performances to phase"
     ItemPerformance.all.each do |item|
-      Fabricate :phase_item, phase_id: 2, item_performance_id: item.id
+      visible = item.id <= 2 ? true : false
+      Fabricate :phase_item, phase_id: 2, item_performance_id: item.id, visible: visible
     end
 
     puts "Create work performances value"
     Activity.all.each do |activity|
       assignee = project.assignees.sample
       Sprint.first.master_sprints.each do |day|
-        project.phase_items.each do |item|
-          Fabricate :work_performance, phase_id: 2, sprint_id: 1, master_sprint_id: day.id,
-            assignee_id: activity.user_id, activity_id: activity.id, item_performance_id: item.item_performance_id,
-            performance_value: Random.rand(10 .. 30)
+        project.phase_items.each do |phase_item|
+          Fabricate :work_performance, phase_id: phase_item.phase_id, sprint_id: 1,
+            master_sprint_id: day.id, assignee_id: activity.user_id,
+            item_performance_id: phase_item.item_performance_id,
+            activity_id: activity.id, performance_value: Random.rand(20 .. 70)
         end
       end
     end

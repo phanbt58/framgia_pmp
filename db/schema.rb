@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915021251) do
+ActiveRecord::Schema.define(version: 20160921061542) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "product_backlog_id", limit: 4
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160915021251) do
     t.integer  "item_performance_id", limit: 4
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.boolean  "visible"
   end
 
   create_table "phases", force: :cascade do |t|
