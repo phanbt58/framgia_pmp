@@ -1,7 +1,8 @@
 <%= render "shared/category_tab", project: @project, active_tab: @sprint.id, f: nil %>
   <div id="wrapper">
     <div class="row">
-      <div id="performance_chart"></div>
+      <div id="performance_chart" data-wpd="<%= @work_performances.to_json %>"></div>
+
       <div id="work-performance-datas">
         <table class="table table-striped tbl-work-performance-datas">
           <thead>
@@ -10,7 +11,7 @@
               <th class="activity"><%= t "table.thead.activity" %></th>
               <th class="assigned"><%= t "table.thead.assigned" %></th>
               <% @sprint.project_phases.each do |phase| %>
-                <th colspan="7" class="phase-name"><%= phase.phase_name %></th>
+                <th colspan="10" class="phase-name"><%= phase.phase_name %></th>
               <% end %>
             </tr>
             <tr>
@@ -18,9 +19,9 @@
               <th class="activity"></th>
               <th class="assigned"></th>
               <% @sprint.project_phases.each do |phase| %>
-                <% @sprint.item_performances.each do |item| %>
-                  <th class="phase-value" title="<%= item.name %>">
-                    <%= item.name %>
+                <% @sprint.master_sprints.each do |day_sprint| %>
+                  <th class="phase-value" title="<%= day_sprint.day %>">
+                    <%= day_sprint.day %>
                   </th>
                 <% end %>
               <% end %>
@@ -28,7 +29,19 @@
           </thead>
           <tbody>
             <% @activities.each_with_index.map do |activity, index| %>
-
+              <tr>
+                <td class="th"><%= index + 1 %></td>
+                <td class="left">
+                  <%= link_to "#{activity.subject}", "#", remote: true %>
+                </td>
+                <td class="assigned"><%= activity.user_name %></td>
+                <% @sprint.project_phases.each do |phase| %>
+                  <% @sprint.master_sprints.each do |day_sprint| %>
+                    <td>
+                    </td>
+                  <% end %>
+                <% end %>
+              </tr>
             <% end %>
           </tbody>
         </table>
