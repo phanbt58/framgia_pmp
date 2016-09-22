@@ -1,5 +1,4 @@
 class WorkPerformancesController < ApplicationController
-  include WorkPerformanceHelper
   load_resource
   load_resource :project
   load_resource :sprint
@@ -7,7 +6,6 @@ class WorkPerformancesController < ApplicationController
   def index
     @sprints = Sprint.list_by_user current_user
     @activities = @sprint.activities
-    @work_performances = work_performances @sprint, @sprint.users.pluck(:id)
   end
 
   def update

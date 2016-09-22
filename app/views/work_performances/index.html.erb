@@ -1,7 +1,9 @@
 <%= render "shared/category_tab", project: @project, active_tab: @sprint.id, f: nil %>
   <div id="wrapper">
     <div class="row">
-      <div id="performance_chart" data-wpd="<%= @work_performances.to_json %>"></div>
+      <div id="performance_chart" data-project="<%= @project.id %>"
+        data-sprint="<%= @sprint.id %>">
+      </div>
 
       <div id="work-performance-datas">
         <table class="table table-striped tbl-work-performance-datas">
