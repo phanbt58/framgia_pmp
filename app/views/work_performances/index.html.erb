@@ -38,6 +38,9 @@
                 <% @sprint.project_phases.each do |phase| %>
                   <% @sprint.master_sprints.each do |day_sprint| %>
                     <td>
+                      <% activity.work_performances.in_day(day_sprint).each do |wpm| %>
+                        <%= wpm.performance_value %> <br>
+                      <% end %>
                     </td>
                   <% end %>
                 <% end %>

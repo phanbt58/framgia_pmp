@@ -29,7 +29,7 @@ function initPerformanceChart(json_data){
       gridLineWidth: 1
     },
     yAxis: {
-      title: {text: 'Estimate time (hour)'},
+      title: {text: 'Value'},
       lineWidth: 1,
       gridLineWidth: 1
     },
