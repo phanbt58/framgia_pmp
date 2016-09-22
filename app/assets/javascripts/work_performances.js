@@ -4,13 +4,12 @@ $(document).ready(function(){
 
 $(document).on('page:change', function (){
   var performance_chart = $('#performance_chart');
-  var json_data = $('#performance_chart').data('wpd');
   if (performance_chart.length > 0){
-    initPerformanceChart(json_data);
+    initPerformanceChart();
   }
 });
 
-function initPerformanceChart(json_data){
+function initPerformanceChart(){
   var options = {
     chart: {
       renderTo: 'performance_chart',
@@ -50,9 +49,14 @@ function initPerformanceChart(json_data){
     series: []
   };
 
-  for (var i in json_data){
-    options.series.push(json_data[i]);
-  }
-  console.log(options.series);
-  var chart = new Highcharts.Chart(options);
+  var project = $('#performance_chart').data('project');
+  var sprint = $('#performance_chart').data('sprint');
+  var url = '/api/projects/'+project+'/sprints/'+sprint+'/work_performances';
+
+  $.getJSON(url, function (data) {
+    for (var i in data){
+      options.series.push(data[i])
+    }
+    var chart = new Highcharts.Chart(options);
+  });
 }

@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :sprints
+    resources :projects do
+      resources :sprints do
+        resources :work_performances, only: [:index]
+      end
+    end
   end
 
   namespace :admin do
