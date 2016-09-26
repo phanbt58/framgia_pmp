@@ -7,7 +7,8 @@ class Api::WorkPerformancesController < Api::BaseController
   load_and_authorize_resource :sprint
 
   def index
-    @work_performances = work_performances @sprint, @sprint.users.pluck(:id)
+    users = params[:users]
+    @work_performances = work_performances @sprint, users
     render json: @work_performances
   end
 end

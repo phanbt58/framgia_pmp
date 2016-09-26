@@ -1,15 +1,36 @@
-$(document).ready(function(){
-  $('.phase-value').tooltip()
-});
-
 $(document).on('page:change', function (){
-  var performance_chart = $('#performance_chart');
-  if (performance_chart.length > 0){
-    initPerformanceChart();
-  }
+  getData();
+  $('.user-select').click(function() {
+    getData();
+  });
 });
 
-function initPerformanceChart(){
+function getData(){
+  var performance_chart = $('#performance_chart');
+
+  var users = [];
+  $('input:checkbox[class=user-select]:checked').each(function() {
+    users.push($(this).val());
+  });
+
+  var project = $('#performance_chart').data('project');
+  var sprint = $('#performance_chart').data('sprint');
+
+  $.ajax({
+    url: '/api/projects/'+project+'/sprints/'+sprint+'/work_performances',
+    data: {
+      users: users
+    },
+    dataType: 'json',
+    success: function(data) {
+      if (performance_chart.length > 0){
+        initPerformanceChart(data);
+      }
+    }
+  });
+}
+
+function initPerformanceChart(data){
   var options = {
     chart: {
       renderTo: 'performance_chart',
@@ -49,14 +70,8 @@ function initPerformanceChart(){
     series: []
   };
 
-  var project = $('#performance_chart').data('project');
-  var sprint = $('#performance_chart').data('sprint');
-  var url = '/api/projects/'+project+'/sprints/'+sprint+'/work_performances';
-
-  $.getJSON(url, function (data) {
     for (var i in data){
       options.series.push(data[i])
     }
     var chart = new Highcharts.Chart(options);
-  });
 }

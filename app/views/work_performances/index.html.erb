@@ -5,6 +5,13 @@
         data-sprint="<%= @sprint.id %>">
       </div>
 
+      <% @sprint.users.each do |user| %>
+
+        <%= check_box_tag "user-select-id-#{user.id}",
+          user.id, true, class: "user-select" %>
+        <%= user.name %>
+      <% end %>
+
       <div id="work-performance-datas">
         <table class="table table-striped tbl-work-performance-datas">
           <thead>
