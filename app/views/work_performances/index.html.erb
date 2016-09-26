@@ -5,6 +5,7 @@
         data-sprint="<%= @sprint.id %>">
       </div>
 
+      <i id="user-reset" class="glyphicon glyphicon-refresh"></i>
       <% @sprint.users.each do |user| %>
 
         <%= check_box_tag "user-select-id-#{user.id}",

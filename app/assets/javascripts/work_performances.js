@@ -1,5 +1,13 @@
 $(document).on('page:change', function (){
   getData();
+
+  $('#user-reset').click(function(){
+    $('input:checkbox[class=user-select]').each(function() {
+      $(this).prop('checked', false);
+    });
+    getData();
+  });
+
   $('.user-select').click(function() {
     getData();
   });
