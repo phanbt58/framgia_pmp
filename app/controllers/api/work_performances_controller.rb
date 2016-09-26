@@ -7,7 +7,7 @@ class Api::WorkPerformancesController < Api::BaseController
   load_and_authorize_resource :sprint
 
   def index
-    users = params[:users]
+    users = params[:users].present? ? params[:users] : ["0"]
     @work_performances = work_performances @sprint, users
     render json: @work_performances
   end
