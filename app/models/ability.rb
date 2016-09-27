@@ -6,6 +6,9 @@ class Ability
     if user.member?
       can [:update], User, id: user.id
       can [:show], User
+      can :read, Project
+      can :read, WorkPerformance
+      can :read, Sprint
     else
       can :manage, Project, manager_id: user.id
       can :manage, Sprint
