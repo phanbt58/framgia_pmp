@@ -8,7 +8,8 @@ class Api::WorkPerformancesController < Api::BaseController
 
   def index
     users = params[:users].present? ? params[:users] : ["0"]
-    @work_performances = work_performances @sprint, users
+
+    @work_performances = work_performances @sprint, users, params[:chart_type]
     render json: @work_performances
   end
 end
