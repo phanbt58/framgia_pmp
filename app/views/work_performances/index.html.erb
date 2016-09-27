@@ -1,10 +1,18 @@
 <%= render "shared/category_tab", project: @project, active_tab: @sprint.id, f: nil %>
   <div id="wrapper">
     <div class="row">
-      <div id="performance_chart" data-project="<%= @project.id %>"
-        data-sprint="<%= @sprint.id %>">
+      <div class="row">
+        <div id="performance_chart" data-project="<%= @project.id %>"
+          data-sprint="<%= @sprint.id %>">
+        </div>
+        <div class="check-box-burnup">
+          <%= radio_button_tag :chart_type, 0, true, class: "type-chart-select" %> None
+          <br>
+          <%= radio_button_tag :chart_type, 1, class: "type-chart-select" %> Burn down chart
+          <br>
+          <%= radio_button_tag :chart_type, 2, class: "type-chart-select" %> Burn up chart
+        </div>
       </div>
-
       <i id="user-reset" class="glyphicon glyphicon-refresh"></i>
       <% @sprint.users.each do |user| %>
 

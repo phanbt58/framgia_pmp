@@ -11,6 +11,9 @@ $(document).on('page:change', function (){
   $('.user-select').click(function() {
     getData();
   });
+  $('.check-box-burnup > input:radio').click(function() {
+    getData();
+  });
 });
 
 function getData(){
@@ -23,11 +26,13 @@ function getData(){
 
   var project = $('#performance_chart').data('project');
   var sprint = $('#performance_chart').data('sprint');
+  var chart_type = $('.check-box-burnup > input:radio:checked').val();
 
   $.ajax({
     url: '/api/projects/'+project+'/sprints/'+sprint+'/work_performances',
     data: {
-      users: users
+      users: users,
+      chart_type: chart_type
     },
     dataType: 'json',
     success: function(data) {
