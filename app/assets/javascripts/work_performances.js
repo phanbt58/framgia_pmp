@@ -11,12 +11,17 @@ $(document).on('page:change', function (){
   $('.user-select').click(function() {
     getData();
   });
+
+  $('#chart_type').click(function() {
+    getData();
+  });
 });
 
 function getData(){
   var performance_chart = $('#performance_chart');
 
   var users = [];
+  var chart_type = $('#chart_type').val();
   $('input:checkbox[class=user-select]:checked').each(function() {
     users.push($(this).val());
   });
@@ -27,7 +32,8 @@ function getData(){
   $.ajax({
     url: '/api/projects/'+project+'/sprints/'+sprint+'/work_performances',
     data: {
-      users: users
+      users: users,
+      chart_type: chart_type
     },
     dataType: 'json',
     success: function(data) {

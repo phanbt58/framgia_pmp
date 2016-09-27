@@ -71,10 +71,10 @@ namespace :db do
     end
 
     puts "Creating item performances"
-    Fabricate :item_performance, name: "Scope"
-    Fabricate :item_performance, name: "Time"
-    Fabricate :item_performance, name: "Cost"
-    Fabricate :item_performance, name: "Quanlity"
+    Fabricate :item_performance, name: "Scope", chart_type: 0
+    Fabricate :item_performance, name: "Time", chart_type: 1
+    Fabricate :item_performance, name: "Cost", chart_type: 1
+    Fabricate :item_performance, name: "Quanlity", chart_type: 0
 
     puts "Add item performances to phase"
     ItemPerformance.all.each do |item|
@@ -85,12 +85,20 @@ namespace :db do
     puts "Create work performances value"
     Activity.all.each do |activity|
       assignee = project.assignees.sample
-      Sprint.first.master_sprints.each do |day|
-        project.phase_items.each do |phase_item|
+      performance_value = Random.rand(30 .. 70)
+      project.phase_items.each do |phase_item|
+
+        Sprint.first.master_sprints.each do |day|
+          if phase_item.item_performance.burn_up?
+            performance_value += Random.rand(3 .. 7)
+          else
+            performance_value -= Random.rand(3 .. 7)
+          end
+
           Fabricate :work_performance, phase_id: phase_item.phase_id, sprint_id: 1,
             master_sprint_id: day.id, assignee_id: activity.user_id,
             item_performance_id: phase_item.item_performance_id,
-            activity_id: activity.id, performance_value: Random.rand(20 .. 70)
+            activity_id: activity.id, performance_value: performance_value
         end
       end
     end
