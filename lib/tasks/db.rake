@@ -75,6 +75,8 @@ namespace :db do
     Fabricate :item_performance, name: "Time", chart_type: 1
     Fabricate :item_performance, name: "Cost", chart_type: 1
     Fabricate :item_performance, name: "Quanlity", chart_type: 0
+    Fabricate :item_performance, name: "Line of code", chart_type: nil
+    Fabricate :item_performance, name: "Test case", chart_type: nil
 
     puts "Add item performances to phase"
     ItemPerformance.all.each do |item|
@@ -91,8 +93,10 @@ namespace :db do
         Sprint.first.master_sprints.each do |day|
           if phase_item.item_performance.burn_up?
             performance_value += Random.rand(3 .. 7)
-          else
+          elsif phase_item.item_performance.burn_down?
             performance_value -= Random.rand(3 .. 7)
+          else
+            performance_value = Random.rand(30 .. 70)
           end
 
           Fabricate :work_performance, phase_id: phase_item.phase_id, sprint_id: 1,

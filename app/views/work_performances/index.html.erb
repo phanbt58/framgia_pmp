@@ -1,21 +1,27 @@
 <%= render "shared/category_tab", project: @project, active_tab: @sprint.id, f: nil %>
   <div id="wrapper">
     <div class="row">
-      <%= select_tag :chart_type,
-        options_for_select(ItemPerformance.chart_types.map {|k, v| [k.humanize.capitalize, k]}) %>
-
-      <div id="performance_chart" data-project="<%= @project.id %>"
-        data-sprint="<%= @sprint.id %>">
+      <div class="row">
+        <div id="performance_chart" data-project="<%= @project.id %>"
+          data-sprint="<%= @sprint.id %>">
+        </div>
+        <div class="chart-type">
+          <i id="user-reset" class="glyphicon glyphicon-refresh"></i><br><br>
+          <% ItemPerformance.chart_types.each do |key, value| %>
+            <%= radio_button_tag "chart_type", value, class: "chart_type_radio" %>
+            <%= key.humanize.capitalize %>
+            <br>
+          <% end %>
+          <%= radio_button_tag "chart_type", "", class: "chart_type_radio" %>
+          <%= t "item_performances.showall" %><br>
+          <br>
+          <% @sprint.users.each do |user| %>
+            <%= check_box_tag "user-select-id-#{user.id}",
+              user.id, true, class: "user-select" %>
+            <%= user.name %><br>
+          <% end %>
+        </div>
       </div>
-
-      <i id="user-reset" class="glyphicon glyphicon-refresh"></i>
-      <% @sprint.users.each do |user| %>
-
-        <%= check_box_tag "user-select-id-#{user.id}",
-          user.id, true, class: "user-select" %>
-        <%= user.name %>
-      <% end %>
-
       <div id="work-performance-datas">
         <table class="table table-striped tbl-work-performance-datas">
           <thead>

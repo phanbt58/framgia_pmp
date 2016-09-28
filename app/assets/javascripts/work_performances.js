@@ -12,7 +12,7 @@ $(document).on('page:change', function (){
     getData();
   });
 
-  $('#chart_type').click(function() {
+  $('.chart-type > input:radio').click(function() {
     getData();
   });
 });
@@ -21,7 +21,7 @@ function getData(){
   var performance_chart = $('#performance_chart');
 
   var users = [];
-  var chart_type = $('#chart_type').val();
+  var chart_type = $('.chart-type > input:radio:checked').val();
   $('input:checkbox[class=user-select]:checked').each(function() {
     users.push($(this).val());
   });
@@ -48,8 +48,8 @@ function initPerformanceChart(data){
   var options = {
     chart: {
       renderTo: 'performance_chart',
-      height: 400,
-      width: 650,
+      height: 350,
+      width: 600,
       borderWidth: 1
     },
     title: {

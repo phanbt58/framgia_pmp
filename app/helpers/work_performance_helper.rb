@@ -1,11 +1,10 @@
 module WorkPerformanceHelper
   def work_performances sprint, user_ids, chart_type
     performances_array = []
-    sprint.item_performances.each do |item|
-      if item.chart_type == chart_type
+    (chart_type.blank? ? sprint.item_performances : sprint.item_performances
+      .list_by_chart_type(chart_type)).each do |item|
         item_data = user_performance(sprint, user_ids, item)
         performances_array << item_data
-      end
     end
     return performances_array
   end
