@@ -3,7 +3,7 @@ class ProductBacklogsController < ApplicationController
   load_resource :project
 
   def index
-    @sprints = Sprint.list_by_user current_user
+    @sprints = @project.sprints
     @product_backlogs = @project.product_backlogs
   end
 
@@ -22,7 +22,7 @@ class ProductBacklogsController < ApplicationController
   end
 
   def create
-    @sprints = Sprint.list_by_user current_user
+    @sprints = @project.sprints
     @product_backlog = @project.product_backlogs.build
     if @product_backlog.save
       @row_number = @project.product_backlogs.size.pred
