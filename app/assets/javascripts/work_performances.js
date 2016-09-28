@@ -29,19 +29,21 @@ function getData(){
   var project = $('#performance_chart').data('project');
   var sprint = $('#performance_chart').data('sprint');
 
-  $.ajax({
-    url: '/api/projects/'+project+'/sprints/'+sprint+'/work_performances',
-    data: {
-      users: users,
-      chart_type: chart_type
-    },
-    dataType: 'json',
-    success: function(data) {
-      if (performance_chart.length > 0){
-        initPerformanceChart(data);
+  if(project && sprint){
+    $.ajax({
+      url: '/api/projects/'+project+'/sprints/'+sprint+'/work_performances',
+      data: {
+        users: users,
+        chart_type: chart_type
+      },
+      dataType: 'json',
+      success: function(data) {
+        if (performance_chart.length > 0){
+          initPerformanceChart(data);
+        }
       }
-    }
-  });
+    });
+  }
 }
 
 function initPerformanceChart(data){

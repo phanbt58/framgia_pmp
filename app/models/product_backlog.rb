@@ -25,7 +25,7 @@ class ProductBacklog < ActiveRecord::Base
   end
 
   def calculate_actual_time
-    actual_time = total_estimation_time - total_remaining_time
+    actual_time = total_estimation_time
     self.update_attributes actual: actual_time
     actual_time
   end

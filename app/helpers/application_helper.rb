@@ -32,12 +32,12 @@ module ApplicationHelper
   end
 
   def product_backlog_class product_backlog
-    estimate_time = product_backlog.total_estimation_time
+    actual_time = product_backlog.actual
     remaining_time = product_backlog.total_remaining_time
-    if (remaining_time == 0 && estimate_time == 0) || remaining_time.nil?
+    if (remaining_time == 0 && actual_time == 0) || remaining_time.nil?
       "default"
     else
-      (remaining_time == 0 && estimate_time !=0) ? "finished" : "in_progress"
+      (remaining_time == 0 && actual_time !=0) ? "finished" : "in_progress"
     end
   end
 
