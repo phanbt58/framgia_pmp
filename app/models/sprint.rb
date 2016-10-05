@@ -10,7 +10,7 @@ class Sprint < ActiveRecord::Base
   has_many :master_sprints
   has_many :item_performances, through: :project
   has_many :phase_items, through: :project
-  has_many :work_performances
+  has_many :work_performances, dependent: :destroy
 
   delegate :phases, to: :project, prefix: true, allow_nil: true
 

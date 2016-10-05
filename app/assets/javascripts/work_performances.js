@@ -15,7 +15,65 @@ $(document).on('page:change', function (){
   $('.chart-type > input:radio').click(function() {
     getData();
   });
+
+  $('#dialog').on('shown.bs.modal', function(){
+    submitWorkPerformanceInput();
+  });
 });
+
+function submitWorkPerformanceInput(){
+  checkWorkPerformances();
+  $('#work_performance_master_sprint_id, #work_performance_activity_id').on('change', function(){
+    checkWorkPerformances();
+  });
+
+  $('form#form-input-wpd').submit(function(e){
+    e.preventDefault();
+    var url = $(this).attr('action');
+    var data = $(this).serializeArray();
+    console.log(data);
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: data,
+      dataType: 'json',
+      success: function(result){
+        $('#dialog').modal('hide');
+        getData();
+      }
+    });
+  });
+}
+
+function checkWorkPerformances(){
+  var master_sprint_id = $('#work_performance_master_sprint_id').val();
+  var activity_id = $('#work_performance_activity_id').val();
+  var sprint_id = $('#work_performances__sprint_id').val();
+  if (master_sprint_id && activity_id && sprint_id){
+    $.ajax({
+      url: '/ajax/work_performances',
+      type: 'POST',
+      data: {
+        master_sprint_id: master_sprint_id,
+        activity_id: activity_id,
+        sprint_id: sprint_id
+      },
+      dataType: 'json',
+      success: function(result){
+        if (result.existed == 'false'){
+          $('input#work_performances__performance_value').val('');
+        }
+        else{
+          $('input#work_performances__performance_value').val('');
+          for (var i in result.wpds){
+            var id = result.wpds[i].item_performance_id;
+            $('#wpd-input-'+id).find('input#work_performances__performance_value').val(result.wpds[i].performance_value);
+          }
+        }
+      }
+    });
+  }
+}
 
 function getData(){
   var performance_chart = $('#performance_chart');

@@ -41,6 +41,9 @@ en:
   work_performances:
     view: "Work performance data"
     update: "Update"
+    save: "Save"
+    submitwpd: "Submit WPD"
+    dialog_title: "Input Work Performance Data"
   item_performances:
     showall: "All items"
   sprints:

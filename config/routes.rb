@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :projects, only: [:index, :show] do
     resources :product_backlogs
     resources :sprints, only: [:show, :update] do
-      resources :work_performances, except: [:new, :create]
+      resources :work_performances
     end
   end
 
@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   end
 
   resource :update_product_backlogs
+  post "ajax/work_performances", to: "work_performances#update"
 
   resources :synchronizes, only: [:index, :create]
   resources :users, except: [:new, :create]
