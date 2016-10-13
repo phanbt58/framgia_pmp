@@ -27,6 +27,7 @@ namespace :db do
       "Luu Thi Thom": "luu.thi.thom",
       "Bui Thi Phan": "bui.thi.phan",
       "Nguyen Thi Phuong B": "nguyen.thi.phuongb",
+      "Bui Van Duong": "bui.van.duong"
     }
     user_hash.each do |key, value|
       user = Fabricate :user, name: key, email: value+"@framgia.com"
@@ -87,20 +88,20 @@ namespace :db do
     puts "Create work performances value"
     Activity.all.each do |activity|
       assignee = project.assignees.sample
-      performance_value = Random.rand(30 .. 70)
+      performance_value = Random.rand(50 .. 70)
       project.phase_items.each do |phase_item|
 
         Sprint.first.master_sprints.each do |day|
           if phase_item.item_performance.burn_up?
-            performance_value += Random.rand(3 .. 7)
+            performance_value += Random.rand(3 .. 6)
           elsif phase_item.item_performance.burn_down?
-            performance_value -= Random.rand(3 .. 7)
+            performance_value -= Random.rand(3 .. 6)
           else
             performance_value = Random.rand(30 .. 70)
           end
 
           Fabricate :work_performance, phase_id: phase_item.phase_id, sprint_id: 1,
-            master_sprint_id: day.id, assignee_id: activity.user_id,
+            master_sprint_id: day.id, user_id: activity.user_id,
             item_performance_id: phase_item.item_performance_id,
             activity_id: activity.id, performance_value: performance_value
         end
