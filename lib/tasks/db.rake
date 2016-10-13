@@ -81,8 +81,7 @@ namespace :db do
 
     puts "Add item performances to phase"
     ItemPerformance.all.each do |item|
-      visible = item.id <= 2 ? true : false
-      Fabricate :phase_item, phase_id: 2, item_performance_id: item.id, visible: visible
+      Fabricate :phase_item, phase_id: 2, item_performance_id: item.id, visible: true
     end
 
     puts "Create work performances value"
@@ -96,6 +95,7 @@ namespace :db do
             performance_value += Random.rand(3 .. 6)
           elsif phase_item.item_performance.burn_down?
             performance_value -= Random.rand(3 .. 6)
+            performance_value = performance_value >= 0 ? performance_value : 0
           else
             performance_value = Random.rand(30 .. 70)
           end
