@@ -41,7 +41,7 @@ $(document).on("page:change", function() {
     return false;
   });
 
-  $("#product_backlog_form").on("change", "input, select", function(){
+  $("#save-product-backlog").on("click", function(){
     $("#notify-message").text(I18n.t("product_backlogs.saving"));
     $.ajax({
       type: "PATCH",
@@ -49,12 +49,17 @@ $(document).on("page:change", function() {
       data: $("#product_backlog_form").serialize(),
       dataType: "json",
       success: function(data) {
+        $('#save-product-backlog').addClass("disabled");
         $("#notify-message").text(I18n.t("product_backlogs.saved")).css("color", "green");
       },
       error: function(data) {
         $("#notify-message").text(I18n.t("product_backlogs.failed")).css("color", "red");
         }
     });
+  });
+
+  $("#product_backlog_form").on("change", "input, select", function(){
+    $('#save-product-backlog').removeClass("disabled");
   });
 });
 
