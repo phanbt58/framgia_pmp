@@ -1,10 +1,4 @@
 <div class="container" id="product_backlogs">
-  <div id="product_backlog">
-    <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus",
-      project_id: @project.id), project_product_backlogs_path({project_id: @project.id}),
-      class: "btn btn-xs btn-primary pull-left", id: "add-more-row",
-      type: "button",  title: t("activities.add_more_row") %>
-  </div>
   <div class="product_backlog">
     <%= form_for :product_backlog, html: {id: "product_backlog_form"}  do |f| %>
       <table class="table table-bordered" id="product_backlogs">
@@ -30,6 +24,16 @@
         </tbody>
       </table>
     <% end %>
+    <div id="product-backlogs">
+      <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus",
+        project_id: @project.id), project_product_backlogs_path({project_id: @project.id}),
+        class: "btn btn-primary", id: "add-more-row",
+        type: "button",  title: t("activities.add_more_row") %>
+      <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-floppy-disk",
+        project_id: @project.id), project_product_backlogs_path({project_id: @project.id}),
+        class: "disabled btn btn-primary", id: "save-product-backlog",
+        type: "button",  title: t("activities.add_more_row") %>
+    </div>
     <br>
     <div class="clearfix"></div>
     <div class="row">
