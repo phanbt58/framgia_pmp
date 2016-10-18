@@ -9,15 +9,11 @@ class WorkPerformancesController < ApplicationController
   end
 
   def new
-    @work_performances = []
-    @sprint.item_performances.each do |item|
-      @work_performances << item.work_performances.build
-    end
     render partial: "work_performances/form"
   end
 
   def create
-    @work_performances = InputWorkPerformanceData.new(@sprint, @current_user, params)
+    @work_performances = InputWorkPerformanceData.new(@sprint, params)
       .submit_work_performances
     respond_to do |format|
       format.json {render json: @work_performances}
@@ -25,8 +21,8 @@ class WorkPerformancesController < ApplicationController
   end
 
   def update
-    if params[:master_sprint_id] && params[:activity_id]
-      @work_performances = CheckWorkPerformanceExisted.new(@sprint, @current_user, params)
+    if params[:master_sprint_id] && params[:activity_id] && params[:user_id]
+      @work_performances = CheckWorkPerformanceExisted.new(@sprint, params)
         .check_WPD_if_existed
       respond_to do |format|
         if @work_performances.any?
@@ -40,6 +36,6 @@ class WorkPerformancesController < ApplicationController
 
   private
   def work_performance_params
-    params.permit WorkPerformance::ATTRIBUTES_PARAMS
+    params.require(:work_performance).permit WorkPerformance::ATTRIBUTES_PARAMS
   end
 end

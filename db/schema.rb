@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018020448) do
+ActiveRecord::Schema.define(version: 20161018071855) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "product_backlog_id", limit: 4
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20161018020448) do
   add_index "work_performances", ["item_performance_id"], name: "index_work_performances_on_item_performance_id", using: :btree
   add_index "work_performances", ["master_sprint_id"], name: "index_work_performances_on_master_sprint_id", using: :btree
   add_index "work_performances", ["phase_id"], name: "index_work_performances_on_phase_id", using: :btree
+  add_index "work_performances", ["sprint_id", "user_id", "activity_id", "master_sprint_id"], name: "work_perormance_index", unique: true, using: :btree
   add_index "work_performances", ["sprint_id"], name: "index_work_performances_on_sprint_id", using: :btree
   add_index "work_performances", ["user_id"], name: "index_work_performances_on_user_id", using: :btree
 

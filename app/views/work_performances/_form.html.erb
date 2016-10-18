@@ -7,39 +7,40 @@
   </h3>
 </div>
 <div class="modal-body">
-  <%= form_for [@project, @sprint, @work_performance], html: {id: "form-input-wpd"} do |f| %>
+  <%= form_for [@project, @sprint, @work_performance], html: {id: "form-input-wpd",
+    data: {project: @project.id}} do |f| %>
     <div id="error_explanation" class="bg-danger text-danger">
     </div>
     <div class="row">
-      <div class="col-sm-6">
-        <label><%= t "work_performances.day" %></label><br>
-        <%= f.select :master_sprint_id,
-          @sprint.master_sprints.collect {|day| [day.date.to_s(:long), day.id]},
-          {selected: @sprint.master_sprints.in_today.first.id},
-          {class: "form-control"} %>
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <%= f.hidden_field :sprint_id, value: @sprint.id %>
+        <label><%= t "work_performances.user_name" %></label><br>
+        <%= f.select :user_id, @sprint.users.collect {|user| [user.name, user.id]},
+          {}, {class: "form-control"} %>
         <br>
         <%= f.label :activity %><br>
         <%= f.select :activity_id,
-          Activity.of_user_in_sprint(current_user, @sprint)
-          .collect {|a| [a.subject, a.id]}, {}, {class: "form-control"} %>
+          @sprint.activities.collect {|a| [a.subject, a.id]}, {}, {class: "form-control"} %>
         <br>
-      </div>
-      <div class="col-sm-6">
-        <% @work_performances.each do |work_performance| %>
-          <%= fields_for "work_performances[]", work_performance do |wpd| %>
-            <div id="wpd-input-<%= work_performance.item_performance_id %>">
-              <%= wpd.hidden_field :user_id, value: current_user.id %>
-              <%= wpd.hidden_field :sprint_id, value: @sprint.id %>
-              <%= wpd.hidden_field :item_performance_id, value: work_performance.item_performance_id %>
-              <label><%= work_performance.item_performance_name %></label>
-              <%= wpd.number_field :performance_value, min: 0.0, class: "form-control" %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      <hr>
-      <div class="form-group submit_update">
-        <%= f.submit t("work_performances.save"), class: "btn btn-primary" %>
+        <label><%= t "work_performances.day" %></label><br>
+        <%= f.select :master_sprint_id,
+          @sprint.master_sprints.collect {|day| [("Day "+day.day.to_s+" - "+day.date.to_s(:long)), day.id]},
+          {selected: @sprint.master_sprints.in_today.first.id},
+          {class: "form-control"} %>
+        <br>
+        <label><%= t "work_performances.item_name" %></label><br>
+        <%= f.select :item_performance_id,
+          @sprint.item_performances.collect {|item| [item.name, item.id]},
+          {}, {class: "form-control"} %>
+        <br>
+        <label><%= t "work_performances.value" %></label><br>
+        <%= f.number_field :performance_value, min: 0, class: "form-control" %>
+        <br>
+        <hr>
+        <div class="form-group submit_update">
+          <%= f.submit t("work_performances.save"), class: "btn btn-primary" %>
+        </div>
       </div>
     </div>
   <% end %>

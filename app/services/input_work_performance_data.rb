@@ -1,45 +1,43 @@
 class InputWorkPerformanceData
 
-  def initialize sprint, user, params
+  def initialize sprint, params
     @sprint = sprint
-    @user = user
     @params = params
+    @master_sprint_id = params[:work_performance][:master_sprint_id]
+    @activity_id = params[:work_performance][:activity_id]
+    @user_id = params[:work_performance][:user_id]
+    @item_id = params[:work_performance][:item_performance_id]
   end
 
   def submit_work_performances
-    if @params[:work_performance][:master_sprint_id] && @params[:work_performance][:activity_id]
-      master_sprint = MasterSprint.find_by id: @params[:work_performance][:master_sprint_id]
-      activity = Activity.find_by id: @params[:work_performance][:activity_id]
-      work_performances = @sprint.work_performances.of_activity_in_day(@user.id,
-        master_sprint, activity)
-      work_performances.any? ? update_work_performances : create_work_performances
-    end
+    work_performances = @sprint.work_performances.of_activity_in_day(@user_id,
+        @master_sprint_id, @activity_id)
+    work_performances.any? ? update_work_performances : create_work_performances
   end
 
   private
   def create_work_performances
-    work_performances = @params[:work_performances].map do |wpd|
-      WorkPerformance.new wpd.merge(@params[:work_performance])
-        .permit WorkPerformance::ATTRIBUTES_PARAMS
+    if @activity_id
+      work_performance = WorkPerformance.new work_performance_params
+      work_performance.save
     end
-    work_performances.map!(&:save)
   end
 
   def update_work_performances
-    @params[:work_performances].map do |wpd|
-      unless wpd[:performance_value].blank?
-        work_performance = @sprint.work_performances.of_user_in_day_by_item(@user,
-          @params[:work_performance][:activity_id], @params[:work_performance][:master_sprint_id],
-          wpd[:item_performance_id])
+    if @activity_id
+      unless @params[:work_performance][:performance_value].blank?
+        work_performance = @sprint.work_performances.of_activity_in_day(@user_id,
+        @master_sprint_id, @activity_id)
         if work_performance.blank?
-          WorkPerformance.create wpd.merge(@params[:work_performance])
-            .permit WorkPerformance::ATTRIBUTES_PARAMS
+          WorkPerformance.create work_performance_params
         else
-          work_performance.first.update_attributes activity_id: @params[:work_performance][:activity_id],
-            master_sprint_id: @params[:work_performance][:master_sprint_id],
-            performance_value: wpd[:performance_value]
+          work_performance.first.update_attributes work_performance_params
         end
       end
     end
+  end
+
+  def work_performance_params
+    @params.require(:work_performance).permit WorkPerformance::ATTRIBUTES_PARAMS
   end
 end
