@@ -30,10 +30,6 @@
   text-decoration: none;
 }
 
-.container {
-  margin-right: 10px;
-}
-
 .wrapper {
   margin: 30px;
   .error_explanation {
@@ -180,4 +176,10 @@ textarea {
 
 .submit_update {
   margin-left: 15px;
+}
+
+@media (min-width: 1200px){
+  .container {
+    width: 90%;
+  }
 }

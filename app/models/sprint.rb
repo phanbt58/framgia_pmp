@@ -26,7 +26,7 @@ class Sprint < ActiveRecord::Base
     assignees_attributes: [:id, :work_hour],
     master_sprints_attributes: [:id, :date, :day]]
 
-  after_create :build_master_sprint
+  after_create :build_master_sprint, :create_default_tasks
 
   scope :list_by_user, ->user do
     joins(:assignees).where assignees: {user_id: user.id}
@@ -72,5 +72,11 @@ class Sprint < ActiveRecord::Base
 
   def destroy_time_logs user
     user.assignees.find_by(sprint_id: self.id).time_logs.destroy_all
+  end
+
+  def create_default_tasks
+    10.times do |i|
+      Activity.create(sprint_id: self.id)
+    end
   end
 end
