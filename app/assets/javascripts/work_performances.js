@@ -22,8 +22,12 @@ $(document).on('page:change', function (){
 });
 
 function submitWorkPerformanceInput(){
-  checkWorkPerformances();
-  $('#work_performance_master_sprint_id, #work_performance_activity_id').on('change', function(){
+  getActivitiesOfUser();
+  $('#work_performance_user_id').on('change', function(){
+    getActivitiesOfUser();
+  });
+  $('#work_performance_master_sprint_id,#work_performance_activity_id')
+    .on('change', function(){
     checkWorkPerformances();
   });
 
@@ -45,34 +49,65 @@ function submitWorkPerformanceInput(){
   });
 }
 
+function getActivitiesOfUser(){
+  var user_id = $('#work_performance_user_id').val();
+  var sprint_id = $('#work_performance_sprint_id').val();
+  var project_id = $('form#form-input-wpd').data('project');
+  if (sprint_id && project_id){
+    $.ajax({
+      url: '/api/projects/'+project_id+'/sprints/'+sprint_id+'/activities',
+      dataType: 'json',
+      data: {
+        user_id: user_id
+      },
+      success: function(result){
+        fill_up_activity_select(result.activities);
+      }
+    });
+  }
+}
+
 function checkWorkPerformances(){
   var master_sprint_id = $('#work_performance_master_sprint_id').val();
   var activity_id = $('#work_performance_activity_id').val();
-  var sprint_id = $('#work_performances__sprint_id').val();
-  if (master_sprint_id && activity_id && sprint_id){
+  var user_id = $('#work_performance_user_id').val();
+  var item_id = $('#work_performance_item_performance_id').val();
+  var sprint_id = $('#work_performance_sprint_id').val();
+  if (sprint_id){
     $.ajax({
       url: '/ajax/work_performances',
       type: 'POST',
       data: {
         master_sprint_id: master_sprint_id,
         activity_id: activity_id,
+        user_id: user_id,
+        item_performance_id: item_id,
         sprint_id: sprint_id
       },
       dataType: 'json',
       success: function(result){
         if (result.existed == 'false'){
-          $('input#work_performances__performance_value').val('');
+          $('#work_performance_performance_value').val('');
         }
         else{
-          $('input#work_performances__performance_value').val('');
-          for (var i in result.wpds){
-            var id = result.wpds[i].item_performance_id;
-            $('#wpd-input-'+id).find('input#work_performances__performance_value').val(result.wpds[i].performance_value);
-          }
+          $('#work_performance_performance_value').val('');
+          $('#work_performance_performance_value').val(result.wpds[0].performance_value);
+          $('#work_performance_item_performance_id').val(result.wpds[0].item_performance_id);
         }
       }
     });
   }
+}
+
+function fill_up_activity_select(activities){
+  $('select#work_performance_activity_id').empty();
+  if (activities.length > 0){
+    for (var i in activities){
+      $('#work_performance_activity_id').append('<option value="'+activities[i].id
+        +'">'+activities[i].subject+'</option>');
+    }
+  }
+  checkWorkPerformances();
 }
 
 function getData(){

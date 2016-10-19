@@ -44,6 +44,10 @@ en:
     save: "Save"
     submitwpd: "Submit WPD"
     dialog_title: "Input Work Performance Data"
+    user_name: "Member"
+    day: "Day"
+    item_name: "Item"
+    value: "Value"
   item_performances:
     showall: "All items"
   sprints:

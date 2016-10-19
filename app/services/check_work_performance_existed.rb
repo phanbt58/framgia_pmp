@@ -1,8 +1,7 @@
 class CheckWorkPerformanceExisted
 
-  def initialize sprint, user, params
+  def initialize sprint, params
     @sprint = sprint
-    @user = user
     @params = params
   end
 
@@ -13,10 +12,11 @@ class CheckWorkPerformanceExisted
   private
   def check_WPD_existed
     if @params[:master_sprint_id] && @params[:activity_id]
-      master_sprint = MasterSprint.find_by id: @params[:master_sprint_id]
-      activity = Activity.find_by id: @params[:activity_id]
-      work_performances = @sprint.work_performances.of_activity_in_day(@user.id,
-        master_sprint, activity)
+      master_sprint_id = @params[:master_sprint_id]
+      activity_id = @params[:activity_id]
+      user_id = @params[:user_id]
+      work_performances = @sprint.work_performances.of_activity_in_day(user_id,
+        master_sprint_id, activity_id)
     end
     work_performances
   end
