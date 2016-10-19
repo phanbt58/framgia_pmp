@@ -1,4 +1,6 @@
 $(document).on('page:change', function() {
+  $('#sprint-with-wpd-tab a:first').tab('show');
+
   setSprintHeight();
 
   $(window).resize(function() {

@@ -71,10 +71,6 @@
                       method: :delete, data: {confirm: t("projects.delete.confirm")} %>
                   </li>
                 <% end %>
-                <li>
-                  <%= link_to t("work_performances.view"),
-                    project_sprint_work_performances_path(@project, @sprint) %>
-                </li>
               </ul>
             </li>
           <% elsif @sprint.nil? && @sprints.nil? %>
