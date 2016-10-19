@@ -1,9 +1,5 @@
-<td>
-  <i class="fa fa-trash delete_icon delete-activity" aria-hidden="true"
-    data-project-id="<%= @project.id %>"
-    data-activity-id="<%= @activity.id %>"
-    data-sprint-id="<%= @sprint.id %>">
-  </i>
+<td class="index" data-task="<%= @activity.id %>">
+  <div class="text-center"><%= @row_number + 1 %></div>
 </td>
 <td class="story">
   <%= select_tag "sprint[activities_attributes][#{@row_number}][product_backlog_id]",

@@ -16,6 +16,7 @@ class Activity < ActiveRecord::Base
   scope :of_user_in_sprint, ->(user_id, sprint){where user_id: user_id, sprint_id: sprint.id}
 
   delegate :name, to: :user, prefix: true, allow_nil: true
+  delegate :story, to: :product_backlog, prefix: true, allow_nil: true
 
   def get_remaining_activity
     self.log_works.any? ? self.log_works.pluck(:remaining_time).min : 0

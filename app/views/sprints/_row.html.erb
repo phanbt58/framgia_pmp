@@ -1,17 +1,14 @@
-<tr class="activity_<%= activity_builder.object.id %> <%= type %>">
-  <td>
+<tr class="activity_<%= activity_builder.object.id %> <%= type %>"
+  id="activity_<%= activity_builder.object.id %>">
+  <td class="index" data-task="<%= activity_builder.object.id %>">
     <div class="text-center"><%= row + 1 %></div>
-<!--     <i class="fa fa-trash delete_icon delete-activity" aria-hidden="true"
-      data-project-id="<%= @project.id %>"
-      data-activity-id="<%= activity_builder.object.id %>"
-      data-sprint-id="<%= activity_builder.object.sprint.id %>">
-    </i> -->
   </td>
   <td class="story">
     <%= activity_builder.select :product_backlog_id,
       options_for_select(@product_backlogs.collect {|p| [p.story_id + "-"+ p.story, p.id]},
       activity_builder.object.product_backlog_id),
-      {include_blank: true}, class: "row-#{row}" %>
+      {include_blank: true}, class: "user-story row-#{row}",
+      title: "#{activity_builder.object.product_backlog_story}" %>
   </td>
   <td class="task-id text-center"><%= activity_builder.text_field :task_id,
     class: "row-#{row}" %></td>
