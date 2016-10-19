@@ -25,3 +25,12 @@ rect {
 #notify-message {
   margin-right: 10px;
 }
+
+.nav-tabs {
+  height: 35px;
+  background: rgb(255, 254, 241);
+  li > a {
+    height: 30px;
+    margin-top: 5px;
+  }
+}

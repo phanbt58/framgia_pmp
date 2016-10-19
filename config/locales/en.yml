@@ -39,7 +39,7 @@ en:
     start_date: "Start date"
     end_date: "End date"
   work_performances:
-    view: "Work performance data"
+    view: "Work Performances Data"
     update: "Update"
     save: "Save"
     submitwpd: "Submit WPD"
@@ -51,6 +51,7 @@ en:
   item_performances:
     showall: "All items"
   sprints:
+    sprint: "Sprint"
     title: "List Sprint"
     new: "New Sprint"
     name: "Name"
