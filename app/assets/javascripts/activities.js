@@ -185,26 +185,26 @@ $(document).on('page:change', function(){
   $('.first_day').change(resetStartDate);
 });
 
-$(document).on("click", "#add-more-column", function(e){
-  lastest_date = new Date($(".newest_master_sprint").last().val());
+$(document).on('click', '#add-more-column', function(e){
+  lastest_date = new Date($('.newest_master_sprint').last().val());
   lastest_date.setDate(lastest_date.getDate() + 1)
-  sprint_id = $("#sprint_id").val();
+  sprint_id = $('#sprint_id').val();
   $.ajax({
-    type: "POST",
-    url: "/columns/",
+    type: 'POST',
+    url: '/columns/',
     data: {master_sprint: {sprint_id: sprint_id, date: lastest_date}},
     success: function(){}
   })
 })
 
 $(document).on('click', '#delete-activity', function(e){
-  var activity_id = $('#delete-activity').data('activity');
+  var task_id = $('#delete-activity').data('activity');
   var deleteButton = $(this);
 
   $.ajax({
       type: 'DELETE',
-      url:  '/rows/' + activity_id,
-      data: {activity_id: activity_id},
+      url:  '/rows/' + task_id,
+      data: {task_id: task_id},
       dataType: 'json',
       success: function() {
         deleteButton.closest('tr').remove();

@@ -22,8 +22,8 @@ module SprintHelper
     TimeLog.find_by(assignee: assignee, master_sprint: master_sprint)
   end
 
-  def get_log_work_by_activity_master_sprint activity, master_sprint
-    LogWork.find_by(activity: activity, master_sprint: master_sprint)
+  def get_log_work_by_activity_master_sprint task, master_sprint
+    LogWork.find_by(task: task, master_sprint: master_sprint)
   end
 
   def get_master_sprint_id

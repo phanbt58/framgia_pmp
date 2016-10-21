@@ -1,12 +1,12 @@
 <td class="panel-left master-column-<%= @master_sprint.id %>">
-  <input value="<%= activity.id %>" type="hidden"
-    name="sprint[log_works_attributes][<%= @total_time_log - row %>][activity_id]"
+  <input value="<%= task.id %>" type="hidden"
+    name="sprint[log_works_attributes][<%= @total_time_log - row %>][task_id]"
     id="sprint_log_works_attributes_<%= @total_time_log - row %>_activity_id">
-  <input value="<%= get_log_work_by_activity_master_sprint(activity, @master_sprint).id %>" type="hidden"
+  <input value="<%= get_log_work_by_activity_master_sprint(task, @master_sprint).id %>" type="hidden"
     name="sprint[log_works_attributes][<%= @total_time_log - row %>][id]"
     id="sprint_log_works_attributes_<%= @total_time_log - row %>_id">
   <input class="log log-<%= @master_sprint.day %> row-<%= row %> text-center"
-    value="<%= activity.log_works.reload.last.remaining_time %>"
+    value="<%= task.log_works.reload.last.remaining_time %>"
     name="sprint[log_works_attributes][<%= @total_time_log - row %>][remaining_time]"
     id="sprint_log_works_attributes_<%= @total_time_log - row %>_remaining_time">
 </td>

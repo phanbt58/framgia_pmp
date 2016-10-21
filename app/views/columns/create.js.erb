@@ -1,6 +1,6 @@
-<% @activities.each_with_index do |activity, row| %>
-  $('tr.activity_<%= activity.id %>').append('<%= j render "log_work_cell", activity: activity, row: row %>')
-  setLastTimeLogValue("<%= activity.id %>");
+<% @tasks.each_with_index do |task, row| %>
+  $('tr.activity_<%= task.id %>').append('<%= j render "log_work_cell", task: task, row: row %>')
+  setLastTimeLogValue("<%= task.id %>");
 <% end %>
 
 <% ["master-data-date", "master-sprint-working-day", "master-estimate-plan", "actual"].each do |header_class| %>
@@ -28,9 +28,9 @@ $("#sprints").animate({
   scrollLeft: $(".activities-panel").width()
 }, "fast");
 
-function setLastTimeLogValue(activity_id) {
-  var value = $($('tr.activity_' + activity_id + ' td').eq(-2)).children().last().val();
-  $($('tr.activity_' + activity_id + ' td')).last().children().last().val(value);
+function setLastTimeLogValue(task_id) {
+  var value = $($('tr.activity_' + task_id + ' td').eq(-2)).children().last().val();
+  $($('tr.activity_' + task_id + ' td')).last().children().last().val(value);
 }
 
 function setLastActual() {

@@ -28,13 +28,13 @@
             </tr>
           </thead>
           <tbody>
-            <% @activities.each_with_index.map do |activity, index| %>
+            <% @tasks.each_with_index.map do |task, index| %>
               <tr>
                 <td class="th"><%= index + 1 %></td>
                 <td class="left">
-                  <%= link_to "#{activity.subject}", "#", remote: true %>
+                  <%= link_to "#{task.subject}", "#", remote: true %>
                 </td>
-                <td class="assigned"><%= activity.user_name %></td>
+                <td class="assigned"><%= task.user_name %></td>
                 <% @sprint.project_phases.each do |phase| %>
                   <% @sprint.master_sprints.each do |day_sprint| %>
                     <td>

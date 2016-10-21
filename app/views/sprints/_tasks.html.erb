@@ -13,7 +13,7 @@
       <table id="activities" class="table table-bordered" >
         <tbody>
           <%= render "header", f: f %>
-          <%= f.fields_for :activities, @sprint.activities do |activity_builder| %>
+          <%= f.fields_for :tasks, @sprint.tasks do |activity_builder| %>
             <%= render "row", activity_builder: activity_builder,
               row: activity_builder.index,
               type: activity_class(activity_builder.object), f: f %>

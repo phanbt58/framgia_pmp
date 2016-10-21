@@ -4,7 +4,7 @@ class ColumnsController < ApplicationController
 
     if @master_sprint.save
       @sprint = @master_sprint.sprint
-      @activities = @sprint.activities
+      @tasks = @sprint.tasks
       @assignees = @sprint.assignees
       @total_lost_hour = @sprint.time_logs.size
       @total_time_log = @sprint.log_works.size
