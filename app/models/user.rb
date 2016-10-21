@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :reset_token
   has_many :assignees
-  has_many :activities
+  has_many :tasks
   has_many :projects, foreign_key: :manager_id
   has_many :sprints, through: :assignees
   devise :database_authenticatable, :registerable, :recoverable,

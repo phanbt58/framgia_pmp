@@ -16,9 +16,9 @@ class MasterSprint < ActiveRecord::Base
       assignee.time_logs.create master_sprint: self, sprint: sprint
     end
 
-    sprint.activities.each do |activity|
-      activity.log_works.create master_sprint: self,
-        remaining_time: activity.log_works.last.remaining_time, sprint: sprint
+    sprint.tasks.each do |task|
+      task.log_works.create master_sprint: self,
+        remaining_time: task.log_works.last.remaining_time, sprint: sprint
     end
   end
 

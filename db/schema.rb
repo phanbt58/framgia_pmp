@@ -11,20 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018071855) do
-
-  create_table "activities", force: :cascade do |t|
-    t.integer  "product_backlog_id", limit: 4
-    t.string   "subject",            limit: 255
-    t.string   "description",        limit: 255
-    t.integer  "spent_time",         limit: 4
-    t.integer  "estimate",           limit: 4
-    t.integer  "user_id",            limit: 4
-    t.string   "task_id",            limit: 255
-    t.integer  "sprint_id",          limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-  end
+ActiveRecord::Schema.define(version: 20161021044225) do
 
   create_table "assignees", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -44,17 +31,17 @@ ActiveRecord::Schema.define(version: 20161018071855) do
   end
 
   create_table "log_works", force: :cascade do |t|
-    t.integer  "activity_id",      limit: 4
     t.integer  "remaining_time",   limit: 4
     t.integer  "sprint_id",        limit: 4
     t.integer  "master_sprint_id", limit: 4
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "task_id",          limit: 4
   end
 
-  add_index "log_works", ["activity_id"], name: "index_log_works_on_activity_id", using: :btree
   add_index "log_works", ["master_sprint_id"], name: "index_log_works_on_master_sprint_id", using: :btree
   add_index "log_works", ["sprint_id"], name: "index_log_works_on_sprint_id", using: :btree
+  add_index "log_works", ["task_id"], name: "index_log_works_on_task_id", using: :btree
 
   create_table "master_sprints", force: :cascade do |t|
     t.integer "day",       limit: 4
@@ -135,6 +122,19 @@ ActiveRecord::Schema.define(version: 20161018071855) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.integer  "product_backlog_id", limit: 4
+    t.integer  "sprint_id",          limit: 4
+    t.string   "task_id",            limit: 255
+    t.integer  "user_id",            limit: 4
+    t.integer  "estimate",           limit: 4
+    t.integer  "spent_time",         limit: 4
+    t.string   "description",        limit: 255
+    t.string   "subject",            limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
   create_table "time_logs", force: :cascade do |t|
     t.integer  "assignee_id",      limit: 4
     t.integer  "sprint_id",        limit: 4
@@ -172,7 +172,6 @@ ActiveRecord::Schema.define(version: 20161018071855) do
   create_table "work_performances", force: :cascade do |t|
     t.integer  "phase_id",            limit: 4
     t.string   "description",         limit: 255
-    t.integer  "activity_id",         limit: 4
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.integer  "sprint_id",           limit: 4
@@ -180,16 +179,17 @@ ActiveRecord::Schema.define(version: 20161018071855) do
     t.integer  "master_sprint_id",    limit: 4
     t.float    "performance_value",   limit: 24
     t.integer  "user_id",             limit: 4
+    t.integer  "task_id",             limit: 4
   end
 
   add_index "work_performances", ["item_performance_id"], name: "index_work_performances_on_item_performance_id", using: :btree
   add_index "work_performances", ["master_sprint_id"], name: "index_work_performances_on_master_sprint_id", using: :btree
   add_index "work_performances", ["phase_id"], name: "index_work_performances_on_phase_id", using: :btree
-  add_index "work_performances", ["sprint_id", "user_id", "activity_id", "master_sprint_id"], name: "work_perormance_index", unique: true, using: :btree
+  add_index "work_performances", ["sprint_id", "user_id", "task_id", "master_sprint_id"], name: "work_perormance_index", unique: true, using: :btree
   add_index "work_performances", ["sprint_id"], name: "index_work_performances_on_sprint_id", using: :btree
   add_index "work_performances", ["user_id"], name: "index_work_performances_on_user_id", using: :btree
 
-  add_foreign_key "log_works", "activities"
+  add_foreign_key "log_works", "tasks"
   add_foreign_key "work_performances", "item_performances"
   add_foreign_key "work_performances", "master_sprints"
   add_foreign_key "work_performances", "sprints"

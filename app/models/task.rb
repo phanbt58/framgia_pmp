@@ -1,4 +1,4 @@
-class Activity < ActiveRecord::Base
+class Task < ActiveRecord::Base
   belongs_to :product_backlog
   belongs_to :sprint
   belongs_to :user
@@ -26,7 +26,7 @@ class Activity < ActiveRecord::Base
   def create_log_works
     self.sprint.master_sprints.each do |master_sprint|
       master_sprint.log_works.create remaining_time: 0,
-        sprint: sprint, activity: self
+        sprint: sprint, task: self
     end
   end
 end

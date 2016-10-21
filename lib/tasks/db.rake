@@ -56,9 +56,9 @@ namespace :db do
     puts "Chose phase for project"
     Fabricate :project_phase, project_id: project.id, phase_id: 2
 
-    puts "Creating activities for the first sprint of project 1"
+    puts "Creating tasks for the first sprint of project 1"
     Sprint.first.assignees.each do |assignee|
-      ac = Fabricate :activity, user_id: assignee.user.id, sprint_id: Sprint.first.id,
+      ac = Fabricate :task, user_id: assignee.user.id, sprint_id: Sprint.first.id,
         product_backlog_id: ProductBacklog.first.id
       start_log_work = 8
       ac.log_works.each do |log_work|
@@ -85,25 +85,27 @@ namespace :db do
     end
 
     puts "Create work performances value"
-    Activity.all.each do |activity|
-      assignee = project.assignees.sample
-      performance_value = Random.rand(50 .. 70)
-      phase_item = project.phase_items.sample
+    Task.all.each do |task|
+      if task.user_id
+        assignee = project.assignees.sample
+        performance_value = Random.rand(50 .. 70)
+        phase_item = project.phase_items.sample
 
-      Sprint.first.master_sprints.each do |day|
-        if phase_item.item_performance.burn_up?
-          performance_value += Random.rand(3 .. 6)
-        elsif phase_item.item_performance.burn_down?
-          performance_value -= Random.rand(3 .. 6)
-          performance_value = performance_value >= 0 ? performance_value : 0
-        else
-          performance_value = Random.rand(30 .. 70)
+        Sprint.first.master_sprints.each do |day|
+          if phase_item.item_performance.burn_up?
+            performance_value += Random.rand(3 .. 6)
+          elsif phase_item.item_performance.burn_down?
+            performance_value -= Random.rand(3 .. 6)
+            performance_value = performance_value >= 0 ? performance_value : 0
+          else
+            performance_value = Random.rand(30 .. 70)
+          end
+
+          Fabricate :work_performance, phase_id: phase_item.phase_id, sprint_id: 1,
+            master_sprint_id: day.id, user_id: task.user_id,
+            item_performance_id: phase_item.item_performance_id,
+            task_id: task.id, performance_value: performance_value
         end
-
-        Fabricate :work_performance, phase_id: phase_item.phase_id, sprint_id: 1,
-          master_sprint_id: day.id, user_id: activity.user_id,
-          item_performance_id: phase_item.item_performance_id,
-          activity_id: activity.id, performance_value: performance_value
       end
     end
 
