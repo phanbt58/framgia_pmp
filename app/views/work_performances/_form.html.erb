@@ -19,9 +19,9 @@
         <%= f.select :user_id, @sprint.users.collect {|user| [user.name, user.id]},
           {}, {class: "form-control"} %>
         <br>
-        <%= f.label :activity %><br>
-        <%= f.select :activity_id,
-          @sprint.activities.collect {|a| [a.subject, a.id]}, {}, {class: "form-control"} %>
+        <%= f.label :task %><br>
+        <%= f.select :task_id,
+          @sprint.tasks.collect {|a| [a.subject, a.id]}, {}, {class: "form-control"} %>
         <br>
         <label><%= t "work_performances.day" %></label><br>
         <%= f.select :master_sprint_id,

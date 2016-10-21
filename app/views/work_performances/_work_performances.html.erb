@@ -9,7 +9,7 @@
           new_project_sprint_work_performance_path(@project, @sprint),
           class: "btn btn-primary", id: "create-work-performance", type: "button",
           data: {project: @project.id, sprint: @sprint.id,
-          toggle: "modal", target: "#dialog"} %>
+          toggle: "modal", target: "#wpd-dialog"} %>
 
         <i id="user-reset" class="glyphicon glyphicon-refresh"></i><br><br>
         <% ItemPerformance.chart_types.each do |key, value| %>

@@ -5,7 +5,7 @@ class WorkPerformancesController < ApplicationController
 
   def index
     @sprints = Sprint.list_by_user current_user
-    @activities = @sprint.activities
+    @tasks = @sprint.tasks
   end
 
   def new
@@ -21,7 +21,7 @@ class WorkPerformancesController < ApplicationController
   end
 
   def update
-    if params[:master_sprint_id] && params[:activity_id] && params[:user_id]
+    if params[:master_sprint_id] && params[:task_id] && params[:user_id]
       @work_performances = CheckWorkPerformanceExisted.new(@sprint, params)
         .check_WPD_if_existed
       respond_to do |format|
