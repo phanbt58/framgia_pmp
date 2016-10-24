@@ -197,23 +197,21 @@ $(document).on("click", "#add-more-column", function(e){
   })
 })
 
-$(document).on("click", ".delete-activity", function(e){
-  var activity_id = $(this).data("activity-id");
-  var project_id = $(this).data("project-id");
-  var sprint_id = $(this).data("sprint-id");
+$(document).on('click', '#delete-activity', function(e){
+  var activity_id = $('#delete-activity').data('activity');
   var deleteButton = $(this);
 
   $.ajax({
-      type: "DELETE",
-      url:  "/rows/" + activity_id,
+      type: 'DELETE',
+      url:  '/rows/' + activity_id,
       data: {activity_id: activity_id},
-      dataType: "json",
+      dataType: 'json',
       success: function() {
-        deleteButton.closest("tr").remove();
-        $("#notify-message").text(I18n.t("product_backlogs.delete.success")).css("color", "green");
+        deleteButton.closest('tr').remove();
+        $('#notify-message').text(I18n.t('product_backlogs.delete.success')).css('color', 'green');
       },
       error: function(){
-        $("#notify-message").text(I18n.t("product_backlogs.delete.failed")).css("color", "red");
+        $('#notify-message').text(I18n.t('product_backlogs.delete.failed')).css('color', 'red');
       }
     });
 });

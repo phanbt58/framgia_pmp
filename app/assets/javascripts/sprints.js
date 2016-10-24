@@ -91,18 +91,49 @@ $(document).on('page:change', function() {
     $(".scroll").hide();
   }
 
-  $("#right, #left").click(function() {
-    var dir = this.id == "right" ? "+=" : "-=" ;
-    $("#scroll").animate({scrollLeft: dir + "300"}, 500);
+  $('#right, #left').click(function() {
+    var dir = this.id == 'right' ? '+=' : '-=' ;
+    $('#scroll').animate({scrollLeft: dir + '300'}, 500);
   });
+
 })
 
-$(document).ready(function(){
-  $(".subject-activity").tooltip();
+function initDialog(event, task_id){
+  if ($('#dialog') !== null)
+      $('#dialog').remove();
+  $.ajax({
+    url: '/rows/' + task_id,
+    success: function(data){
+      $('#activity_'+task_id).append(data);
+      $left = event.pageX + 'px';
+      $top = event.pageY + 'px';
+
+      $('#dialog').css({'left': $left,'top': $top});
+      $('#dialog').removeClass('dialog-hidden');
+      $('#dialog').addClass('dialog-visible');
+    }
+  });
+}
+
+$(document).on('contextmenu', 'td.index', function(e){
+  var task = $(this).data('task');
+  initDialog(e, task);
+  return false;
 });
 
-$(document).on("keyup", ".task-name", function(event) {
+$(document).mousedown(function(e) {
+  if (($(e.target).is('#delete-activity') === false)) {
+    $('#dialog').remove();
+  }
+});
+
+$(document).ready(function(){
+  $('.subject-activity').tooltip();
+  $('.user-story').tooltip();
+});
+
+$(document).on('keyup', '.task-name', function(event) {
   if(event.which == 13) {
-    $("#add-more-row").click();
+    $('#add-more-row').click();
   }
 });

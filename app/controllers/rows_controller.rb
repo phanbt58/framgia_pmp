@@ -17,6 +17,20 @@ class RowsController < ApplicationController
     end
   end
 
+  def show
+    @activity = Activity.find params[:id]
+    if @activity.present?
+      respond_to do |format|
+        format.html {
+          render partial: "sprints/dialog",
+            locals: {
+              activity: @activity
+            }
+        }
+      end
+    end
+  end
+
   def destroy
     @activity = Activity.find params[:activity_id]
     if @activity.destroy

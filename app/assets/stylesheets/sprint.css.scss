@@ -35,3 +35,39 @@ rect {
     margin-top: 5px;
   }
 }
+
+td.index {
+  &:hover{
+    cursor: default;
+  }
+}
+
+.dialog{
+  position:absolute;
+  background-color: white;
+  padding: 10px;
+  z-index:10;
+  width:172px;
+  height:102px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.dialog-visible {
+  visibility: visible;
+  z-index: 1011;
+}
+
+.dialog-hidden {
+  visibility: hidden;
+  top: 0;
+}
+
+.delete-activity {
+  padding: 5px;
+  margin: 0 -10px;
+  &:hover{
+    background-color: #EEEEEE;
+    cursor:pointer;
+  }
+}

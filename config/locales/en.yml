@@ -182,6 +182,7 @@ en:
     saving: "Saving..."
   delete:
       confirm: "Are you sure?"
+      task: "Detele task"
   users:
     stt: "STT"
     name: "Name"
