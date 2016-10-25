@@ -2,32 +2,32 @@
   <div class="text-center"><%= @row_number + 1 %></div>
 </td>
 <td class="story">
-  <%= select_tag "sprint[activities_attributes][#{@row_number}][product_backlog_id]",
-    options_for_select(@product_backlogs.collect {|p| [p.story, p.id]}),
+  <%= select_tag "sprint[tasks_attributes][#{@row_number}][product_backlog_id]",
+    options_for_select(@product_backlogs.collect {|p| [p.story_id + "-"+ p.story, p.id]}),
     {include_blank: true,
-    id: "sprint_activities_attributes_#{@row_number}_product_backlog_id",
+    id: "sprint_tasks_attributes_#{@row_number}_product_backlog_id",
     class: "row-#{@row_number}"} %>
 </td>
 <td class="task-id text-center">
   <input class="row-<%= @row_number %>" type="text" value=""
-    name="sprint[activities_attributes][<%= @row_number %>][task_id]"
+    name="sprint[tasks_attributes][<%= @row_number %>][task_id]"
     id="sprint_activities_attributes_<%= @row_number %>_task_id" />
   <input class="row-<%= @row_number %>" type="hidden"
-    name="sprint[activities_attributes][<%= @row_number %>][id]"
-    id="sprint_activities_attributes_<%= @row_number %>_id"
+    name="sprint[tasks_attributes][<%= @row_number %>][id]"
+    id="sprint_tasks_attributes_<%= @row_number %>_id"
     value="<%= @task.id %>" />
 </td>
 <td class="task-name text-left">
   <input class="row-<%= @row_number %> subject-activity" type="text"
     title="<%= @task.subject %>" value=""
-    name="sprint[activities_attributes][<%= @row_number %>][subject]"
-    id="sprint_activities_attributes_<%= @row_number %>_subject">
+    name="sprint[tasks_attributes][<%= @row_number %>][subject]"
+    id="sprint_tasks_attributes_<%= @row_number %>_subject">
 </td>
 <td>
-  <%= select_tag "sprint[activities_attributes][#{@row_number}][user_id]",
+  <%= select_tag "sprint[tasks_attributes][#{@row_number}][user_id]",
     options_for_select(@assignees.collect {|assignee|
       [assignee.user_name, assignee.user_id]}),
       {include_blank: true,
         class: "row-#{@row_number} assignee",
-        id: "sprint_activities_attributes_#{@row_number}_user_id"} %>
+        id: "sprint_tasks_attributes_#{@row_number}_user_id"} %>
 </td>

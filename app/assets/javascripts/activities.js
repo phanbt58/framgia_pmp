@@ -200,7 +200,7 @@ $(document).on('click', '#add-more-column', function(e){
 $(document).on('click', '#delete-activity', function(e){
   var task_id = $('#delete-activity').data('activity');
   var deleteButton = $(this);
-
+  var row_index = parseInt(deleteButton.closest('tr').attr('data-row-index'));
   $.ajax({
       type: 'DELETE',
       url:  '/rows/' + task_id,
@@ -208,6 +208,8 @@ $(document).on('click', '#delete-activity', function(e){
       dataType: 'json',
       success: function() {
         deleteButton.closest('tr').remove();
+        $('input#sprint_tasks_attributes_'+row_index+'_id').remove();
+        resetTaskIndex(row_index);
         $('#notify-message').text(I18n.t('product_backlogs.delete.success')).css('color', 'green');
       },
       error: function(){
@@ -215,3 +217,15 @@ $(document).on('click', '#delete-activity', function(e){
       }
     });
 });
+
+function resetTaskIndex(row_index){
+  $('table#activities tr').each(function(){
+    var index = parseInt($(this).attr('data-row-index'));
+    if (index > row_index){
+      var new_index = index - 1;
+      $(this).attr('data-row-index', new_index);
+      $(this).find('td.index > .text-center').html(index);
+      $('input#sprint_tasks_attributes_'+index+'_id').attr('id', 'sprint_tasks_attributes_'+new_index+'_id');
+    }
+  });
+}
