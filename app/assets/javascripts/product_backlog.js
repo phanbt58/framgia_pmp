@@ -7,12 +7,13 @@ $(document).on("click", ".delete-product-backlog", function(e){
       dataType: "json",
       success: function() {
         $("#backlog-row-"+ product_backlog_id).remove();
+        change_style_table();
         $("#notify-message").text(I18n.t("product_backlogs.delete.success")).css("color", "green");
       },
       error: function(){
         $("#notify-message").text(I18n.t("product_backlogs.delete.failed")).css("color", "red");
       }
-    });
+  });
 });
 
 $(document).ready(function(){
@@ -20,7 +21,38 @@ $(document).ready(function(){
   $(".product-backlog-category").tooltip();
 });
 
+function table_scroll_resize(){
+  var $table = $('.product_backlog_table_scroll');
+  var $bodyCells = $table.find('tbody tr:first').children(), colWidth;
+  $(window).resize(function() {
+    colWidth = $bodyCells.map(function() {
+      return $(this).css('width');
+    }).get();
+
+    $table.find('thead tr').children().each(function(i, v) {
+      $(v).css('width',colWidth[i]);
+    });
+  }).resize();
+}
+function change_style_table(){
+  length = $('.product_backlog_table_scroll tbody').children().length;
+  row_height = $('.product_backlog_table_scroll tbody').children().first().height();
+  height_tbody=length*row_height;
+  if(height_tbody<350){
+    $('.product_backlog_table_scroll tbody').height(height_tbody+1);
+  }else{
+    $('.body-product-backlog').height(350);
+  }
+}
+
+$(document).on("ready page:load", function() {
+  table_scroll_resize();
+  change_style_table();
+});
+
 $(document).on("page:change", function() {
+  table_scroll_resize();
+  change_style_table();
   $("#product_backlogs").on("click", "#add-more-row", function(e){
     var project_id = $(this).find("span").attr("project_id");
     var url = $(this).attr("href");
@@ -33,6 +65,7 @@ $(document).on("page:change", function() {
         var row_number = result.row_number;
         $("table#product_backlogs tbody").append(result.content);
         $(".product-backlog-category-" + row_number).focus();
+        change_style_table();
       },
       error: function(){
         $("#notify-message").text(I18n.t("product_backlogs.delete.failed")).css("color", "red");

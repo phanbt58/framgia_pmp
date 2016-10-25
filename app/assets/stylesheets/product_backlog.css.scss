@@ -33,12 +33,13 @@
     margin: 0;
     min-width: 40px;
     color: #fff;
+    border: none;
   }
 
   td {
     margin: 0;
     padding: 0 5px;
-    border-color: #F3F3F3;
+    border-color: rgba(221, 221, 221, 0.62);
     input, select {
       padding-top: 5px;
       display: block;
@@ -67,49 +68,66 @@
     padding-left: 0px;
   }
 }
+.product_backlog_table_scroll {
+  border-spacing: 0;
+
+  tbody, thead {
+    display: block;
+  }
+
+  thead {
+    background: #628db6;
+  }
+
+  tbody {
+    height: 350px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
 
 #product_backlog {
   padding-left: 0px;
 }
 
-#tbl-product-backlog {
+.product_backlog_table_scroll tbody tr {
   .id {
-    width: 5%;
+    width: 5% !important;
   }
 
   .story-id {
-    width: 5%;
+    width: 9% !important;
   }
 
   .category {
-    width: 15%;
+    width: 11% !important;
   }
 
   .story {
-    width: 40%;
+    width: 18% !important;
   }
 
   .sprint {
-    width: 10%;
+    width: 12% !important;
   }
 
   .priority {
-    width: 5%;
+    width: 7% !important;
   }
 
   .estimate {
-    width: 5%;
+    width: 8% !important;
   }
 
   .actual {
-    width: 5%;
+    width: 7% !important;
   }
 
   .remaining {
-    width: 5%;
+    width: 10% !important;
   }
 
   .action {
-    width: 5%;
+    width: 5% !important;
   }
 }
