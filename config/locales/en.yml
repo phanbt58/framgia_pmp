@@ -120,7 +120,7 @@ en:
       phase_not_create: "Don't create phase, phase name already exits"
   table:
     thead:
-      activity: "Activity"
+      activity: "Task"
       assigned: "Assigned for"
       plan: "P"
       actual: "A"
@@ -172,7 +172,7 @@ en:
     remaining: "R"
     start_date: "Start Date"
     date: "Date"
-    add: "Add Activity"
+    add: "Add Task"
     add_more_row: "Add more rows"
     add_more_column: "Add more columns"
   lost_hour:

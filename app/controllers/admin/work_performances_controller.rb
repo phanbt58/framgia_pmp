@@ -4,7 +4,7 @@ class Admin::WorkPerformancesController < ApplicationController
   load_and_authorize_resource :sprint
 
   def index
-    @activities = @sprint.activities
+    @tasks = @sprint.tasks
   end
 
   def update

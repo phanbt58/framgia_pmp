@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :projects do
       resources :sprints do
         resources :work_performances, only: [:index]
-        resources :activities, only: [:index]
+        resources :tasks, only: [:index]
       end
     end
   end

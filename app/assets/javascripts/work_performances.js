@@ -16,7 +16,7 @@ $(document).on('page:change', function (){
     getData();
   });
 
-  $('#dialog').on('shown.bs.modal', function(){
+  $('#wpd-dialog').on('shown.bs.modal', function(){
     submitWorkPerformanceInput();
   });
 });
@@ -26,7 +26,7 @@ function submitWorkPerformanceInput(){
   $('#work_performance_user_id').on('change', function(){
     getActivitiesOfUser();
   });
-  $('#work_performance_master_sprint_id,#work_performance_activity_id')
+  $('#work_performance_master_sprint_id,#work_performance_task_id')
     .on('change', function(){
     checkWorkPerformances();
   });
@@ -42,7 +42,7 @@ function submitWorkPerformanceInput(){
       data: data,
       dataType: 'json',
       success: function(result){
-        $('#dialog').modal('hide');
+        $('#wpd-dialog').modal('hide');
         getData();
       }
     });
@@ -55,13 +55,13 @@ function getActivitiesOfUser(){
   var project_id = $('form#form-input-wpd').data('project');
   if (sprint_id && project_id){
     $.ajax({
-      url: '/api/projects/'+project_id+'/sprints/'+sprint_id+'/activities',
+      url: '/api/projects/'+project_id+'/sprints/'+sprint_id+'/tasks',
       dataType: 'json',
       data: {
         user_id: user_id
       },
       success: function(result){
-        fill_up_activity_select(result.activities);
+        fill_up_task_select(result.tasks);
       }
     });
   }
@@ -69,7 +69,7 @@ function getActivitiesOfUser(){
 
 function checkWorkPerformances(){
   var master_sprint_id = $('#work_performance_master_sprint_id').val();
-  var activity_id = $('#work_performance_activity_id').val();
+  var task_id = $('#work_performance_task_id').val();
   var user_id = $('#work_performance_user_id').val();
   var item_id = $('#work_performance_item_performance_id').val();
   var sprint_id = $('#work_performance_sprint_id').val();
@@ -79,7 +79,7 @@ function checkWorkPerformances(){
       type: 'POST',
       data: {
         master_sprint_id: master_sprint_id,
-        activity_id: activity_id,
+        task_id: task_id,
         user_id: user_id,
         item_performance_id: item_id,
         sprint_id: sprint_id
@@ -99,12 +99,12 @@ function checkWorkPerformances(){
   }
 }
 
-function fill_up_activity_select(activities){
-  $('select#work_performance_activity_id').empty();
-  if (activities.length > 0){
-    for (var i in activities){
-      $('#work_performance_activity_id').append('<option value="'+activities[i].id
-        +'">'+activities[i].subject+'</option>');
+function fill_up_task_select(tasks){
+  $('select#work_performance_task_id').empty();
+  if (tasks.length > 0){
+    for (var i in tasks){
+      $('#work_performance_task_id').append('<option value="'+tasks[i].id
+        +'">'+tasks[i].subject+'</option>');
     }
   }
   checkWorkPerformances();
