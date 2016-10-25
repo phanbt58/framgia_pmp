@@ -18,11 +18,11 @@ module ApplicationHelper
     end
   end
 
-  def activity_class activity
-    assignee = activity.user
-    log_works = activity.log_works
+  def activity_class task
+    assignee = task.user
+    log_works = task.log_works
     estimate = log_works.any? ? log_works.first.remaining_time : 0
-    remaining = activity.log_works.empty? ? 0 : activity.log_works.last.remaining_time
+    remaining = task.log_works.empty? ? 0 : task.log_works.last.remaining_time
 
     if assignee.nil?
       estimate != 0 ? (remaining != 0 ? "estimated" : "default") : "default"

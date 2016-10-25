@@ -11,7 +11,7 @@ class LogWork < ActiveRecord::Base
       .of_product_backlog_and_sprint(product_backlog.id, sprint.id).map do |task|
       task.log_works.first.remaining_time
     end.sum rescue 0
-    product_backlog.update_attributes actual: actual_time
+    product_backlog.update_attributes actual: actual_time if product_backlog
   end
 
   def update_remaining_time
@@ -20,6 +20,6 @@ class LogWork < ActiveRecord::Base
       .of_product_backlog_and_sprint(product_backlog.id, sprint.id).map do |task|
       task.log_works.last.remaining_time
     end.sum rescue 0
-    product_backlog.update_attributes remaining: remaining
+    product_backlog.update_attributes remaining: remaining if product_backlog
   end
 end

@@ -1,13 +1,13 @@
 class RowsController < ApplicationController
   def create
     @sprint = Sprint.find_by id: params[:sprint_id]
-    @activity = @sprint.activities.build
+    @task = @sprint.tasks.build
     @product_backlogs = @sprint.project.product_backlogs
     @project = Project.find_by id: @sprint.project_id
 
-    if @activity.save
+    if @task.save
       @assignees = @sprint.assignees
-      @row_number = @sprint.activities.size - 1
+      @row_number = @sprint.tasks.size - 1
       @master_sprints = @sprint.master_sprints.order(day: :asc)
       @log_work_count = @sprint.log_works.size
     end
@@ -18,13 +18,13 @@ class RowsController < ApplicationController
   end
 
   def show
-    @activity = Activity.find params[:id]
-    if @activity.present?
+    @task = Task.find params[:id]
+    if @task.present?
       respond_to do |format|
         format.html {
           render partial: "sprints/dialog",
             locals: {
-              activity: @activity
+              task: @task
             }
         }
       end
@@ -32,8 +32,8 @@ class RowsController < ApplicationController
   end
 
   def destroy
-    @activity = Activity.find params[:activity_id]
-    if @activity.destroy
+    @task = Task.find params[:task_id]
+    if @task.destroy
       respond_to do |format|
         format.html {redirect_to project_sprint_path(@project)}
         format.json {head :no_content}

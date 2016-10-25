@@ -4,12 +4,12 @@
 
 <% @master_sprints.each_with_index do |master_sprint, index| %>
   <td class="panel-left master-column-<%= master_sprint.id %>">
-    <input value="<%= @activity.id %>" type="hidden"
-      name="sprint[log_works_attributes][<%= @log_work_count - index %>][activity_id]"
+    <input value="<%= @task.id %>" type="hidden"
+      name="sprint[log_works_attributes][<%= @log_work_count - index %>][task_id]"
       id="sprint_log_works_attributes_<%= @log_work_count - index  %>_activity_id"/>
     <input type="hidden" name="sprint[log_works_attributes][<%= @log_work_count - index %>][id]"
       id="sprint_log_works_attributes_<%= @log_work_count - index %>_id"
-      value="<%= get_log_work_by_activity_master_sprint(@activity, master_sprint).id %>"/>
+      value="<%= get_log_work_by_activity_master_sprint(@task, master_sprint).id %>"/>
     <input class="log log-<%= master_sprint.day %> row-<%= @row_number %> text-center"
       name="sprint[log_works_attributes][<%= @log_work_count - index %>][remaining_time]"
       id="sprint_log_works_attributes_<%= @log_work_count - index %>_remaining_time"
