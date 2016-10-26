@@ -1,6 +1,7 @@
 $(document).on("click", ".delete-product-backlog", function(e){
   var product_backlog_id = $(this).data("product-backlog-id");
   var project_id = $(this).data("project-id");
+  var row_index = parseInt($('tr#backlog-row-'+product_backlog_id).attr('data-productbacklog-index'));
   $.ajax({
       type: "DELETE",
       url:  "/projects/" + project_id + "/product_backlogs/" + product_backlog_id,
@@ -8,6 +9,7 @@ $(document).on("click", ".delete-product-backlog", function(e){
       success: function() {
         $("#backlog-row-"+ product_backlog_id).remove();
         change_style_table();
+        resetProductbacklogIndex(row_index);
         $("#notify-message").text(I18n.t("product_backlogs.delete.success")).css("color", "green");
       },
       error: function(){
@@ -20,6 +22,19 @@ $(document).ready(function(){
   $(".product-backlog-story").tooltip();
   $(".product-backlog-category").tooltip();
 });
+
+function resetProductbacklogIndex(row_index){
+  $('table.product_backlog_table_scroll tr').each(function(){
+    var index = parseInt($(this).attr('data-productbacklog-index'));
+    var product_backlog_id = $(this).data('product-backlog-id');
+    if (index > row_index){
+      $(this).attr('data-productbacklog-index', index - 1);
+      $(this).find('td.id').html(index+'<input type="hidden" name="product_backlogs['+
+        product_backlog_id+'][id]" id="product_backlogs_'+product_backlog_id+'_id" value="'+
+        product_backlog_id+'">');
+    }
+  });
+}
 
 function table_scroll_resize(){
   var $table = $('.product_backlog_table_scroll');

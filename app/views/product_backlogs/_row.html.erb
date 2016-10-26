@@ -1,8 +1,13 @@
-<tr id="backlog-row-<%= @product_backlog.id %>">
+<tr id="backlog-row-<%= @product_backlog.id %>" data-productbacklog-index="<%= @row_number %>"
+  data-product-backlog-id="<%= @product_backlog.id %>">
   <td class="id"><%= @row_number+ 1 %></td>
   <%= hidden_field_tag "product_backlogs[#{@product_backlog.id}][id]",
     @product_backlog.id %>
-  <td class="story-id"><%= @product_backlog.story_id %></td>
+  <td class="story-id">
+    <%= text_field_tag "product_backlogs[#{@product_backlog.id}][story_id]",
+      @product_backlog.story_id, title: "#{@product_backlog.story_id}",
+      class: "product-backlog-story" %>
+  </td>
   <td class="category"><%= text_field_tag "product_backlogs[#{@product_backlog.id}][category]",
     @product_backlog.category,
     title: "#{@product_backlog.category}", class: "product-backlog-category-#{@row_number}" %></td>

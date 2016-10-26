@@ -1,6 +1,6 @@
-<tr id="backlog-row-<%= product_backlog.id %>" class="<%= type %>">
-  <td class="id">
-    <%= index + 1 %>
+<tr id="backlog-row-<%= product_backlog.id %>" class="<%= type %>"
+  data-productbacklog-index="<%= index %>" data-product-backlog-id="<%= product_backlog.id %>">
+  <td class="id"><%= index + 1 %>
     <%= hidden_field_tag "product_backlogs[#{product_backlog.id}][id]",
       product_backlog.id %>
   </td>
