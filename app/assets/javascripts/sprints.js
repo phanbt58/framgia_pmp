@@ -9,6 +9,8 @@ $(document).on('page:change', function() {
 
   function setSprintHeight() {
     $("#sprints").outerHeight($(window).height() - $("header").outerHeight() - $("#category-tab").outerHeight() - 4);
+    var width_task_name =$('.left-side').outerWidth() - $('.task-id').outerWidth()-$('.story').outerWidth();
+    $('.task-name').css('min-width', width_task_name+'px');
   }
 
   masterSprintDateListener = function() {

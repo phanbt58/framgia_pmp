@@ -9,7 +9,7 @@
   <td class="none-border"></td>
   <td><%= t "activities.date" %></td>
   <%= f.fields_for :master_sprints, @sprint.master_sprints do |master_sprints_builder| %>
-    <td class="panel-left master-column-<%= master_sprints_builder.object.id %>
+    <td class="date-of-project panel-left master-column-<%= master_sprints_builder.object.id %>
       <%= "today" if master_sprints_builder.object.date.today? %>">
       <%= master_sprints_builder.hidden_field :date,
         class: "#{'newest_master_sprint' if master_sprints_builder.object == @sprint.master_sprints.last}
