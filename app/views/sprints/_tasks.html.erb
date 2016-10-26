@@ -11,8 +11,10 @@
     </div>
     <div>
       <table id="activities" class="table table-bordered" >
-        <tbody>
+        <thead>
           <%= render "header", f: f %>
+        </thead>
+        <tbody>
           <%= f.fields_for :tasks, @sprint.tasks do |activity_builder| %>
             <%= render "row", activity_builder: activity_builder,
               row: activity_builder.index,

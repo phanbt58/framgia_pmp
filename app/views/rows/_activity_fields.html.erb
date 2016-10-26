@@ -23,7 +23,7 @@
     name="sprint[tasks_attributes][<%= @row_number %>][subject]"
     id="sprint_tasks_attributes_<%= @row_number %>_subject">
 </td>
-<td>
+<td class="assignee-name">
   <%= select_tag "sprint[tasks_attributes][#{@row_number}][user_id]",
     options_for_select(@assignees.collect {|assignee|
       [assignee.user_name, assignee.user_id]}),

@@ -2,11 +2,11 @@
   width: 550px;
   min-width: 550px;
   float: left;
-  margin-right: 15px;
+  margin-right: 16px;
 }
 
 .time-log {
-  margin-left: 565px;
+  margin-left: 566px;
   padding-right: 15px;
 }
 
@@ -69,5 +69,53 @@ td.index {
   &:hover{
     background-color: #EEEEEE;
     cursor:pointer;
+  }
+}
+
+#activities {
+  border-spacing: 0;
+
+  tbody, thead {
+    display: block;
+  }
+
+  thead {
+    background: white;
+
+    tr {
+      th {
+        vertical-align: middle;
+      }
+    }
+  }
+
+  tbody {
+    width: 101.3%;
+    height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .story-id, .task-id {
+      width: 70px;
+      min-width: 70px;
+    }
+
+    .assignee-name {
+      width: 170px;
+      min-width: 170px;
+    }
+
+    .task-name {
+      width: 385px;
+      min-width: 385px;
+    }
+  }
+
+  .date-of-project{
+    border: 1px solid #dddddd;
+  }
+
+  #sprint-start-date {
+    border-bottom: 1px solid #dddddd;
   }
 }
