@@ -60,34 +60,38 @@ function change_style_table(){
   }
 }
 
-$(document).on("ready page:load", function() {
+$(document).on('ready page:load', function() {
   table_scroll_resize();
   change_style_table();
+  $('.add-more-product-value').click(function(){
+    var x=this.firstChild.innerHTML;
+    $('#product-backlogs .dropdown').removeClass('open');
+    for( i=0;i< x ;i++){
+      var project_id = $(this).find('span').attr('project_id');
+      var url = $(this).attr('href');
+      $.ajax({
+        type: 'POST',
+        url:  url,
+        dataType: 'json',
+        data: {id: project_id},
+        success: function(result) {
+          var row_number = result.row_number;
+          $('table#product_backlogs tbody').append(result.content);
+          $('.product-backlog-category-' + row_number).focus();
+          change_style_table();
+        },
+        error: function(){
+          $('#notify-message').text(I18n.t('product_backlogs.delete.failed')).css('color', 'red');
+        }
+      });
+    }
+    return false;
+   });
 });
 
 $(document).on("page:change", function() {
   table_scroll_resize();
   change_style_table();
-  $("#product_backlogs").on("click", "#add-more-row", function(e){
-    var project_id = $(this).find("span").attr("project_id");
-    var url = $(this).attr("href");
-    $.ajax({
-      type: "POST",
-      url:  url,
-      dataType: "json",
-      data: {id: project_id},
-      success: function(result) {
-        var row_number = result.row_number;
-        $("table#product_backlogs tbody").append(result.content);
-        $(".product-backlog-category-" + row_number).focus();
-        change_style_table();
-      },
-      error: function(){
-        $("#notify-message").text(I18n.t("product_backlogs.delete.failed")).css("color", "red");
-      }
-    });
-    return false;
-  });
 
   $("#save-product-backlog").on("click", function(){
     $("#notify-message").text(I18n.t("product_backlogs.saving"));

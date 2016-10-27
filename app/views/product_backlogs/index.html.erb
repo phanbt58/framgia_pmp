@@ -26,10 +26,17 @@
       </table>
     <% end %>
     <div id="product-backlogs">
-      <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus",
-        project_id: @project.id), project_product_backlogs_path({project_id: @project.id}),
-        class: "btn btn-primary", id: "add-more-row",
-        type: "button",  title: t("activities.add_more_row") %>
+      <div class="dropdown col-md-1">
+        <button class="btn btn-primary dropdown-toggle glyphicon glyphicon-plus"
+          type="button" data-toggle="dropdown">
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <% Settings.product_add_more.each do |value| %>
+            <li class="add-more-product-value center"><span><%= value %></span></li>
+            <li class="divider"></li>
+          <% end %>
+        </ul>
+      </div>
       <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-floppy-disk",
         project_id: @project.id), project_product_backlogs_path({project_id: @project.id}),
         class: "disabled btn btn-primary", id: "save-product-backlog",
