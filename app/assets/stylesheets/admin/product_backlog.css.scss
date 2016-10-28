@@ -1,10 +1,13 @@
+@import "../common/variables/color";
+@import "../common/variables/variable";
+
 .thead_table {
-  background-color: #628DB6;
-  color: #FFFFFF;
+  background-color: $header-blue;
+  color: $white;
 }
 
 .product_backlog h1 {
-  line-height: 1.42857143;
+  line-height: $light-height;
   text-align: left;
 }
 
@@ -23,11 +26,11 @@
 }
 
 .edit_icon {
-  color: #628DB6;
+  color: $header-blue;
 }
 
 .delete_icon {
-  color: #1a1a1a;
+  color: $black;
 }
 
 .product_backlog {

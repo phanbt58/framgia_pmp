@@ -72,12 +72,12 @@ namespace :db do
     end
 
     puts "Creating item performances"
-    Fabricate :item_performance, name: "Scope", chart_type: 0
-    Fabricate :item_performance, name: "Time", chart_type: 1
-    Fabricate :item_performance, name: "Cost", chart_type: 1
-    Fabricate :item_performance, name: "Quanlity", chart_type: 0
-    Fabricate :item_performance, name: "Line of code", chart_type: nil
-    Fabricate :item_performance, name: "Test case", chart_type: nil
+    Fabricate :item_performance, name: "Estimate task", chart_type: 0
+    Fabricate :item_performance, name: "Spent time", chart_type: 1
+    Fabricate :item_performance, name: "Burn value", chart_type: 1
+    Fabricate :item_performance, name: "Estimate story", chart_type: 0
+    Fabricate :item_performance, name: "Burn story", chart_type: nil
+    Fabricate :item_performance, name: "Execute", chart_type: nil
 
     puts "Add item performances to phase"
     ItemPerformance.all.each do |item|

@@ -1,17 +1,19 @@
+@import "common/variables/color";
+
 #activities {
   border: none;
   th {
-    background-color: #628DB6;
+    background-color: $header-blue;
     margin: 0;
     padding: 0 5px;
     min-width: 40px;
-    color: #fff;
+    color: $white;
   }
 
   td {
     margin: 0;
     padding: 0 5px;
-    border-color: #F3F3F3;
+    border-color: $boder-grey;
     input, select {
       display: block;
       margin: 0;
@@ -40,7 +42,7 @@
   }
 
   .master-data > td {
-    border-color: #FFF;
+    border-color: $white;
   }
 
   .left-side {
@@ -48,7 +50,7 @@
     min-width: 525px;
     vertical-align: middle;
     border-left-width: 1px;
-    border-color: #FFF;
+    border-color: $white;
   }
 
   .start-date {
@@ -62,19 +64,19 @@
   }
 
   .estimated {
-    background-color: #FABF8F;
+    background-color: $light-orrange;
   }
 
   .assigned {
-    background-color: #7F7F7F;
+    background-color: $darken-grey;
   }
 
   .default {
-    background-color: #7F7F7F;
+    background-color: $darken-grey;
   }
 
   .processed {
-    background-color: #FFFFFF;
+    background-color: $white;
   }
 
   .story {
@@ -88,7 +90,7 @@
 
   .none-border {
     border-top-width: 1px;
-    border-top-color: #FFF;
+    border-top-color: $white;
   }
 
   .master-sprint-working-day {
@@ -126,6 +128,6 @@
   }
 
   .today {
-    background-color: #f00;
+    background-color: $red;
   }
 }
