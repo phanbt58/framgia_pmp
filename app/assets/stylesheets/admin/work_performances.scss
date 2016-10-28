@@ -1,13 +1,19 @@
 #wrapper #work-performance-datas {
   padding: 20px 1px 1px 1px;
+  .index {
+    width: 2%;
+  }
   .assigned {
-    width: 15%;
-    text-align: center;
+    width: 10%;
     padding: 5px;
   }
+
+  .assignee {
+    text-align: left;
+  }
+
   .activity {
     width: 25%;
-    text-align: center;
   }
 
   .tbl-work-performance-datas {
@@ -24,6 +30,10 @@
       margin: 0;
       padding: 5px;
       border: 1px solid #F3F3F3;
+      vertical-align: middle !important;
+    }
+
+    .value {
       text-align: center;
     }
   }

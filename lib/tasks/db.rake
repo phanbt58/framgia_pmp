@@ -49,7 +49,7 @@ namespace :db do
     end
 
     puts "Creating phase"
-    ["Design", "Developing", "Testing"].each do |phase|
+    ["Design", "Coding", "Testing"].each do |phase|
       Fabricate :phase, phase_name: phase
     end
 
