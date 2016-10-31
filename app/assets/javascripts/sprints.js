@@ -134,6 +134,34 @@ $(document).ready(function(){
   $('.user-story').tooltip();
 });
 
+$(document).on('ready page:load', function() {
+  $('.add-more-sprint-value').click(function(){
+    var x=this.firstChild.innerHTML;
+    var row_number=2;
+    $('.dropdown').removeClass('open');
+    for( i=0;i< x ;i++){
+      var url = '/rows?sprint_id='+$('#sprint_id').val();
+      $.ajax({
+        type: 'POST',
+        url:  url,
+        dataType: 'json',
+        data: {},
+        success: function(result) {
+          $('table#activities tbody').append(result.content);
+          row_number = result.row_number;
+          $('.log.row-'+row_number).change(logWorkEventListener);
+          $('.log-1.row-'+row_number).change(estimateEventListener);
+          $('.assignee.row-'+row_number).change(assigneeEventListener);
+          $('.remaining.row-'+row_number).change(remainingEventListener);
+          setColorToday();
+          $('[class="row-'+row_number+'"]').focus();
+        }
+      });
+    }
+    return false;
+   });
+});
+
 $(document).on('keyup', '.task-name', function(event) {
   if(event.which == 13) {
     $('#add-more-row').click();

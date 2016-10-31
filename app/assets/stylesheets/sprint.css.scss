@@ -19,6 +19,25 @@
 
 .activities-panel {
   display: inline-block;
+
+  .dropdown-menu {
+    min-width: 46px;
+    margin-left: 14px;
+    text-align: center;
+
+    li:hover {
+      background: $light-grey;
+      cursor: pointer;
+    }
+
+    .add-more-sprint-value {
+      padding: 3px;
+    }
+
+    .divider {
+      margin: 0px;
+    }
+  }
 }
 
 rect {

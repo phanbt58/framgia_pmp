@@ -24,11 +24,16 @@
       </table>
     </div>
     <div>
-      <div class="pull-left">
-        <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
-          rows_path({sprint_id: @sprint.id}),
-          class: "btn btn-xs btn-primary pull-left", id: "add-more-row",
-          type: "button", method: :post, remote: true, title: t("activities.add_more_row") %>
+      <div class="dropdown col-md-1">
+        <button class="btn btn-xs btn-primary dropdown-toggle glyphicon glyphicon-plus"
+          type="button" data-toggle="dropdown">
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <% Settings.sprint_add_more_activities.each do |value| %>
+            <li class="add-more-sprint-value center"><span class="button"><%= value %></span></li>
+            <li class="divider"></li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>
