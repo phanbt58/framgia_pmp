@@ -68,7 +68,7 @@ $(document).on('ready page:load', function() {
     $('#product-backlogs .dropdown').removeClass('open');
     for( i=0;i< x ;i++){
       var project_id = $(this).find('span').attr('project_id');
-      var url = $(this).attr('href');
+      var url = $('#product_backlog_form').attr('action');
       $.ajax({
         type: 'POST',
         url:  url,
