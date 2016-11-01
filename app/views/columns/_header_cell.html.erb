@@ -1,5 +1,6 @@
 <% if header_class == "master-sprint-working-day" %>
-  <th class="panel-left master-column-<%= @master_sprint.id %>"><%= @master_sprint.day %></th>
+  <th class="panel-left master-column-<%= @master_sprint.id %> master-sprint-day-header"
+    data-master-sprint="<%= @master_sprint.id %>"><%= @master_sprint.day %></th>
 <% elsif header_class == "master-estimate-plan" %>
   <th class="panel-left log-actual-<%= @master_sprint.day %> master-column-<%= @master_sprint.id %>">
   </th>

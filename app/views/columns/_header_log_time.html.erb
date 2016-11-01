@@ -1,10 +1,14 @@
 <% if header_log_time == "lost-hour-row" %>
-  <td id="lost-hour-<%= @sprint.master_sprints.size %>" >
+  <td class="total-lost-hour lost-hour-header-<%= @master_sprint.id %>"
+    id="lost-hour-<%= @sprint.master_sprints.size %>"
+    data-master-sprint="<%= @master_sprint.id %>">
     <%= text_field_tag nil, @master_sprint.day == 0 ? total_lost_hour :
       sum_lost_hour[@master_sprint.day], disabled: true, class: "body_column", value: "0" %>
   </td>
 <% elsif header_log_time == "work-hour" %>
-  <td id="work-hour-<%= @sprint.master_sprints.size %>">
+  <td class="total-lost-hour work-hour-header-<%= @master_sprint.id %>"
+    id="work-hour-<%= @sprint.master_sprints.size %>"
+    data-master-sprint="<%= @master_sprint.id %>">
     <%= text_field_tag nil, "", disabled: true, class: "body_column" %>
   </td>
 <% end %>

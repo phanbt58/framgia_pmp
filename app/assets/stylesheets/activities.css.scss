@@ -3,11 +3,9 @@
 #activities {
   border: none;
   th {
-    background-color: $header-blue;
     margin: 0;
     padding: 0 5px;
     min-width: 40px;
-    color: $white;
   }
 
   td {
@@ -130,4 +128,9 @@
   .today {
     background-color: $red;
   }
+}
+
+.th-color {
+  background-color: $header-blue;
+  color: $white;
 }

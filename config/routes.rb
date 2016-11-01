@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root "projects#index"
 
   resources :synchronizes, only: [:index, :create]
-  resources :columns, only: [:create]
+  resources :columns, only: [:create, :show, :destroy]
   resources :rows, only: [:create, :show, :destroy]
 
   resources :projects, only: [:index, :show] do
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :sprints do
         resources :work_performances, only: [:index]
         resources :tasks, only: [:index]
+        resources :master_sprints, only: [:show]
       end
     end
   end
