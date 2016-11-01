@@ -1,3 +1,5 @@
+@import "../common/variables/color";
+
 #phases {
   margin-right: 10px;
   margin-left: 10px;
@@ -5,15 +7,15 @@
   .title {
     margin-bottom: 10px;
     text-align: center;
-    color: #474647;
+    color: $light-black;
     font-size: x-large;
   }
 
   .custab {
-    border: 1px solid #ccc;
+    border: 1px solid $boder-grey;
     padding: 5px;
     margin: 5% 0;
-    box-shadow: 3px 3px 2px #ccc;
+    box-shadow: 3px 3px 2px $boder-grey;
     transition: 0.5s;
     }
 

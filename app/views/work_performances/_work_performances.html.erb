@@ -55,43 +55,45 @@
         </thead>
         <tbody>
           <% @sprint.users.each_with_index do |user, index| %>
-            <tr>
-              <td class="index" rowspan="<%= user.tasks.number_of_task(@sprint.id).count %>">
-               <%= index + 1 %>
-              </td>
-              <td class="assignee" rowspan="<%= user.tasks.number_of_task(@sprint.id).count %>">
-                <%= user.name %>
-              </td>
-
-              <td class="left">
-                <%= user.tasks.number_of_task(@sprint.id).first.subject %>
-              </td>
-
-              <% @sprint.project_phases.each do |phase| %>
-                <% @sprint.master_sprints.each do |day_sprint| %>
-                  <td class="value">
-                    <% user.tasks.number_of_task(@sprint.id).first.work_performances.in_day(day_sprint).each do |wpm| %>
-                      <%= wpm.performance_value %> <br>
-                    <% end %>
-                  </td>
-                <% end %>
-              <% end %>
-            </tr>
-            <% user.tasks.number_of_task(@sprint.id).drop(1).each do |task| %>
+            <% if user.tasks.number_of_task(@sprint.id).any? %>
               <tr>
-                <td>
-                  <%= task.subject %>
+                <td class="index" rowspan="<%= user.tasks.number_of_task(@sprint.id).count %>">
+                 <%= index + 1 %>
                 </td>
+                <td class="assignee" rowspan="<%= user.tasks.number_of_task(@sprint.id).count %>">
+                  <%= user.name %>
+                </td>
+
+                <td class="left">
+                  <%= user.tasks.number_of_task(@sprint.id).first.subject %>
+                </td>
+
                 <% @sprint.project_phases.each do |phase| %>
                   <% @sprint.master_sprints.each do |day_sprint| %>
                     <td class="value">
-                      <% task.work_performances.in_day(day_sprint).each do |wpm| %>
+                      <% user.tasks.number_of_task(@sprint.id).first.work_performances.in_day(day_sprint).each do |wpm| %>
                         <%= wpm.performance_value %> <br>
                       <% end %>
                     </td>
                   <% end %>
                 <% end %>
               </tr>
+              <% user.tasks.number_of_task(@sprint.id).drop(1).each do |task| %>
+                <tr>
+                  <td>
+                    <%= task.subject %>
+                  </td>
+                  <% @sprint.project_phases.each do |phase| %>
+                    <% @sprint.master_sprints.each do |day_sprint| %>
+                      <td class="value">
+                        <% task.work_performances.in_day(day_sprint).each do |wpm| %>
+                          <%= wpm.performance_value %> <br>
+                        <% end %>
+                      </td>
+                    <% end %>
+                  <% end %>
+                </tr>
+              <% end %>
             <% end %>
           <% end %>
         </tbody>

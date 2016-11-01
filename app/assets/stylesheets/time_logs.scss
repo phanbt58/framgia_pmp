@@ -1,3 +1,5 @@
+@import "common/variables/color";
+
 #lost_hour_table {
   td {
     margin: 0;
@@ -6,7 +8,7 @@
     width: 40px;
     height: 21px;
     position: relative;
-    border-color: #F3F3F3;
+    border-color: $boder-grey;
     input {
       display: block;
       padding: 0;
@@ -26,20 +28,20 @@
     width: 170px;
     height: 25px;
     overflow: hidden;
-    background-color: #628DB6;
-    color: #fff;
+    background-color: $header-blue;
+    color: $white;
     font: bold 15px arial,sans-serif;
     text-indent: 5px;
   }
 
   .assignees_name {
-    background-color: #fff;
+    background-color: $white;
     text-indent: 5px;
   }
 
   .body_column {
-    background-color: #628DB6;
-    color: #fff;
+    background-color: $header-blue;
+    color: $white;
     font-weight: bold;
   }
 }

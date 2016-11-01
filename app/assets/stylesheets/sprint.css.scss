@@ -1,3 +1,5 @@
+@import "common/variables/color";
+
 #burndown_chart {
   width: 550px;
   min-width: 550px;
@@ -20,7 +22,7 @@
 }
 
 rect {
-  stroke: #DDD;
+  stroke: $boder-grey;
 }
 
 #notify-message {
@@ -44,12 +46,12 @@ td.index {
 
 .dialog{
   position:absolute;
-  background-color: white;
+  background-color: $white;
   padding: 10px;
   z-index:10;
   width:172px;
   height:102px;
-  border: 1px solid #ccc;
+  border: 1px solid $boder-grey;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -67,8 +69,8 @@ td.index {
   padding: 5px;
   margin: 0 -10px;
   &:hover{
-    background-color: #EEEEEE;
-    cursor:pointer;
+    background-color: $light-grey;
+    cursor: pointer;
   }
 }
 
@@ -80,7 +82,7 @@ td.index {
   }
 
   thead {
-    background: white;
+    background: $white;
 
     tr {
       th {
@@ -112,10 +114,10 @@ td.index {
   }
 
   .date-of-project{
-    border: 1px solid #dddddd;
+    border: 1px solid $boder-grey;
   }
 
   #sprint-start-date {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid $boder-grey;
   }
 }

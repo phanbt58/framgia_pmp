@@ -1,10 +1,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "common/variables/color";
 
 .navbar-custom {
-  background-color: #628DB6;
+  background-color: $header-blue;
   a {
-    color: #FFFFFF;
+    color: $white;
     font-size: 1em;
   }
 }
@@ -19,14 +20,14 @@
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #FFFFFF;
+  color: $white;
   letter-spacing: -1px;
   padding-top: 6px;
   font-weight: bold;
 }
 
 #logo:hover {
-  color: #F8F8F8;
+  color: $milk-white;
   text-decoration: none;
 }
 
@@ -68,7 +69,7 @@ html, body {
   bottom: 0px;
   height: 38px;
   width: 100%;
-  background: #EEEEEE;
+  background: $light-grey;
 
   .container-fluid {
     width: 100%;
@@ -76,7 +77,7 @@ html, body {
     position: fixed;
     height: 39px;
     border-top-style: solid;
-    border-color: #C4C4C4;
+    border-color: $boder-grey;
     border-width: 1px;
     padding-top: 0px
   }
@@ -94,23 +95,23 @@ html, body {
     float: none;
     display: inline;
     a {
-      color: #252C3A;
+      color: $black;
       border-style: solid;
-      border-color: #D1D1D1;
+      border-color: $boder-grey;
       border-width: 1px;
       border-top-width: 0px;
       display: inline;
-      margin-right:  -5px;
+      margin-right: -5px;
       padding: 7px 5px 7px 5px;
     }
     a:hover {
-      background-color: #F8F8F8;
+      background-color: $milk-white;
     }
   }
 
   .active {
     a {
-      background-color: white;
+      background-color: $white;
       padding-top: 5px;
     }
   }
@@ -133,7 +134,7 @@ html, body {
   }
 
   .glyphicon-plus {
-    color: #6F7682;
+    color: $light-black;
     margin-top: 5px;
     margin-right: 5px;
     }

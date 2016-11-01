@@ -1,23 +1,25 @@
+@import "common/variables/color";
+
 #product_backlogs {
   padding-top: 15px;
   .center {
     text-align: center;
   }
   .default {
-    background-color: white;
+    background-color: $white;
   }
 
   .in_progress {
     background-color: rgb(0, 176, 240);
-    color: white;
+    color: $white;
     option {
       color: black;
     }
   }
 
   .finished {
-    background-color: #7F7F7F;
-    color: white;
+    background-color: $darken-grey;
+    color: $white;
     option {
       color: black;
     }
@@ -29,10 +31,10 @@
 
   th {
     height: 30px;
-    background-color: #628DB6;
+    background-color: $header-blue;
     margin: 0;
     min-width: 40px;
-    color: #fff;
+    color: $white;
     border: none;
   }
 
@@ -85,7 +87,7 @@
   }
 
   thead {
-    background: #628db6;
+    background: $header-blue;
   }
 
   tbody {
@@ -138,5 +140,14 @@
 
   .action {
     width: 5% !important;
+  }
+}
+
+li.add-more-product-value {
+  padding: 5px;
+  border-bottom: 1px solid $boder-grey;
+  &:hover {
+    background-color: $light-grey;
+    cursor: pointer;
   }
 }

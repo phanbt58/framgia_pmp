@@ -1,3 +1,4 @@
+@import "common/variables/color";
 #projects {
   margin-right: 10px;
   margin-left: 10px;
@@ -5,7 +6,7 @@
     margin-bottom: 10px;
     text-align: center;
     font-family: "Roboto Slab, serif";
-    color: #474647;
+    color: $light-black;
     font-size: x-large;
   }
 
