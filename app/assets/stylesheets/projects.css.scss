@@ -57,11 +57,13 @@
 
   #tbl-list-project {
     .id {
-      width: 5%;
+      width: 3%;
+      text-align: right;
     }
 
     .name {
       width: 20%;
+      text-align: left;
     }
 
     .description {
@@ -70,14 +72,17 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      text-align: left;
     }
 
     .manager {
       width: 15%;
+      text-align: left;
     }
 
-    .start-date, .end_date, .action {
+    .start-date, .end-date, .action {
       width: 10%;
+      text-align: center;
     }
   }
 }
