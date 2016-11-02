@@ -7,3 +7,4 @@ sprint:
   default_days: 10
   phases: "Phases"
 product_add_more: [1, 3, 5, 10]
+sprint_add_more_activities: [1, 5, 10]

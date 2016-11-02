@@ -14,6 +14,11 @@ class RowsController < ApplicationController
 
     respond_to do |format|
       format.js
+      format.json {render json: {
+        content: render_to_string({
+          partial: "row", formats: "html", layout: false
+        }), row_number: @row_number
+      }}
     end
   end
 
