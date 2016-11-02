@@ -7,8 +7,10 @@ class MasterSprint < ActiveRecord::Base
 
   before_create :set_date_and_day
   after_create :create_log_times_and_log_works
+  after_destroy :update_day
 
   scope :in_today, ->{where date: Date.today}
+  scope :after_this_day, ->day{where"day > ?", day}
 
   private
   def create_log_times_and_log_works
@@ -30,5 +32,9 @@ class MasterSprint < ActiveRecord::Base
       self.day = sprint.master_sprints.size + 1
       self.date = sprint.master_sprints.last.date + 1 if self.date.nil?
     end
+  end
+
+  def update_day
+    sprint.master_sprints.after_this_day(self.day).update_all("day = day - 1")
   end
 end

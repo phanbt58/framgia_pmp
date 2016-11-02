@@ -2,7 +2,8 @@
   <th class="panel-left master-column-<%= @master_sprint.id %> master-sprint-day-header"
     data-master-sprint="<%= @master_sprint.id %>"><%= @master_sprint.day %></th>
 <% elsif header_class == "master-estimate-plan" %>
-  <th class="panel-left log-actual-<%= @master_sprint.day %> master-column-<%= @master_sprint.id %>">
+  <th class="panel-left log-actual-<%= @master_sprint.day %> master-column-<%= @master_sprint.id %>"
+    data-column-number="<%= @total_master_sprint %>">
   </th>
 <% elsif header_class == "actual" %>
   <th class="panel-left log-estimate-<%= @master_sprint.day %> master-column-<%= @master_sprint.id %>">

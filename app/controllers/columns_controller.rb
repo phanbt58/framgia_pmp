@@ -10,7 +10,6 @@ class ColumnsController < ApplicationController
       @total_time_log = @sprint.log_works.size
       @total_master_sprint = @sprint.master_sprints.size
     end
-
     respond_to do |format|
       format.js
     end
@@ -36,12 +35,12 @@ class ColumnsController < ApplicationController
     if @master_sprint.destroy
       respond_to do |format|
         format.html {redirect_to project_sprint_path(@project)}
-        format.json {head :no_content}
+        format.json {render json: {master_sprints: @master_sprint.sprint.master_sprints}}
       end
     else
       respond_to do |format|
         format.html {redirect_to project_sprint_path(@project)}
-        format.json {head :no_content}
+        format.json {render json: {master_sprints: @master_sprint.sprint.master_sprints}}
       end
     end
   end
