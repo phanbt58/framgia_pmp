@@ -135,6 +135,7 @@ $(document).ready(function(){
 });
 
 $(document).on('ready page:load', function() {
+  $('.dropdown-add-column').css('margin-left',($('.actual').width()-25)+'px');
   $('.add-more-sprint-value').click(function(){
     var x=this.firstChild.innerHTML;
     var row_number=2;
@@ -155,6 +156,7 @@ $(document).on('ready page:load', function() {
           $('.remaining.row-'+row_number).change(remainingEventListener);
           setColorToday();
           $('[class="row-'+row_number+'"]').focus();
+          setSprintHeight();
         }
       });
     }

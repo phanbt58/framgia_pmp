@@ -20,6 +20,10 @@
 .activities-panel {
   display: inline-block;
 
+  .dropdown {
+    margin-left: -15px;
+  }
+
   .dropdown-menu {
     min-width: 46px;
     margin-left: 14px;
@@ -36,6 +40,21 @@
 
     .divider {
       margin: 0px;
+    }
+  }
+
+  .dropdown-menu-column{
+    margin-left: 0px !important;
+  }
+
+  .dropdown-toggle{
+    min-width: 40px;
+    width: 40px;
+  }
+
+  .master-sprint-working-day, .master-estimate-plan, .master-estimate-plan, .actual {
+    .panel-left:last-child {
+      border-right: 1px solid $boder-grey;
     }
   }
 }
