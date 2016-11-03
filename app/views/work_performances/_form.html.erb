@@ -26,7 +26,7 @@
         <label><%= t "work_performances.day" %></label><br>
         <%= f.select :master_sprint_id,
           @sprint.master_sprints.collect {|day| [("Day "+day.day.to_s+" - "+day.date.to_s(:long)), day.id]},
-          {selected: @sprint.master_sprints.in_today.first.id},
+          {selected: @sprint.master_sprints.in_today.first.try(:id)},
           {class: "form-control"} %>
         <br>
         <label><%= t "work_performances.item_name" %></label><br>

@@ -175,6 +175,7 @@ en:
     add: "Add Task"
     add_more_row: "Add more rows"
     add_more_column: "Add more columns"
+    save: "Save Data"
   lost_hour:
     lost_hour: "Lost hour"
     work_hour: "Work hour"
