@@ -16,6 +16,36 @@ class ColumnsController < ApplicationController
     end
   end
 
+  def show
+    @master_sprint = MasterSprint.find_by id: params[:master_sprint_id]
+    if @master_sprint
+      respond_to do |format|
+        format.html {
+          render partial: "sprints/delete_column_dialog",
+            locals: {
+              master_sprint: @master_sprint, sprint: @master_sprint.sprint,
+              project: @master_sprint.sprint.project
+            }
+        }
+      end
+    end
+  end
+
+  def destroy
+    @master_sprint = MasterSprint.find_by id: params[:master_sprint_id]
+    if @master_sprint.destroy
+      respond_to do |format|
+        format.html {redirect_to project_sprint_path(@project)}
+        format.json {head :no_content}
+      end
+    else
+      respond_to do |format|
+        format.html {redirect_to project_sprint_path(@project)}
+        format.json {head :no_content}
+      end
+    end
+  end
+
   private
   def master_sprint_params
     params.require(:master_sprint).permit :sprint_id, :date

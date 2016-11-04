@@ -159,3 +159,19 @@ td.index {
     border-bottom: 1px solid $boder-grey;
   }
 }
+
+.selected-column {
+  background: $light-blue;
+  color: $black;
+  font-weight: bold;
+}
+
+.delete-column {
+  padding: 5px;
+  margin: 0 -10px;
+  color: black;
+  &:hover{
+    background-color: $light-grey;
+    cursor:pointer;
+  }
+}

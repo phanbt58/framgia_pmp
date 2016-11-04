@@ -19,7 +19,7 @@
     </td>
   <% end %>
 </tr>
-<tr class="master-sprint-working-day">
+<tr class="master-sprint-working-day th-color">
   <th rowspan="3" class="index" >
     #
   </th>
@@ -43,12 +43,13 @@
     </span>
   </th>
   <% @sprint.master_sprints.each do |master_sprint| %>
-    <th class="panel-left master-column-<%= master_sprint.id %>">
+    <th class="panel-left master-column-<%= master_sprint.id %> master-sprint-day-header"
+      data-master-sprint="<%= master_sprint.id %>">
       <%= master_sprint.day %>
     </th>
   <% end %>
 </tr>
-<tr class="master-estimate-plan">
+<tr class="master-estimate-plan th-color">
   <th class="panel-left worked-percent"><%= @estimate.get_percent_worked %></th>
   <th class="panel-left remaining-percent"><%= @estimate.get_percent_remaining %></th>
   <% @sprint.master_sprints.each_with_index do |master_sprint, index| %>
@@ -63,7 +64,7 @@
     <% end %>
   <% end %>
 </tr>
-<tr class="actual">
+<tr class="actual th-color">
   <th class="panel-left worked"><%= @estimate.get_sum_worked %></th>
   <th class="panel-left remaining-header"><%= @estimate.get_sum_remaining %></th>
   <% @sprint.master_sprints.each_with_index do |master_sprint, index| %>

@@ -1,9 +1,9 @@
 class MasterSprint < ActiveRecord::Base
   belongs_to :sprint
 
-  has_many :time_logs
-  has_many :log_works
-  has_many :work_performances
+  has_many :time_logs, dependent: :destroy
+  has_many :log_works, dependent: :destroy
+  has_many :work_performances, dependent: :destroy
 
   before_create :set_date_and_day
   after_create :create_log_times_and_log_works

@@ -181,8 +181,10 @@ en:
     save: "Save"
     saving: "Saving..."
   delete:
-      confirm: "Are you sure?"
-      task: "Detele task"
+    confirm: "Are you sure?"
+    task: "Detele task"
+    column: "Delete Column"
+    confirm_day_have_wpd: "This day have Work Performances Data, \n Are you sure delete this day with its data?"
   users:
     stt: "STT"
     name: "Name"
