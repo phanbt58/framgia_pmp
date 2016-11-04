@@ -21,7 +21,7 @@ function calculate_lost_hour(col) {
 
 function total_lost_hour() {
   var total = 0;
-  var work_day = $('#lost_hour_table').data('numberWorkDay');
+  var work_day = parseInt($('#lost_hour_table').attr('data-number-work-day'));
   for(var i = 1; i <= work_day; i++) {
     total += parseInt($('#lost-hour-' + i +' input').val());
   }

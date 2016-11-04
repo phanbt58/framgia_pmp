@@ -17,6 +17,7 @@
 
 $('.log-<%= @master_sprint.day %>').change(logWorkEventListener);
 $('.newest_master_sprint').last().change(masterSprintDateListener);
+$('#lost_hour_table').attr('data-number-work-day', <%= @total_master_sprint %>);
 totalLogWorksCol();
 setLastActual();
 setActual(<%= @total_master_sprint - 1 %>);

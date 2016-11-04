@@ -55,7 +55,7 @@ function initDeleteColumnDialog(event, day){
     data: {master_sprint_id: day},
     success: function(data){
       $(event.target).append(data);
-      $left = event.pageX + 'px';
+      $left = (event.pageX +180 >= $(document).width()) ? (event.pageX - 180 + 'px') : (event.pageX + 'px');
       $top = event.pageY + 'px';
 
       $('#delete-column-dialog').css({'left': $left,'top': $top});
@@ -87,7 +87,7 @@ $(document).on('click', '#delete-column', function(){
           data: {master_sprint_id: master_sprint_id},
           dataType: 'json',
           success: function(data){
-            deleteColumn(master_sprint_id);
+            deleteColumn(master_sprint_id, data);
             $('#notify-message').text(I18n.t('product_backlogs.delete.success')).css('color', 'green');
           },
           error: function(){
@@ -103,9 +103,40 @@ $(document).on('click', '#delete-column', function(){
   });
 });
 
-function deleteColumn(day){
+function deleteColumn(day, data){
+  var column_index = parseInt($('.master-estimate-plan .master-column-'+day).attr('data-column-number'));
+  var number_assignees = $('#lost_hour_table').data('numberAssignees');
+  var number_columns = Object.keys(data.master_sprints).length;
+  //delete column
+  $('input#sprint_master_sprints_attributes_'+(column_index - 1)+'_id').remove();
+  $('td#assignee-timelog-col-'+day).next('input').remove();
   $('.lost-hour-header-'+day).remove();
   $('.work-hour-header-'+day).remove();
   $('td#assignee-timelog-col-'+day).remove();
   $('.master-column-'+day).remove();
+
+  $('form#form-input-wpd select#work_performance_master_sprint_id').find('option[value='+day+']').remove();
+  $('table.tbl-work-performance-datas .wpd-master-sprint-'+day).remove();
+  //update index of columns
+  $('#lost_hour_table').attr('data-number-work-day', number_columns);
+  for (var i in data.master_sprints){
+    $('.master-sprint-working-day .master-column-'+data.master_sprints[i].id).html(data.master_sprints[i].day);
+  }
+
+  for (var i=(column_index+1); i<= (number_columns+1);i++){
+    $('td#lost-hour-'+i).attr('id','lost-hour-'+(i - 1));
+    $('td#work-hour-'+i).attr('id', 'work-hour-'+(i - 1));
+    $('.assignee-col-'+i).attr('class', 'assignee-col-'+(i - 1));
+    $('th.log-actual-'+i).removeClass('log-actual-'+i).addClass('log-actual-'+(i - 1));
+    $('th.log-estimate-'+i).removeClass('log-estimate-'+i).addClass('log-estimate-'+(i - 1));
+    $('input#sprint_master_sprints_attributes_'+(i - 1)+'_id')
+      .attr('id', 'sprint_master_sprints_attributes_'+(i - 2)+'_id');
+
+    $('th.log-actual-'+(i - 1)).attr('data-column-number', (i - 1));
+  }
+  $('.dropdown-add-column').css('margin-left',($('.actual').width()-25)+'px');
+
+  setActual(column_index-1);
+  total_lost_hour();
+  updateBurnDownChart();
 }
