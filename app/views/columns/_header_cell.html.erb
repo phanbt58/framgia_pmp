@@ -7,7 +7,7 @@
   <th class="panel-left log-estimate-<%= @master_sprint.day %> master-column-<%= @master_sprint.id %>">
   </th>
 <% elsif header_class == "master-data-date" %>
-  <td class="panel-left  <%= "today" if @master_sprint.date.today? %> master-column-<%= @master_sprint.id %>">
+  <td class="date-of-project panel-left <%= "today" if @master_sprint.date.today? %> master-column-<%= @master_sprint.id %>">
     <input type="hidden" value="<%= @master_sprint.date.strftime(t "date.iso_format") %>"
       class="newest_master_sprint" name="sprint[master_sprints_attributes][<%= @master_sprint.day + 1 %>][date]"
       id="sprint_master_sprints_attributes_<%= @master_sprint.day + 1 %>_date">

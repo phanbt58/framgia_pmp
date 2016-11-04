@@ -1,13 +1,17 @@
 <div class="row">
   <div class="activities-panel">
-    <div class="pull-right">
+    <div class="dropdown-add-column">
       <%= hidden_field_tag :sprint_id, @sprint.id %>
-      <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
-        "javascript:void(0);",
-        class: "btn btn-xs btn-primary pull-right",
-        id: "add-more-column",
-        type: "button",
-        title: t("activities.add_more_column") %>
+      <div class="dropdown">
+        <button class="btn btn-primary btn-xs dropdown-toggle glyphicon glyphicon-plus"
+          type="button" data-toggle="dropdown">
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu dropdown-menu-column">
+          <% Settings.sprint_add_more_activities.each do |value| %>
+            <li class="add-more-column center"><span><%= value %></span></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
     <div>
       <table id="activities" class="table table-bordered" >
