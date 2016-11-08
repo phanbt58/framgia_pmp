@@ -221,6 +221,7 @@ $(document).on('click', '#delete-activity', function(e){
         deleteButton.closest('tr').remove();
         $('input#sprint_tasks_attributes_'+row_index+'_id').remove();
         resetTaskIndex(row_index);
+        resetTaskTableHeight();
         $('#notify-message').text(I18n.t('product_backlogs.delete.success')).css('color', 'green');
       },
       error: function(){
@@ -240,3 +241,12 @@ function resetTaskIndex(row_index){
     }
   });
 }
+
+$(document).on('click', '#add-more-task-in-sprint button', function(e){
+  if (e.pageY > $('#sprints').height()){
+    $('#add-more-task-in-sprint').removeClass('dropdown').addClass('dropup');
+  }
+  else{
+    $('#add-more-task-in-sprint').removeClass('dropup').addClass('dropdown');
+  }
+});
