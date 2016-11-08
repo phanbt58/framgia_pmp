@@ -39,6 +39,10 @@
           <% end %>
         </ul>
       </div>
+
+      <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-floppy-disk"), "#",
+        class: "disabled btn btn-xs btn-primary", id: "save-sprint",
+        type: "button",  title: t("activities.save") %>
     </div>
   </div>
 </div>
