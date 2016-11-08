@@ -7,12 +7,6 @@ $(document).on('page:change', function() {
     setSprintHeight();
   });
 
-  function setSprintHeight() {
-    $("#sprints").outerHeight($(window).height() - $("header").outerHeight() - $("#category-tab").outerHeight() - 4);
-    var width_task_name =$('.left-side').outerWidth() - $('.task-id').outerWidth()-$('.story').outerWidth();
-    $('.task-name').css('min-width', width_task_name+'px');
-  }
-
   masterSprintDateListener = function() {
     if(new Date($(this).val()).toDateString() == new Date().toDateString()) {
       $(".today").removeClass("today");
@@ -100,6 +94,13 @@ $(document).on('page:change', function() {
 
 })
 
+function setSprintHeight() {
+  $('#sprints').outerHeight($(window).height() - $('header').outerHeight() - $('#category-tab').outerHeight() - 4);
+  var width_task_name =$('.left-side').outerWidth() - $('.task-id').outerWidth()-$('.story').outerWidth();
+  $('.task-name').css('min-width', width_task_name+'px');
+  resetTaskTableHeight();
+}
+
 function initDialog(event, task_id){
   if ($('#dialog') !== null)
       $('#dialog').remove();
@@ -139,7 +140,7 @@ $(document).on('ready page:load', function() {
   $('.add-more-sprint-value').click(function(){
     var x=this.firstChild.innerHTML;
     var row_number=2;
-    $('.dropdown').removeClass('open');
+    $('#add-more-task-in-sprint').removeClass('open');
     for( i=0;i< x ;i++){
       var url = '/rows?sprint_id='+$('#sprint_id').val();
       $.ajax({
@@ -149,6 +150,7 @@ $(document).on('ready page:load', function() {
         data: {},
         success: function(result) {
           $('table#activities tbody').append(result.content);
+          resetTaskTableHeight();
           row_number = result.row_number;
           $('.log.row-'+row_number).change(logWorkEventListener);
           $('.log-1.row-'+row_number).change(estimateEventListener);
@@ -169,3 +171,16 @@ $(document).on('keyup', '.task-name', function(event) {
     $('#add-more-row').click();
   }
 });
+
+function resetTaskTableHeight(){
+  var task_table = $('table#activities tbody');
+  var height_row = task_table.children('tr').first().height();
+  var number_rows = task_table.children('tr').size();
+  var body_height = height_row*number_rows;
+  if (body_height >= 250){
+    task_table.attr('height', 250+'px');
+  }
+  else{
+    task_table.removeAttr('height');
+  }
+}
