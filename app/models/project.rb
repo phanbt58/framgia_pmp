@@ -10,9 +10,13 @@ class Project < ActiveRecord::Base
   has_many :phase_items, through: :phases
   has_many :item_performances, through: :phase_items
 
+  after_create :create_product_backlog
+
   scope :list_by_assignee, ->user do
     joins(:assignees).where assignees: {user_id: user.id}
   end
+
+  DEFAULT_PRODUCT_BACKLOG = 10
   PROJECT_ATTRIBUTES_PARAMS = [:name, :description, :manager_id, :start_date,
     :end_date, user_ids: []]
 
@@ -31,4 +35,9 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def create_product_backlog
+    DEFAULT_PRODUCT_BACKLOG.times do |i|
+      ProductBacklog.create(project_id: self.id)
+    end
+  end
 end

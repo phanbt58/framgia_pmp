@@ -8,6 +8,7 @@ $(document).on("click", ".delete-product-backlog", function(e){
       dataType: "json",
       success: function() {
         $("#backlog-row-"+ product_backlog_id).remove();
+        table_scroll_resize();
         change_style_table();
         resetProductbacklogIndex(row_index);
         $("#notify-message").text(I18n.t("product_backlogs.delete.success")).css("color", "green");
@@ -38,15 +39,22 @@ function resetProductbacklogIndex(row_index){
 
 function table_scroll_resize(){
   var $table = $('.product_backlog_table_scroll');
-  var $bodyCells = $table.find('tbody tr:first').children(), colWidth;
+  var $bodyCells = $table.find('tbody tr:first').children('td'), colWidth;
   $(window).resize(function() {
     colWidth = $bodyCells.map(function() {
       return $(this).css('width');
     }).get();
 
-    $table.find('thead tr').children().each(function(i, v) {
-      $(v).css('width',colWidth[i]);
-    });
+    if ($table.find('tbody tr').children().length > 0){
+      $table.find('thead').removeAttr('class');
+      $table.find('thead tr').children().each(function(i, v) {
+        $(v).css('width',colWidth[i]);
+      });
+    }
+    else{
+      $table.find('thead').addClass('tbl-product-backlog');
+      $table.find('thead tr').children().css('width', '');
+    }
   }).resize();
 }
 function change_style_table(){
@@ -61,7 +69,6 @@ function change_style_table(){
 }
 
 $(document).on('ready page:load', function() {
-  table_scroll_resize();
   change_style_table();
   $('.add-more-product-value').click(function(){
     var x=this.firstChild.innerHTML;
@@ -79,6 +86,7 @@ $(document).on('ready page:load', function() {
           $('table#product_backlogs tbody').append(result.content);
           $('.product-backlog-category-' + row_number).focus();
           change_style_table();
+          table_scroll_resize();
         },
         error: function(){
           $('#notify-message').text(I18n.t('product_backlogs.delete.failed')).css('color', 'red');

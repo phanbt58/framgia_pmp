@@ -65,7 +65,6 @@
   }
 
   td, th {
-    width: 40px;
     padding-right: 0px;
     padding-left: 0px;
   }
@@ -149,5 +148,16 @@ li.add-more-product-value {
   &:hover {
     background-color: $light-grey;
     cursor: pointer;
+  }
+}
+
+.tbl-product-backlog {
+  tr {
+    .id {
+      width: 2%;
+    }
+    th{
+      width: 3%;
+    }
   }
 }
