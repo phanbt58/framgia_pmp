@@ -1,14 +1,11 @@
 class ColumnsController < ApplicationController
   def create
-    @master_sprint = MasterSprint.new master_sprint_params
-
-    if @master_sprint.save
-      @sprint = @master_sprint.sprint
-      @tasks = @sprint.tasks
-      @assignees = @sprint.assignees
-      @total_lost_hour = @sprint.time_logs.size
-      @total_time_log = @sprint.log_works.size
-      @total_master_sprint = @sprint.master_sprints.size
+    @master_sprints = params[:master_sprint].map do |master_sprint|
+      MasterSprint.new master_sprint.last.permit :sprint_id, :date
+    end
+    if @master_sprints.map(&:save)
+      @sprint = Sprint.find_by id: params[:sprint_id]
+      @support_column = Supports::ColumnSupport.new @sprint
     end
     respond_to do |format|
       format.js

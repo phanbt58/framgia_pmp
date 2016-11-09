@@ -33,7 +33,6 @@ $(document).on('page:change', function(){
 
   setActual = function(col) {
     var workHour = parseInt($("#work-hour-0" + " input").val());
-
     var cells = $('th[class*="log-actual"]');
     for(col; col < cells.length; col++) {
       var lostHour = parseInt($("#lost-hour-" + col + " input").val());
@@ -150,23 +149,25 @@ $(document).on('page:change', function(){
   $('.add-more-column').click(function(){
     var more_column = this.firstChild.innerHTML;
     $('.dropdown').removeClass('open');
-    load_column(1, more_column);
+    load_column(more_column);
     return false;
   });
 
-  function load_column(i, max){
-    if(i > max) return;
-    lastest_date = new Date($('.newest_master_sprint').last().val());
-    lastest_date.setDate(lastest_date.getDate() + 1)
+  function load_column(more_column){
+    var master_sprints = [];
     sprint_id = $('#sprint_id').val();
+    lastest_date = new Date($('.newest_master_sprint').last().val());
+    for (var i = 1; i<= more_column; i++){
+      master_sprints.push({sprint_id: sprint_id, date: lastest_date.setDate(lastest_date.getDate() + 1)});
+    }
     $.ajax({
       type: 'POST',
       url: '/columns/',
-      data: {master_sprint: {sprint_id: sprint_id, date: lastest_date}},
-      success: function(){
-        load_column(i+1,max);
-        $('.dropdown-add-column').css('margin-left',($('.actual').width()-25)+'px');
-      }
+      data: {
+        master_sprint: master_sprints,
+        sprint_id: sprint_id
+      },
+      success: function(){}
     });
   }
 });

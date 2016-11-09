@@ -7,7 +7,7 @@
           type="button" data-toggle="dropdown">
         <span class="caret"></span></button>
         <ul class="dropdown-menu dropdown-menu-column">
-          <% Settings.sprint_add_more_activities.each do |value| %>
+          <% Settings.options_to_add_more.each do |value| %>
             <li class="add-more-column center"><span><%= value %></span></li>
           <% end %>
         </ul>
@@ -33,7 +33,7 @@
           type="button" data-toggle="dropdown">
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <% Settings.sprint_add_more_activities.each do |value| %>
+          <% Settings.options_to_add_more.each do |value| %>
             <li class="add-more-sprint-value center"><span><%= value %></span></li>
           <% end %>
         </ul>

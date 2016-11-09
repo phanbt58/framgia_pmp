@@ -1,22 +1,24 @@
-<% if header_class == "master-sprint-working-day" %>
-  <th class="panel-left master-column-<%= @master_sprint.id %> master-sprint-day-header"
-    data-master-sprint="<%= @master_sprint.id %>"><%= @master_sprint.day %></th>
-<% elsif header_class == "master-estimate-plan" %>
-  <th class="panel-left log-actual-<%= @master_sprint.day %> master-column-<%= @master_sprint.id %>"
-    data-column-number="<%= @total_master_sprint %>">
-  </th>
-<% elsif header_class == "actual" %>
-  <th class="panel-left log-estimate-<%= @master_sprint.day %> master-column-<%= @master_sprint.id %>">
-  </th>
-<% elsif header_class == "master-data-date" %>
-  <td class="date-of-project panel-left <%= "today" if @master_sprint.date.today? %> master-column-<%= @master_sprint.id %>">
-    <input type="hidden" value="<%= @master_sprint.date.strftime(t "date.iso_format") %>"
-      class="newest_master_sprint" name="sprint[master_sprints_attributes][<%= @master_sprint.day + 1 %>][date]"
-      id="sprint_master_sprints_attributes_<%= @master_sprint.day + 1 %>_date">
-    <input type="text" class="master-sprint-day text-center day-<%= @master_sprint.day %>"
-      value="<%= @master_sprint.date.day %>">
-    <input type="hidden" value="<%= get_master_sprint_id %>"
-      name="sprint[master_sprints_attributes][<%= @master_sprint.day + 1 %>][id]"
-      id="sprint_master_sprints_attributes_<%= @master_sprint.day + 1 %>_id">
-  </td>
+<% @master_sprints.each_with_index do |master_sprint, column| %>
+  <% if header_class == "master-sprint-working-day" %>
+    <th class="panel-left master-column-<%= master_sprint.id %> master-sprint-day-header"
+      data-master-sprint="<%= master_sprint.id %>"><%= master_sprint.day %></th>
+  <% elsif header_class == "master-estimate-plan" %>
+    <th class="panel-left log-actual-<%= master_sprint.day %> master-column-<%= master_sprint.id %>"
+      data-column-number="<%= @support_column.total_master_sprint - @master_sprints.size + column + 1 %>">
+    </th>
+  <% elsif header_class == "actual" %>
+    <th class="panel-left log-estimate-<%= master_sprint.day %> master-column-<%= master_sprint.id %>">
+    </th>
+  <% elsif header_class == "master-data-date" %>
+    <td class="date-of-project panel-left <%= "today" if master_sprint.date.today? %> master-column-<%= master_sprint.id %>">
+      <input type="hidden" value="<%= master_sprint.date.strftime(t "date.iso_format") %>"
+        class="newest_master_sprint" name="sprint[master_sprints_attributes][<%= master_sprint.day - 1 %>][date]"
+        id="master_sprint_<%= master_sprint.day - 1 %>_date">
+      <input type="text" class="master-sprint-day text-center day-<%= master_sprint.day %>"
+        value="<%= master_sprint.date.day %>">
+      <input type="hidden" value="<%= master_sprint.id %>"
+        name="sprint[master_sprints_attributes][<%= master_sprint.day - 1 %>][id]"
+        id="master_sprint_<%= master_sprint.day - 1 %>_id">
+    </td>
+  <% end %>
 <% end %>

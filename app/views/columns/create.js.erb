@@ -1,4 +1,4 @@
-<% @tasks.each_with_index do |task, row| %>
+<% @support_column.tasks.each_with_index do |task, row| %>
   $('tr.activity_<%= task.id %>').append('<%= j render "log_work_cell", task: task, row: row %>')
   setLastTimeLogValue("<%= task.id %>");
 <% end %>
@@ -7,7 +7,7 @@
   $('tr.<%= header_class %>').append('<%= j render "header_cell", header_class: header_class %>')
 <% end %>
 
-<% @assignees.each_with_index do |assignee, row| %>
+<% @support_column.assignees.each_with_index do |assignee, row| %>
   $('tr.assignee-row-<%= assignee.id %>').append('<%= j render "log_time_cell", assignee: assignee, row: row %>')
 <% end %>
 
@@ -15,12 +15,13 @@
   $('tr.<%= header_log_time %>').append('<%= j render "header_log_time", header_log_time: header_log_time %>')
 <% end %>
 
-$('.log-<%= @master_sprint.day %>').change(logWorkEventListener);
+$('td[class*=master-column-]').find('input[id*=_remaining_time]').change(logWorkEventListener);
 $('.newest_master_sprint').last().change(masterSprintDateListener);
-$('#lost_hour_table').attr('data-number-work-day', <%= @total_master_sprint %>);
+$('#lost_hour_table').attr('data-number-work-day', <%= @support_column.total_master_sprint %>);
+$('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
 totalLogWorksCol();
 setLastActual();
-setActual(<%= @total_master_sprint - 1 %>);
+setActual(<%= @support_column.total_master_sprint - @master_sprints.size %>);
 updateBurnDownChart();
 updateDatePicker();
 setColorToday();
@@ -40,5 +41,6 @@ function setLastActual() {
 }
 
 function updateDatePicker() {
-  $(".day-<%= @master_sprint.day %>").click(clickDateMasterSprintListener);
+  $('input[class*=day-]').click(clickDateMasterSprintListener);
 }
+

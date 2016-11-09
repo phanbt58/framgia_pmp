@@ -2,7 +2,7 @@ $(document).mousedown(function(e) {
   if (($(e.target).is('#delete-column') === false)) {
     $('#delete-column-dialog').remove();
   }
-  if (e.which != 3){
+  if (e.which != 3 && e.target.id != 'delete-column'){
     resetCssForColumn();
   }
 });
@@ -55,7 +55,7 @@ function initDeleteColumnDialog(event, day){
     data: {master_sprint_id: day},
     success: function(data){
       $(event.target).append(data);
-      $left = (event.pageX +140 >= $(document).width()) ? (event.pageX - 140 + 'px') : (event.pageX + 'px');
+      $left = (event.pageX +140 >= $(window).width()) ? (event.pageX - 130 + 'px') : (event.pageX + 'px');
       $top = event.pageY + 'px';
 
       $('#delete-column-dialog').css({'left': $left,'top': $top});
@@ -134,7 +134,7 @@ function deleteColumn(day, data){
 
     $('th.log-actual-'+(i - 1)).attr('data-column-number', (i - 1));
   }
-  $('.dropdown-add-column').css('margin-left',($('.actual').width()-25)+'px');
+  $('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
 
   setActual(column_index-1);
   total_lost_hour();
