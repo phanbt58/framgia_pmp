@@ -67,18 +67,19 @@ $(document).on('page:change', function() {
       dataType: "script",
       success: function(data) {
         $("#notify-message").text(I18n.t("sprints.success")).css("color", "green");
-        $('#save-sprint').addClass('disabled');
+        $('a#save-sprint').addClass('disabled');
       },
       error: function(data){
         $("#notify-message").text(I18n.t("sprints.failed")).css("color", "red");
       }
     });
   }
-  $("#lost_hour_form").on("change", "input, select", function(){
-    $('#save-sprint').removeClass('disabled');
+  $("#lost_hour_form").on("change, click", "input, select", function(){
+    $("#notify-message").text('');
+    $('a#save-sprint').removeClass('disabled');
   });
 
-  $('#save-sprint').click(function(){
+  $('a#save-sprint').click(function(){
     $("#notify-message").text(I18n.t("sprints.saving"));
     autoSaveForm();
   });

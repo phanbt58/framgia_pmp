@@ -19,6 +19,12 @@ $(document).on('page:change', function (){
   $('#wpd-dialog').on('shown.bs.modal', function(){
     submitWorkPerformanceInput();
   });
+
+  $('td.date-of-project').on('change', function(){
+    $('a#save-sprint').click(function(){
+      updateSelectMasterSprintOnForm();
+    });
+  });
 });
 
 function submitWorkPerformanceInput(){
@@ -108,6 +114,22 @@ function fill_up_task_select(tasks){
     }
   }
   checkWorkPerformances();
+}
+
+function updateSelectMasterSprintOnForm(){
+  var $dates = $('td.date-of-project');
+  var number_cols = $dates.length;
+  var $form_select_day = $('form#form-input-wpd select#work_performance_master_sprint_id');
+  $form_select_day.find('option[selected=selected]').removeAttr('selected');
+  for (var i=0; i< number_cols; i++){
+    var date = new Date($dates.eq(i).find('input.master-sprint-date').val()).toDateString().substring(4);
+    var day = parseInt($('th.master-sprint-day-header').eq(i).text());
+    var master_sprint_id = $('th.master-sprint-day-header').eq(i).data('master-sprint');
+    $form_select_day.find('option[value='+master_sprint_id+']').text('Day '+day+' - '+date);
+    if (date == new Date().toDateString().substring(4)){
+      $form_select_day.find('option[value='+master_sprint_id+']').attr('selected', 'selected');
+    }
+  }
 }
 
 function getData(){
