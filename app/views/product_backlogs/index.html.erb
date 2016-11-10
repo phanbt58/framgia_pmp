@@ -26,8 +26,8 @@
       </table>
     <% end %>
     <div id="product-backlogs">
-      <div class="dropdown col-md-1">
-        <button class="btn btn-primary dropdown-toggle glyphicon glyphicon-plus"
+      <div class="dropdown col-md-1", id="add-more-user-story">
+        <button class="btn btn-xs btn-primary dropdown-toggle glyphicon glyphicon-plus"
           type="button" data-toggle="dropdown">
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
@@ -38,7 +38,7 @@
       </div>
       <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-floppy-disk",
         project_id: @project.id), project_product_backlogs_path({project_id: @project.id}),
-        class: "disabled btn btn-primary", id: "save-product-backlog",
+        class: "disabled btn btn-xs btn-primary", id: "save-product-backlog",
         type: "button",  title: t("activities.add_more_row") %>
     </div>
     <br>
