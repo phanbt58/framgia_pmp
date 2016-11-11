@@ -121,6 +121,11 @@ $(document).on("page:change", function() {
   $("#product_backlog_form").on("change", "input, select", function(){
     $('#save-product-backlog').removeClass("disabled");
   });
+
+  $('#product_backlog_form').on('click', 'input, select', function(){
+    $('#notify-message').text('');
+    $('#save-product-backlog').removeClass('disabled');
+  });
 });
 
 $(document).on("keyup", ".story", function(event) {

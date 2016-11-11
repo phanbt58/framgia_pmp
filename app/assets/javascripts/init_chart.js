@@ -31,7 +31,7 @@ updateBurnDownChart = function(){
   });
 }
 
-$(document).on("change click", "td input", updateBurnDownChart);
+$(document).on("change click", "#lost_hour_form td input", updateBurnDownChart);
 
 function initChart(){
   chart = new Highcharts.Chart({
