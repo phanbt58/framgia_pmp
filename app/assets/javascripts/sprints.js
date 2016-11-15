@@ -124,7 +124,7 @@ function initDialog(event, task_id){
   });
 }
 
-$(document).on('contextmenu', 'td.index', function(e){
+$(document).on('contextmenu', 'tr.selected-row td.index', function(e){
   var task = $(this).data('task');
   initDialog(e, task);
   return false;
@@ -133,6 +133,9 @@ $(document).on('contextmenu', 'td.index', function(e){
 $(document).mousedown(function(e) {
   if (($(e.target).is('#delete-activity') === false)) {
     $('#dialog').remove();
+  }
+  if (e.which != 3){
+    resetRowClass();
   }
 });
 
@@ -189,4 +192,23 @@ function resetTaskTableHeight(){
   else{
     task_table.removeAttr('height');
   }
+}
+
+$(document).on('click', 'td.index', function(){
+  resetRowClass();
+  var $tr = $(this).closest('tr');
+  var old_class = $tr.attr('class').split(' ').slice(-1)[0];
+  if (old_class.includes('activity_') == false){
+    $tr.removeClass(old_class).addClass('selected-row');
+  }
+  else{
+    $tr.addClass('selected-row');
+  }
+  $tr.find('.today').removeClass('today');
+});
+
+function resetRowClass(){
+  var row = parseInt($('tr.selected-row').attr('data-row-index'));
+  setRowColor('row-'+row);
+  $('tr.selected-row').removeClass('selected-row');
 }
