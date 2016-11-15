@@ -16,7 +16,7 @@ class WorkPerformancesController < ApplicationController
     @work_performances = InputWorkPerformanceData.new(@sprint, params)
       .submit_work_performances
     respond_to do |format|
-      format.json {render json: @work_performances}
+      format.json {render json: {wpd: @work_performances}}
     end
   end
 

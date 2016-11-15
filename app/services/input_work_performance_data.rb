@@ -13,6 +13,7 @@ class InputWorkPerformanceData
     work_performances = @sprint.work_performances.of_activity_in_day(@user_id,
         @master_sprint_id, @task_id)
     work_performances.any? ? update_work_performances : create_work_performances
+    return work_performances
   end
 
   private

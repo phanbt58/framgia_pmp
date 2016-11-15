@@ -214,7 +214,9 @@ $(document).on('click', '#delete-activity', function(e){
   var task_id = $('#delete-activity').data('activity');
   var deleteButton = $(this);
   var row_index = parseInt(deleteButton.closest('tr').attr('data-row-index'));
-  $.ajax({
+  var answer = confirm(I18n.t('delete.confirm'));
+  if (answer){
+    $.ajax({
       type: 'DELETE',
       url:  '/rows/' + task_id,
       data: {task_id: task_id},
@@ -230,6 +232,7 @@ $(document).on('click', '#delete-activity', function(e){
         $('#notify-message').text(I18n.t('product_backlogs.delete.failed')).css('color', 'red');
       }
     });
+  }
 });
 
 function resetTaskIndex(row_index){

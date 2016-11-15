@@ -71,9 +71,10 @@
 
                 <% @sprint.project_phases.each do |phase| %>
                   <% @sprint.master_sprints.each do |day_sprint| %>
-                    <td class="value wpd-master-sprint-<%= day_sprint.id %>">
+                    <td class="value wpd-master-sprint-<%= day_sprint.id %>
+                        task-id-<%= user.tasks.number_of_task(@sprint.id).first.id %>">
                       <% user.tasks.number_of_task(@sprint.id).first.work_performances.in_day(day_sprint).each do |wpm| %>
-                        <%= wpm.performance_value %> <br>
+                        <p class="task-<%= wpm.task_id %>-wpd-<%= wpm.id %>"><%= wpm.performance_value %></p>
                       <% end %>
                     </td>
                   <% end %>
@@ -86,9 +87,11 @@
                   </td>
                   <% @sprint.project_phases.each do |phase| %>
                     <% @sprint.master_sprints.each do |day_sprint| %>
-                      <td class="value wpd-master-sprint-<%= day_sprint.id %>">
+                      <td class="value wpd-master-sprint-<%= day_sprint.id %> task-id-<%= task.id %>">
                         <% task.work_performances.in_day(day_sprint).each do |wpm| %>
-                          <%= wpm.performance_value %> <br>
+                          <p class="task-<%= wpm.task_id %>-wpd-<%= wpm.id %>">
+                            <%= wpm.performance_value %>
+                          </p>
                         <% end %>
                       </td>
                     <% end %>

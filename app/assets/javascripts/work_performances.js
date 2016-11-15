@@ -50,9 +50,24 @@ function submitWorkPerformanceInput(){
       success: function(result){
         $('#wpd-dialog').modal('hide');
         getData();
+        updateWPDtable(result.wpd);
       }
     });
   });
+}
+
+function updateWPDtable(wpd){
+  for (var i in wpd){
+    var task_id = wpd[i].task_id;
+    var day_id = wpd[i].master_sprint_id;
+    if ($('.task-'+task_id+'-wpd-'+wpd[i].id).length >0){
+      $('.task-'+task_id+'-wpd-'+wpd[i].id).html(wpd[i].performance_value);
+    }
+    else{
+      $('.wpd-master-sprint-'+day_id+'.task-id-'+task_id).append('<p class="task-'
+        +task_id+'-wpd-'+wpd[i].id+'">'+wpd[i].performance_value+'</p>');
+    }
+  }
 }
 
 function getActivitiesOfUser(){
