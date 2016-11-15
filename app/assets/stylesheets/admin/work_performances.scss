@@ -1,5 +1,10 @@
 @import "../common/variables/color";
 
+.work_performances {
+  overflow-x: auto;
+  display: block;
+}
+
 #wrapper #work-performance-datas {
   padding: 20px 1px 1px 1px;
   .index {
@@ -54,6 +59,7 @@
   width: 600px;
   float: left;
   margin: 15px;
+  margin-left: 0px;
 }
 
 #create-work-performance {

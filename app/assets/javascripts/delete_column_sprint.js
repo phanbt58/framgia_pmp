@@ -55,7 +55,7 @@ function initDeleteColumnDialog(event, day){
     data: {master_sprint_id: day},
     success: function(data){
       $(event.target).append(data);
-      $left = (event.pageX +180 >= $(document).width()) ? (event.pageX - 180 + 'px') : (event.pageX + 'px');
+      $left = (event.pageX +140 >= $(document).width()) ? (event.pageX - 140 + 'px') : (event.pageX + 'px');
       $top = event.pageY + 'px';
 
       $('#delete-column-dialog').css({'left': $left,'top': $top});

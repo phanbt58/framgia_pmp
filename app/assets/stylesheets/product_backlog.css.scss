@@ -2,6 +2,7 @@
 
 #product_backlogs {
   padding-top: 15px;
+  width: 100%;
   .center {
     text-align: center;
   }
@@ -74,8 +75,7 @@
   }
 
   .dropdown-menu {
-    min-width: 75px;
-    margin-left: 14px;
+    min-width: 43px;
   }
 }
 .product_backlog_table_scroll {

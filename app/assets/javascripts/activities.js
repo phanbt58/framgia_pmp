@@ -233,6 +233,10 @@ $(document).on('click', '#delete-activity', function(e){
       }
     });
   }
+  else{
+    $('#dialog').addClass('dialog-hidden');
+    resetRowClass();
+  }
 });
 
 function resetTaskIndex(row_index){

@@ -1,107 +1,109 @@
 <%= render "shared/category_tab", project: @project, active_tab: @sprint.id, f: nil %>
   <div id="wrapper">
-    <div class="row">
-      <div id="performance_chart" data-project="<%= @project.id %>"
-        data-sprint="<%= @sprint.id %>">
-      </div>
-      <div class="chart-type">
-        <%= link_to t("work_performances.submitwpd"),
-          new_project_sprint_work_performance_path(@project, @sprint),
-          class: "btn btn-primary", id: "create-work-performance", type: "button",
-          data: {project: @project.id, sprint: @sprint.id,
-          toggle: "modal", target: "#wpd-dialog"} %>
+    <div class="work_performances">
+      <div class="row">
+        <div id="performance_chart" data-project="<%= @project.id %>"
+          data-sprint="<%= @sprint.id %>">
+        </div>
+        <div class="chart-type">
+          <%= link_to t("work_performances.submitwpd"),
+            new_project_sprint_work_performance_path(@project, @sprint),
+            class: "btn btn-primary", id: "create-work-performance", type: "button",
+            data: {project: @project.id, sprint: @sprint.id,
+            toggle: "modal", target: "#wpd-dialog"} %>
 
-        <i id="user-reset" class="glyphicon glyphicon-refresh"></i><br><br>
-        <% ItemPerformance.chart_types.each do |key, value| %>
-          <%= radio_button_tag "chart_type", value, class: "chart_type_radio" %>
-          <%= key.humanize.capitalize %>
+          <i id="user-reset" class="glyphicon glyphicon-refresh"></i><br><br>
+          <% ItemPerformance.chart_types.each do |key, value| %>
+            <%= radio_button_tag "chart_type", value, class: "chart_type_radio" %>
+            <%= key.humanize.capitalize %>
+            <br>
+          <% end %>
+          <%= radio_button_tag "chart_type", "", class: "chart_type_radio" %>
+          <%= t "item_performances.showall" %><br>
           <br>
-        <% end %>
-        <%= radio_button_tag "chart_type", "", class: "chart_type_radio" %>
-        <%= t "item_performances.showall" %><br>
-        <br>
-        <% @sprint.users.each do |user| %>
-          <%= check_box_tag "user-select-id-#{user.id}",
-            user.id, true, class: "user-select" %>
-          <%= user.name %><br>
-        <% end %>
+          <% @sprint.users.each do |user| %>
+            <%= check_box_tag "user-select-id-#{user.id}",
+              user.id, true, class: "user-select" %>
+            <%= user.name %><br>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div id="work-performance-datas">
-      <table class="table table-striped tbl-work-performance-datas">
-        <thead>
-          <tr>
-            <th class="index"></th>
-            <th class="assigned"> User</th>
-            <th class="activity"><%= t "table.thead.activity" %></th>
-            <% @sprint.project_phases.each do |phase| %>
-              <th colspan="<%= @sprint.master_sprints.count %>" class="phase-name">
-                <%= phase.phase_name %>
-              </th>
-            <% end %>
-          </tr>
-          <tr>
-            <th class="index"></th>
-            <th class="assigned"></th>
-            <th class="activity"></th>
-            <% @sprint.project_phases.each do |phase| %>
-              <% @sprint.master_sprints.each do |day_sprint| %>
-                <th class="phase-value wpd-master-sprint-<%= day_sprint.id %>"
-                  title="<%= day_sprint.day %>">
-                  <%= day_sprint.day %>
+      <div id="work-performance-datas">
+        <table class="table table-striped tbl-work-performance-datas">
+          <thead>
+            <tr>
+              <th class="index"></th>
+              <th class="assigned"> User</th>
+              <th class="activity"><%= t "table.thead.activity" %></th>
+              <% @sprint.project_phases.each do |phase| %>
+                <th colspan="<%= @sprint.master_sprints.count %>" class="phase-name">
+                  <%= phase.phase_name %>
                 </th>
               <% end %>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% @sprint.users.each_with_index do |user, index| %>
-            <% if user.tasks.number_of_task(@sprint.id).any? %>
-              <tr>
-                <td class="index" rowspan="<%= user.tasks.number_of_task(@sprint.id).count %>">
-                 <%= index + 1 %>
-                </td>
-                <td class="assignee" rowspan="<%= user.tasks.number_of_task(@sprint.id).count %>">
-                  <%= user.name %>
-                </td>
-
-                <td class="left">
-                  <%= user.tasks.number_of_task(@sprint.id).first.subject %>
-                </td>
-
-                <% @sprint.project_phases.each do |phase| %>
-                  <% @sprint.master_sprints.each do |day_sprint| %>
-                    <td class="value wpd-master-sprint-<%= day_sprint.id %>
-                        task-id-<%= user.tasks.number_of_task(@sprint.id).first.id %>">
-                      <% user.tasks.number_of_task(@sprint.id).first.work_performances.in_day(day_sprint).each do |wpm| %>
-                        <p class="task-<%= wpm.task_id %>-wpd-<%= wpm.id %>"><%= wpm.performance_value %></p>
-                      <% end %>
-                    </td>
-                  <% end %>
+            </tr>
+            <tr>
+              <th class="index"></th>
+              <th class="assigned"></th>
+              <th class="activity"></th>
+              <% @sprint.project_phases.each do |phase| %>
+                <% @sprint.master_sprints.each do |day_sprint| %>
+                  <th class="phase-value wpd-master-sprint-<%= day_sprint.id %>"
+                    title="<%= day_sprint.day %>">
+                    <%= day_sprint.day %>
+                  </th>
                 <% end %>
-              </tr>
-              <% user.tasks.number_of_task(@sprint.id).drop(1).each do |task| %>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @sprint.users.each_with_index do |user, index| %>
+              <% if user.tasks.number_of_task(@sprint.id).any? %>
                 <tr>
-                  <td>
-                    <%= task.subject %>
+                  <td class="index" rowspan="<%= user.tasks.number_of_task(@sprint.id).count %>">
+                   <%= index + 1 %>
                   </td>
+                  <td class="assignee" rowspan="<%= user.tasks.number_of_task(@sprint.id).count %>">
+                    <%= user.name %>
+                  </td>
+
+                  <td class="left">
+                    <%= user.tasks.number_of_task(@sprint.id).first.subject %>
+                  </td>
+
                   <% @sprint.project_phases.each do |phase| %>
                     <% @sprint.master_sprints.each do |day_sprint| %>
-                      <td class="value wpd-master-sprint-<%= day_sprint.id %> task-id-<%= task.id %>">
-                        <% task.work_performances.in_day(day_sprint).each do |wpm| %>
-                          <p class="task-<%= wpm.task_id %>-wpd-<%= wpm.id %>">
-                            <%= wpm.performance_value %>
-                          </p>
+                      <td class="value wpd-master-sprint-<%= day_sprint.id %>
+                          task-id-<%= user.tasks.number_of_task(@sprint.id).first.id %>">
+                        <% user.tasks.number_of_task(@sprint.id).first.work_performances.in_day(day_sprint).each do |wpm| %>
+                          <p class="task-<%= wpm.task_id %>-wpd-<%= wpm.id %>"><%= wpm.performance_value %></p>
                         <% end %>
                       </td>
                     <% end %>
                   <% end %>
                 </tr>
+                <% user.tasks.number_of_task(@sprint.id).drop(1).each do |task| %>
+                  <tr>
+                    <td>
+                      <%= task.subject %>
+                    </td>
+                    <% @sprint.project_phases.each do |phase| %>
+                      <% @sprint.master_sprints.each do |day_sprint| %>
+                        <td class="value wpd-master-sprint-<%= day_sprint.id %> task-id-<%= task.id %>">
+                          <% task.work_performances.in_day(day_sprint).each do |wpm| %>
+                            <p class="task-<%= wpm.task_id %>-wpd-<%= wpm.id %>">
+                              <%= wpm.performance_value %>
+                            </p>
+                          <% end %>
+                        </td>
+                      <% end %>
+                    <% end %>
+                  </tr>
+                <% end %>
               <% end %>
             <% end %>
-          <% end %>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 <%= render "work_performances/dialog" %>

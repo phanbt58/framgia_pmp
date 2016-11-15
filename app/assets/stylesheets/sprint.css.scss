@@ -1,5 +1,9 @@
 @import "common/variables/color";
 
+.hidden-scroll {
+  overflow: hidden;
+}
+
 #burndown_chart {
   width: 550px;
   min-width: 550px;
@@ -85,6 +89,7 @@ rect {
   li > a {
     height: 30px;
     margin-top: 5px;
+    padding: 5px 15px;
   }
 }
 
@@ -99,7 +104,7 @@ td.index {
   background-color: $white;
   padding: 10px;
   z-index:10;
-  width:172px;
+  width: auto;
   height:102px;
   border: 1px solid $boder-grey;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -113,15 +118,6 @@ td.index {
 .dialog-hidden {
   visibility: hidden;
   top: 0;
-}
-
-.delete-activity {
-  padding: 5px;
-  margin: 0 -10px;
-  &:hover{
-    background-color: $light-grey;
-    cursor: pointer;
-  }
 }
 
 #activities {
@@ -177,10 +173,12 @@ td.index {
   font-weight: bold;
 }
 
-.delete-column {
+.delete-column, .delete-activity {
   padding: 5px;
-  margin: 0 -10px;
+  margin: 0 5px;
   color: black;
+  text-align: left;
+  font-weight: bold;
   &:hover{
     background-color: $light-grey;
     cursor:pointer;

@@ -1,6 +1,12 @@
 $(document).on('page:change', function (){
   getData();
 
+  setWorkPerformanceHeight();
+
+  $(window).resize(function() {
+    setWorkPerformanceHeight();
+  });
+
   $('#user-reset').click(function(){
     $('input:checkbox[class=user-select]').each(function() {
       $(this).prop('checked', false);
@@ -54,6 +60,11 @@ function submitWorkPerformanceInput(){
       }
     });
   });
+}
+
+function setWorkPerformanceHeight(){
+  $('.work_performances').outerHeight($(window).height() -
+    $('header').outerHeight() - $('#category-tab').outerHeight() - 30);
 }
 
 function updateWPDtable(wpd){

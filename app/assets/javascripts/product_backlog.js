@@ -72,7 +72,7 @@ $(document).on('ready page:load', function() {
   change_style_table();
   $('.add-more-product-value').click(function(){
     var x=this.firstChild.innerHTML;
-    $('#product-backlogs .dropdown').removeClass('open');
+    $('#add-more-user-story').removeClass('open');
     for( i=0;i< x ;i++){
       var project_id = $(this).find('span').attr('project_id');
       var url = $('#product_backlog_form').attr('action');
@@ -101,6 +101,15 @@ $(document).on("page:change", function() {
   table_scroll_resize();
   change_style_table();
 
+  $('#add-more-user-story').click(function(e){
+    if (e.pageY+130 > $(document).height()){
+      $('#add-more-user-story').removeClass('dropdown').addClass('dropup');
+    }
+    else{
+      $('#add-more-user-story').removeClass('dropup').addClass('dropdown');
+    }
+  });
+
   $("#save-product-backlog").on("click", function(){
     $("#notify-message").text(I18n.t("product_backlogs.saving"));
     $.ajax({
@@ -118,7 +127,7 @@ $(document).on("page:change", function() {
     });
   });
 
-  $("#product_backlog_form").on("change", "input, select", function(){
+  $("#product_backlog_form").on("change click", "input, select", function(){
     $('#save-product-backlog').removeClass("disabled");
   });
 });
