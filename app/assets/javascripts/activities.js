@@ -63,44 +63,7 @@ $(document).on('page:change', function(){
     worked();
   }
 
-  function setRowColor(rowClass) {
-    var assigneeValue = $('.assignee.' + rowClass).val();
-    var remainingValue = parseInt($('.remaining.' + rowClass).val());
-    var estimateValue = parseInt($('.log-1.' + rowClass).val());
 
-    var row = $('.' + rowClass).closest('tr');
-
-    // assignee is empty
-    if(assigneeValue == '') {
-      if(estimateValue != 0) {
-        if(remainingValue != 0) {
-          row.addClass('estimated');
-          row.removeClass('assigned default processed');
-        } else {
-          row.addClass('default');
-          row.removeClass('assigned estimated processed');
-        }
-      }
-      else {
-        row.removeClass('estimated assigned processed');
-        row.addClass('default');
-      }
-    } else {
-      if(estimateValue != 0) {
-        if(remainingValue != 0) {
-          row.removeClass('assigned default estimated');
-          row.addClass('processed');
-        } else {
-          row.removeClass('assigned processed estimated');
-          row.addClass('default');
-        }
-      }
-      else {
-        row.removeClass('processed default estimated');
-        row.addClass('assigned');
-      }
-    }
-  }
 
   setColorToday = function() {
     if ($('#activities').length && $('.today').length) {
@@ -208,6 +171,45 @@ $(document).on('page:change', function(){
   }
 });
 
+function setRowColor(rowClass) {
+  var assigneeValue = $('.assignee.' + rowClass).val();
+  var remainingValue = parseInt($('.remaining.' + rowClass).val());
+  var estimateValue = parseInt($('.log-1.' + rowClass).val());
+
+  var row = $('.' + rowClass).closest('tr');
+
+  // assignee is empty
+  if(assigneeValue == '') {
+    if(estimateValue != 0) {
+      if(remainingValue != 0) {
+        row.addClass('estimated');
+        row.removeClass('assigned default processed');
+      } else {
+        row.addClass('default');
+        row.removeClass('assigned estimated processed');
+      }
+    }
+    else {
+      row.removeClass('estimated assigned processed');
+      row.addClass('default');
+    }
+  } else {
+    if(estimateValue != 0) {
+      if(remainingValue != 0) {
+        row.removeClass('assigned default estimated');
+        row.addClass('processed');
+      } else {
+        row.removeClass('assigned processed estimated');
+        row.addClass('default');
+      }
+    }
+    else {
+      row.removeClass('processed default estimated');
+      row.addClass('assigned');
+    }
+  }
+}
+
 $(document).on('click', '#delete-activity', function(e){
   var task_id = $('#delete-activity').data('activity');
   var deleteButton = $(this);
@@ -238,6 +240,7 @@ function resetTaskIndex(row_index){
       $(this).attr('data-row-index', new_index);
       $(this).find('td.index > .text-center').html(index);
       $('input#sprint_tasks_attributes_'+index+'_id').attr('id', 'sprint_tasks_attributes_'+new_index+'_id');
+      $('.row-'+index).removeClass('row-'+index).addClass('row-'+new_index);
     }
   });
 }
