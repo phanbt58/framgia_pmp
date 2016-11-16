@@ -98,10 +98,17 @@ $(document).on('page:change', function() {
     $('#scroll').animate({scrollLeft: dir + '300'}, 500);
   });
 
+  if ($('#sprints').length > 0){
+    $('body').addClass('hidden-scroll');
+  }
+  else{
+    $('body').removeClass('hidden-scroll');
+  }
+
 })
 
 function setSprintHeight() {
-  $('#sprints').outerHeight($(window).height() - $('header').outerHeight() - $('#category-tab').outerHeight() - 4);
+  $('#sprints').outerHeight($(window).height() - $('header').outerHeight() - $('#category-tab').outerHeight() - 40);
   var width_task_name =$('.left-side').outerWidth() - $('.task-id').outerWidth()-$('.story').outerWidth();
   $('.task-name').css('min-width', width_task_name+'px');
   resetTaskTableHeight();
@@ -134,7 +141,7 @@ $(document).mousedown(function(e) {
   if (($(e.target).is('#delete-activity') === false)) {
     $('#dialog').remove();
   }
-  if (e.which != 3){
+  if (e.which != 3 && e.target.id != 'delete-activity'){
     resetRowClass();
   }
 });

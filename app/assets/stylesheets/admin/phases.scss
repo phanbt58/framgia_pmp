@@ -1,8 +1,8 @@
 @import "../common/variables/color";
 
 #phases {
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 0px;
+  margin-left: 0px;
 
   .title {
     margin-bottom: 10px;
@@ -25,6 +25,10 @@
     }
 
   #tbl-list-phase {
+    th {
+      text-align: left;
+    }
+
     .id {
       width: 5%;
     }

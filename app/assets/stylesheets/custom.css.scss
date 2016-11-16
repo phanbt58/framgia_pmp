@@ -2,6 +2,29 @@
 @import "bootstrap";
 @import "common/variables/color";
 
+#header {
+  width: 100%;
+
+  .nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 10px;
+  }
+}
+
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 100%;
+}
+
 .navbar-custom {
   background-color: $header-blue;
   a {
@@ -32,13 +55,13 @@
 }
 
 .wrapper {
-  margin: 0px 30px 30px 30px;
+  margin: 0px 10px 30px 10px;
   .error_explanation {
     padding-left: 150px;
   }
 
   #work-performance-datas, #sprints {
-    padding: 15px 25px;
+    padding: 15px 0px;
   }
 
   #lost_hour_form {
@@ -157,10 +180,15 @@ textarea {
     height: 44px;
     padding-top: 14px;
   }
+
+  .dropdown {
+    margin-right: 10px;
+  }
 }
 
 .navbar {
   min-height: 44px !important;
+  padding-right: 15px;
 }
 
 .invite-text {
