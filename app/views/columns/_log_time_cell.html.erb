@@ -1,10 +1,12 @@
-<td class="assignee-col-<%= @master_sprint.day %>" id="assignee-timelog-col-<%= @master_sprint.id %>">
-  <input value="<%= get_time_log_by_assignee_master_sprint(assignee, @master_sprint).id %>"
-    type="hidden" name="sprint[time_logs_attributes][<%= @total_lost_hour - row %>][id]"
-    id="sprint_time_logs_attributes_<%= @total_lost_hour - row %>_id">
-  <input value="<%= assignee.id %>" type="hidden"
-    name="sprint[time_logs_attributes][<%= @total_lost_hour - row %>][assignee_id]"
-    id="sprint_time_logs_attributes_<%= @total_lost_hour - row %>_assignee_id">
-  <input name="sprint[time_logs_attributes][<%= @total_lost_hour - row %>][lost_hour]"
-    id="sprint_time_logs_attributes_<%= @total_lost_hour - row %>_lost_hour">
-</td>
+<% @master_sprints.each_with_index do |master_sprint, column| %>
+  <td class="assignee-col-<%= master_sprint.day %>" id="assignee-timelog-col-<%= master_sprint.id %>">
+    <input value="<%= get_time_log_by_assignee_master_sprint(assignee, master_sprint).id %>"
+      type="hidden" name="sprint[time_logs_attributes][<%= @support_column.total_lost_hour - row + column + 1%>][id]"
+      id="time_logs_<%= @support_column.total_lost_hour - row + column + 1 %>_id">
+    <input value="<%= assignee.id %>" type="hidden"
+      name="sprint[time_logs_attributes][<%= @support_column.total_lost_hour - row + column + 1 %>][assignee_id]"
+      id="time_logs_<%= @support_column.total_lost_hour - row + column + 1 %>_assignee_id">
+    <input name="sprint[time_logs_attributes][<%= @support_column.total_lost_hour - row + column + 1 %>][lost_hour]"
+      id="time_logs_<%= @support_column.total_lost_hour - row + column + 1 %>_lost_hour">
+  </td>
+<% end %>

@@ -33,8 +33,8 @@
   }
 
   .dropdown-menu {
-    min-width: 46px;
-    margin-left: 14px;
+    min-width: 44px;
+    margin-left: 15px;
     text-align: center;
 
     li:hover {
@@ -42,8 +42,13 @@
       cursor: pointer;
     }
 
-    .add-more-sprint-value {
-      padding: 3px;
+    .add-more-sprint-value, .add-more-column {
+      padding: 5px 10px;
+      border-bottom: 1px solid $boder-grey;
+      &:hover {
+        background-color: $light-grey;
+        cursor: pointer;
+      }
     }
 
     .divider {
@@ -102,7 +107,7 @@ td.index {
 .dialog{
   position:absolute;
   background-color: $white;
-  padding: 10px;
+  padding: 5px 0px;
   z-index:10;
   width: auto;
   height:102px;

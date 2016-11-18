@@ -5,6 +5,7 @@ $(document).on('page:change', function() {
 
   $(window).resize(function() {
     setSprintHeight();
+    $('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
   });
 
   masterSprintDateListener = function() {
@@ -68,6 +69,7 @@ $(document).on('page:change', function() {
       success: function(data) {
         $("#notify-message").text(I18n.t("sprints.success")).css("color", "green");
         $('a#save-sprint').addClass('disabled');
+        updateBurnDownChart();
       },
       error: function(data){
         $("#notify-message").text(I18n.t("sprints.failed")).css("color", "red");
@@ -152,7 +154,7 @@ $(document).ready(function(){
 });
 
 $(document).on('ready page:load', function() {
-  $('.dropdown-add-column').css('margin-left',($('.actual').width()-25)+'px');
+  $('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
   $('.add-more-sprint-value').click(function(){
     var x=this.firstChild.innerHTML;
     var row_number=2;
