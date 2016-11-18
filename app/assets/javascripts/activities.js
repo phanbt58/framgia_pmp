@@ -167,7 +167,9 @@ $(document).on('page:change', function(){
         master_sprint: master_sprints,
         sprint_id: sprint_id
       },
-      success: function(){}
+      success: function(){
+        setWidthOfElementSprint();
+      }
     });
   }
 });

@@ -5,7 +5,6 @@
     margin: 0;
     padding: 0;
     min-width: 40px;
-    width: 40px;
     height: 21px;
     position: relative;
     border-color: $boder-grey;
@@ -25,7 +24,7 @@
 
   .header_column {
     min-width: 170px;
-    width: 170px;
+    width: 10%;
     height: 25px;
     overflow: hidden;
     background-color: $header-blue;
@@ -53,6 +52,6 @@
 }
 
 #tracking-time {
-  margin-right: 15px;
+  margin-right: 0px;
   display: inline-block;
 }
