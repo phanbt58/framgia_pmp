@@ -13,12 +13,17 @@
       </div>
       <div class="col-md-3 box">
         <p class="label"><%= t "project.show.manager" %></p>
-        <p><%= link_to @manager.name, user_path(@manager) %></p>
+        <p class="list-user">
+          <% @project.managers.each_with_index do |manager, index| %>
+            <%= link_to manager.user_name, "#" %>
+            <%= (index == @project.managers.size - 1)  ? "." : "," %>
+          <% end %>
+        </p>
         <p class="label"><%= t "project.show.member" %></p>
         <p class="list-user">
-          <% @assignees.each_with_index do |assignee, index| %>
-            <%= link_to assignee.user_name,
-              user_path(assignee.user) %><%= (index == @assignees.size - 1)  ? "." : "," %>
+          <% @project.developers.each_with_index do |developer, index| %>
+            <%= link_to developer.user_name, "#" %>
+            <%= (index == @project.developers.size - 1)  ? "." : "," %>
           <% end %>
         </p>
       </div>

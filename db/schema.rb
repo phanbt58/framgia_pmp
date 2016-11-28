@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(version: 20161124013158) do
   end
 
   create_table "item_performances", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.float    "chart_type",  limit: 24
+    t.integer  "performance_name", limit: 4
+    t.text     "description",      limit: 65535
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.float    "chart_type",       limit: 24
   end
 
   create_table "log_works", force: :cascade do |t|

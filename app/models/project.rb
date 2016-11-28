@@ -15,10 +15,6 @@ class Project < ActiveRecord::Base
 
   after_create :create_product_backlog
 
-  scope :list_by_assignee, ->user do
-    joins(:assignees).where assignees: {user_id: user.id}
-  end
-
   DEFAULT_PRODUCT_BACKLOG = 10
   PROJECT_ATTRIBUTES_PARAMS = [:name, :description, :manager_id, :start_date,
     :end_date, user_ids: []]
@@ -27,8 +23,16 @@ class Project < ActiveRecord::Base
 
   delegate :name, to: :manager, prefix: true, allow_nil: true
 
+  def managers
+    self.members.where(role: 0)
+  end
+
+  def developers
+    self.members.where(role: 1)
+  end
+
   def include_assignee? current_user
-    self.assignees.map{|assignee| assignee.user_id}.include? current_user.id
+    self.members.map{|member| member.user_id}.include? current_user.id
   end
 
   private

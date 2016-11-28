@@ -3,14 +3,11 @@ class ProjectsController < ApplicationController
   before_action :load_sprint, only: [:index, :show]
 
   def index
-    @projects = Project.list_by_assignee current_user
+    @projects = current_user.projects
   end
 
   def show
-    if @project.include_assignee? current_user
-      @manager = @project.manager
-      @assignees = Assignee.list_by_project @project
-    else
+    unless @project.include_assignee? current_user
       flash[:alert] = t "flashs.not_authorize"
       redirect_to root_path
     end
