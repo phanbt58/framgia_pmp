@@ -11,9 +11,11 @@ module WorkPerformanceHelper
 
   private
   def user_performance sprint, user_ids, item
-    visible = sprint.phase_items.find_by(item_performance_id: item.id).visible
+    item_phase = sprint.phase_items.find_by item_performance_id: item.id
 
-    item_data = {name: item.name, data: [], visible: visible}
+    visible = item.execute? ? true : false
+
+    item_data = {name: item_phase.alias, data: [], visible: visible}
     sprint.master_sprints.order(:day).each do |day|
       item_value = WorkPerformance.performances_in_day(user_ids, item, day)
         .sum(:performance_value)

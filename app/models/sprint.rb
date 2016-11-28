@@ -63,7 +63,7 @@ class Sprint < ActiveRecord::Base
   end
 
   def check_manager? current_user, project
-    current_user.id == project.manager_id
+    project.managers.map{|member| member.user_id}.include? current_user.id
   end
 
   def include_assignee? current_user

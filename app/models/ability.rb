@@ -10,8 +10,8 @@ class Ability
       can :read, WorkPerformance
       can [:create, :update], WorkPerformance, user_id: user.id
       can :read, Sprint
-    else
-      can :manage, Project, manager_id: user.id
+    elsif user.manager?
+      can :manage, Project
       can :manage, Sprint
       can :manage, User
       can :manage, WorkPerformance

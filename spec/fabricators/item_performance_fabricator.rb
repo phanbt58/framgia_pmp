@@ -1,4 +1,4 @@
 Fabricator :item_performance do
-  name
+  performance_name
   chart_type
 end

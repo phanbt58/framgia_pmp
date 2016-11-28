@@ -20,6 +20,6 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_url
-    current_user.manager? ? admin_projects_url : root_url
+    current_user.is_root? ? admin_projects_url : root_url
   end
 end

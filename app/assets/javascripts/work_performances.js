@@ -47,7 +47,6 @@ function submitWorkPerformanceInput(){
     e.preventDefault();
     var url = $(this).attr('action');
     var data = $(this).serializeArray();
-    console.log(data);
     $.ajax({
       url: url,
       type: 'POST',

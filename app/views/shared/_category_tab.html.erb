@@ -10,7 +10,7 @@
           <ul class="nav navbar-nav" id="scroll">
             <% unless current_user.member? %>
               <li role="presentation" class="<%= tab_active Settings.tabs.overview_project, active_tab %>">
-                <%= link_to t("projects.overview"), admin_project_path(project) %>
+                <%= link_to t("projects.overview"), project_path(project) %>
               </li>
               <li role="presentation" id="pb_tab_show" class="<%= tab_active Settings.tabs.project_backlog, active_tab %>">
                 <%= link_to t("product_backlog.title"), project_product_backlogs_path(project) %>
