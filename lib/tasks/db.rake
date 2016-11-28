@@ -4,11 +4,11 @@ namespace :db do
     Rake::Task["db:migrate:reset"].invoke
 
     puts "Creating Manager"
-    user = Fabricate :user, role: 2, email: "chu.anh.tuan@framgia.com",
+    user = Fabricate :user, role: 0, email: "chu.anh.tuan@framgia.com",
       name: "Chu Anh Tuan"
 
     puts "Creating project"
-    project = Fabricate :project, manager_id: user.id
+    project = Fabricate :project
 
     puts "Creating sprint for each project"
     2.times do
@@ -30,18 +30,20 @@ namespace :db do
       "Bui Van Duong": "bui.van.duong"
     }
     user_hash.each do |key, value|
-      user = Fabricate :user, name: key, email: value+"@framgia.com"
+      user = Fabricate :user, name: key, email: value+"@framgia.com", role: 2
     end
 
-    puts "Add asignee to project 1"
+    puts "Add member to project 1"
     User.all.each do |user|
-      Fabricate :assignee, user_id: user.id, project_id: project.id,
-        sprint_id: nil, work_hour: 0
+      user.manager? ? role = 0 : role = 1
+
+      Fabricate :project_member, user_name: user.name, user_id: user.id, project_id: project.id,
+        role: role
     end
 
     puts "Add asignee to sprints 1"
     User.all.each do |user|
-      as = Fabricate :assignee, user_id: user.id, project_id: nil,
+      as = Fabricate :assignee, user_id: user.id, project_id: project.id,
         sprint_id: Sprint.first.id, work_hour: 8
       as.time_logs.each do |time_log|
         time_log.update_attributes lost_hour: 1
@@ -81,7 +83,9 @@ namespace :db do
 
     puts "Add item performances to phase"
     ItemPerformance.all.each do |item|
-      Fabricate :phase_item, phase_id: 2, item_performance_id: item.id, visible: true
+      item.id == 6 ? item_alias = "Line of Code" : item.name
+      Fabricate :phase_item, phase_id: 2, item_performance_id: item.id, visible: true,
+        alias: item_alias
     end
 
     puts "Create work performances value"

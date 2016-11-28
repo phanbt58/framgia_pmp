@@ -2,15 +2,17 @@ class User < ActiveRecord::Base
   attr_accessor :reset_token
   has_many :assignees
   has_many :tasks
-  has_many :projects, foreign_key: :manager_id
   has_many :sprints, through: :assignees
+  has_many :project_members
+  has_many :projects, through: :project_members
+
   devise :database_authenticatable, :registerable, :recoverable,
     :rememberable, :trackable, :validatable
 
   USER_ATTRIBUTES_PARAMS = [:name, :email, :password, :password_confirmation]
   PASSWORD_ATTRIBUTES_PARAMS = [:password, :password_confirmation]
 
-  enum role: [:member, :leader, :manager]
+  enum role: [:manager, :leader, :member]
 
   validates :name, presence: true, length: {maximum: 50}
 
