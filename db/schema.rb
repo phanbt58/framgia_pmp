@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021044225) do
+ActiveRecord::Schema.define(version: 20161124013158) do
 
   create_table "assignees", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -54,9 +54,10 @@ ActiveRecord::Schema.define(version: 20161021044225) do
   create_table "phase_items", force: :cascade do |t|
     t.integer  "phase_id",            limit: 4
     t.integer  "item_performance_id", limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.boolean  "visible"
+    t.string   "alias",               limit: 255
   end
 
   create_table "phases", force: :cascade do |t|
@@ -83,6 +84,15 @@ ActiveRecord::Schema.define(version: 20161021044225) do
   add_index "product_backlogs", ["project_id"], name: "index_product_backlogs_on_project_id", using: :btree
   add_index "product_backlogs", ["sprint_id"], name: "index_product_backlogs_on_sprint_id", using: :btree
 
+  create_table "project_members", force: :cascade do |t|
+    t.string   "user_name",  limit: 255
+    t.integer  "user_id",    limit: 4
+    t.integer  "project_id", limit: 4
+    t.integer  "role",       limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "project_phases", force: :cascade do |t|
     t.integer  "project_id", limit: 4
     t.integer  "phase_id",   limit: 4
@@ -95,9 +105,9 @@ ActiveRecord::Schema.define(version: 20161021044225) do
     t.text     "description", limit: 65535
     t.date     "start_date"
     t.date     "end_date"
-    t.integer  "manager_id",  limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "status",      limit: 4
   end
 
   create_table "sprints", force: :cascade do |t|
@@ -164,6 +174,7 @@ ActiveRecord::Schema.define(version: 20161021044225) do
     t.string   "last_sign_in_ip",        limit: 255
     t.string   "hr_token",               limit: 255
     t.string   "hr_email",               limit: 255
+    t.boolean  "is_root"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

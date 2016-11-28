@@ -9,6 +9,9 @@ class Project < ActiveRecord::Base
   has_many :phases, through: :project_phases
   has_many :phase_items, through: :phases
   has_many :item_performances, through: :phase_items
+  has_many :members, class_name: ProjectMember.name, foreign_key: :project_id
+
+  enum status: [:init, :inprogress, :finish, :close]
 
   after_create :create_product_backlog
 
