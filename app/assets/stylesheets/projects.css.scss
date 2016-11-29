@@ -40,6 +40,87 @@
   .project-description {
     margin-top: 0px;
     padding-left: 0px;
+
+    .start-date {
+      font-size: 10px;
+    }
+  }
+
+  .master-plan {
+    margin: 50px;
+
+    .start-sprint {
+      float: left;
+      font-size: 10px;
+      margin-left: 10px;
+    }
+    .end-sprint {
+      float: right;
+      font-size: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  .sprint-10-days {
+    float: left;
+    width: 250px;
+    margin: 10px 0;
+  }
+
+  .sprint-5-days {
+    float: left;
+    width: 125px;
+    margin: 10px 0;
+  }
+
+  .master-sprint-1 {
+    background-color: #00cc99;
+    height: 50px;
+  }
+
+  .master-sprint-2 {
+    background-color: #eded59;
+    height: 50px;
+  }
+
+  .master-sprint-3 {
+    background-color: #66a3ff;
+    height: 50px;
+  }
+
+  .master-sprint-4 {
+    background-color: #f50949;
+    height: 50px;
+  }
+
+  .master-sprint-5 {
+    background-color: #fb9db6;
+    height: 50px;
+  }
+
+  .master-sprint-6 {
+    background-color: #bb99ff;
+    height: 50px;
+  }
+
+  .master-sprint-7 {
+    background-color: #ff6633;
+    height: 50px;
+  }
+
+  .master-sprint-8 {
+    background-color: #33cc33;
+    height: 50px;
+  }
+
+  .master-sprint-9 {
+    background-color: #990000;
+    height: 50px;
+  }
+
+  .master-sprint-10 {
+    background-color: #6699ff;
+    height: 50px;
   }
 
   .custab{

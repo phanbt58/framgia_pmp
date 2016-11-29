@@ -8,13 +8,13 @@ class Sprint < ActiveRecord::Base
   has_many :tasks
   has_many :log_works
   has_many :master_sprints
+  has_many :days, class_name: MasterSprint.name, foreign_key: :sprint_id
   has_many :item_performances, through: :project
   has_many :phase_items, through: :project
   has_many :work_performances, dependent: :destroy
 
   delegate :phases, to: :project, prefix: true, allow_nil: true
 
-  validates :name, presence: true
   validates :start_date, presence: true
 
   DEFAULT_MASTER_SPRINT = 10
@@ -53,11 +53,23 @@ class Sprint < ActiveRecord::Base
     self.update_attributes start_date: self.master_sprints.first.date
   end
 
+  def end_date
+    self.days.last.date
+  end
+
   private
   def build_master_sprint
     if self.master_sprints.empty?
+      weekend_day = 0
+
       DEFAULT_MASTER_SPRINT.times do |day|
-        self.master_sprints.create date: self.start_date + day, day: day
+        date = self.start_date + weekend_day + day
+
+        if date.saturday?
+          date = date + 2.day
+          weekend_day += 2
+        end
+        self.days.create date: date, day: day
       end
     end
   end
