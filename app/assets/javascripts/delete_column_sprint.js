@@ -136,6 +136,21 @@ function deleteColumn(day, data){
   }
   $('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
 
+  var task_width = $('#activities').outerWidth();
+  if($('.activities-panel tbody').width() > $('#sprints').width()){
+    var new_width = task_width - $('th.master-sprint-day-header').last().outerWidth();
+    if (new_width < $('#sprints').width()){
+      $('.activities-panel').outerWidth($('#sprints').width()- 15);
+    }
+    else{
+      $('.activities-panel').outerWidth(new_width);
+    }
+  }
+  else{
+    $('.activities-panel').css('width', '');
+  }
+
+  setWidthOfElementSprint();
   setActual(column_index-1);
   total_lost_hour();
   updateBurnDownChart();

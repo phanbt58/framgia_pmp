@@ -5,15 +5,14 @@
 }
 
 #burndown_chart {
-  width: 550px;
+  width: 37%;
   min-width: 550px;
   float: left;
-  margin-right: 16px;
+  margin-right: 0px;
 }
 
 .time-log {
-  margin-left: 566px;
-  padding-right: 15px;
+  padding-right: 0px;
 }
 
 #sprints {
@@ -143,22 +142,25 @@ td.index {
   }
 
   tbody {
-    width: 101.3%;
     overflow-y: auto;
     overflow-x: hidden;
 
+    .index {
+      width: 2%;
+    }
+
     .story-id, .task-id {
-      width: 70px;
+      width: 5%;
       min-width: 70px;
     }
 
     .assignee-name {
-      width: 170px;
+      width: 10%;
       min-width: 170px;
     }
 
     .task-name {
-      width: 385px;
+      width: 25%;
       min-width: 385px;
     }
   }
@@ -175,7 +177,6 @@ td.index {
 .selected-column, .selected-row {
   background: $light-blue;
   color: $black;
-  font-weight: bold;
 }
 
 .delete-column, .delete-activity {
@@ -188,4 +189,12 @@ td.index {
     background-color: $light-grey;
     cursor:pointer;
   }
+}
+
+.scroll_tbody::-webkit-scrollbar {
+  width: 15px;
+}
+
+.scroll_tbody::-webkit-scrollbar-thumb {
+  background-color: $boder-grey;
 }

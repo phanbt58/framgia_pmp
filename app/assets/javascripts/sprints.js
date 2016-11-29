@@ -1,9 +1,12 @@
 $(document).on('page:change', function() {
   $('#sprint-with-wpd-tab a:first').tab('show');
 
+  setWidthOfElementSprint();
+
   setSprintHeight();
 
   $(window).resize(function() {
+    setWidthOfElementSprint();
     setSprintHeight();
     $('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
   });
@@ -107,7 +110,26 @@ $(document).on('page:change', function() {
     $('body').removeClass('hidden-scroll');
   }
 
-})
+});
+
+function setWidthOfElementSprint(){
+  if ($('th.master-sprint-day-header').length <= 10){
+    if (($('.activities-panel').height() + $('#chart').height()) > $('#sprints').height()){
+      $('.activities-panel').width($('#sprints').width() - 30);
+    }
+    else{
+      $('.activities-panel').width($('#sprints').width() - 15);
+    }
+  }
+  var margin_time_log = $('td.left-side').outerWidth() + $('td.left-side').prev('td').outerWidth();
+  $('.time-log').css('margin-left', margin_time_log + 2);
+  $('#burndown_chart').width(margin_time_log);
+  $('th.sprint-remaining').width($('.sprint-remaining').next('th').width());
+  $('.panel-left .remaining').parent().width($('th.sprint-remaining').width());
+  $('#tracking-time').find('td.header_column, td.assignees_name').width($('th.sprint-worked').width());
+  $('#tracking-time').width($('.activities-panel').width() - margin_time_log);
+  $('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
+}
 
 function setSprintHeight() {
   $('#sprints').outerHeight($(window).height() - $('header').outerHeight() - $('#category-tab').outerHeight() - 40);
@@ -153,7 +175,12 @@ $(document).ready(function(){
   $('.user-story').tooltip();
 });
 
+$(window).on('load', function(){
+  setWidthOfElementSprint();
+});
+
 $(document).on('ready page:load', function() {
+  setWidthOfElementSprint();
   $('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
   $('.add-more-sprint-value').click(function(){
     var x=this.firstChild.innerHTML;
@@ -197,9 +224,13 @@ function resetTaskTableHeight(){
   var body_height = height_row*number_rows;
   if (body_height >= 250){
     task_table.attr('height', 250+'px');
+    task_table.addClass('scroll_tbody');
+    var new_width = ($('table#activities thead').width() + 15) / $('table#activities thead').width() * 100;
+    task_table.width(new_width+'%');
   }
   else{
     task_table.removeAttr('height');
+    task_table.width(100+'%');
   }
 }
 
