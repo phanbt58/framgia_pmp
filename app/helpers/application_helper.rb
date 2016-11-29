@@ -62,6 +62,6 @@ module ApplicationHelper
   end
 
   def home_page
-    (current_user.nil? || current_user.member?) ? root_path : admin_projects_path
+    (current_user.nil? || !current_user.is_root?) ? root_path : admin_projects_path
   end
 end

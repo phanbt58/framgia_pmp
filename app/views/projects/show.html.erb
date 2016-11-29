@@ -5,27 +5,43 @@
     <div class="row">
       <div class="col-md-9 project-description">
         <h3><%= @project.name %></h3>
-        <p><i><%= @project.description %></i></p>
-        <p class="label"><%= t "projects.show.start_date" %></p>
-        <p><%= @project.start_date %></p>
-        <p class="label"><%= t "projects.show.end_date" %></p>
-        <p><%= @project.end_date %></p>
+        <p class="start-date"><%= @project.start_date %></p>
+        <div class="master-plan">
+          <p class="label"><%= t "projects.show.master_plan" %></p>
+          <div>
+            <% @project.sprints.each_with_index do |sprint, index| %>
+              <div class="sprint-<%= sprint.days.count %>-days" >
+                <div class="start-sprint"><%= sprint.start_date %></div>
+                <div class="end-sprint"><%= sprint.end_date %></div>
+                <div class="master-sprint-<%= index % 10 + 1 %>"></div>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
-      <div class="col-md-3 box">
-        <p class="label"><%= t "project.show.manager" %></p>
-        <p class="list-user">
-          <% @project.managers.each_with_index do |manager, index| %>
-            <%= link_to manager.user_name, "#" %>
-            <%= (index == @project.managers.size - 1)  ? "." : "," %>
-          <% end %>
-        </p>
-        <p class="label"><%= t "project.show.member" %></p>
-        <p class="list-user">
-          <% @project.developers.each_with_index do |developer, index| %>
-            <%= link_to developer.user_name, "#" %>
-            <%= (index == @project.developers.size - 1)  ? "." : "," %>
-          <% end %>
-        </p>
+      <div class="col-md-3">
+        <div class="box">
+          <p class="label">
+            <i class="fa fa-users"></i>
+            <%= t "projects.show.member" %>
+          </p>
+          <p class="list-user">
+            <%= t "projects.show.manager" %>:
+            <% @project.managers.each_with_index do |manager, index| %>
+              <%= link_to manager.user_name, "#" %><%= (index == @project.managers.size - 1)  ? "." : "," %>
+            <% end %>
+          </p>
+          <p class="list-user">
+            <%= t "projects.show.developer" %>:
+            <% @project.developers.each_with_index do |developer, index| %>
+              <%= link_to developer.user_name, "#" %><%= (index == @project.developers.size - 1)  ? "." : "," %>
+            <% end %>
+          </p>
+        </div>
+        <div class="box">
+          <p class="label"><%= t "projects.show.spent_time" %></p>
+          <p><i class="fa fa-clock-o"></i> <%= t "projects.show.hours" %></p>
+        </div>
       </div>
     </div>
   </div>

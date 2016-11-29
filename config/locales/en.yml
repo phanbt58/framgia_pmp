@@ -27,7 +27,11 @@ en:
       start_date: "Start date"
       end_date: "End date"
       manager: "Manager"
-      member: "Member"
+      member: "Members"
+      developer: "Developer"
+      master_plan: "Master plan"
+      spent_time: "Spent time"
+      hours: "hours"
     delete:
       confirm: "You are sure?"
     overview: "Overview"

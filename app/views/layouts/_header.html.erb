@@ -7,7 +7,7 @@
           <% unless current_user.member? %>
             <li><%= link_to t("layouts.invite"), users_path %></li>
             <li><%= link_to t("layouts.sync_user"), synchronizes_path %></li>
-            <li><%= link_to t("layouts.projects"), admin_projects_path %></li>
+            <li><%= link_to t("layouts.projects"), projects_path %></li>
             <li><%= link_to t("layouts.phases"), admin_phases_path %></li>
           <% else %>
             <li><%= link_to t("layouts.projects"), projects_path %></li>
