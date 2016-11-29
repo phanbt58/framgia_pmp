@@ -15,6 +15,7 @@
       <div class="col-md-2"></div>
       <div class="col-md-8">
         <%= f.hidden_field :sprint_id, value: @sprint.id %>
+        <%= f.hidden_field :item_performance_id, value: @sprint.item_performances.execute.first.id %>
         <label><%= t "work_performances.user_name" %></label><br>
         <%= f.select :user_id, @sprint.users.collect {|user| [user.name, user.id]},
           {}, {class: "form-control"} %>
@@ -29,9 +30,9 @@
           {selected: @sprint.master_sprints.in_today.first.try(:id)},
           {class: "form-control"} %>
         <br>
-        <label><%= t "work_performances.item_name" %></label><br>
-        <%= f.select :item_performance_id,
-          @sprint.item_performances.collect {|item| [item.name, item.id]},
+        <label><%= t "work_performances.phase" %></label><br>
+        <%= f.select :phase_id,
+          @sprint.project_phases.collect {|phase| [phase.phase_name, phase.id]},
           {}, {class: "form-control"} %>
         <br>
         <label><%= t "work_performances.value" %></label><br>

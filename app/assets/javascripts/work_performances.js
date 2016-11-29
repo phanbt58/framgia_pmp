@@ -102,7 +102,6 @@ function checkWorkPerformances(){
   var master_sprint_id = $('#work_performance_master_sprint_id').val();
   var task_id = $('#work_performance_task_id').val();
   var user_id = $('#work_performance_user_id').val();
-  var item_id = $('#work_performance_item_performance_id').val();
   var sprint_id = $('#work_performance_sprint_id').val();
   if (sprint_id){
     $.ajax({
@@ -112,7 +111,6 @@ function checkWorkPerformances(){
         master_sprint_id: master_sprint_id,
         task_id: task_id,
         user_id: user_id,
-        item_performance_id: item_id,
         sprint_id: sprint_id
       },
       dataType: 'json',
@@ -123,7 +121,6 @@ function checkWorkPerformances(){
         else{
           $('#work_performance_performance_value').val('');
           $('#work_performance_performance_value').val(result.wpds[0].performance_value);
-          $('#work_performance_item_performance_id').val(result.wpds[0].item_performance_id);
         }
       }
     });

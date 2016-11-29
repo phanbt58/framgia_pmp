@@ -4,7 +4,7 @@ class ItemPerformance < ActiveRecord::Base
 
   enum chart_type: [:burn_up, :burn_down]
   enum performance_name: [:estimate_task, :spent_time, :burn_value, :estimate_story,
-    :bunr_story, :execute]
+    :burn_story, :execute]
 
   scope :list_by_chart_type, -> type {where chart_type: type}
 end
