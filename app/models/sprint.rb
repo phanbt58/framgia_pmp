@@ -3,12 +3,12 @@ class Sprint < ActiveRecord::Base
 
   has_many :assignees, dependent: :destroy
   has_many :users, through: :assignees, before_remove: :destroy_time_logs
-  has_many :time_logs
+  has_many :time_logs, dependent: :destroy
   has_many :product_backlogs
-  has_many :tasks
-  has_many :log_works
-  has_many :master_sprints
   has_many :days, class_name: MasterSprint.name, foreign_key: :sprint_id
+  has_many :tasks, dependent: :destroy
+  has_many :log_works, dependent: :destroy
+  has_many :master_sprints, dependent: :destroy
   has_many :item_performances, through: :project
   has_many :phase_items, through: :project
   has_many :work_performances, dependent: :destroy
@@ -18,7 +18,7 @@ class Sprint < ActiveRecord::Base
   validates :start_date, presence: true
 
   DEFAULT_MASTER_SPRINT = 10
-  SPRINT_ATTRIBUTES_PARAMS = [:name, :description, :project_id, :start_date,
+  SPRINT_ATTRIBUTES_PARAMS = [:description, :project_id, :start_date,
     user_ids: [], time_logs_attributes: [:id, :assignee_id, :lost_hour],
     log_works_attributes: [:id, :task_id, :remaining_time],
     tasks_attributes: [:id, :product_backlog_id, :task_id, :subject, :description,
@@ -55,6 +55,12 @@ class Sprint < ActiveRecord::Base
 
   def end_date
     self.days.last.date
+
+  end
+
+  def create_name
+    index = self.project.sprints.count + 1
+    self.name = I18n.t("sprints.sprint") + index.to_s
   end
 
   private

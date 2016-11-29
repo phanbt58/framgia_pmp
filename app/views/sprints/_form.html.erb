@@ -1,0 +1,32 @@
+<div class="col-md-offset-1">
+  <%= render "shared/error_messages", object: @sprint %>
+  <%= f.hidden_field :project_id, value: @project.id %>
+
+  <div class="row">
+    <div class="col-md-2 text-right">
+      <span><%= t "projects.member" %></span>
+    </div>
+    <div class="col-md-7">
+      <div class="form-group">
+        <%= f.select :user_ids,
+          @assignees.collect {|assignee| [assignee.user_name, assignee.user_id]},
+          {}, {id: "assignee", multiple: :true} %>
+      </div>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col-md-2 text-right">
+      <span><%= t "sprints.start_date" %></span>
+    </div>
+    <div class="col-md-2">
+      <%= f.text_field :start_date, class: "form-control datepicker",
+        value: @sprint.start_date.nil? ? DateTime.now.strftime(t "date.rb_format") :
+        @sprint.start_date.strftime(t "date.rb_format")%>
+    </div>
+    <br>
+  </div><br>
+  <div class="col-md-2 col-md-offset-2">
+    <%= f.submit (f.object.new_record? ? t("buttons.create")
+      : t("buttons.update")), class: "btn btn-primary" %>
+  </div>
+</div>

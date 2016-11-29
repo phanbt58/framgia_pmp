@@ -2,6 +2,21 @@ class SprintsController < ApplicationController
   load_resource
   load_resource :project
   before_action :load_sprint, :load_tasks
+  before_action :load_assignees, only: [:new, :create]
+
+  def new
+  end
+
+  def create
+    @sprint.create_name
+    if @sprint.save
+      flash[:success] = flash_message :created
+      redirect_to project_sprint_path(@project, @sprint)
+    else
+      flash.now[:failed] = flash_message :not_created
+      render :new
+    end
+  end
 
   def show
     @product_backlogs = @sprint.product_backlogs
@@ -27,6 +42,16 @@ class SprintsController < ApplicationController
     end
   end
 
+  def destroy
+    if @sprint.destroy
+      flash[:success] = flash_message :deleted
+      redirect_to project_path(@project)
+    else
+      flash.now[:failed] = flash_message :not_updated
+      redirect_to project_sprint_path(@project, @sprint)
+    end
+  end
+
   private
   def sprint_params
     params.require(:sprint).permit Sprint::SPRINT_ATTRIBUTES_PARAMS
@@ -38,5 +63,9 @@ class SprintsController < ApplicationController
 
   def load_tasks
     @tasks = @sprint.tasks
+  end
+
+  def load_assignees
+    @assignees = @project.members
   end
 end
