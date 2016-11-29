@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   resources :columns, only: [:create, :show, :destroy]
   resources :rows, only: [:create, :show, :destroy]
 
-  resources :projects, only: [:index, :show] do
+  resources :projects do
     resources :product_backlogs
-    resources :sprints, only: [:show, :update] do
+    resources :sprints do
       resources :work_performances
     end
   end
