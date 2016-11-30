@@ -2,8 +2,8 @@ var chart;
 var estimate_data = [0];
 var actual_data = [0];
 
-$(document).on("page:change", function (){
-  var burndown_chart = $("#burndown_chart");
+$(document).on('page:change', function (){
+  var burndown_chart = $('#burndown_chart');
   if (burndown_chart.length > 0){
     getChartData();
     initChart();
@@ -11,12 +11,12 @@ $(document).on("page:change", function (){
 });
 
 function getChartData() {
-  var workday = $("th[class*='log-estimate']").length;
+  var workday = $('th[class*="log-estimate"]').length;
   estimate_data.length = 1;
   actual_data.length = 1;
   for(var i = 1; i <= workday; i++) {
-    actual_data.push(parseInt($(".log-actual-" + i).text()));
-    estimate_data.push(parseInt($(".log-estimate-" + i).text()));
+    actual_data.push(parseInt($('.log-actual-' + i).text()));
+    estimate_data.push(parseInt($('.log-estimate-' + i).text()));
   }
 }
 
@@ -31,7 +31,7 @@ updateBurnDownChart = function(){
   });
 }
 
-$(document).on("change click", "td input", updateBurnDownChart);
+$(document).on('change click', '#sprints td input', updateBurnDownChart);
 
 function initChart(){
   chart = new Highcharts.Chart({

@@ -7,6 +7,8 @@ class ProductBacklog < ActiveRecord::Base
   delegate :name, to: :project, prefix: true
   delegate :name, :id, to: :sprint, prefix: true, allow_nil: true
 
+  scope :with_ids, ->ids {where id: ids}
+
   def total_estimation_time
     estimate = Task.includes(:log_works)
       .of_product_backlog_and_sprint(id, sprint_id).map do |task|
