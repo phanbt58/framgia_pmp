@@ -2,7 +2,7 @@ class SprintsController < ApplicationController
   load_resource
   load_resource :project
   before_action :load_sprint, :load_tasks
-  before_action :load_assignees, only: [:new, :create]
+  before_action :load_assignees, except: [:index, :show, :destroy]
 
   def new
   end
@@ -31,10 +31,14 @@ class SprintsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     respond_to do |format|
       if @sprint.update_attributes sprint_params
         @sprint.update_start_date
+        format.html {redirect_to project_sprint_path(@project, @sprint)}
         format.js {head :ok}
       else
         format.js {head :internal_server_error}
