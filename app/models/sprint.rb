@@ -27,6 +27,7 @@ class Sprint < ActiveRecord::Base
     master_sprints_attributes: [:id, :date, :day]]
 
   after_create :build_master_sprint, :create_default_tasks
+  after_update :update_master_sprint
 
   scope :list_by_user, ->user do
     joins(:assignees).where assignees: {user_id: user.id}
@@ -42,20 +43,12 @@ class Sprint < ActiveRecord::Base
     check_manager? current_user, project or include_assignee? current_user
   end
 
-  def update_master_sprint
-    self.master_sprints.each_with_index do |master_sprint, index|
-      master_sprint.update_attributes date: self.start_date + index,
-        day: index + 1
-    end
-  end
-
   def update_start_date
     self.update_attributes start_date: self.master_sprints.first.date
   end
 
   def end_date
     self.days.last.date
-
   end
 
   def create_name
@@ -67,17 +60,28 @@ class Sprint < ActiveRecord::Base
   def build_master_sprint
     if self.master_sprints.empty?
       weekend_day = 0
-
       DEFAULT_MASTER_SPRINT.times do |day|
-        date = self.start_date + weekend_day + day
-
-        if date.saturday?
-          date = date + 2.day
-          weekend_day += 2
-        end
+        date, weekend_day = set_day_sprint self, weekend_day, day
         self.days.create date: date, day: day
       end
     end
+  end
+
+  def update_master_sprint
+    weekend_day = 0
+    self.master_sprints.each_with_index do |master_sprint, index|
+      date, weekend_day = set_day_sprint self, weekend_day, index
+      master_sprint.update_attributes date: date, day: index + 1
+    end
+  end
+
+  def set_day_sprint sprint, weekend_day, day
+    date = self.start_date + weekend_day + day
+    if date.saturday?
+      date = date + 2.day
+      weekend_day += 2
+    end
+    [date, weekend_day]
   end
 
   def check_manager? current_user, project
