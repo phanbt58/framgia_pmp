@@ -168,6 +168,9 @@ $(document).mousedown(function(e) {
   if (e.which != 3 && e.target.id != 'delete-activity'){
     resetRowClass();
   }
+
+  if ($('#input-active') !== null)
+      $('#input-active').removeAttr("id");
 });
 
 $(document).ready(function(){
@@ -209,6 +212,17 @@ $(document).on('ready page:load', function() {
     }
     return false;
    });
+
+  $('.log,.subject-activity,.tasks,.lost-hours').click(function(e){
+    e.preventDefault();
+    if ($('#input-active') !== null)
+      $('#input-active').removeAttr("id");
+    $(this).parent().attr('id', 'input-active');
+  });
+
+  $('.log,.subject-activity,.tasks,.lost-hours').one('keypress', function () {
+    $(this).val('');
+  });
 });
 
 $(document).on('keyup', '.task-name', function(event) {

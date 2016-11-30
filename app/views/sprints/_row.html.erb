@@ -11,7 +11,7 @@
       title: "#{activity_builder.object.product_backlog_story}" %>
   </td>
   <td class="task-id text-center"><%= activity_builder.text_field :task_id,
-    class: "row-#{row}" %></td>
+    class: "tasks row-#{row}" %></td>
   <td class="task-name text-left"><%= activity_builder.text_field :subject,
     class: "row-#{row} subject-activity", title: "#{activity_builder.object.subject}" %></td>
   <td class="assignee-name"><%= activity_builder.select :user_id,
