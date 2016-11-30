@@ -1,5 +1,4 @@
 $(document).on('page:change', function() {
-  $('#sprint-with-wpd-tab a:first').tab('show');
 
   setWidthOfElementSprint();
 
@@ -224,6 +223,7 @@ function resetTaskTableHeight(){
     task_table.removeAttr('height');
     task_table.width(100+'%');
   }
+  setWidthOfElementSprint();
 }
 
 $(document).on('click', 'td.delete_task input', function(){

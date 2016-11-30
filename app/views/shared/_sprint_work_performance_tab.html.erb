@@ -1,0 +1,11 @@
+<div class ="row">
+  <ul class="nav nav-tabs" id="sprint-with-wpd-tab">
+    <li role="presentation" class="<%= tab_active sprint.id, active_tab %>">
+      <%= link_to t("sprints.sprint"), project_sprint_path(project, sprint) %>
+    </li>
+    <li role="presentation" class="<%= tab_active Settings.tabs.sprint_wpd, active_tab %>">
+      <%= link_to t("work_performances.view"),
+        project_sprint_work_performances_path(project, sprint) %>
+    </li>
+  </ul>
+</div>

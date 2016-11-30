@@ -3,6 +3,7 @@ tabs:
   overview_project: "overview project"
   new_sprint: "new sprint"
   project_backlog: "project_backlog"
+  sprint_wpd: "sprint_work_performance"
 sprint:
   default_days: 10
   phases: "Phases"

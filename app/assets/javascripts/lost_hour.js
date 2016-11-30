@@ -29,6 +29,9 @@ function total_lost_hour() {
 }
 
 $(document).on('change', '#lost_hour_table td input', function(){
-  var col = parseInt($($(this).parent().attr('class').split('-')).last()[0]);
+  var filter = function(v) {return v.indexOf('assignee-col') == 0}
+  var className = $(this).parent().attr('class').split(' ').filter(filter)[0];
+  var col = parseInt(className.split('-').pop());
+
   calculate_lost_hour(col);
 });
