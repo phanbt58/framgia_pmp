@@ -3,6 +3,7 @@
   <td class="index" data-task="<%= activity_builder.object.id %>">
     <div class="text-center"><%= row + 1 %></div>
   </td>
+
   <td class="story">
     <%= activity_builder.select :product_backlog_id,
       options_for_select(@product_backlogs.collect {|p| [p.story_id + "-"+ p.story, p.id]},
@@ -32,4 +33,8 @@
           class: "log log-#{log_work_builder.object.master_sprint.day} row-#{row} text-center" %>
       </td>
   <% end %>
+  <td class="delete_task">
+    <%= check_box_tag "delete-task", activity_builder.object.id, false,
+      class: "text-center" %>
+  </td>
 </tr>

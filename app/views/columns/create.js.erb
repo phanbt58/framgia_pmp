@@ -1,10 +1,10 @@
 <% @support_column.tasks.each_with_index do |task, row| %>
-  $('tr.activity_<%= task.id %>').append('<%= j render "log_work_cell", task: task, row: row %>')
+  $('tr.activity_<%= task.id %> .panel-left').last().after('<%= j render "log_work_cell", task: task, row: row %>')
   setLastTimeLogValue("<%= task.id %>");
 <% end %>
 
 <% ["master-data-date", "master-sprint-working-day", "master-estimate-plan", "actual"].each do |header_class| %>
-  $('tr.<%= header_class %>').append('<%= j render "header_cell", header_class: header_class %>')
+  $('tr.<%= header_class %> .panel-left').last().after('<%= j render "header_cell", header_class: header_class %>')
 <% end %>
 
 <% @support_column.assignees.each_with_index do |assignee, row| %>
@@ -18,7 +18,7 @@
 $('td[class*=master-column-]').find('input[id*=_remaining_time]').change(logWorkEventListener);
 $('.newest_master_sprint').last().change(masterSprintDateListener);
 $('#lost_hour_table').attr('data-number-work-day', <%= @support_column.total_master_sprint %>);
-$('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
+setMarginLeftofAddColumnButton();
 totalLogWorksCol();
 setLastActual();
 setActual(<%= @support_column.total_master_sprint - @master_sprints.size %>);
@@ -32,12 +32,12 @@ $("#sprints").animate({
 
 function setLastTimeLogValue(task_id) {
   var value = $($('tr.activity_' + task_id + ' td').eq(-2)).children().last().val();
-  $($('tr.activity_' + task_id + ' td')).last().children().last().val(value);
+  $($('tr.activity_' + task_id + ' td.panel-left')).last().children().last().val(value);
 }
 
 function setLastActual() {
   var value = $($('tr.actual th').eq(-2)).text();
-  $($('tr.actual th')).last().text(value);
+  $($('tr.actual th.panel-left')).last().text(value);
 }
 
 function updateDatePicker() {

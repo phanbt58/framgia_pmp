@@ -37,17 +37,11 @@ class RowsController < ApplicationController
   end
 
   def destroy
-    @task = Task.find params[:task_id]
-    if @task.destroy
-      respond_to do |format|
-        format.html{redirect_to project_sprint_path(@project)}
-        format.json{head :no_content}
-      end
-    else
-      respond_to do |format|
-        format.html{redirect_to project_sprint_path(@project)}
-        format.json{head :no_content}
-      end
+    @tasks = Task.find_with_ids params[:task_ids]
+    @tasks.destroy_all
+    respond_to do |format|
+      format.html{redirect_to project_sprint_path(@project)}
+      format.json{head :no_content}
     end
   end
 end

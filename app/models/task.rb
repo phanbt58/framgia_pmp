@@ -15,6 +15,7 @@ class Task < ActiveRecord::Base
   scope :fitler_log_works, ->sprint{includes(:log_works).where(sprint: sprint)}
   scope :of_user_in_sprint, ->(user_id, sprint){where user_id: user_id, sprint_id: sprint.id}
   scope :number_of_task, ->sprint_id{where sprint_id: sprint_id}
+  scope :find_with_ids, ->ids{where id: ids}
 
   delegate :name, to: :user, prefix: true, allow_nil: true
   delegate :story, to: :product_backlog, prefix: true, allow_nil: true

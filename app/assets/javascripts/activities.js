@@ -68,7 +68,11 @@ $(document).on('page:change', function(){
     if ($('#activities').length && $('.today').length) {
       var filterCol = function(v) {return v.indexOf('master-column') == 0}
       var colClass = $('.today')[0].className.split(' ').filter(filterCol)[0];
-      $('.' + colClass).addClass('today');
+      $('.' + colClass).each(function(){
+        if ($(this).closest('tr').hasClass('selected-row') == false){
+          $(this).addClass('today');
+        }
+      });
     }
   }
 
@@ -214,44 +218,54 @@ function setRowColor(rowClass) {
 }
 
 $(document).on('click', '#delete-activity', function(e){
-  var task_id = $('#delete-activity').data('activity');
-  var deleteButton = $(this);
-  var row_index = parseInt(deleteButton.closest('tr').attr('data-row-index'));
-  var answer = confirm(I18n.t('delete.confirm'));
-  if (answer){
-    $.ajax({
-      type: 'DELETE',
-      url:  '/rows/' + task_id,
-      data: {task_id: task_id},
-      dataType: 'json',
-      success: function() {
-        deleteButton.closest('tr').remove();
-        $('input#sprint_tasks_attributes_'+row_index+'_id').remove();
-        resetTaskIndex(row_index);
-        resetTaskTableHeight();
-        $('#notify-message').text(I18n.t('product_backlogs.delete.success')).css('color', 'green');
-      },
-      error: function(){
-        $('#notify-message').text(I18n.t('product_backlogs.delete.failed')).css('color', 'red');
-      }
-    });
-  }
-  else{
-    $('#dialog').addClass('dialog-hidden');
-    resetRowClass();
+  var task_ids = [];
+  $('input:checkbox[id=delete-task]:checked').each(function(){
+    task_ids.push($(this).val());
+  });
+  if (task_ids.length > 0){
+    var answer = confirm(I18n.t('delete.confirm'));
+    if (answer){
+      $.ajax({
+        type: 'DELETE',
+        url:  '/rows',
+        data: {task_ids: task_ids},
+        dataType: 'json',
+        success: function() {
+          for (var i in task_ids){
+            var $tr = $('tr#activity_'+task_ids[i]);
+            $tr.next('input').remove();
+            $tr.remove();
+          }
+          resetTaskIndex();
+          resetTaskTableHeight();
+          $('#notify-message').text(I18n.t('product_backlogs.delete.success')).css('color', 'green');
+        },
+        error: function(){
+          $('#notify-message').text(I18n.t('product_backlogs.delete.failed')).css('color', 'red');
+        }
+      });
+    }
+    else{
+      $('input:checkbox[id=delete-task]:checked').each(function(){
+        var row = parseInt($(this).closest('tr').attr('data-row-index'));
+        resetRowClass(row);
+        $(this).prop('checked', false);
+      });
+    }
   }
 });
 
-function resetTaskIndex(row_index){
-  $('table#activities tr').each(function(){
-    var index = parseInt($(this).attr('data-row-index'));
-    if (index > row_index){
-      var new_index = index - 1;
-      $(this).attr('data-row-index', new_index);
-      $(this).find('td.index > .text-center').html(index);
-      $('input#sprint_tasks_attributes_'+index+'_id').attr('id', 'sprint_tasks_attributes_'+new_index+'_id');
-      $('.row-'+index).removeClass('row-'+index).addClass('row-'+new_index);
-    }
+function resetTaskIndex(){
+  $('table#activities tr[id*="activity_"]').each(function(index){
+    $(this).attr('data-row-index', index);
+    $(this).next('input').attr('id', 'sprint_tasks_attributes_'+index+'_id');
+    $(this).find('td.index > .text-center').html(index + 1);
+
+    $(this).find('[class*="row-"]').each(function(i, cell){
+      var filter = function(v) {return v.indexOf('row') == 0}
+      var className = cell.className.split(' ').filter(filter)[0];
+      $(cell).removeClass(className).addClass('row-'+index);
+    });
   });
 }
 
