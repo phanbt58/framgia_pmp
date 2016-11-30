@@ -1,24 +1,10 @@
 class ProductBacklogsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:destroy]
   load_resource :project
 
   def index
     @sprints = @project.sprints
     @product_backlogs = @project.product_backlogs
-  end
-
-  def destroy
-    if @product_backlog.destroy
-      respond_to do |format|
-        format.html {redirect_to project_product_backlogs_path(@project)}
-        format.json {render json: {}}
-      end
-    else
-      respond_to do |format|
-        format.html {redirect_to project_product_backlogs_path(@project)}
-        format.json {render json: {}}
-      end
-    end
   end
 
   def create
@@ -37,6 +23,21 @@ class ProductBacklogsController < ApplicationController
             formats: "html"
           )
         }
+      end
+    end
+  end
+
+  def destroy
+    @product_backlogs = ProductBacklog.with_ids params[:ids]
+    if @product_backlogs.destroy_all
+      respond_to do |format|
+        format.html {redirect_to project_product_backlogs_path(@project)}
+        format.json {render json: {}}
+      end
+    else
+      respond_to do |format|
+        format.html {redirect_to project_product_backlogs_path(@project)}
+        format.json {render json: {}}
       end
     end
   end

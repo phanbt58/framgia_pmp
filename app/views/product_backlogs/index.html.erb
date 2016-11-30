@@ -14,7 +14,11 @@
             <th class="estimate"><%= t "product_backlog.index.estimate" %></th>
             <th class="actual"><%= t "product_backlog.index.actual" %></th>
             <th class="remaining"><%= t "product_backlog.index.remaining" %></th>
-            <th class="action"><%= t "product_backlog.index.action" %></th>
+            <th class="action">
+              <i class="fa fa-trash fa-2x delete_icon delete-product-backlog" aria-hidden="true"
+                data-project-id="<%= @project.id %>">
+              </i>
+            </th>
           </tr>
         </thead>
         <tbody>

@@ -27,7 +27,7 @@
   }
 
   .fa-2x {
-    font-size: 1em;
+    font-size: 1.3em;
   }
 
   th {
@@ -68,6 +68,7 @@
   td, th {
     padding-right: 0px;
     padding-left: 0px;
+    vertical-align: middle;
   }
 
   .glyphicon {
@@ -165,4 +166,10 @@ li.add-more-product-value {
 #add-more-user-story {
   width: 90px;
   padding-left: 0px;
+}
+
+.selected-userstory {
+  background: $light-blue;
+  color: $black;
+  font-weight: bold;
 }

@@ -1,22 +1,66 @@
-$(document).on("click", ".delete-product-backlog", function(e){
-  var product_backlog_id = $(this).data("product-backlog-id");
-  var project_id = $(this).data("project-id");
-  var row_index = parseInt($('tr#backlog-row-'+product_backlog_id).attr('data-productbacklog-index'));
-  $.ajax({
-      type: "DELETE",
-      url:  "/projects/" + project_id + "/product_backlogs/" + product_backlog_id,
-      dataType: "json",
-      success: function() {
-        $("#backlog-row-"+ product_backlog_id).remove();
-        table_scroll_resize();
-        change_style_table();
-        resetProductbacklogIndex(row_index);
-        $("#notify-message").text(I18n.t("product_backlogs.delete.success")).css("color", "green");
-      },
-      error: function(){
-        $("#notify-message").text(I18n.t("product_backlogs.delete.failed")).css("color", "red");
-      }
+$(document).on('click', 'td input#delete-userstory', function(){
+  $('input:checkbox[id=delete-userstory]:checked').each(function(){
+    var product_backlog_id = $(this).val();
+    $('#backlog-row-'+product_backlog_id).attr('class', 'selected-userstory');
   });
+  $('input:checkbox[id=delete-userstory]:not(:checked)').each(function(){
+    var product_backlog_id = $(this).val();
+    resetColorProductBacklogRow(product_backlog_id);
+  });
+});
+
+function resetColorProductBacklogRow(row){
+  var $tr = $('#backlog-row-'+row);
+  var actual_time = $tr.find('td.actual input').val();
+  var remaining_time = $tr.find('td.remaining input').val();
+  if ((remaining_time == 0 && actual_time == 0) || remaining_time == '')
+    $tr.attr('class', 'default');
+  else{
+    if (remaining_time == 0 && actual_time != 0){
+      $tr.attr('class', 'finished');
+    }
+    else{
+      $tr.attr('class', 'in_progress');
+    }
+  }
+}
+
+$(document).on('click', '.delete-product-backlog', function(e){
+  var project_id = $(this).data("project-id");
+  var user_story_ids = []
+  $('input:checkbox[id=delete-userstory]:checked').each(function(){
+    user_story_ids.push($(this).val());
+  });
+  if (user_story_ids.length > 0){
+    var answer = confirm(I18n.t('delete.confirm'));
+    if (answer){
+      $.ajax({
+        type: 'DELETE',
+        url:  '/projects/' + project_id + '/product_backlogs',
+        data: {ids: user_story_ids},
+        dataType: 'json',
+        success: function() {
+          for (var i in user_story_ids){
+            $('#backlog-row-'+ user_story_ids[i]).remove();
+          }
+          table_scroll_resize();
+          change_style_table();
+          resetProductbacklogIndex();
+          $('#notify-message').text(I18n.t('product_backlogs.delete.success')).css('color', 'green');
+        },
+        error: function(){
+          $('#notify-message').text(I18n.t('product_backlogs.delete.failed')).css('color', 'red');
+        }
+      });
+    }
+    else{
+      $('input:checkbox[id=delete-userstory]:checked').each(function(){
+        var product_backlog_id = $(this).val();
+        $(this).prop('checked', false);
+        resetColorProductBacklogRow(product_backlog_id);
+      });
+    }
+  }
 });
 
 $(document).ready(function(){
@@ -24,16 +68,13 @@ $(document).ready(function(){
   $(".product-backlog-category").tooltip();
 });
 
-function resetProductbacklogIndex(row_index){
-  $('table.product_backlog_table_scroll tr').each(function(){
-    var index = parseInt($(this).attr('data-productbacklog-index'));
+function resetProductbacklogIndex(){
+  $('table.product_backlog_table_scroll tr').each(function(index){
     var product_backlog_id = $(this).data('product-backlog-id');
-    if (index > row_index){
-      $(this).attr('data-productbacklog-index', index - 1);
-      $(this).find('td.id').html(index+'<input type="hidden" name="product_backlogs['+
-        product_backlog_id+'][id]" id="product_backlogs_'+product_backlog_id+'_id" value="'+
-        product_backlog_id+'">');
-    }
+    $(this).attr('data-productbacklog-index', index - 1);
+    $(this).find('td.id').html(index +'<input type="hidden" name="product_backlogs['+
+      product_backlog_id+'][id]" id="product_backlogs_'+product_backlog_id+'_id" value="'+
+      product_backlog_id+'">');
   });
 }
 
@@ -97,7 +138,7 @@ $(document).on('ready page:load', function() {
    });
 });
 
-$(document).on("page:change", function() {
+$(document).on('page:change', function() {
   table_scroll_resize();
   change_style_table();
 
@@ -110,30 +151,37 @@ $(document).on("page:change", function() {
     }
   });
 
-  $("#save-product-backlog").on("click", function(){
-    $("#notify-message").text(I18n.t("product_backlogs.saving"));
+  $('#save-product-backlog').on('click', function(){
+    $('#notify-message').text(I18n.t('product_backlogs.saving'));
     $.ajax({
-      type: "PATCH",
-      url: "/update_product_backlogs",
-      data: $("#product_backlog_form").serialize(),
-      dataType: "json",
+      type: 'PATCH',
+      url: '/update_product_backlogs',
+      data: $('#product_backlog_form').serialize(),
+      dataType: 'json',
       success: function(data) {
         $('#save-product-backlog').addClass("disabled");
-        $("#notify-message").text(I18n.t("product_backlogs.saved")).css("color", "green");
+        $('#notify-message').text(I18n.t('product_backlogs.saved')).css('color', 'green');
       },
       error: function(data) {
-        $("#notify-message").text(I18n.t("product_backlogs.failed")).css("color", "red");
+        $('#notify-message').text(I18n.t('product_backlogs.failed')).css('color', 'red');
         }
     });
   });
 
-  $("#product_backlog_form").on("change click", "input, select", function(){
-    $('#save-product-backlog').removeClass("disabled");
+  $('#product_backlog_form').on('change click', 'input, select', function(e){
+    $('#save-product-backlog').removeClass('disabled');
+    if (e.target.id != 'delete-userstory'){
+      $('input:checkbox[id=delete-userstory]:checked').each(function(){
+        var product_backlog_id = $(this).val();
+        $(this).prop('checked', false);
+        resetColorProductBacklogRow(product_backlog_id);
+      });
+    }
   });
 });
 
-$(document).on("keyup", ".story", function(event) {
+$(document).on('keyup', '.story', function(event) {
   if(event.which == 13) {
-    $("#add-more-row").click();
+    $('#add-more-row').click();
   }
 });

@@ -26,8 +26,7 @@
   <td class="remaining"><%= text_field_tag "product_backlogs[#{@product_backlog.id}][remaining]",
     @product_backlog.remaining, class: "center" %></td>
   <td class="action">
-    <i class="fa fa-trash fa-2x delete_icon delete-product-backlog" aria-hidden="true"
-      data-project-id="<%= @project.id %>" data-product-backlog-id="<%= @product_backlog.id %>">
-    </i>
+    <%= check_box_tag "delete-userstory", @product_backlog.id, false,
+      class: "delete-userstory-#{@product_backlog.id}" %>
   </td>
 </tr>
