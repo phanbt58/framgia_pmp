@@ -52,6 +52,8 @@ en:
     day: "Day"
     item_name: "Item"
     value: "Value"
+    view_all: "View all"
+    compare: "Compare"
   item_performances:
     showall: "All items"
   sprints:
