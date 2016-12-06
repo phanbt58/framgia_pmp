@@ -18,7 +18,7 @@ $(document).on('click', 'td.total-lost-hour, th.master-sprint-day-header', funct
 
   $('td.lost-hour-header-'+day).children().removeClass('body_column').addClass('selected-column');
   $('td.work-hour-header-'+day).children().removeClass('body_column').addClass('selected-column');
-  $('td#assignee-timelog-col-'+day).each(function(){
+  $('td.assignee-timelog-col-'+day).each(function(){
     $(this).children().addClass('selected-column');
   });
   if(new Date($('.master-column-'+day+'> input.master-sprint-date').val())
@@ -119,10 +119,10 @@ function deleteColumn(day, data){
   var number_columns = Object.keys(data.master_sprints).length;
   //delete column
   $('input#sprint_master_sprints_attributes_'+(column_index - 1)+'_id').remove();
-  $('td#assignee-timelog-col-'+day).next('input').remove();
+  $('td.assignee-timelog-col-'+day).next('input').remove();
   $('.lost-hour-header-'+day).remove();
   $('.work-hour-header-'+day).remove();
-  $('td#assignee-timelog-col-'+day).remove();
+  $('td.assignee-timelog-col-'+day).remove();
   $('.master-column-'+day).remove();
 
   $('form#form-input-wpd select#work_performance_master_sprint_id').find('option[value='+day+']').remove();
@@ -136,7 +136,7 @@ function deleteColumn(day, data){
   for (var i=(column_index+1); i<= (number_columns+1);i++){
     $('td#lost-hour-'+i).attr('id','lost-hour-'+(i - 1));
     $('td#work-hour-'+i).attr('id', 'work-hour-'+(i - 1));
-    $('.assignee-col-'+i).attr('class', 'assignee-col-'+(i - 1));
+    $('.assignee-col-'+i).removeClass('assignee-col-'+ i).addClass('assignee-col-'+(i - 1));
     $('th.log-actual-'+i).removeClass('log-actual-'+i).addClass('log-actual-'+(i - 1));
     $('th.log-estimate-'+i).removeClass('log-estimate-'+i).addClass('log-estimate-'+(i - 1));
     $('input#sprint_master_sprints_attributes_'+(i - 1)+'_id')
