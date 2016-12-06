@@ -75,21 +75,21 @@ class Sprint < ActiveRecord::Base
     end
   end
 
-  def set_day_sprint weekend_day, day
-    date = self.start_date + weekend_day + day
+  def set_day_sprint weekend_day, sprint_day
+    date = self.start_date + weekend_day + sprint_day
     if date.saturday?
-      date = date + 2.day
+      date += 2.sprint_day
       weekend_day += 2
     end
     [date, weekend_day]
   end
 
   def check_manager? current_user, project
-    project.managers.map{|member| member.user_id}.include? current_user.id
+    project.managers.map(&:user_id).include? current_user.id
   end
 
   def include_assignee? current_user
-    self.assignees.map{|assignee| assignee.user_id}.include? current_user.id
+    self.assignees.map(&:user_id).include? current_user.id
   end
 
   def destroy_time_logs user
@@ -97,7 +97,7 @@ class Sprint < ActiveRecord::Base
   end
 
   def create_default_tasks
-    10.times do |i|
+    10.times do
       Task.create(sprint_id: self.id)
     end
   end

@@ -20,7 +20,7 @@ class UsersDatatable < AjaxDatatablesRails::Base
     users.each_with_index.map do |user, index|
       [
         index + 1,
-        link_to(user.name,user_path(user)),
+        link_to(user.name, user_path(user)),
         user.email,
         user.role
       ]
@@ -50,7 +50,7 @@ class UsersDatatable < AjaxDatatablesRails::Base
   end
 
   def sort_column
-    columns = %w[name email]
+    columns = %w(name email)
     columns[params[:iSortCol_1].to_i]
   end
 

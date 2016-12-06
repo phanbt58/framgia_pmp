@@ -23,7 +23,7 @@ class WorkPerformancesController < ApplicationController
   def update
     if params[:master_sprint_id] && params[:task_id] && params[:user_id]
       @work_performances = CheckWorkPerformanceExisted.new(@sprint, params)
-        .check_WPD_if_existed
+        .check_wpd_if_existed
       respond_to do |format|
         if @work_performances.any?
           format.json{render json: {existed: :true, wpds: @work_performances}}

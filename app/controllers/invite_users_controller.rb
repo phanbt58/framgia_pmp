@@ -1,7 +1,7 @@
 class InviteUsersController < ApplicationController
   before_action :authenticate_user!, except: [:edit, :update]
   before_action :load_user, only: [:edit, :update]
-  before_action :verity_admin?, only:[:new, :create]
+  before_action :verity_admin?, only: [:new, :create]
 
   def create
     @user = User.find_by email: params[:invite_user][:email].downcase

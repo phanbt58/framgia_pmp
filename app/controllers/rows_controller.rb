@@ -14,11 +14,13 @@ class RowsController < ApplicationController
 
     respond_to do |format|
       format.js
-      format.json{render json: {
-        content: render_to_string({
-          partial: "row", formats: "html", layout: false
-        }), row_number: @row_number
-      }}
+      format.json do
+        render json: {
+          content: render_to_string(
+            partial: "row", formats: "html", layout: false
+          ), row_number: @row_number
+        }
+      end
     end
   end
 
@@ -26,12 +28,10 @@ class RowsController < ApplicationController
     @task = Task.find params[:id]
     if @task.present?
       respond_to do |format|
-        format.html{
+        format.html do
           render partial: "sprints/dialog",
-            locals: {
-              task: @task
-            }
-        }
+            locals: {task: @task}
+        end
       end
     end
   end

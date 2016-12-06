@@ -1,16 +1,15 @@
 class CheckWorkPerformanceExisted
-
   def initialize sprint, params
     @sprint = sprint
     @params = params
   end
 
-  def check_WPD_if_existed
-    check_WPD_existed
+  def check_wpd_if_existed
+    check_wpd_existed
   end
 
   private
-  def check_WPD_existed
+  def check_wpd_existed
     if @params[:master_sprint_id] && @params[:task_id]
       master_sprint_id = @params[:master_sprint_id]
       task_id = @params[:task_id]

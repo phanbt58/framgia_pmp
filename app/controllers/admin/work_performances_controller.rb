@@ -10,11 +10,13 @@ class Admin::WorkPerformancesController < ApplicationController
   def update
     respond_to do |format|
       if @work_performance.update performance_data_params
-        format.json {head :no_content}
+        format.json{head :no_content}
         format.js
       else
-        format.json {render json: @customer.errors.full_messages,
-          status: :unprocessable_entity}
+        format.json do
+          render json: @customer.errors.full_messages,
+            status: :unprocessable_entity
+        end
       end
     end
   end
