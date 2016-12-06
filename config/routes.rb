@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
   resources :synchronizes, only: [:index, :create]
   resources :columns, only: [:create, :show, :destroy]
-  resources :rows, only: [:create, :show, :destroy]
+  resources :rows, only: [:create, :show]
+  resource :rows, only: [:destroy]
 
   resources :projects do
     resources :product_backlogs, except: [:destroy]

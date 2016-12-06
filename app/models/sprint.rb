@@ -40,7 +40,7 @@ class Sprint < ActiveRecord::Base
   accepts_nested_attributes_for :assignees
 
   def include_user? current_user, project
-    check_manager? current_user, project || include_assignee? current_user
+    check_manager?(current_user, project) || include_assignee?(current_user)
   end
 
   def update_start_date

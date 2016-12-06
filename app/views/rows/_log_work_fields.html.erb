@@ -16,3 +16,9 @@
       type="text" value="0"/>
   </td>
 <% end %>
+<td class="delete_task">
+  <div class="text-center">
+    <%= check_box_tag "delete-task", @task.id, false,
+      class: "text-center" %>
+  </div>
+</td>

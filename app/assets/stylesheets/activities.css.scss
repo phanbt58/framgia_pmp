@@ -2,6 +2,11 @@
 
 #activities {
   border: none;
+
+  .fa-2x {
+    font-size: 1.3em;
+  }
+
   th {
     margin: 0;
     padding: 0 5px;
@@ -36,6 +41,7 @@
     min-width: 40px;
     padding-right: 0px;
     padding-left: 0px;
+    vertical-align: middle;
   }
 
   .master-data > td {
@@ -68,6 +74,16 @@
     background-color: $darken-grey;
   }
 
+  .delete_task {
+    width: 2%;
+    border-right-width: 1px;
+  }
+
+  .last-date-row {
+    border: 1px solid $boder-grey;
+    border-left-width: 0px;
+  }
+
   .default {
     background-color: $darken-grey;
   }
@@ -95,6 +111,11 @@
 
     .index {
       width: 2%;
+    }
+
+    .delete_task {
+      width: 2%;
+      border-right-width: 1px;
     }
 
     .story-id {

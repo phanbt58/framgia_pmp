@@ -8,7 +8,7 @@ $(document).on('page:change', function() {
   $(window).resize(function() {
     setWidthOfElementSprint();
     setSprintHeight();
-    $('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
+    setMarginLeftofAddColumnButton();
   });
 
   masterSprintDateListener = function() {
@@ -79,9 +79,11 @@ $(document).on('page:change', function() {
       }
     });
   }
-  $("#lost_hour_form").on("change, click", "input, select", function(){
-    $("#notify-message").text('');
-    $('a#save-sprint').removeClass('disabled');
+  $('#lost_hour_form').on('change, click', 'input, select', function(e){
+    $('#notify-message').text('');
+    if (e.target.id != 'delete-task'){
+      $('a#save-sprint').removeClass('disabled');
+    }
   });
 
   $('a#save-sprint').click(function(){
@@ -115,20 +117,21 @@ $(document).on('page:change', function() {
 function setWidthOfElementSprint(){
   if ($('th.master-sprint-day-header').length <= 10){
     if (($('.activities-panel').height() + $('#chart').height()) > $('#sprints').height()){
-      $('.activities-panel').width($('#sprints').width() - 30);
+      $('.activities-panel').width($('#sprints').width() - 35);
     }
     else{
-      $('.activities-panel').width($('#sprints').width() - 15);
+      $('.activities-panel').width($('#sprints').width() - 20);
     }
   }
   var margin_time_log = $('td.left-side').outerWidth() + $('td.left-side').prev('td').outerWidth();
-  $('.time-log').css('margin-left', margin_time_log + 2);
+  var last_td_width = $('.activities-panel').find('.delete_task').first().width();
+  $('.time-log').css('margin-left', margin_time_log + 1);
   $('#burndown_chart').width(margin_time_log);
   $('th.sprint-remaining').width($('.sprint-remaining').next('th').width());
   $('.panel-left .remaining').parent().width($('th.sprint-remaining').width());
   $('#tracking-time').find('td.header_column, td.assignees_name').width($('th.sprint-worked').width());
-  $('#tracking-time').width($('.activities-panel').width() - margin_time_log);
-  $('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
+  $('#tracking-time').width($('.activities-panel').width() - margin_time_log - last_td_width);
+  setMarginLeftofAddColumnButton();
 }
 
 function setSprintHeight() {
@@ -138,39 +141,10 @@ function setSprintHeight() {
   resetTaskTableHeight();
 }
 
-function initDialog(event, task_id){
-  if ($('#dialog') !== null)
-      $('#dialog').remove();
-  $.ajax({
-    url: '/rows/' + task_id,
-    success: function(data){
-      $('#activity_'+task_id).append(data);
-      $left = event.pageX + 'px';
-      $top = event.pageY + 'px';
-
-      $('#dialog').css({'left': $left,'top': $top});
-      $('#dialog').removeClass('dialog-hidden');
-      $('#dialog').addClass('dialog-visible');
-    }
-  });
-}
-
-$(document).on('contextmenu', 'tr.selected-row td.index', function(e){
-  var task = $(this).data('task');
-  initDialog(e, task);
-  return false;
-});
-
 $(document).mousedown(function(e) {
-  if (($(e.target).is('#delete-activity') === false)) {
-    $('#dialog').remove();
+  if ($('#input-active') !== null){
+    $('#input-active').removeAttr("id");
   }
-  if (e.which != 3 && e.target.id != 'delete-activity'){
-    resetRowClass();
-  }
-
-  if ($('#input-active') !== null)
-      $('#input-active').removeAttr("id");
 });
 
 $(document).ready(function(){
@@ -184,7 +158,7 @@ $(window).on('load', function(){
 
 $(document).on('ready page:load', function() {
   setWidthOfElementSprint();
-  $('.dropdown-add-column').css('margin-left',($('.actual').width()-27)+'px');
+  setMarginLeftofAddColumnButton();
   $('.add-more-sprint-value').click(function(){
     var x=this.firstChild.innerHTML;
     var row_number=2;
@@ -239,7 +213,7 @@ function resetTaskTableHeight(){
   if (body_height >= 250){
     task_table.attr('height', 250+'px');
     task_table.addClass('scroll_tbody');
-    var new_width = ($('table#activities thead').width() + 15) / $('table#activities thead').width() * 100;
+    var new_width = ($('table#activities thead').width() + 16) / $('table#activities thead').width() * 100;
     task_table.width(new_width+'%');
   }
   else{
@@ -248,21 +222,41 @@ function resetTaskTableHeight(){
   }
 }
 
-$(document).on('click', 'td.index', function(){
-  resetRowClass();
-  var $tr = $(this).closest('tr');
-  var old_class = $tr.attr('class').split(' ').slice(-1)[0];
-  if (old_class.includes('activity_') == false){
-    $tr.removeClass(old_class).addClass('selected-row');
-  }
-  else{
-    $tr.addClass('selected-row');
-  }
-  $tr.find('.today').removeClass('today');
+$(document).on('click', 'td.delete_task input', function(){
+  $('input:checkbox[id=delete-task]:checked').each(function(){
+    var $tr = $(this).closest('tr');
+    var old_class = $tr.attr('class').split(' ').slice(-1)[0];
+    $tr.find('.today').removeClass('today');
+    if (old_class.includes('activity_') == false){
+      $tr.removeClass(old_class).addClass('selected-row');
+    }
+    else{
+      $tr.addClass('selected-row');
+    }
+  });
+  $('input:checkbox[id=delete-task]:not(:checked)').each(function(){
+    var row = parseInt($(this).closest('tr').attr('data-row-index'));
+    resetRowClass(row);
+  });
 });
 
-function resetRowClass(){
-  var row = parseInt($('tr.selected-row').attr('data-row-index'));
+$(document).on('change click', 'a#save-sprint, #sprints td input,select', function(e){
+  if (e.target.id != 'delete-task'){
+    $('input:checkbox[id=delete-task]:checked').each(function(){
+      var row = parseInt($(this).closest('tr').attr('data-row-index'));
+      resetRowClass(row);
+      $(this).prop('checked', false);
+    });
+  }
+});
+
+function resetRowClass(row){
   setRowColor('row-'+row);
-  $('tr.selected-row').removeClass('selected-row');
+  $('.row-'+row).closest('tr').removeClass('selected-row');
+  setColorToday();
+}
+
+function setMarginLeftofAddColumnButton(){
+  var last_td_width = $('.activities-panel').find('.delete_task').first().outerWidth();
+  $('.dropdown-add-column').css('margin-left',($('.actual').width()  - last_td_width - 27)+'px');
 }
