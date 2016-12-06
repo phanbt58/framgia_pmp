@@ -130,7 +130,7 @@ function setWidthOfElementSprint(){
   $('th.sprint-remaining').width($('.sprint-remaining').next('th').width());
   $('.panel-left .remaining').parent().width($('th.sprint-remaining').width());
   $('#tracking-time').find('td.header_column, td.assignees_name').width($('th.sprint-worked').width());
-  $('#tracking-time').width($('.activities-panel').width() - margin_time_log - last_td_width);
+  $('#tracking-time').width($('.activities-panel thead').width() - margin_time_log - last_td_width);
   setMarginLeftofAddColumnButton();
 }
 
@@ -185,8 +185,18 @@ $(document).on('ready page:load', function() {
       });
     }
     return false;
-   });
+  });
 
+  resetFormWhenKeyPress();
+});
+
+$(document).on('keyup', '.task-name', function(event) {
+  if(event.which == 13) {
+    $('#add-more-row').click();
+  }
+});
+
+function resetFormWhenKeyPress(){
   $('.log,.subject-activity,.tasks,.lost-hours').click(function(e){
     e.preventDefault();
     if ($('#input-active') !== null)
@@ -197,13 +207,7 @@ $(document).on('ready page:load', function() {
   $('.log,.subject-activity,.tasks,.lost-hours').one('keypress', function () {
     $(this).val('');
   });
-});
-
-$(document).on('keyup', '.task-name', function(event) {
-  if(event.which == 13) {
-    $('#add-more-row').click();
-  }
-});
+}
 
 function resetTaskTableHeight(){
   var task_table = $('table#activities tbody');
@@ -248,6 +252,10 @@ $(document).on('change click', 'a#save-sprint, #sprints td input,select', functi
       $(this).prop('checked', false);
     });
   }
+});
+
+$(document).on('change click', '#lost_hour_form',  function(){
+  resetFormWhenKeyPress();
 });
 
 function resetRowClass(row){
