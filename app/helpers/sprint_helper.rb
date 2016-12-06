@@ -9,7 +9,7 @@ module SprintHelper
   end
 
   def total_lost_hour
-    sum_lost_hour.inject {|total, lost_hour| total + lost_hour}
+    sum_lost_hour.inject{|total, lost_hour| total + lost_hour}
   end
 
   def total_work_hour

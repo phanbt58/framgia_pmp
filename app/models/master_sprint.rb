@@ -25,7 +25,7 @@ class MasterSprint < ActiveRecord::Base
   end
 
   def set_date_and_day
-    if sprint.master_sprints.count == 0
+    if sprint.master_sprints.count.zero?
       self.day = 1
       self.date = sprint.start_date
     else

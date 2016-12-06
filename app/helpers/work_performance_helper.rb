@@ -1,12 +1,16 @@
 module WorkPerformanceHelper
   def work_performances sprint, user_ids, chart_type
     performances_array = []
-    (chart_type.blank? ? sprint.item_performances : sprint.item_performances
-      .list_by_chart_type(chart_type)).each do |item|
-        item_data = user_performance(sprint, user_ids, item)
-        performances_array << item_data
+    if chart_type.blank?
+      items = sprint.item_performances
+    else
+      items = sprint.item_performances.list_by_chart_type(chart_type)
     end
-    return performances_array
+    items.each do |item|
+      item_data = user_performance(sprint, user_ids, item)
+      performances_array << item_data
+    end
+    performances_array
   end
 
   private
@@ -22,6 +26,6 @@ module WorkPerformanceHelper
       item_value /= (user_ids.size.nonzero? || 1)
       item_data[:data] << item_value
     end
-    return item_data
+    item_data
   end
 end

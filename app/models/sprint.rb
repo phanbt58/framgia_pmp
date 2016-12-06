@@ -21,8 +21,8 @@ class Sprint < ActiveRecord::Base
   SPRINT_ATTRIBUTES_PARAMS = [:description, :project_id, :start_date,
     user_ids: [], time_logs_attributes: [:id, :assignee_id, :lost_hour],
     log_works_attributes: [:id, :task_id, :remaining_time],
-    tasks_attributes: [:id, :product_backlog_id, :task_id, :subject, :description,
-      :spent_time, :estimate, :user_id, :sprint_id],
+    tasks_attributes: [:id, :product_backlog_id, :task_id, :subject,
+      :description, :spent_time, :estimate, :user_id, :sprint_id],
     assignees_attributes: [:id, :work_hour],
     master_sprints_attributes: [:id, :date, :day]]
 
@@ -40,7 +40,7 @@ class Sprint < ActiveRecord::Base
   accepts_nested_attributes_for :assignees
 
   def include_user? current_user, project
-    check_manager? current_user, project or include_assignee? current_user
+    check_manager? current_user, project || include_assignee? current_user
   end
 
   def update_start_date
@@ -61,7 +61,7 @@ class Sprint < ActiveRecord::Base
     if self.master_sprints.empty?
       weekend_day = 0
       DEFAULT_MASTER_SPRINT.times do |day|
-        date, weekend_day = set_day_sprint self, weekend_day, day
+        date, weekend_day = set_day_sprint weekend_day, day
         self.days.create date: date, day: day
       end
     end
@@ -70,12 +70,12 @@ class Sprint < ActiveRecord::Base
   def update_master_sprint
     weekend_day = 0
     self.master_sprints.each_with_index do |master_sprint, index|
-      date, weekend_day = set_day_sprint self, weekend_day, index
+      date, weekend_day = set_day_sprint weekend_day, index
       master_sprint.update_attributes date: date, day: index + 1
     end
   end
 
-  def set_day_sprint sprint, weekend_day, day
+  def set_day_sprint weekend_day, day
     date = self.start_date + weekend_day + day
     if date.saturday?
       date = date + 2.day
