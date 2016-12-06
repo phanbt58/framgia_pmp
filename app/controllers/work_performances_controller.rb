@@ -16,7 +16,7 @@ class WorkPerformancesController < ApplicationController
     @work_performances = InputWorkPerformanceData.new(@sprint, params)
       .submit_work_performances
     respond_to do |format|
-      format.json {render json: {wpd: @work_performances}}
+      format.json{render json: {wpd: @work_performances}}
     end
   end
 
@@ -26,9 +26,9 @@ class WorkPerformancesController < ApplicationController
         .check_WPD_if_existed
       respond_to do |format|
         if @work_performances.any?
-          format.json {render json: {existed: :true, wpds: @work_performances}}
+          format.json{render json: {existed: :true, wpds: @work_performances}}
         else
-          format.json {render json: {existed: :false, wpds: []}}
+          format.json{render json: {existed: :false, wpds: []}}
         end
       end
     end
