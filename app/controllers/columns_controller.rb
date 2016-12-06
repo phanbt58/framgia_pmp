@@ -16,9 +16,9 @@ class ColumnsController < ApplicationController
     @master_sprint = MasterSprint.find_by id: params[:master_sprint_id]
     if @master_sprint
       respond_to do |format|
-        format.html {
+        format.html{
           render partial: "sprints/delete_column_dialog",
-            locals: {
+            locals:{
               master_sprint: @master_sprint, sprint: @master_sprint.sprint,
               project: @master_sprint.sprint.project
             }
@@ -31,13 +31,13 @@ class ColumnsController < ApplicationController
     @master_sprint = MasterSprint.find_by id: params[:master_sprint_id]
     if @master_sprint.destroy
       respond_to do |format|
-        format.html {redirect_to project_sprint_path(@project)}
-        format.json {render json: {master_sprints: @master_sprint.sprint.master_sprints}}
+        format.html{redirect_to project_sprint_path(@project)}
+        format.json{render json: {master_sprints: @master_sprint.sprint.master_sprints}}
       end
     else
       respond_to do |format|
-        format.html {redirect_to project_sprint_path(@project)}
-        format.json {render json: {master_sprints: @master_sprint.sprint.master_sprints}}
+        format.html{redirect_to project_sprint_path(@project)}
+        format.json{render json: {master_sprints: @master_sprint.sprint.master_sprints}}
       end
     end
   end

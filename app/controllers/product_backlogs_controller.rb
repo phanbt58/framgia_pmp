@@ -31,13 +31,13 @@ class ProductBacklogsController < ApplicationController
     @product_backlogs = ProductBacklog.with_ids params[:ids]
     if @product_backlogs.destroy_all
       respond_to do |format|
-        format.html {redirect_to project_product_backlogs_path(@project)}
-        format.json {render json: {}}
+        format.html{redirect_to project_product_backlogs_path(@project)}
+        format.json{render json: {}}
       end
     else
       respond_to do |format|
-        format.html {redirect_to project_product_backlogs_path(@project)}
-        format.json {render json: {}}
+        format.html{redirect_to project_product_backlogs_path(@project)}
+        format.json{render json: {}}
       end
     end
   end
