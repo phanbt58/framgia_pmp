@@ -10,9 +10,8 @@ class ProductBacklogsController < ApplicationController
   def create
     @sprints = @project.sprints
     @product_backlog = @project.product_backlogs.build
-    if @product_backlog.save
-      @row_number = @project.product_backlogs.size.pred
-    end
+    @row_number = @project.product_backlogs.size.pred if @product_backlog.save
+
     respond_to do |format|
       format.json do
         render json: {

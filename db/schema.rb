@@ -193,8 +193,8 @@ ActiveRecord::Schema.define(version: 20161124013158) do
     t.integer  "task_id",             limit: 4
   end
 
-  add_index "work_performances", ["item_performance_id"], name: "index_work_performances_on_item_performance_id", using: :btree
-  add_index "work_performances", ["master_sprint_id"], name: "index_work_performances_on_master_sprint_id", using: :btree
+  add_index "work_performances", ["item_performance_id"], name: "fk_rails_dec164a722", using: :btree
+  add_index "work_performances", ["master_sprint_id"], name: "fk_rails_d40e64dd85", using: :btree
   add_index "work_performances", ["phase_id"], name: "index_work_performances_on_phase_id", using: :btree
   add_index "work_performances", ["sprint_id", "user_id", "task_id", "master_sprint_id"], name: "work_perormance_index", unique: true, using: :btree
   add_index "work_performances", ["sprint_id"], name: "index_work_performances_on_sprint_id", using: :btree

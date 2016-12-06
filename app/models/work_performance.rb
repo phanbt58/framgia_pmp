@@ -28,7 +28,8 @@ class WorkPerformance < ActiveRecord::Base
   scope :in_day, ->day{where master_sprint_id: day.id}
 
   def item_performance_name
-    phase_item = PhaseItem.find_by phase_id: self.phase_id, item_performance_id: self.item_performance_id
+    phase_item = PhaseItem.find_by phase_id: self.phase_id,
+      item_performance_id: self.item_performance_id
     phase_item.alias
   end
 end

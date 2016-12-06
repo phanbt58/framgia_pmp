@@ -34,10 +34,10 @@ module ApplicationHelper
   def product_backlog_class product_backlog
     actual_time = product_backlog.actual
     remaining_time = product_backlog.total_remaining_time
-    if (remaining_time == 0 && actual_time == 0) || remaining_time.nil?
+    if (remaining_time.zero? && actual_time.zero?) || remaining_time.nil?
       "default"
     else
-      (remaining_time == 0 && actual_time !=0) ? "finished" : "in_progress"
+      (remaining_time.zero? && !actual_time.zero?) ? "finished" : "in_progress"
     end
   end
 
