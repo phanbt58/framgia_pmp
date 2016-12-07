@@ -1,0 +1,46 @@
+<div class="update_information">
+  <h4><%= t "projects.show.update_info" %></h4><br>
+  <div class="tab-body">
+    <div class="row">
+      <div class="row">
+        <%= render "shared/error_messages", object: @project %>
+        <div class="col-md-2 text-right">
+          <span><%= f.label :name %></span>
+        </div>
+        <div class="col-md-8">
+          <%= f.text_field :name, class: "form-control",
+            placeholder: t("placeholders.name"), required: true %>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-2 text-right">
+          <span><%= f.label :description %></span>
+        </div>
+        <div class="col-md-8">
+          <%= f.text_area :description, rows: 10, class: "form-control",
+            placeholder: t("placeholders.description") %>
+        </div>
+      </div><br>
+
+      <div class="row">
+        <div class="col-md-2 text-right">
+          <span><%= f.label :start_date %></span>
+        </div>
+        <div class="col-md-3">
+          <%= f.text_field :start_date, class: "form-control datepicker", required: true,
+            value: @project.start_date.nil? ? "" : @project.start_date.strftime(t "date.rb_format") %>
+        </div>
+        <div class="col-md-2 text-right">
+          <span><%= f.label :end_date %></span>
+        </div>
+        <div class="col-md-3">
+          <%= f.text_field :end_date, class: "form-control datepicker", required: true,
+            value: @project.end_date.nil? ? "" : @project.end_date.strftime(t "date.rb_format") %>
+        </div>
+      </div></br>
+    </div>
+  </div>
+  <div class="col-md-1">
+    <%= f.submit t("buttons.save"), class: "btn btn-primary" %>
+  </div>
+</div>

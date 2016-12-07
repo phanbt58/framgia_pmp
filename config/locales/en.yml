@@ -20,6 +20,13 @@ en:
         start_date: "Start date"
         end_date: "End date"
     title: "List project"
+    settings:
+      index: "Index"
+      name: "Name"
+      infomation: "Information"
+      role: "Role"
+      action: "Actions"
+      add_member: "Add members"
     show:
       overview: "Overview"
       project_name: "Project Name"
@@ -32,6 +39,9 @@ en:
       master_plan: "Master plan"
       spent_time: "Spent time"
       hours: "hours"
+      action: "Actions"
+      setting: "Settings"
+      update_info: "Change Information"
     delete:
       confirm: "You are sure?"
     overview: "Overview"

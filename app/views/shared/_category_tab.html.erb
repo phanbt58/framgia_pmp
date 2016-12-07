@@ -75,24 +75,6 @@
                 <% end %>
               </ul>
             </li>
-          <% elsif @sprint.nil? && @sprints.nil? %>
-            <div class="button">
-              <li class="dropup over-view-project">
-                <%= link_to "", "", "data-toggle": "dropdown",
-                  "aria-haspopup": "true", "aria-expanded": "false",
-                  class: "glyphicon glyphicon-align-justify dropdown-toggle" %>
-                <ul class="dropdown-menu"
-                  aria-labelledby="dLabel">
-                  <li>
-                    <%= link_to t("buttons.edit"), edit_admin_project_path %>
-                  </li>
-                  <li>
-                    <%= link_to t("buttons.delete"), admin_project_path, method: :delete,
-                      data: {confirm: t("projects.delete.confirm")} %>
-                  </li>
-                </ul>
-              </li>
-            </div>
           <% end %>
         </ul>
       </div>
