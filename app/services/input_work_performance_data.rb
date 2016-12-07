@@ -1,5 +1,4 @@
 class InputWorkPerformanceData
-
   def initialize sprint, params
     @sprint = sprint
     @params = params
@@ -11,9 +10,9 @@ class InputWorkPerformanceData
 
   def submit_work_performances
     work_performances = @sprint.work_performances.of_activity_in_day(@user_id,
-        @master_sprint_id, @task_id)
+      @master_sprint_id, @task_id)
     work_performances.any? ? update_work_performances : create_work_performances
-    return work_performances
+    work_performances
   end
 
   private
@@ -27,8 +26,8 @@ class InputWorkPerformanceData
   def update_work_performances
     if @task_id
       unless @params[:work_performance][:performance_value].blank?
-        work_performance = @sprint.work_performances.of_activity_in_day(@user_id,
-        @master_sprint_id, @task_id)
+        work_performance = @sprint.work_performances
+          .of_activity_in_day(@user_id, @master_sprint_id, @task_id)
         if work_performance.blank?
           WorkPerformance.create work_performance_params
         else

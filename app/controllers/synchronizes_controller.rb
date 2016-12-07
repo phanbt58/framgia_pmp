@@ -30,8 +30,8 @@ class SynchronizesController < ApplicationController
   def get_token
     email = params[:email]
     password = params[:password]
-    uri = URI("#{Settings.hr_system_link.
-      sessions}email=#{email}&password=#{password}")
+    uri = URI("#{Settings.hr_system_link
+      .sessions}email=#{email}&password=#{password}")
     request = Net::HTTP::Post.new(uri)
     response = Net::HTTP.start(uri.host, uri.port){|http| http.request(request)}
     JSON(response.body)
