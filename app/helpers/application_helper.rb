@@ -20,9 +20,8 @@ module ApplicationHelper
 
   def activity_class task
     assignee = task.user
-    log_works = task.log_works
-    estimate = log_works.any? ? log_works.first.remaining_time : 0
-    remaining = task.log_works.empty? ? 0 : task.log_works.last.remaining_time
+    estimate = task.log_works.any? ? task.actual_time : 0
+    remaining = task.log_works.empty? ? 0 : task.remaining_time
 
     if assignee.nil?
       estimate != 0 ? (remaining != 0 ? "estimated" : "default") : "default"
@@ -34,10 +33,12 @@ module ApplicationHelper
   def product_backlog_class product_backlog
     actual_time = product_backlog.actual
     remaining_time = product_backlog.total_remaining_time
-    if (remaining_time.zero? && actual_time.zero?) || remaining_time.nil?
+    if remaining_time.nil? || (remaining_time.zero? && actual_time.zero?)
       "default"
+    elsif remaining_time.zero? && actual_time != 0
+      "finished"
     else
-      (remaining_time.zero? && !actual_time.zero?) ? "finished" : "in_progress"
+      "in_progress"
     end
   end
 
@@ -45,8 +46,8 @@ module ApplicationHelper
     if params.empty?
       t "flashs.messages.#{flash_type}", model_name: controller_name.classify
     else
-      t "flashs.messages.#{flash_type}",
-        models_name: params[0].join(", ") unless params[0].empty?
+      models_name = params[0].join(", ") unless params[0].empty?
+      t "flashs.messages.#{flash_type}", models_name: models_name
     end
   end
 
@@ -62,6 +63,10 @@ module ApplicationHelper
   end
 
   def home_page
-    (current_user.nil? || !current_user.is_root?) ? root_path : admin_projects_path
+    if current_user.nil? || !current_user.is_root?
+      root_path
+    else
+      admin_projects_path
+    end
   end
 end

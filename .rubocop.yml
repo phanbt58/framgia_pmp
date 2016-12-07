@@ -11,8 +11,10 @@ Rails:
   Enabled: true
 
 AllCops:
+  TargetRubyVersion: 2.2
   Excludes:
     - db/schema.rb
+    - lib/tasks/*.rake
 
 # Indent private/protected/public as deep as method definitions
 Style/AccessModifierIndentation:
@@ -308,6 +310,12 @@ Style/MethodDefParentheses:
 Metrics/MethodLength:
   CountComments: false  # count full line comments?
   Max: 10
+
+Metrics/BlockLength:
+  CountComments: false  # count full line comments?
+  Max: 25
+  Exclude:
+    - config/**/*.rb
 
 Style/MethodName:
   EnforcedStyle: snake_case

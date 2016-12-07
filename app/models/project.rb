@@ -32,7 +32,7 @@ class Project < ActiveRecord::Base
   end
 
   def include_assignee? current_user
-    self.members.map{|member| member.user_id}.include? current_user.id
+    self.members.map(&:user_id).include? current_user.id
   end
 
   private
@@ -43,7 +43,7 @@ class Project < ActiveRecord::Base
   end
 
   def create_product_backlog
-    DEFAULT_PRODUCT_BACKLOG.times do |i|
+    DEFAULT_PRODUCT_BACKLOG.times do
       ProductBacklog.create(project_id: self.id)
     end
   end

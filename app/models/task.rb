@@ -28,6 +28,14 @@ class Task < ActiveRecord::Base
     self.log_works.any? ? self.log_works.pluck(:remaining_time).min : 0
   end
 
+  def actual_time
+    log_works.first.remaining_time
+  end
+
+  def remaining_time
+    log_works.last.remaining_time
+  end
+
   private
   def create_log_works
     self.sprint.master_sprints.each do |master_sprint|

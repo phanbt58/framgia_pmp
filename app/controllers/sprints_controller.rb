@@ -22,8 +22,8 @@ class SprintsController < ApplicationController
     @product_backlogs = @sprint.product_backlogs
     if @sprint.include_user? current_user, @project
       all_log_works = @tasks.first.log_works if @tasks.any?
-      @log_works_count = all_log_works.size rescue 0
-      @estimate = EstimateLogworkService.new @tasks, @sprint rescue nil
+      @log_works_count = all_log_works.size
+      @estimate = EstimateLogworkService.new @tasks, @sprint
       @log_estimates = @estimate.sum_remaining_for_day all_log_works
     else
       flash[:alert] = t "flashs.not_authorize"

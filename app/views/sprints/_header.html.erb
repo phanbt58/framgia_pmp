@@ -61,7 +61,7 @@
   <% @sprint.master_sprints.each_with_index do |master_sprint, index| %>
     <% if index == 0 %>
       <th class="panel-left log-actual-1 master-column-<%= master_sprint.id %>" data-column-number="1">
-        <%= @estimate.get_estimate_activities %>
+        <%= @estimate.sum_estimate %>
       </th>
     <% else %>
       <th class="panel-left log-actual-<%= index + 1 %> master-column-<%= master_sprint.id %>"
@@ -77,7 +77,7 @@
   <% @sprint.master_sprints.each_with_index do |master_sprint, index| %>
     <% if index == 0 %>
       <th class="panel-left log-estimate-1 master-column-<%= master_sprint.id %>">
-        <%= @estimate.get_estimate_activities %>
+        <%= @estimate.sum_estimate %>
       </th>
     <% else %>
       <th class="panel-left log-estimate-<%= index + 1 %> master-column-<%= master_sprint.id %>">
