@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
-  def after_sign_in_path_for resource
+  def after_sign_in_path_for _resource
     redirect_url
   end
 

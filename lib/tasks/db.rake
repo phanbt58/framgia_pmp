@@ -17,7 +17,8 @@ namespace :db do
 
     puts "Creating product backlog"
     5.times do
-      Fabricate :product_backlog, project_id: project.id, sprint_id: Sprint.first.id
+      Fabricate :product_backlog, project_id: project.id,
+        sprint_id: Sprint.first.id
     end
 
     puts "Creating member"
@@ -30,15 +31,15 @@ namespace :db do
       "Bui Van Duong": "bui.van.duong"
     }
     user_hash.each do |key, value|
-      user = Fabricate :user, name: key, email: value+"@framgia.com", role: 2
+      user = Fabricate :user, name: key, email: value + "@framgia.com", role: 2
     end
 
     puts "Add member to project 1"
     User.all.each do |user|
       user.manager? ? role = 0 : role = 1
 
-      Fabricate :project_member, user_name: user.name, user_id: user.id, project_id: project.id,
-        role: role
+      Fabricate :project_member, user_name: user.name, user_id: user.id,
+        project_id: project.id, role: role
     end
 
     puts "Add asignee to sprints 1"
@@ -60,8 +61,8 @@ namespace :db do
 
     puts "Creating tasks for the first sprint of project 1"
     Sprint.first.assignees.each do |assignee|
-      ac = Fabricate :task, user_id: assignee.user.id, sprint_id: Sprint.first.id,
-        product_backlog_id: ProductBacklog.first.id
+      ac = Fabricate :task, user_id: assignee.user.id,
+        sprint_id: Sprint.first.id, product_backlog_id: ProductBacklog.first.id
       start_log_work = 8
       ac.log_works.each do |log_work|
         if start_log_work > 0
@@ -83,21 +84,25 @@ namespace :db do
 
     puts "Add item performances to phase"
     ItemPerformance.all.each do |item|
-      item_alias = item.id == 6 ? "Line of Code" : item.performance_name.humanize
+      item_alias = if item.id == 6
+       "Line of Code"
+      else
+        item.performance_name.humanize
+      end
 
-      Fabricate :phase_item, phase_id: 2, item_performance_id: item.id, visible: true,
-        alias: item_alias
+      Fabricate :phase_item, phase_id: 2, item_performance_id: item.id,
+        visible: true, alias: item_alias
     end
 
     puts "Create work performances value"
     Task.all.each do |task|
       if task.user_id
         Sprint.first.master_sprints.each do |day|
-          performance_value = Random.rand(50 .. 200)
+          performance_value = Random.rand(50..200)
 
           Fabricate :work_performance, phase_id: 2, sprint_id: 1,
-            master_sprint_id: day.id, user_id: task.user_id, item_performance_id: 6,
-            task_id: task.id, performance_value: performance_value
+            master_sprint_id: day.id, user_id: task.user_id, task_id: task.id,
+            item_performance_id: 6, performance_value: performance_value
         end
       end
     end

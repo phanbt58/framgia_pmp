@@ -1,18 +1,16 @@
 class EstimateLogworkService
   include SprintHelper
   include ActionView::Helpers::NumberHelper
+  attr_reader :sum_estimate
 
   def initialize tasks, sprint
     @tasks = tasks
     @sprint = sprint
     @sum_estimate = sum_logwork_day 0
-    @arr_remaining_time = get_time_remaining_team
   end
 
   def get_sum_remaining
-    @tasks.reduce(0) do |sum, task|
-      sum += time_remaining_activity(task)
-    end
+    @tasks.map{|task| time_remaining_activity(task)}.reduce(0, :+)
   end
 
   def get_sum_worked
@@ -35,12 +33,8 @@ class EstimateLogworkService
     0
   end
 
-  def get_estimate_activities
-    @sum_estimate
-  end
-
   def get_time_remaining
-    @arr_remaining_time
+    get_time_remaining_team
   end
 
   def sum_logwork_day day
@@ -58,7 +52,7 @@ class EstimateLogworkService
 
   def get_time_remaining_team
     arr = []
-    remaining = get_estimate_activities
+    remaining = @sum_estimate
     get_arr_lost_hour.each do |rm|
       wh = remaining - rm
       arr << wh
@@ -75,7 +69,7 @@ class EstimateLogworkService
   def get_arr_lost_hour
     arr = []
     wh = total_work_hour
-    sum_lost_hour.each_with_index do |lost_hour, index|
+    sum_lost_hour.each_with_index do |_lost_hour, index|
       arr << wh - sum_lost_hour[index]
     end
     arr

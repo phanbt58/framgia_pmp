@@ -52,6 +52,15 @@ Metrics/ParameterLists:
   Description: "Avoid parameter lists longer than three or four parameters."
   Enabled: false
 
+Style/EmptyMethod:
+  Description: 'Checks the formatting of empty method definitions.'
+  StyleGuide: '#no-single-line-methods'
+  Enabled: false
+
+Style/GuardClause:
+  Description: 'Check for conditionals that can be replaced with guard clauses'
+  StyleGuide: '#no-nested-conditionals'
+  Enabled: false
 
 Style/DoubleNegation:
   Description: "Checks for uses of double negation (!!)."
@@ -184,3 +193,11 @@ Performance/StringReplacement:
 
 Style/MultilineOperationIndentation:
     Enabled: false
+
+Bundler/OrderedGems:
+  Description: >-
+                 Sort alphabetically gems appearing within a contiguous set
+                 of lines in the Gemfile
+  Enabled: false
+  Include:
+    - '**/Gemfile'

@@ -78,7 +78,7 @@ class Sprint < ActiveRecord::Base
   def set_day_sprint weekend_day, sprint_day
     date = self.start_date + weekend_day + sprint_day
     if date.saturday?
-      date += 2.sprint_day
+      date += 2.days
       weekend_day += 2
     end
     [date, weekend_day]

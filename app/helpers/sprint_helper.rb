@@ -9,13 +9,14 @@ module SprintHelper
   end
 
   def total_lost_hour
-    sum_lost_hour.inject{|total, lost_hour| total + lost_hour}
+    sum_lost_hour.reduce(0, :+)
   end
 
   def total_work_hour
-    @sprint.assignees.inject(0) do |total, assignee|
-      total + (assignee.work_hour.nil? ? 0 : assignee.work_hour)
+    work_hours = @sprint.assignees.map do |assignee|
+      assignee.work_hour.nil? ? 0 : assignee.work_hour
     end
+    work_hours.reduce(0, :+)
   end
 
   def get_time_log_by_assignee_master_sprint assignee, master_sprint
