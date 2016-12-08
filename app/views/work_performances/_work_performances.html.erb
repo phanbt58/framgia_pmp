@@ -21,6 +21,9 @@
           <%= radio_button_tag "chart_type", "", class: "chart_type_radio" %>
           <%= t "item_performances.showall" %><br>
           <br>
+          <%= button_tag t("work_performances.view_all"), id: "view-all" %>
+          <%= button_tag t("work_performances.compare"), id: "compare-wpd" %>
+          <br>
           <% @sprint.users.each do |user| %>
             <%= check_box_tag "user-select-id-#{user.id}",
               user.id, true, class: "user-select" %>

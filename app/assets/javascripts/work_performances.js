@@ -14,12 +14,12 @@ $(document).on('page:change', function (){
     getData();
   });
 
-  $('.user-select').click(function() {
+  $('#view-all,.chart-type > input:radio').click(function() {
     getData();
   });
 
-  $('.chart-type > input:radio').click(function() {
-    getData();
+  $('#compare-wpd').click(function() {
+    getData('compare');
   });
 
   $('#wpd-dialog').on('shown.bs.modal', function(){
@@ -154,7 +154,7 @@ function updateSelectMasterSprintOnForm(){
   }
 }
 
-function getData(){
+function getData(view_type = "view_all"){
   var performance_chart = $('#performance_chart');
 
   var users = [];
@@ -171,7 +171,8 @@ function getData(){
       url: '/api/projects/'+project+'/sprints/'+sprint+'/work_performances',
       data: {
         users: users,
-        chart_type: chart_type
+        chart_type: chart_type,
+        view_type: view_type
       },
       dataType: 'json',
       success: function(data) {

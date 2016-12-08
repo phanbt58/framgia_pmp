@@ -11,8 +11,8 @@ class WorkPerformance < ActiveRecord::Base
   ATTRIBUTES_PARAMS = [:task_id, :sprint_id, :master_sprint_id,
     :item_performance_id, :user_id, :performance_value, :phase_id]
 
-  scope :performances_in_day, ->(users_id, item, day) do
-    where user_id: users_id, item_performance_id: item.id,
+  scope :performances_in_day, ->(users_id, item_id, day) do
+    where user_id: users_id, item_performance_id: item_id,
       master_sprint_id: day.id
   end
   scope :of_activity_in_day, ->(user_id, master_sprint_id, task_id) do
