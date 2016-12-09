@@ -42,6 +42,15 @@
           <p class="label"><%= t "projects.show.spent_time" %></p>
           <p><i class="fa fa-clock-o"></i> <%= t "projects.show.hours" %></p>
         </div>
+        <% if can? :manage, Project %>
+          <div class="box">
+            <p class="label"><%= t "projects.show.action" %></p>
+            <p>
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+              <%= link_to t("projects.show.setting"), edit_project_path(@project) %>
+            </p>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

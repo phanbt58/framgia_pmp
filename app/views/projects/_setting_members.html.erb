@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-8" id="list_member_project">
+    <table class="table table-inverse" >
+      <thead>
+        <tr>
+          <td class="index"><%= t "projects.settings.index" %> </td>
+          <td class="member_name"><%= t "projects.settings.name" %> </td>
+          <td class="member_role"><%= t "projects.settings.role" %> </td>
+          <td class="action"><%= t "projects.settings.action" %></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @project.members.each_with_index do |member, index| %>
+          <tr class="member-<%= member.id %>">
+            <td class="index"><%= index +1 %></td>
+            <td class="member_name"><%= member.user_name %></td>
+            <td class="member_role"><%= member.role %></td>
+            <td class="action">
+              <%= link_to content_tag(:span, "", class: "fa fa-pencil"), "#",
+                class: "btn btn-primary btn-xs", id: "edit_role_member",
+                type: "button" %>
+              &ensp;
+              <%= link_to content_tag(:span, "", class: "fa fa-times"),
+                "#", class: "btn btn-danger btn-xs", id: "delete_member",
+                type: "button", method: :delete,
+                data: {confirm: t("projects.delete.confirm")} %>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4" id="add_member">
+    <center><strong><%= t "projects.settings.add_member" %></strong></center>
+  </div>
+</div>

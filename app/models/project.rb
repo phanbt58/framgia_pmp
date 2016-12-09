@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
   has_many :sprints
   has_many :product_backlogs
   has_many :assignees
-  has_many :users, through: :assignees
+  has_many :users, through: :members
   has_many :project_phases
   has_many :phases, through: :project_phases
   has_many :phase_items, through: :phases
@@ -16,8 +16,8 @@ class Project < ActiveRecord::Base
   after_create :create_product_backlog
 
   DEFAULT_PRODUCT_BACKLOG = 10
-  PROJECT_ATTRIBUTES_PARAMS = [:name, :description, :manager_id, :start_date,
-    :end_date, user_ids: []]
+  PROJECT_ATTRIBUTES_PARAMS = [:name, :description, :start_date,
+    :end_date]
 
   validate :check_end_date, on: [:create, :update]
 

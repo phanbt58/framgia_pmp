@@ -194,3 +194,57 @@
 .navbar-nav li a {
   padding-top: 6px;
 }
+
+.project_setting {
+  .nav-tabs{
+    background: $white;
+    margin-bottom: 15px;
+
+    li > a {
+      border-top-color: $boder-grey;
+      border-left-color: $boder-grey;
+      border-right-color: $boder-grey;
+    }
+  }
+}
+
+.tab-body {
+  background: $light-pink;
+  padding-top: 15px;
+  margin-bottom: 15px;
+  border: 1px solid $boder-grey;
+}
+
+.update_information {
+  margin-top: 30px;
+}
+
+#list_member_project {
+
+  padding-left: 0px;
+  margin-top: 10px;
+  border-right: 2px solid $boder-grey;
+
+  thead {
+    vertical-align: middle;
+    color: $white;
+    background-color: $header-blue;
+    font: bold 15px arial,sans-serif;
+  }
+
+  .index {
+    width: 10%;
+  }
+
+  .member_name {
+    width: 50%;
+  }
+
+  .member_role {
+    width: 30%;
+  }
+
+  .action {
+    width: 10%;
+  }
+}
