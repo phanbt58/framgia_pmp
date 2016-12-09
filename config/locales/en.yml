@@ -28,6 +28,8 @@ en:
       action: "Actions"
       add_member: "Add members"
       add: "Add"
+      add_member_input: "Add new member to project"
+      nomatch: "There isn't this user in system. Add them to project"
     show:
       overview: "Overview"
       project_name: "Project Name"

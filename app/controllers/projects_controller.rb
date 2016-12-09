@@ -3,6 +3,8 @@ class ProjectsController < ApplicationController
   before_action :load_sprint, only: [:index, :show]
   before_action :load_member_not_in_project, only: [:edit]
 
+  autocomplete :user, :name, full: true, extra_data: [:id]
+
   def index
     @projects = current_user.projects
   end

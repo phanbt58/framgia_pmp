@@ -20,6 +20,8 @@ gem "jquery-datatables-rails", "~> 3.3.0"
 gem "ajax-datatables-rails"
 gem "kaminari"
 gem "font-awesome-rails"
+gem "rails-jquery-autocomplete"
+gem "jquery-ui-rails"
 
 group :development, :test do
   gem "pry-rails"
