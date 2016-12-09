@@ -223,7 +223,6 @@
 
   padding-left: 0px;
   margin-top: 10px;
-  border-right: 2px solid $boder-grey;
 
   thead {
     vertical-align: middle;
@@ -246,5 +245,15 @@
 
   .action {
     width: 10%;
+  }
+}
+
+#add_member {
+  margin-top: 10px;
+  padding-left: 20px;
+  border-left: 2px solid $boder-grey;
+
+  .select_member, .choose_role_member {
+    margin-bottom: 15px;
   }
 }

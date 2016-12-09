@@ -3,25 +3,23 @@
 <div class="project_setting">
   <div class ="row">
     <h3><%= @project.name %></h3>
-    <%= form_for @project do |f| %>
-      <ul class="nav nav-tabs" id="setting_project">
-        <li>
-          <%= link_to t("projects.edit.infomation"), "#informations", data: {toggle: "tab"} %>
-        </li>
-        <li>
-          <%= link_to t("projects.show.member"), "#project_members", data: {toggle: "tab"} %>
-        </li>
-      </ul>
+    <ul class="nav nav-tabs" id="setting_project">
+      <li>
+        <%= link_to t("projects.edit.infomation"), "#informations", data: {toggle: "tab"} %>
+      </li>
+      <li>
+        <%= link_to t("projects.show.member"), "#project_members", data: {toggle: "tab"} %>
+      </li>
+    </ul>
 
-      <div class="tab-content">
-        <div class="tab-pane active" id="informations">
-          <%= render "setting_information", f: f %>
-        </div>
-
-        <div class="tab-pane" id="project_members">
-          <%= render "setting_members" %>
-        </div>
+    <div class="tab-content">
+      <div class="tab-pane active" id="informations">
+        <%= render "setting_information" %>
       </div>
-    <% end %>
+
+      <div class="tab-pane" id="project_members">
+        <%= render "setting_members" %>
+      </div>
+    </div>
   </div>
 </div>

@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   before_create :set_default_role
 
   scope :fitler_by_role_not_manager, ->{where.not role: 2}
+  scope :not_in_project, ->ids{where.not id: ids}
 
   def create_invite_digest
     self.reset_token = SecureRandom.urlsafe_base64(64)

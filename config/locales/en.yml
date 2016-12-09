@@ -27,6 +27,7 @@ en:
       role: "Role"
       action: "Actions"
       add_member: "Add members"
+      add: "Add"
     show:
       overview: "Overview"
       project_name: "Project Name"
@@ -44,6 +45,8 @@ en:
       update_info: "Change Information"
     delete:
       confirm: "You are sure?"
+      success: "Deleted"
+      failed: "Failed"
     overview: "Overview"
     phase: "Phases"
     new: "New Project"
@@ -52,6 +55,8 @@ en:
     description: "Description"
     start_date: "Start date"
     end_date: "End date"
+    saved: "Saved"
+    failed: "Failed"
   work_performances:
     view: "Work Performances Data"
     update: "Update"

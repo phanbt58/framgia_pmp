@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resource :rows, only: [:destroy]
 
   resources :projects do
+    resources :project_members
     resources :product_backlogs, except: [:destroy]
     delete "/product_backlogs", to: "product_backlogs#destroy"
     resources :sprints do
