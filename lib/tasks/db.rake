@@ -58,6 +58,7 @@ namespace :db do
 
     puts "Chose phase for project"
     Fabricate :project_phase, project_id: project.id, phase_id: 2
+    Fabricate :project_phase, project_id: project.id, phase_id: 3
 
     puts "Creating tasks for the first sprint of project 1"
     Sprint.first.assignees.each do |assignee|
@@ -97,12 +98,14 @@ namespace :db do
     puts "Create work performances value"
     Task.all.each do |task|
       if task.user_id
-        Sprint.first.master_sprints.each do |day|
-          performance_value = Random.rand(50..200)
+        project.phases.each do |phase|
+          Sprint.first.master_sprints.each do |day|
+            performance_value = Random.rand(50..200)
 
-          Fabricate :work_performance, phase_id: 2, sprint_id: 1,
-            master_sprint_id: day.id, user_id: task.user_id, task_id: task.id,
-            item_performance_id: 6, performance_value: performance_value
+            Fabricate :work_performance, phase_id: phase.id, sprint_id: 1,
+              master_sprint_id: day.id, user_id: task.user_id, task_id: task.id,
+              item_performance_id: 6, performance_value: performance_value
+          end
         end
       end
     end

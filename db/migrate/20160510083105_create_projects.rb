@@ -5,7 +5,6 @@ class CreateProjects < ActiveRecord::Migration
       t.text :description
       t.date :start_date
       t.date :end_date
-      t.integer :manager_id
 
       t.timestamps null: false
     end

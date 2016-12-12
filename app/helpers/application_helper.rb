@@ -20,8 +20,7 @@ module ApplicationHelper
 
   def activity_class task
     assignee = task.user
-    estimate = task.log_works.any? ? task.actual_time : 0
-    remaining = task.log_works.empty? ? 0 : task.remaining_time
+    estimate, remaining = task.actual_time, task.remaining_time
 
     if assignee.nil?
       estimate != 0 ? (remaining != 0 ? "estimated" : "default") : "default"
@@ -31,13 +30,14 @@ module ApplicationHelper
   end
 
   def product_backlog_class product_backlog
+    return "default" if product_backlog.tasks.empty?
+
     actual_time = product_backlog.actual
     remaining_time = product_backlog.total_remaining_time
-    if remaining_time.nil? || (remaining_time.zero? && actual_time.zero?)
-      "default"
-    elsif remaining_time.zero? && actual_time != 0
+
+    if remaining_time.zero? && actual_time != 0
       "finished"
-    else
+    elsif remaining_time != 0 && actual_time != 0
       "in_progress"
     end
   end
