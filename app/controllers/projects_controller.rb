@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   load_resource
   before_action :load_sprint, only: [:index, :show]
+  before_action :load_member_not_in_project, only: [:edit]
 
   def index
     @projects = current_user.projects
@@ -33,5 +34,9 @@ class ProjectsController < ApplicationController
 
   def load_sprint
     @sprints = Sprint.list_by_user current_user
+  end
+
+  def load_member_not_in_project
+    @users = User.not_in_project(@project.members.pluck(:id))
   end
 end

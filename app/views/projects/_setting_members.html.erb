@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-8" id="list_member_project">
+  <div class="col-md-8" id="list_member_project" data-project="<%= @project.id %>">
     <table class="table table-inverse" >
       <thead>
         <tr>
@@ -16,15 +16,14 @@
             <td class="member_name"><%= member.user_name %></td>
             <td class="member_role"><%= member.role %></td>
             <td class="action">
-              <%= link_to content_tag(:span, "", class: "fa fa-pencil"), "#",
-                class: "btn btn-primary btn-xs", id: "edit_role_member",
-                type: "button" %>
+              <span class="btn btn-primary btn-xs" id="edit_role_member">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </span>
               &ensp;
-              <%= link_to content_tag(:span, "", class: "fa fa-times"),
-                "#", class: "btn btn-danger btn-xs", id: "delete_member",
-                type: "button", method: :delete,
-                data: {confirm: t("projects.delete.confirm")} %>
-              </a>
+              <span class="btn btn-danger btn-xs" id="delete_member">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </span>
+
             </td>
           </tr>
         <% end %>
@@ -32,6 +31,26 @@
     </table>
   </div>
   <div class="col-md-4" id="add_member">
-    <center><strong><%= t "projects.settings.add_member" %></strong></center>
+    <center><h4><strong><%= t "projects.settings.add_member" %></strong></h4></center>
+    <br>
+    <%= form_tag project_project_members_path(@project), method: :post,
+      id: "form_add_member" do %>
+      <div class="select_member">
+        <strong><%= t "projects.settings.name" %>: </strong><br>
+        <%= select_tag :user_id, options_for_select(@users.collect{|user| [user.name, user.id]}),
+          {class: "form-control", id: "add_member_project"} %>
+      </div>
+      <div class="choose_role_member">
+        <strong><%= t "projects.settings.role" %>: </strong><br>
+        <% ProjectMember.roles.each do |key, value| %>
+          <%= radio_button_tag :role, key, class: "role_member_radio" %>
+          <%= key.humanize.capitalize %>
+          <br>
+        <% end %>
+      </div>
+
+      <%= submit_tag t("projects.settings.add"), class: "btn btn-primary btn-xs",
+        id: "add_member_button" %>
+    <% end %>
   </div>
 </div>
