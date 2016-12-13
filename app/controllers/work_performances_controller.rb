@@ -5,7 +5,6 @@ class WorkPerformancesController < ApplicationController
 
   def index
     @sprints = Sprint.list_by_user current_user
-    @tasks = @sprint.tasks
   end
 
   def new

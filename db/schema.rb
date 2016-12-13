@@ -189,20 +189,17 @@ ActiveRecord::Schema.define(version: 20161124013158) do
     t.integer  "sprint_id",           limit: 4
     t.integer  "item_performance_id", limit: 4
     t.integer  "master_sprint_id",    limit: 4
-    t.integer  "user_id",             limit: 4
     t.float    "performance_value",   limit: 24
   end
 
   add_index "work_performances", ["item_performance_id"], name: "fk_rails_dec164a722", using: :btree
   add_index "work_performances", ["master_sprint_id"], name: "fk_rails_d40e64dd85", using: :btree
-  add_index "work_performances", ["phase_id", "sprint_id", "user_id", "task_id", "master_sprint_id"], name: "work_perormance_index", unique: true, using: :btree
+  add_index "work_performances", ["phase_id", "sprint_id", "task_id", "master_sprint_id"], name: "work_perormance_index", unique: true, using: :btree
   add_index "work_performances", ["phase_id"], name: "index_work_performances_on_phase_id", using: :btree
   add_index "work_performances", ["sprint_id"], name: "index_work_performances_on_sprint_id", using: :btree
-  add_index "work_performances", ["user_id"], name: "index_work_performances_on_user_id", using: :btree
 
   add_foreign_key "log_works", "tasks"
   add_foreign_key "work_performances", "item_performances"
   add_foreign_key "work_performances", "master_sprints"
   add_foreign_key "work_performances", "sprints"
-  add_foreign_key "work_performances", "users"
 end

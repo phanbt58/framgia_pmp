@@ -26,6 +26,8 @@ Rails.application.routes.draw do
         resources :master_sprints, only: [:show]
       end
     end
+
+    get "performances", to: "performances_table#index", as: :performances_data
   end
 
   namespace :admin do
