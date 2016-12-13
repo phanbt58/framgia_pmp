@@ -1,7 +1,12 @@
 $(document).on('page:change', function(){
   $('#setting_project a:first').tab('show');
-  $('#add_member_project').select2();
-  $('#add_member .select2').width(100+'%');
+  $('#add_member_project').on('autocompleteopen', function(){
+    $('.ui-autocomplete').width($('#add_member_project').width());
+    $('div[role=status]').css('display', 'none');
+  });
+  $('#add_member_project').bind('railsAutocomplete.select', function(event, data){
+    $('#add_member_project').data('member_user_id', data.item.id);
+  });
 });
 
 $(document).mousedown(function(e) {
@@ -70,10 +75,6 @@ $(document).on('click', '#delete_member', function(){
       success: function(data){
         $tr.remove();
         resetMemberIndex();
-        if ($('select#add_member_project option[value='+data.user_id+']').length == 0){
-          $('select#add_member_project').append('<option value="'+data.user_id+
-            '">'+data.user_name+'</option>');
-        }
         $('#notify-message').text(I18n.t('projects.delete.success')).css('color', 'green');
       },
       error: function(){
@@ -87,10 +88,11 @@ $(document).on('submit', 'form#form_add_member', function(e){
   e.preventDefault();
   var url = $(this).attr('action');
   var data = $(this).serializeArray();
-  var user_id = parseInt($('#add_member_project').val());
-  var user_name = $('#add_member_project option[value='+user_id+']').html();
-  data.push({name: "user_name", value: user_name});
+  var user_id = $('#add_member_project').data('member_user_id');
   if (user_id){
+    data.push({name: 'user_id', value: user_id});
+  }
+  if ($('#add_member_project').val()){
     $.ajax({
       url: url,
       type: 'post',
@@ -98,7 +100,7 @@ $(document).on('submit', 'form#form_add_member', function(e){
       data: data,
       success: function(data){
         $('#list_member_project table tbody').append(data.content);
-        $('select#add_member_project').find('option[value='+user_id+']').remove();
+        $('#add_member_project').val('');
         $('#notify-message').text(I18n.t('projects.saved')).css('color', 'green');
       },
       error: function(data){

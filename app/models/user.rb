@@ -35,6 +35,11 @@ class User < ActiveRecord::Base
     self == user
   end
 
+  def self.search name
+    where("LOWER(users.name) LIKE :name", name: "%#{name}%")
+      .order("LOWER(users.name)")
+  end
+
   private
   def set_default_role
     self.role ||= :member

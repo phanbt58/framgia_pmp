@@ -257,3 +257,18 @@
     margin-bottom: 15px;
   }
 }
+
+.ui-autocomplete {
+  background: $white;
+  border-radius: 5px;
+  padding-left: 20px;
+  border: 2px solid $boder-grey;
+}
+
+.ui-menu-item {
+  height: 25px;
+
+  &:hover {
+    background: $light-grey;
+  }
+}
