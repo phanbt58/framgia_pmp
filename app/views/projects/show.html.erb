@@ -1,6 +1,6 @@
 <%= render "shared/category_tab", project: @project,
   active_tab: Settings.tabs.overview_project, f: nil %>
-<div id="projects">
+<div id="projects" data-project="<%= @project.id %>">
   <div class="subject-content">
     <div class="row">
       <div class="col-md-9 project-description">
@@ -43,7 +43,7 @@
           <p><i class="fa fa-clock-o"></i> <%= t "projects.show.hours" %></p>
         </div>
         <% if can? :update, @project %>
-          <div class="box">
+          <div class="box" id="settings">
             <p class="label"><%= t "projects.show.action" %></p>
             <p>
               <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -51,7 +51,7 @@
             </p>
           </div>
         <% end %>
-        <div class="box">
+        <div class="box" id="status" data-project-status="<%= @project[:status] %>">
           <p class="label"><%= t "projects.show.status" %></p>
           <p></p>
           <p>
@@ -62,6 +62,11 @@
             <% else %>
               <span class="btn btn-danger btn-xs" id="status-project">
                 <strong><%= @project.status.humanize.titleize %></strong>
+              </span>
+            <% end %>
+            <% if (current_user.manager? && @project.close?) || (!@project.finish? && (can? :update, @project)) %>
+              <span id="change-project-status" data-project="<%= @project.id %>">
+                <%= t "projects.show.change" %>
               </span>
             <% end %>
           </p>

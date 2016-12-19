@@ -6,7 +6,8 @@ class Api::PerformancesTableController < Api::BaseController
     @sprint = Sprint.find_by id: params[:sprint]
     respond_to do |format|
       format.html do
-        render partial: "work_performances/data", locals: {phase: @phase, sprint: @sprint}
+        render partial: "work_performances/data",
+          locals: {phase: @phase, sprint: @sprint}
       end
     end
   end

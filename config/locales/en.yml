@@ -46,10 +46,14 @@ en:
       setting: "Settings"
       update_info: "Change Information"
       status: "Status"
+      change: "Change"
     delete:
       confirm: "You are sure?"
       success: "Deleted"
       failed: "Failed"
+    confirm:
+      close: "Are you sure to close this project?"
+      finish: "Are you sure to finish this project?"
     overview: "Overview"
     phase: "Phases"
     new: "New Project"

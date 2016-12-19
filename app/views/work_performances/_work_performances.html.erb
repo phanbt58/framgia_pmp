@@ -6,7 +6,7 @@
           data-sprint="<%= @sprint.id %>">
         </div>
         <div class="chart-type">
-          <% if can? :create, @sprint.work_performances.build %>
+          <% if can? :create, @sprint.work_performances.build(task: current_user.tasks.first) %>
             <%= link_to t("work_performances.submitwpd"),
               new_project_sprint_work_performance_path(@project, @sprint),
               class: "btn btn-primary", id: "create-work-performance", type: "button",

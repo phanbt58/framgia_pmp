@@ -3,7 +3,7 @@
     <nav class="navbar navbar-fixed-bottom">
       <div class="container-fluid">
         <% if (can? :create, Sprint) && !@project.close? %>
-          <div class="navbar-header">
+          <div class="navbar-header" id="create_new_sprint">
             <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
               new_project_sprint_path(@project) %>
           </div>

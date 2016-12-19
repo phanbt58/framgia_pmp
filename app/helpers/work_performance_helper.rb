@@ -33,6 +33,7 @@ module WorkPerformanceHelper
       item_value = 0
       user_ids.each do |user_id|
         user = User.find_by id: user_id
+        next if user.nil?
         item_value += user.work_performances.performances_in_day(item.id, day)
           .sum(:performance_value)
       end
@@ -45,7 +46,7 @@ module WorkPerformanceHelper
     performances_array = []
     user_ids.each do |user_id|
       user = User.find_by id: user_id
-      performances_array << json_data(sprint, user)
+      performances_array << json_data(sprint, user) if user
     end
     performances_array
   end
@@ -61,9 +62,11 @@ module WorkPerformanceHelper
   def execute_datas sprint, user_id
     data = []
     user = User.find_by id: user_id
-    sprint.master_sprints.order(:day).each do |day|
-      data << user.work_performances.performances_in_day(6, day)
-        .sum(:performance_value)
+    if user
+      sprint.master_sprints.order(:day).each do |day|
+        data << user.work_performances.performances_in_day(6, day)
+          .sum(:performance_value)
+      end
     end
     data
   end
