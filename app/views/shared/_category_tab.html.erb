@@ -2,7 +2,7 @@
   <div class="col-md-12" id="category-tab">
     <nav class="navbar navbar-fixed-bottom">
       <div class="container-fluid">
-        <% if can? :create, Sprint %>
+        <% if (can? :create, Sprint) && !@project.close? %>
           <div class="navbar-header">
             <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
               new_project_sprint_path(@project) %>
@@ -57,12 +57,12 @@
           <% end %>
 
           <% if @sprint.present? && @sprint.persisted? %>
-            <li class="dropup work-performent">
-              <%= link_to "", "", "data-toggle": "dropdown",
-                "aria-haspopup": "true", "aria-expanded": "false",
-                class: "glyphicon glyphicon-align-justify dropdown-toggle" %>
-              <ul class="dropdown-menu" aria-labelledby="dLabel">
-                <% if can? :edit, @sprint %>
+            <% if can? :destroy, @sprint %>
+              <li class="dropup work-performent">
+                <%= link_to "", "", "data-toggle": "dropdown",
+                  "aria-haspopup": "true", "aria-expanded": "false",
+                  class: "glyphicon glyphicon-align-justify dropdown-toggle" %>
+                <ul class="dropdown-menu" aria-labelledby="dLabel">
                   <li>
                     <%= link_to t("buttons.edit"),
                       edit_project_sprint_path(@project, @sprint) %>
@@ -72,9 +72,9 @@
                       project_sprint_path(@project, @sprint),
                       method: :delete, data: {confirm: t("projects.delete.confirm")} %>
                   </li>
-                <% end %>
-              </ul>
-            </li>
+                </ul>
+              </li>
+            <% end %>
           <% end %>
         </ul>
       </div>

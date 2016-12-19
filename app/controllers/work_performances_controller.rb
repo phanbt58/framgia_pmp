@@ -4,7 +4,7 @@ class WorkPerformancesController < ApplicationController
   load_resource :sprint
 
   def index
-    @sprints = Sprint.list_by_user current_user
+    @sprints = @project.sprints
   end
 
   def new

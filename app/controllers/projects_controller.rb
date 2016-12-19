@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
   end
 
   def load_sprint
-    @sprints = Sprint.list_by_user current_user
+    @sprints = @project.sprints if @project
   end
 
   def load_member_not_in_project

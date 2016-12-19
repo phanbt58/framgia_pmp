@@ -6,11 +6,13 @@
           data-sprint="<%= @sprint.id %>">
         </div>
         <div class="chart-type">
-          <%= link_to t("work_performances.submitwpd"),
-            new_project_sprint_work_performance_path(@project, @sprint),
-            class: "btn btn-primary", id: "create-work-performance", type: "button",
-            data: {project: @project.id, sprint: @sprint.id,
-            toggle: "modal", target: "#wpd-dialog"} %>
+          <% if can? :create, @sprint.work_performances.build(user_id: current_user.id) %>
+            <%= link_to t("work_performances.submitwpd"),
+              new_project_sprint_work_performance_path(@project, @sprint),
+              class: "btn btn-primary", id: "create-work-performance", type: "button",
+              data: {project: @project.id, sprint: @sprint.id,
+              toggle: "modal", target: "#wpd-dialog"} %>
+          <% end %>
 
           <i id="user-reset" class="glyphicon glyphicon-refresh"></i><br><br>
           <% ItemPerformance.chart_types.each do |key, value| %>

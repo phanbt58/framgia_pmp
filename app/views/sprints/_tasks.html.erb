@@ -1,18 +1,20 @@
 <div class="row">
   <div class="activities-panel">
-    <div class="dropdown-add-column">
-      <%= hidden_field_tag :sprint_id, @sprint.id %>
-      <div class="dropdown">
-        <button class="btn btn-primary btn-xs dropdown-toggle glyphicon glyphicon-plus"
-          type="button" data-toggle="dropdown">
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu dropdown-menu-column">
-          <% Settings.options_to_add_more.each do |value| %>
-            <li class="add-more-column center"><span><%= value %></span></li>
-          <% end %>
-        </ul>
+    <% if can? :update, @sprint %>
+      <div class="dropdown-add-column">
+        <%= hidden_field_tag :sprint_id, @sprint.id %>
+        <div class="dropdown">
+          <button class="btn btn-primary btn-xs dropdown-toggle glyphicon glyphicon-plus"
+            type="button" data-toggle="dropdown">
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu dropdown-menu-column">
+            <% Settings.options_to_add_more.each do |value| %>
+              <li class="add-more-column center"><span><%= value %></span></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-    </div>
+    <% end %>
     <div>
       <table id="activities" class="table table-bordered" >
         <thead>
@@ -28,16 +30,18 @@
       </table>
     </div>
     <div>
-      <div class="dropdown col-md-1" id="add-more-task-in-sprint">
-        <button class="btn btn-xs btn-primary dropdown-toggle glyphicon glyphicon-plus"
-          type="button" data-toggle="dropdown">
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <% Settings.options_to_add_more.each do |value| %>
-            <li class="add-more-sprint-value center"><span><%= value %></span></li>
-          <% end %>
-        </ul>
-      </div>
+      <% if can? :update, @sprint %>
+        <div class="dropdown col-md-1" id="add-more-task-in-sprint">
+          <button class="btn btn-xs btn-primary dropdown-toggle glyphicon glyphicon-plus"
+            type="button" data-toggle="dropdown">
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <% Settings.options_to_add_more.each do |value| %>
+              <li class="add-more-sprint-value center"><span><%= value %></span></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
       <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-floppy-disk"), "#",
         class: "disabled btn btn-xs btn-primary", id: "save-sprint",

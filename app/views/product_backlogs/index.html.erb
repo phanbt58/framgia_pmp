@@ -1,4 +1,5 @@
-<div class="container" id="product_backlogs">
+<div class="container" id="product_backlogs"
+  data-update-backlog="<%= can? :update, @product_backlogs.first %>">
   <div class="product_backlog">
     <%= form_for :product_backlog, html: {id: "product_backlog_form"}  do |f| %>
       <table class="product_backlog_table_scroll table table-bordered"
@@ -14,11 +15,13 @@
             <th class="estimate"><%= t "product_backlog.index.estimate" %></th>
             <th class="actual"><%= t "product_backlog.index.actual" %></th>
             <th class="remaining"><%= t "product_backlog.index.remaining" %></th>
-            <th class="action">
-              <i class="fa fa-trash fa-2x delete_icon delete-product-backlog" aria-hidden="true"
-                data-project-id="<%= @project.id %>">
-              </i>
-            </th>
+            <% if can? :destroy, @product_backlogs.first %>
+              <th class="action">
+                <i class="fa fa-trash fa-2x delete_icon delete-product-backlog" aria-hidden="true"
+                  data-project-id="<%= @project.id %>">
+                </i>
+              </th>
+            <% end %>
           </tr>
         </thead>
         <tbody>
@@ -30,16 +33,18 @@
       </table>
     <% end %>
     <div id="product-backlogs">
-      <div class="dropdown col-md-1", id="add-more-user-story">
-        <button class="btn btn-xs btn-primary dropdown-toggle glyphicon glyphicon-plus"
-          type="button" data-toggle="dropdown">
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <% Settings.options_to_add_more.each do |value| %>
-            <li class="add-more-product-value center"><span><%= value %></span></li>
-          <% end %>
-        </ul>
-      </div>
+      <% if can? :create, @project.product_backlogs.build %>
+        <div class="dropdown col-md-1", id="add-more-user-story" project_id="<%= @project.id %>">
+          <button class="btn btn-xs btn-primary dropdown-toggle glyphicon glyphicon-plus"
+            type="button" data-toggle="dropdown">
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <% Settings.options_to_add_more.each do |value| %>
+              <li class="add-more-product-value center"><span><%= value %></span></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-floppy-disk",
         project_id: @project.id), project_product_backlogs_path({project_id: @project.id}),
         class: "disabled btn btn-xs btn-primary", id: "save-product-backlog",
