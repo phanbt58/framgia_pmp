@@ -18,7 +18,9 @@
         value="<%= master_sprints_builder.object.date.day %>"/>
     </td>
   <% end %>
-  <td class="last-date-row"></td>
+  <% if can? :update, Sprint %>
+    <td class="last-date-row"></td>
+  <% end %>
 </tr>
 <tr class="master-sprint-working-day th-color">
   <th rowspan="3" class="index">
@@ -49,11 +51,13 @@
       <%= master_sprint.day %>
     </th>
   <% end %>
-  <th rowspan="3" class="delete_task">
-    <i class="fa fa-trash fa-2x delete_icon" id="delete-activity" aria-hidden="true"
-      data-project-id="<%= @project.id %>">
-    </i>
-  </th>
+  <% if can? :update, Sprint %>
+    <th rowspan="3" class="delete_task">
+      <i class="fa fa-trash fa-2x delete_icon" id="delete-activity" aria-hidden="true"
+        data-project-id="<%= @project.id %>">
+      </i>
+    </th>
+  <% end %>
 </tr>
 <tr class="master-estimate-plan th-color">
   <th class="panel-left worked-percent"><%= @estimate.get_percent_worked %></th>

@@ -42,7 +42,7 @@
           <p class="label"><%= t "projects.show.spent_time" %></p>
           <p><i class="fa fa-clock-o"></i> <%= t "projects.show.hours" %></p>
         </div>
-        <% if can? :manage, Project %>
+        <% if can? :update, Project.is_not_closed %>
           <div class="box">
             <p class="label"><%= t "projects.show.action" %></p>
             <p>
@@ -51,6 +51,21 @@
             </p>
           </div>
         <% end %>
+        <div class="box">
+          <p class="label"><%= t "projects.show.status" %></p>
+          <p></p>
+          <p>
+            <% if @project.init? || @project.inprogress? %>
+              <span class="btn btn-info btn-xs" id="status-project">
+                <strong><%= @project.status %></strong>
+              </span>
+            <% else %>
+              <span class="btn btn-danger btn-xs" id="status-project">
+                <strong><%= @project.status %></strong>
+              </span>
+            <% end %>
+          </p>
+        </div>
       </div>
     </div>
   </div>

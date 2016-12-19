@@ -8,25 +8,28 @@ $(document).mousedown(function(e) {
 });
 
 $(document).on('click', 'td.total-lost-hour, th.master-sprint-day-header', function(){
-  var day = $(this).data('master-sprint');
-  resetCssForColumn();
-  $('input:checkbox[id=delete-task]:checked').each(function(){
-    var row = parseInt($(this).closest('tr').attr('data-row-index'));
-    resetRowClass(row);
-    $(this).prop('checked', false);
-  });
+  var status = $('#sprints').data('update-sprint');
+  if (status == true){
+    var day = $(this).data('master-sprint');
+    resetCssForColumn();
+    $('input:checkbox[id=delete-task]:checked').each(function(){
+      var row = parseInt($(this).closest('tr').attr('data-row-index'));
+      resetRowClass(row);
+      $(this).prop('checked', false);
+    });
 
-  $('td.lost-hour-header-'+day).children().removeClass('body_column').addClass('selected-column');
-  $('td.work-hour-header-'+day).children().removeClass('body_column').addClass('selected-column');
-  $('td.assignee-timelog-col-'+day).each(function(){
-    $(this).children().addClass('selected-column');
-  });
-  if(new Date($('.master-column-'+day+'> input.master-sprint-date').val())
-    .toDateString() == new Date().toDateString()) {
-    $('.master-column-'+day).removeClass('today').addClass('selected-column');
-  }
-  else{
-    $('.master-column-'+day).addClass('selected-column');
+    $('td.lost-hour-header-'+day).children().removeClass('body_column').addClass('selected-column');
+    $('td.work-hour-header-'+day).children().removeClass('body_column').addClass('selected-column');
+    $('td.assignee-timelog-col-'+day).each(function(){
+      $(this).children().addClass('selected-column');
+    });
+    if(new Date($('.master-column-'+day+'> input.master-sprint-date').val())
+      .toDateString() == new Date().toDateString()) {
+      $('.master-column-'+day).removeClass('today').addClass('selected-column');
+    }
+    else{
+      $('.master-column-'+day).addClass('selected-column');
+    }
   }
 });
 

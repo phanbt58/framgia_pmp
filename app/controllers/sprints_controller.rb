@@ -1,5 +1,5 @@
 class SprintsController < ApplicationController
-  load_resource
+  load_and_authorize_resource
   load_resource :project
   before_action :load_sprint, :load_tasks
   before_action :load_assignees, except: [:index, :show, :destroy]
@@ -19,6 +19,7 @@ class SprintsController < ApplicationController
   end
 
   def show
+    binding.pry
     @product_backlogs = @sprint.product_backlogs
     if @sprint.include_user? current_user, @project
       all_log_works = @tasks.first.log_works if @tasks.any?

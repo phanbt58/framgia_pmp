@@ -6,18 +6,33 @@ class Ability
     if user.member?
       can [:update], User, id: user.id
       can [:show], User
-      can :read, Project
-      can :read, WorkPerformance
+      can :read, [Project, Sprint, WorkPerformance]
       can [:create, :update], WorkPerformance, user_id: user.id
-      can :read, Sprint
+
+      cannot [:update], Sprint do |sprint|
+        sprint.project.close?
+      end
+      cannot [:create, :update, :destroy], ProductBacklog,
+        project: {status: 3}
+      cannot [:create, :update], WorkPerformance do |wpd|
+        wpd.sprint && wpd.sprint.project.close?
+      end
     elsif user.manager?
-      can :manage, Project
-      can :manage, Sprint
-      can :manage, User
-      can :manage, WorkPerformance
-      can :manage, Phase
-      can [:update], User
+      can :manage, [Sprint, User, WorkPerformance, Phase]
       can :manage, ProductBacklog
+      can [:read, :create, :destroy], Project
+      can [:update], Project, Project.is_not_closed
+
+      cannot [:create, :update, :destroy], Sprint do |sprint|
+        sprint.project.close?
+      end
+      cannot [:create, :update, :destroy], ProductBacklog do |backlog|
+        backlog.project.close?
+      end
+      cannot [:create, :update, :destroy], WorkPerformance do |wpd|
+        wpd.sprint && wpd.sprint.project.close?
+      end
+      cannot [:update], Project, Project.close
     end
   end
 end

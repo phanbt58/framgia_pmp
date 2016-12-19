@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  load_resource
+  load_and_authorize_resource
   before_action :load_sprint, only: [:index, :show]
   before_action :load_member_not_in_project, only: [:edit]
 
@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    binding.pry
     unless @project.include_assignee? current_user
       flash[:alert] = t "flashs.not_authorize"
       redirect_to root_path

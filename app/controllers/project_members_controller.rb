@@ -1,5 +1,5 @@
 class ProjectMembersController < ApplicationController
-  load_resource
+  load_and_authorize_resource
   load_resource :project
 
   def create

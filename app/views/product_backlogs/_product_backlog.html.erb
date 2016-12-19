@@ -33,8 +33,10 @@
   <td class="remaining"><%= text_field_tag "product_backlogs[#{product_backlog.id}][remaining]",
     product_backlog.total_remaining_time, class: "center" %>
   </td>
-  <td class="action">
-    <%= check_box_tag "delete-userstory", product_backlog.id, false,
-      class: "delete-userstory-#{product_backlog.id}" %>
-  </td>
+  <% if can? :destroy, ProductBacklog %>
+    <td class="action">
+      <%= check_box_tag "delete-userstory", product_backlog.id, false,
+        class: "delete-userstory-#{product_backlog.id}" %>
+    </td>
+  <% end %>
 </tr>

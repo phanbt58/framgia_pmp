@@ -45,6 +45,7 @@ en:
       action: "Actions"
       setting: "Settings"
       update_info: "Change Information"
+      status: "Status"
     delete:
       confirm: "You are sure?"
       success: "Deleted"

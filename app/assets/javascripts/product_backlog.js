@@ -142,6 +142,17 @@ $(document).on('page:change', function() {
   table_scroll_resize();
   change_style_table();
 
+  var backlog_status = $('#product_backlogs').data('update-backlog');
+  if (backlog_status == false){
+    $('#product_backlogs input').prop('disabled', true);
+    $('#product_backlogs select').prop('disabled', true);
+    $('#save-product-backlog').addClass("disabled");
+  }
+  else{
+    $('#product_backlogs input').prop('disabled', false);
+    $('#product_backlogs select').prop('disabled', false);
+  }
+
   $('#add-more-user-story').click(function(e){
     if (e.pageY+130 > $(document).height()){
       $('#add-more-user-story').removeClass('dropdown').addClass('dropup');

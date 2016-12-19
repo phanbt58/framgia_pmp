@@ -1,5 +1,5 @@
 class WorkPerformancesController < ApplicationController
-  load_resource
+  load_and_authorize_resource
   load_resource :project
   load_resource :sprint
 
@@ -8,7 +8,7 @@ class WorkPerformancesController < ApplicationController
     @tasks = @sprint.tasks
   end
 
-  def new
+  def news
     render partial: "work_performances/form"
   end
 
