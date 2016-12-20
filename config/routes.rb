@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   end
 
   resource :update_product_backlogs
-  post "ajax/work_performances", to: "work_performances#update"
+  get "ajax/work_performances", to: "work_performances#show"
 
   resources :synchronizes, only: [:index, :create]
   resources :users, except: [:new, :create]

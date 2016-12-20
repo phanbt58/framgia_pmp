@@ -38,7 +38,7 @@ function submitWorkPerformanceInput(){
   $('#work_performance_user_id').on('change', function(){
     getActivitiesOfUser();
   });
-  $('#work_performance_master_sprint_id,#work_performance_task_id')
+  $('#work_performance_master_sprint_id,#work_performance_task_id,#work_performance_phase_id')
     .on('change', function(){
     checkWorkPerformances();
   });
@@ -54,8 +54,8 @@ function submitWorkPerformanceInput(){
       dataType: 'json',
       success: function(result){
         $('#wpd-dialog').modal('hide');
-        getData();
         updateWPDtable(result.wpd);
+        getData();
       }
     });
   });
@@ -67,15 +67,18 @@ function setWorkPerformanceHeight(){
 }
 
 function updateWPDtable(wpd){
-  for (var i in wpd){
-    var task_id = wpd[i].task_id;
-    var day_id = wpd[i].master_sprint_id;
-    if ($('.task-'+task_id+'-wpd-'+wpd[i].id).length >0){
-      $('.task-'+task_id+'-wpd-'+wpd[i].id).html(wpd[i].performance_value);
-    }
-    else{
-      $('.wpd-master-sprint-'+day_id+'.task-id-'+task_id).append('<p class="task-'
-        +task_id+'-wpd-'+wpd[i].id+'">'+wpd[i].performance_value+'</p>');
+  var current_phase_id = $('#phase').val();
+  if (wpd[0].phase_id == current_phase_id){
+    for (var i in wpd){
+      var task_id = wpd[i].task_id;
+      var day_id = wpd[i].master_sprint_id;
+      if ($('.task-'+task_id+'-wpd-'+wpd[i].id).length >0){
+        $('.task-'+task_id+'-wpd-'+wpd[i].id).html(wpd[i].performance_value);
+      }
+      else{
+        $('.wpd-master-sprint-'+day_id+'.task-id-'+task_id).append('<p class="task-'
+          +task_id+'-wpd-'+wpd[i].id+'">'+wpd[i].performance_value+'</p>');
+      }
     }
   }
 }
@@ -103,15 +106,17 @@ function checkWorkPerformances(){
   var task_id = $('#work_performance_task_id').val();
   var user_id = $('#work_performance_user_id').val();
   var sprint_id = $('#work_performance_sprint_id').val();
+  var phase_id = $('#work_performance_phase_id').val();
   if (sprint_id){
     $.ajax({
       url: '/ajax/work_performances',
-      type: 'POST',
+      type: 'GET',
       data: {
         master_sprint_id: master_sprint_id,
         task_id: task_id,
         user_id: user_id,
-        sprint_id: sprint_id
+        sprint_id: sprint_id,
+        phase_id: phase_id
       },
       dataType: 'json',
       success: function(result){

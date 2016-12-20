@@ -15,8 +15,8 @@ class WorkPerformance < ActiveRecord::Base
   scope :performances_in_day, ->(item_id, day) do
     where item_performance_id: item_id, master_sprint_id: day.id
   end
-  scope :of_activity_in_day, ->(user_id, master_sprint_id, task_id) do
-    where user_id: user_id, master_sprint_id: master_sprint_id, task_id: task_id
+  scope :of_activity_in_day, ->(master_sprint_id, task_id, phase_id) do
+    where master_sprint_id: master_sprint_id, task_id: task_id, phase_id: phase_id
   end
   scope :of_user_in_day, ->(user, master_sprint) do
     where user_id: user.id, master_sprint_id: master_sprint.id
