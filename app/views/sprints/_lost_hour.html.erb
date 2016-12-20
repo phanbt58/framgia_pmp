@@ -35,8 +35,9 @@
               <%= assignee_builder.text_field :work_hour %>
             </td>
             <%= f.fields_for :time_logs, assignee_builder.object.time_logs do |time_log_builder| %>
-              <td class="assignee-col-<%= time_log_builder.object.master_sprint.day %>
-                assignee-timelog-col-<%= time_log_builder.object.master_sprint.id %>">
+              <td class="assignee-col-<%= time_log_builder.object
+                .master_sprint.day %> assignee-timelog-col-<%= time_log_builder
+                .object.master_sprint.id %>">
                 <%= time_log_builder.hidden_field :assignee_id,
                   value: assignee_builder.object.id %>
                 <%= time_log_builder.hidden_field :master_sprint_id,
