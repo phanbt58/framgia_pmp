@@ -1,0 +1,17 @@
+<tbody id="data-table">
+  <% sprint.tasks.each_with_index do |task, index| %>
+    <tr>
+      <td class="index"><%= index + 1 %></td>
+      <td class="left"><%= task.subject %></td>
+      <td class="assignee"><%= task.user_name %></td>
+      <% sprint.master_sprints.each do |day_sprint| %>
+        <td class="value wpd-master-sprint-<%= day_sprint.id %>
+            task-id-<%= task.id %>">
+          <% task.work_performances.in_day(phase, day_sprint).each do |wpm| %>
+            <p class="task-<%= wpm.task_id %>-wpd-<%= wpm.id %>"><%= wpm.performance_value %></p>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</tbody>

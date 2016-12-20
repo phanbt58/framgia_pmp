@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :sprints, through: :assignees
   has_many :project_members
   has_many :projects, through: :project_members
+  has_many :work_performances, through: :tasks
 
   devise :database_authenticatable, :registerable, :recoverable,
     :rememberable, :trackable, :validatable

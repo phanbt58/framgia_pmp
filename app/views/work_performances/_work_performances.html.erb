@@ -32,79 +32,32 @@
         </div>
       </div>
       <div id="work-performance-datas">
-        <table class="table table-striped tbl-work-performance-datas">
+        <table class="table table-striped tbl-work-performance-datas" id="peformances_table"
+          data-sprint="<%= @sprint.id %>">
           <thead>
             <tr>
               <th class="index"></th>
-              <th class="assigned"> User</th>
               <th class="activity"><%= t "table.thead.activity" %></th>
-              <% @sprint.project_phases.each do |phase| %>
-                <th colspan="<%= @sprint.master_sprints.count %>" class="phase-name">
-                  <%= phase.phase_name %>
-                </th>
-              <% end %>
+              <th class="assigned"> User</th>
+
+              <th colspan="<%= @sprint.master_sprints.count %>" class="phase-name">
+                <%= select_tag "phase", options_from_collection_for_select(@sprint.project_phases,
+                  "id", "phase_name") %>
+              </th>
             </tr>
             <tr>
               <th class="index"></th>
-              <th class="assigned"></th>
               <th class="activity"></th>
-              <% @sprint.project_phases.each do |phase| %>
-                <% @sprint.master_sprints.each do |day_sprint| %>
-                  <th class="phase-value wpd-master-sprint-<%= day_sprint.id %>"
-                    title="<%= day_sprint.day %>">
-                    <%= day_sprint.day %>
-                  </th>
-                <% end %>
+              <th class="assigned"></th>
+              <% @sprint.master_sprints.each do |day_sprint| %>
+                <th class="phase-value wpd-master-sprint-<%= day_sprint.id %>"
+                  title="<%= day_sprint.day %>">
+                  <%= day_sprint.day %>
+                </th>
               <% end %>
             </tr>
           </thead>
-          <tbody>
-            <% @sprint.users.each_with_index do |user, index| %>
-              <% if user.tasks.number_of_task(@sprint.id).any? %>
-                <tr>
-                  <td class="index" rowspan="<%= user.tasks.number_of_task(@sprint.id).count %>">
-                   <%= index + 1 %>
-                  </td>
-                  <td class="assignee" rowspan="<%= user.tasks.number_of_task(@sprint.id).count %>">
-                    <%= user.name %>
-                  </td>
-
-                  <td class="left">
-                    <%= user.tasks.number_of_task(@sprint.id).first.subject %>
-                  </td>
-
-                  <% @sprint.project_phases.each do |phase| %>
-                    <% @sprint.master_sprints.each do |day_sprint| %>
-                      <td class="value wpd-master-sprint-<%= day_sprint.id %>
-                          task-id-<%= user.tasks.number_of_task(@sprint.id).first.id %>">
-                        <% user.tasks.number_of_task(@sprint.id).first.work_performances.in_day(day_sprint).each do |wpm| %>
-                          <p class="task-<%= wpm.task_id %>-wpd-<%= wpm.id %>"><%= wpm.performance_value %></p>
-                        <% end %>
-                      </td>
-                    <% end %>
-                  <% end %>
-                </tr>
-                <% user.tasks.number_of_task(@sprint.id).drop(1).each do |task| %>
-                  <tr>
-                    <td>
-                      <%= task.subject %>
-                    </td>
-                    <% @sprint.project_phases.each do |phase| %>
-                      <% @sprint.master_sprints.each do |day_sprint| %>
-                        <td class="value wpd-master-sprint-<%= day_sprint.id %> task-id-<%= task.id %>">
-                          <% task.work_performances.in_day(day_sprint).each do |wpm| %>
-                            <p class="task-<%= wpm.task_id %>-wpd-<%= wpm.id %>">
-                              <%= wpm.performance_value %>
-                            </p>
-                          <% end %>
-                        </td>
-                      <% end %>
-                    <% end %>
-                  </tr>
-                <% end %>
-              <% end %>
-            <% end %>
-          </tbody>
+          <%= render partial: "data", locals: {sprint: @sprint, phase: @sprint.phases.first} %>
         </table>
       </div>
     </div>

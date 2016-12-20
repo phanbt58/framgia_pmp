@@ -103,7 +103,7 @@ namespace :db do
             performance_value = Random.rand(50..200)
 
             Fabricate :work_performance, phase_id: phase.id, sprint_id: 1,
-              master_sprint_id: day.id, user_id: task.user_id, task_id: task.id,
+              master_sprint_id: day.id, task_id: task.id,
               item_performance_id: 6, performance_value: performance_value
           end
         end

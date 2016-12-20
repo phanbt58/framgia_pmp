@@ -30,8 +30,12 @@ module WorkPerformanceHelper
 
     item_data = {name: item_phase.alias, data: [], visible: visible}
     sprint.master_sprints.order(:day).each do |day|
-      item_value = WorkPerformance.performances_in_day(user_ids, item.id, day)
-        .sum(:performance_value)
+      item_value = 0
+      user_ids.each do |user_id|
+        user = User.find_by id: user_id
+        item_value += user.work_performances.performances_in_day(item.id, day)
+          .sum(:performance_value)
+      end
       item_data[:data] << item_value
     end
     item_data
@@ -56,8 +60,9 @@ module WorkPerformanceHelper
 
   def execute_datas sprint, user_id
     data = []
+    user = User.find_by id: user_id
     sprint.master_sprints.order(:day).each do |day|
-      data << WorkPerformance.performances_in_day(user_id, 6, day)
+      data << user.work_performances.performances_in_day(6, day)
         .sum(:performance_value)
     end
     data
