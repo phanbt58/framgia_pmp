@@ -19,7 +19,7 @@ class WorkPerformancesController < ApplicationController
     end
   end
 
-  def update
+  def show
     if params[:master_sprint_id] && params[:task_id] && params[:user_id]
       @work_performances = CheckWorkPerformanceExisted.new(@sprint, params)
         .check_wpd_if_existed

@@ -17,8 +17,9 @@
         <%= f.hidden_field :sprint_id, value: @sprint.id %>
         <%= f.hidden_field :item_performance_id, value: @sprint.item_performances.execute.first.id %>
         <label><%= t "work_performances.user_name" %></label><br>
-        <%= f.select :user_id, @sprint.users.collect {|user| [user.name, user.id]},
-          {}, {class: "form-control"} %>
+
+        <%= select_tag "user_id", options_from_collection_for_select(@sprint.users, "id", "name"),
+          id: "work_performance_user_id", class: "form-control" %>
         <br>
         <%= f.label :task %><br>
         <%= f.select :task_id,

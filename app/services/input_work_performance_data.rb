@@ -3,14 +3,12 @@ class InputWorkPerformanceData
     @sprint = sprint
     @params = params
     @master_sprint_id = params[:work_performance][:master_sprint_id]
+    @phase_id = params[:work_performance][:phase_id]
     @task_id = params[:work_performance][:task_id]
-    @user_id = params[:work_performance][:user_id]
-    @item_id = params[:work_performance][:item_performance_id]
   end
 
   def submit_work_performances
-    work_performances = @sprint.work_performances.of_activity_in_day(@user_id,
-      @master_sprint_id, @task_id)
+    work_performances = @sprint.work_performances.of_activity_in_day(@master_sprint_id, @task_id, @phase_id)
     work_performances.any? ? update_work_performances : create_work_performances
     work_performances
   end
@@ -27,7 +25,7 @@ class InputWorkPerformanceData
     if @task_id
       unless @params[:work_performance][:performance_value].blank?
         work_performance = @sprint.work_performances
-          .of_activity_in_day(@user_id, @master_sprint_id, @task_id)
+          .of_activity_in_day(@master_sprint_id, @task_id, @phase_id)
         if work_performance.blank?
           WorkPerformance.create work_performance_params
         else
