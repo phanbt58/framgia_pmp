@@ -111,6 +111,16 @@ $(document).on('page:change', function() {
     $('body').removeClass('hidden-scroll');
   }
 
+  var sprint_permission = $('#sprints').data('update-sprint');
+  if (sprint_permission == false){
+    $('#sprints input').prop('disabled', true);
+    $('#sprints select').prop('disabled', true);
+    $('a#save-sprint').addClass('disabled');
+  }
+  else{
+    $('#sprints input').prop('disabled', false);
+    $('#sprints select').prop('disabled', false);
+  }
 });
 
 function setWidthOfElementSprint(){

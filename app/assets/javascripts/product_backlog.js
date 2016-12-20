@@ -115,7 +115,7 @@ $(document).on('ready page:load', function() {
     var x=this.firstChild.innerHTML;
     $('#add-more-user-story').removeClass('open');
     for( i=0;i< x ;i++){
-      var project_id = $(this).find('span').attr('project_id');
+      var project_id = parseInt($('#add-more-user-story').attr('project_id'));
       var url = $('#product_backlog_form').attr('action');
       $.ajax({
         type: 'POST',
@@ -141,6 +141,17 @@ $(document).on('ready page:load', function() {
 $(document).on('page:change', function() {
   table_scroll_resize();
   change_style_table();
+
+  var backlog_permission = $('#product_backlogs').data('update-backlog');
+  if (backlog_permission == false){
+    $('#product_backlogs input').prop('disabled', true);
+    $('#product_backlogs select').prop('disabled', true);
+    $('#save-product-backlog').addClass("disabled");
+  }
+  else{
+    $('#product_backlogs input').prop('disabled', false);
+    $('#product_backlogs select').prop('disabled', false);
+  }
 
   $('#add-more-user-story').click(function(e){
     if (e.pageY+130 > $(document).height()){

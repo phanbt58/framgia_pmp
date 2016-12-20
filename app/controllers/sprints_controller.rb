@@ -20,15 +20,10 @@ class SprintsController < ApplicationController
 
   def show
     @product_backlogs = @sprint.product_backlogs
-    if @sprint.include_user? current_user, @project
-      all_log_works = @tasks.first.log_works if @tasks.any?
-      @log_works_count = all_log_works.size
-      @estimate = EstimateLogworkService.new @tasks, @sprint
-      @log_estimates = @estimate.sum_remaining_for_day all_log_works
-    else
-      flash[:alert] = t "flashs.not_authorize"
-      redirect_to root_path
-    end
+    all_log_works = @tasks.first.log_works if @tasks.any?
+    @log_works_count = all_log_works.size
+    @estimate = EstimateLogworkService.new @tasks, @sprint
+    @log_estimates = @estimate.sum_remaining_for_day all_log_works
   end
 
   def edit
@@ -62,7 +57,7 @@ class SprintsController < ApplicationController
   end
 
   def load_sprint
-    @sprints = Sprint.list_by_user current_user
+    @sprints = @project.sprints
   end
 
   def load_tasks

@@ -1,5 +1,5 @@
 class ProductBacklogsController < ApplicationController
-  load_and_authorize_resource except: [:destroy]
+  load_resource
   load_resource :project
 
   def index

@@ -7,14 +7,18 @@ class LogWork < ActiveRecord::Base
   private
   def update_actual_time
     product_backlog = task.product_backlog
-    actual_time = calculate_time product_backlog.id, sprint_id, :actual_time
-    product_backlog.update_attributes actual: actual_time if product_backlog
+    if product_backlog
+      actual_time = calculate_time product_backlog.id, sprint_id, :actual_time
+      product_backlog.update_attributes actual: actual_time
+    end
   end
 
   def update_remaining_time
     product_backlog = task.product_backlog
-    remaining = calculate_time product_backlog.id, sprint_id, :remaining_time
-    product_backlog.update_attributes remaining: remaining if product_backlog
+    if product_backlog
+      remaining = calculate_time product_backlog.id, sprint_id, :remaining_time
+      product_backlog.update_attributes remaining: remaining
+    end
   end
 
   def calculate_time backlog_id, sprint_id, type

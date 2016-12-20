@@ -11,9 +11,9 @@ class Project < ActiveRecord::Base
   has_many :item_performances, through: :phase_items
   has_many :members, class_name: ProjectMember.name, foreign_key: :project_id
 
-  enum status: [:init, :inprogress, :finish, :close]
+  enum status: [:init, :in_progress, :finish, :close]
 
-  after_create :create_product_backlog
+  after_create :create_product_backlog, :update_status
 
   DEFAULT_PRODUCT_BACKLOG = 10
   PROJECT_ATTRIBUTES_PARAMS = [:name, :description, :start_date,
@@ -22,6 +22,8 @@ class Project < ActiveRecord::Base
   validate :check_end_date, on: [:create, :update]
 
   delegate :name, to: :manager, prefix: true, allow_nil: true
+
+  scope :is_not_closed, ->{where.not status: 3}
 
   def managers
     self.members.where(role: 0)
@@ -40,6 +42,15 @@ class Project < ActiveRecord::Base
     if self.start_date.present? && self.end_date < self.start_date
       errors.add :end_date, I18n.t("errors.wrong_end_date")
     end
+  end
+
+  def update_status
+    if self.start_date.present? && self.start_date < Date.today
+      status = :in_progress
+    else
+      status = :init
+    end
+    self.update_attributes status: status
   end
 
   def create_product_backlog
