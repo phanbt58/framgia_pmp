@@ -10,7 +10,7 @@
           <p class="label"><%= t "projects.show.master_plan" %></p>
           <div>
             <% @project.sprints.each_with_index do |sprint, index| %>
-              <div class="sprint-<%= sprint.days.count %>-days" >
+              <div class="sprint-<%= sprint.days.count <= 5 ? 5 : 10 %>-days" >
                 <div class="start-sprint"><%= sprint.start_date %></div>
                 <div class="end-sprint"><%= sprint.end_date %></div>
                 <div class="master-sprint-<%= index % 10 + 1 %>"></div>
