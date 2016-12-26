@@ -17,7 +17,12 @@
           <td class="id"><%= index + 1 %></td>
           <td class="name"><%= link_to project.name, project_path(project) %></td>
           <td class="description"><%= project.description %></td>
-          <td class="manager"><%= project.manager_name %></td>
+          <td class="manager">
+            <% project.managers.each_with_index do |manager, index| %>
+              <%= link_to manager.user_name, "#" %>
+              <%= (index == project.managers.size - 1)  ? "" : "," %>
+            <% end %>
+          </td>
           <td class="start-date"><%= project.start_date %></td>
           <td class="end-date"><%= project.end_date %></td>
         </tr>
