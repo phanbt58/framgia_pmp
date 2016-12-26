@@ -272,3 +272,12 @@
     background: $light-grey;
   }
 }
+
+#change-project-status {
+  color: $header-blue;
+  cursor: pointer;
+  &:hover {
+    background: $white;
+    font-style: italic;
+  }
+}

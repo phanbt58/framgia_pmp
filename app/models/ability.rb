@@ -10,7 +10,7 @@ class Ability
 
       user.projects.each do |project|
         next if project.close?
-        can [:create, :update], WorkPerformance, user_id: user.id,
+        can [:create, :update], WorkPerformance, task: {user_id: user.id},
           sprint: {id: user.sprints.map(&:id)}
         can [:update], Sprint, id: user.sprints.map(&:id)
       end
