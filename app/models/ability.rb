@@ -9,7 +9,7 @@ class Ability
       can :read, [Project, WorkPerformance, ProductBacklog, Sprint]
 
       user.projects.each do |project|
-        next if project.close?
+        next if project[:status] >= 2
         can [:create, :update], WorkPerformance, task: {user_id: user.id},
           sprint: {id: user.sprints.map(&:id)}
         can [:update], Sprint, id: user.sprints.map(&:id)
@@ -20,7 +20,7 @@ class Ability
       can :manage, [User, Phase]
 
       user.projects.each do |project|
-        next if project.close?
+        next if project[:status] >= 2
         can :update, Project
         can [:create, :update, :destroy], [Sprint, WorkPerformance]
         can [:create, :update, :destroy], ProductBacklog

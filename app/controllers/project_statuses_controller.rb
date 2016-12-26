@@ -17,7 +17,8 @@ class ProjectStatusesController < ApplicationController
         format.json do
           render json: {
             status: @project.status.humanize.titleize,
-            permission: (can? :update, @project)
+            permission: (can? :update, @project),
+            sprints: @project.sprints.map{|sprint| [sprint.id, sprint.name]}
           }
         end
       end

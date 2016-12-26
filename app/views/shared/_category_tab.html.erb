@@ -2,38 +2,46 @@
   <div class="col-md-12" id="category-tab">
     <nav class="navbar navbar-fixed-bottom">
       <div class="container-fluid">
-        <% if (can? :create, Sprint) && !@project.close? %>
+        <% if (can? :create, Sprint) && !project.close? %>
           <div class="navbar-header" id="create_new_sprint">
             <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
-              new_project_sprint_path(@project) %>
+              new_project_sprint_path(project) %>
           </div>
         <% end %>
         <div id="sprint-view">
           <ul class="nav navbar-nav" id="scroll">
             <% unless current_user.member? %>
-              <li role="presentation" class="<%= tab_active Settings.tabs.overview_project, active_tab %>">
+              <li role="presentation" id="project_overview"
+                  class="<%= tab_active Settings.tabs.overview_project, active_tab %>">
                 <%= link_to t("projects.overview"), project_path(project) %>
               </li>
-              <li role="presentation" id="pb_tab_show" class="<%= tab_active Settings.tabs.project_backlog, active_tab %>">
-                <%= link_to t("product_backlog.title"), project_product_backlogs_path(project) %>
-              </li>
-              <% project.sprints.each do |sprint| %>
-                <li role="presentation" class="<%= tab_active sprint.id, active_tab %>">
-                  <%= link_to sprint.name, project_sprint_path(project, sprint) %></li>
+              <% unless project.close? %>
+                <li role="presentation" id="pb_tab_show"
+                    class="<%= tab_active Settings.tabs.project_backlog, active_tab %>">
+                  <%= link_to t("product_backlog.title"), project_product_backlogs_path(project) %>
+                </li>
+                <% project.sprints.each do |sprint| %>
+                  <li role="presentation" class="<%= tab_active sprint.id, active_tab %>">
+                    <%= link_to sprint.name, project_sprint_path(project, sprint) %></li>
+                <% end %>
               <% end %>
               <h5 id="notify-message" class="pull-right"></h5>
             <% else %>
-              <li role="presentation" class="<%= tab_active Settings.tabs.overview_project, active_tab %>">
+              <li role="presentation" id="project_overview"
+                  class="<%= tab_active Settings.tabs.overview_project, active_tab %>">
                 <%= link_to t("projects.overview"), project_path(project) %>
               </li>
-              <li role="presentation" id="pb_tab_show" class="<%= tab_active Settings.tabs.project_backlog, active_tab %>">
-                <%= link_to t("product_backlog.title"), project_product_backlogs_path(project) %>
-              </li>
-              <% @sprints.each do |sprint| %>
-                <% if project.sprints.include? sprint%>
-                  <li role="presentation" class="<%= tab_active sprint.id, active_tab %>">
-                    <%= link_to sprint.name, project_sprint_path(project, sprint) %>
-                  </li>
+              <% unless project.close? %>
+                <li role="presentation" id="pb_tab_show"
+                    class="<%= tab_active Settings.tabs.project_backlog, active_tab %>">
+                  <%= link_to t("product_backlog.title"), project_product_backlogs_path(project) %>
+                </li>
+                <% @sprints.each do |sprint| %>
+                  <% if project.sprints.include? sprint%>
+                    <li role="presentation" class="<%= tab_active sprint.id, active_tab %>">
+                      <%= link_to sprint.name, project_sprint_path(project, sprint) %>
+                    </li>
+                  <% end %>
                 <% end %>
               <% end %>
             <% end %>
