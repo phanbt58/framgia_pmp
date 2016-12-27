@@ -11,6 +11,11 @@ class Project < ActiveRecord::Base
   has_many :item_performances, through: :phase_items
   has_many :members, class_name: ProjectMember.name, foreign_key: :project_id
 
+  ProjectMember.roles.each do |key, value|
+    has_many :"#{key.pluralize}", ->{where role: value},
+      class_name: ProjectMember.name
+  end
+
   enum status: [:init, :in_progress, :close, :finish]
 
   after_create :create_product_backlog, :update_status
@@ -24,14 +29,6 @@ class Project < ActiveRecord::Base
   delegate :name, to: :manager, prefix: true, allow_nil: true
 
   scope :is_not_closed, ->{where.not status: 3}
-
-  def managers
-    self.members.where(role: 0)
-  end
-
-  def developers
-    self.members.where(role: 1)
-  end
 
   def include_assignee? current_user
     self.members.map(&:user_id).include? current_user.id

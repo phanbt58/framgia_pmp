@@ -25,18 +25,19 @@
             <i class="fa fa-users"></i>
             <%= t "projects.show.member" %>
           </p>
-          <p class="list-user">
-            <%= t "projects.show.manager" %>:
-            <% @project.managers.each_with_index do |manager, index| %>
-              <%= link_to manager.user_name, "#" %><%= (index == @project.managers.size - 1)  ? "." : "," %>
-            <% end %>
-          </p>
-          <p class="list-user">
-            <%= t "projects.show.developer" %>:
-            <% @project.developers.each_with_index do |developer, index| %>
-              <%= link_to developer.user_name, "#" %><%= (index == @project.developers.size - 1)  ? "." : "," %>
-            <% end %>
-          </p>
+
+          <% ProjectMember.roles.keys.each do |role| %>
+            <p class="list-user">
+              <% if @project.send(role.pluralize).any? %>
+                <%= role.capitalize %>:
+                <% @project.send(role.pluralize).each_with_index do |project_role, index| %>
+                  <%= link_to project_role.user_name, "#" %>
+                  <%= (index == @project.send(role.pluralize).size - 1)  ? "." : "," %>
+                <% end %>
+              <% end %>
+            </p>
+          <% end %>
+
         </div>
         <div class="box">
           <p class="label"><%= t "projects.show.spent_time" %></p>
