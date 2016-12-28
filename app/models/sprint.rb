@@ -57,6 +57,13 @@ class Sprint < ActiveRecord::Base
     self.name = I18n.t("sprints.sprint") + index.to_s
   end
 
+  def total_spent_time
+    spent_time = self.tasks.map do |task|
+      task.actual_time - task.get_remaining_activity
+    end
+    spent_time.reduce(0, :+)
+  end
+
   private
   def build_master_sprint
     if self.master_sprints.empty?

@@ -41,7 +41,13 @@
         </div>
         <div class="box">
           <p class="label"><%= t "projects.show.spent_time" %></p>
-          <p><i class="fa fa-clock-o"></i> <%= t "projects.show.hours" %></p>
+          <p>
+            <i class="fa fa-clock-o"></i>
+            <%= link_to "#" do %>
+              <%= @project.total_spent_time %>
+              <%= t "projects.show.hours" %>
+            <% end %>
+          </p>
         </div>
         <% if can? :update, @project %>
           <div class="box" id="settings">
