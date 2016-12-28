@@ -43,9 +43,9 @@ namespace :db do
     end
 
     puts "Add asignee to sprints 1"
-    User.all.each do |user|
-      as = Fabricate :assignee, user_id: user.id, project_id: project.id,
-        sprint_id: Sprint.first.id, work_hour: 8
+    ProjectMember.all.each do |member|
+      as = Fabricate :assignee, user_id: member.user_id, member_id: member.id,
+        project_id: project.id, sprint_id: Sprint.first.id, work_hour: 8
       as.time_logs.each do |time_log|
         time_log.update_attributes lost_hour: 1
       end

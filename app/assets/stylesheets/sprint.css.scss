@@ -203,3 +203,46 @@ td.index {
 .scroll_tbody::-webkit-scrollbar-thumb {
   background-color: $boder-grey;
 }
+
+#sprint-with-wpd-tab {
+  .fa-2x {
+    font-size: 1.3em;
+  }
+
+  li > .sprint_tab {
+    border-top-color: $boder-grey;
+    border-left-color: $boder-grey;
+    border-right-color: $boder-grey;
+  }
+}
+
+#list_assignees {
+  padding-left: 0px;
+  padding-right: 40px;
+  border-right: 2px solid $boder-grey;
+
+  thead {
+    vertical-align: middle;
+    color: $white;
+    background-color: $header-blue;
+    font: bold 15px arial,sans-serif;
+  }
+
+  .index {
+    width: 8%;
+    text-align: center;
+  }
+
+  .assignee_name {
+    width: 80%;
+  }
+
+  .action {
+    width: 20%;
+    text-align: center;
+  }
+}
+
+.edit_sprint .row {
+  padding-top: 20px;
+}
