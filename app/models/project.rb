@@ -34,6 +34,11 @@ class Project < ActiveRecord::Base
     self.members.map(&:user_id).include? current_user.id
   end
 
+  def total_spent_time
+    spent_time = self.sprints.map(&:total_spent_time)
+    spent_time.reduce(0, :+)
+  end
+
   private
   def check_end_date
     if self.start_date.present? && self.end_date < self.start_date
