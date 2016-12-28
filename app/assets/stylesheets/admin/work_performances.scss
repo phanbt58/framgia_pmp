@@ -47,6 +47,13 @@
     .value {
       text-align: center;
     }
+
+    .total_performance {
+      background-color: $header-blue;
+      text-align: center;
+      color: $white;
+      font-weight: bold;
+    }
   }
 }
 

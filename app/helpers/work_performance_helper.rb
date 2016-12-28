@@ -8,6 +8,14 @@ module WorkPerformanceHelper
     end
   end
 
+  def total_performances phase, sprint, day
+    total_performance = sprint.tasks.map do |task|
+      task.work_performances.in_day(phase, day).map(&:performance_value)
+        .reduce(0, :+)
+    end
+    total_performance.reduce(0, :+)
+  end
+
   private
   def view_all_performances sprint, user_ids, chart_type
     performances_array = []

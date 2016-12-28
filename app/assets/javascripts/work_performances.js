@@ -54,7 +54,7 @@ function submitWorkPerformanceInput(){
       dataType: 'json',
       success: function(result){
         $('#wpd-dialog').modal('hide');
-        updateWPDtable(result.wpd);
+        updateWPDtable(result);
         getData();
       }
     });
@@ -66,8 +66,9 @@ function setWorkPerformanceHeight(){
     $('header').outerHeight() - $('#category-tab').outerHeight() - 30);
 }
 
-function updateWPDtable(wpd){
+function updateWPDtable(result){
   var current_phase_id = $('#phase').val();
+  var wpd = result.wpd;
   if (wpd[0].phase_id == current_phase_id){
     for (var i in wpd){
       var task_id = wpd[i].task_id;
@@ -80,6 +81,7 @@ function updateWPDtable(wpd){
           +task_id+'-wpd-'+wpd[i].id+'">'+wpd[i].performance_value+'</p>');
       }
     }
+    $('.total_performance .total-wpd-in-day-'+wpd[0].master_sprint_id).html(result.total_wpd);
   }
 }
 

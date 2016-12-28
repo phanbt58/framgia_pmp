@@ -14,4 +14,12 @@
       <% end %>
     </tr>
   <% end %>
+  <tr class="total_performance">
+    <td colspan="3"><%= t "work_performances.total" %></td>
+    <% sprint.master_sprints.each do |day_sprint| %>
+      <td class="total-wpd-in-day-<%= day_sprint.id %>">
+      <%= total_performances phase, sprint, day_sprint %>
+      </td>
+    <% end %>
+  </tr>
 </tbody>
