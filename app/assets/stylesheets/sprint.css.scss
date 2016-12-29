@@ -242,10 +242,31 @@ td.index {
   }
 }
 
-#add_assignees {
+#sprint_action {
   border-left: 2px solid $boder-grey;
 }
 
 .edit_sprint .row {
   padding-top: 20px;
+}
+
+#add_assignees, #delete_sprint {
+  background: $light-grey;
+  padding: 10px 15px;
+  border: 1px solid $boder-grey;
+  border-radius: 8px;
+  margin: 5px;
+  p {
+    text-transform: uppercase;
+    font-size: 1em;
+    color: brown;
+    font-weight: bold;
+  }
+}
+
+#delete_sprint {
+  margin-top: 30px;
+  .fa-2x {
+    font-size: 1.3em;
+  }
 }

@@ -1,7 +1,3 @@
-$(document).on('page:change', function(){
-  $('#add_assignees').height($('#add_assignees').parent().height());
-});
-
 $(document).mousedown(function(e) {
   $('#notify-message').text('');
 });
@@ -23,7 +19,6 @@ $(document).on('click', 'table#assignees #delete_assignee', function(){
         resetAssigneeIndex();
         $('form#add_assignee_sprint').find('#assignee').append('<option value="'+
           data.member_id+'">'+data.user_name+'</option>');
-        $('#add_assignees').height($('#add_assignees').parent().height());
         $('#notify-message').text(I18n.t('sprints.delete.success')).css('color', 'green');
       },
       error: function(){

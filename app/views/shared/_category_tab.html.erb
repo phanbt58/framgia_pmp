@@ -63,23 +63,6 @@
           <% if f %>
             <h5  id="notify-message" class="pull-left"></h5>
           <% end %>
-
-          <% if @sprint.present? && @sprint.persisted? %>
-            <% if can? :destroy, @sprint %>
-              <li class="dropup work-performent">
-                <%= link_to "", "", "data-toggle": "dropdown",
-                  "aria-haspopup": "true", "aria-expanded": "false",
-                  class: "glyphicon glyphicon-align-justify dropdown-toggle" %>
-                <ul class="dropdown-menu" aria-labelledby="dLabel">
-                  <li>
-                    <%= link_to t("buttons.delete"),
-                      project_sprint_path(@project, @sprint),
-                      method: :delete, data: {confirm: t("projects.delete.confirm")} %>
-                  </li>
-                </ul>
-              </li>
-            <% end %>
-          <% end %>
         </ul>
       </div>
     </nav>
