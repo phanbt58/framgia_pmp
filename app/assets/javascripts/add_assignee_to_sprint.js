@@ -14,8 +14,13 @@ $(document).on('submit', 'form#add_assignee_sprint', function(e){
         for (var i in member_ids){
           $('form#add_assignee_sprint').find('#assignee option[value='+member_ids[i]+']').remove();
         }
+        $('#add_assignees').height($('#add_assignees').parent().height());
         $('form#add_assignee_sprint').find('#assignee').val('');
         $('.select2 li.select2-selection__choice').remove();
+        $('#notify-message').text(I18n.t('sprints.success')).css('color', 'green');
+      },
+      error: function(data){
+        $('#notify-message').text(I18n.t('sprints.failed')).css('color', 'red');
       }
     });
   }

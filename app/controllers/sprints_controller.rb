@@ -2,7 +2,8 @@ class SprintsController < ApplicationController
   load_resource
   load_resource :project
   before_action :load_assignees, except: [:index, :destroy]
-  before_action :load_sprint, :load_tasks, :load_assignees_not_in_sprint
+  before_action :load_sprint, :load_tasks
+  before_action :load_assignees_not_in_sprint, only: :edit
 
   def new
   end

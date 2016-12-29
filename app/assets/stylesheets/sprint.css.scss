@@ -219,7 +219,6 @@ td.index {
 #list_assignees {
   padding-left: 0px;
   padding-right: 40px;
-  border-right: 2px solid $boder-grey;
 
   thead {
     vertical-align: middle;
@@ -241,6 +240,10 @@ td.index {
     width: 20%;
     text-align: center;
   }
+}
+
+#add_assignees {
+  border-left: 2px solid $boder-grey;
 }
 
 .edit_sprint .row {

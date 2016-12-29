@@ -98,6 +98,9 @@ en:
       name: "Name"
       action: "Action"
       members: "Member"
+    delete:
+      success: "Deleted"
+      failed: "Failed"
   product_backlogs:
     delete:
       success: "Deleted"

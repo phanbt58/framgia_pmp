@@ -15,4 +15,18 @@ class AssigneesController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @assignee = Assignee.find_by id: params[:id]
+    if @assignee.destroy
+      respond_to do |format|
+        format.json do
+          render json: {
+            member_id: @assignee.member_id,
+            user_name: @assignee.user_name
+          }
+        end
+      end
+    end
+  end
 end
