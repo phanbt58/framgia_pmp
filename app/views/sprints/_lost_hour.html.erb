@@ -28,7 +28,7 @@
 
         <%= f.fields_for :assignees, @sprint.assignees do |assignee_builder| %>
           <tr class="assignee-row-<%= assignee_builder.object.id %>">
-            <td class="assignees_name"><%= assignee_builder.object.user.name %></td>
+            <td class="assignees_name"><%= assignee_builder.object.user_name %></td>
             <td class="assignee-col-0">
               <%= assignee_builder.hidden_field :assignee_id,
                 value: assignee_builder.object.id %>

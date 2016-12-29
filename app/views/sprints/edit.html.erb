@@ -2,7 +2,8 @@
   active_tab: nil %>
 <%= render "shared/category_tab", active_tab: @sprint.id,
   project: @project, f: nil %>
-<div id="sprints" class="edit_sprint">
+<div id="sprints" class="edit_sprint" data-project="<%= @project.id %>"
+  data-sprint="<%= @sprint.id %>">
   <h2><%= t "sprints.edit.assignee" %></h2>
   <div class="row">
     <div class="col-md-8" id="list_assignees">
