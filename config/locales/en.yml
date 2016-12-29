@@ -89,6 +89,15 @@ en:
     saving: "Saving..."
     success: "Saved!"
     failed: "Not Save"
+    setting: "Settings"
+    edit:
+      assignee: "Setting Assignees"
+      add_assignee: "Add assignees"
+      add: "Add"
+      index: "Index"
+      name: "Name"
+      action: "Action"
+      members: "Member"
   product_backlogs:
     delete:
       success: "Deleted"

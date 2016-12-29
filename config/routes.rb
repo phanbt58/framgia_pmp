@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     delete "/product_backlogs", to: "product_backlogs#destroy"
     resources :sprints do
       resources :work_performances
+      resources :assignees
     end
   end
 

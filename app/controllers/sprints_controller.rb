@@ -1,8 +1,8 @@
 class SprintsController < ApplicationController
   load_resource
   load_resource :project
-  before_action :load_sprint, :load_tasks
-  before_action :load_assignees, except: [:index, :show, :destroy]
+  before_action :load_assignees, except: [:index, :destroy]
+  before_action :load_sprint, :load_tasks, :load_assignees_not_in_sprint
 
   def new
   end
@@ -66,5 +66,10 @@ class SprintsController < ApplicationController
 
   def load_assignees
     @assignees = @project.members
+  end
+
+  def load_assignees_not_in_sprint
+    @assignees_not_in_sprint = @assignees.not_in_sprint(@sprint.assignees
+      .map(&:member_id))
   end
 end

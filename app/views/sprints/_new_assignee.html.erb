@@ -1,0 +1,11 @@
+<%= assignees.each_with_index do |assignee, index| %>
+  <tr id="assignee-<%= assignee.id %>">
+    <td class="index"><%= row_number - assignees.size + index + 1 %></td>
+    <td class="assignee_name"><%= assignee.user_name %></td>
+    <td class="action">
+    <span class="btn btn-danger btn-xs" id="delete_assignee">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </span>
+    </td>
+  </tr>
+<% end %>
