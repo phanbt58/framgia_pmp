@@ -1,5 +1,13 @@
 <div id="projects">
-  <h2><%= t "layout.projects" %></h2>
+  <h2>
+    <%= t "layout.projects" %>
+    <% if can? :create, Project %>
+      <%= link_to new_project_path, class: "btn btn-info pull-right",
+        title: t("projects.new") do %>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      <% end %>
+    <% end %>
+  </h2>
   <% if @projects.any? %>
     <table class="table table-striped" id="tbl-list-project">
       <thead>

@@ -39,6 +39,11 @@ class Project < ActiveRecord::Base
     spent_time.reduce(0, :+)
   end
 
+  def create_manager current_user
+    self.members.create user: current_user, user_name: current_user.name,
+      role: :manager
+  end
+
   private
   def check_end_date
     if self.start_date.present? && self.end_date < self.start_date

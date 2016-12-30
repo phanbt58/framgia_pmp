@@ -39,7 +39,7 @@
             options_for_select(@assignees_not_in_sprint.collect{|a| [a.user_name, a.id]}),
             {class: "form-control", id: "assignee", multiple: :true} %>
           <br>
-          <%= submit_tag t("sprints.edit.add"), class: "btn btn-primary",
+          <%= submit_tag t("sprints.edit.add"), class: "btn btn-primary btn-xs",
             id: "add_assignee_button" %>
         <% end %>
       </div>
