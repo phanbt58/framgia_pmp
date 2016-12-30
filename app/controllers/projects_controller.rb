@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  load_resource
+  load_and_authorize_resource
   before_action :load_sprint, only: [:index, :show, :edit]
   before_action :load_member_not_in_project, only: [:edit]
 
@@ -7,6 +7,20 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = current_user.projects
+  end
+
+  def new
+  end
+
+  def create
+    if @project.save
+      @project.create_manager current_user
+      flash[:success] = flash_message "created"
+      redirect_to root_url
+    else
+      flash[:failed] = flash_message "not_created"
+      render :new
+    end
   end
 
   def show
