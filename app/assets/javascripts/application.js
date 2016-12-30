@@ -34,17 +34,27 @@
 //= require users
 //= sprints
 
-$(document).on("page:change", function(){
-  $(".datepicker").datepicker({
-    format: I18n.t("date.format"),
+$(document).on('page:change', function(){
+  $('#create_sprint').on('shown.bs.modal', function(){
+    $('.datepicker').datepicker({
+      format: I18n.t('date.format'),
+      autoclose: true,
+    });
+    $('input.datepicker').on('focus', function(){
+      $('.datepicker.datepicker-dropdown').css('z-index', 1051);
+    });
+  });
+
+  $('.datepicker').datepicker({
+    format: I18n.t('date.format'),
     autoclose: true
   });
 
-  $( "#assignee" ).select2({
+  $('#assignee').select2({
     multiple: true,
-    theme: "bootstrap",
+    theme: 'bootstrap',
     width: '100%'
   });
 
-  $(".hide-flash").delay(2000).fadeOut("slow");
+  $('.hide-flash').delay(2000).fadeOut('slow');
 });

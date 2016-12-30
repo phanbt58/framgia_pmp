@@ -270,3 +270,22 @@ td.index {
     font-size: 1.3em;
   }
 }
+
+#create_sprint {
+  .modal-content {
+    height: 200px;
+  }
+
+  .modal-body {
+    padding-top: 30px;
+  }
+
+  .modal-header {
+    padding: 10px;
+  }
+
+  .text-right{
+    text-align: right;
+    font-size: 16px;
+  }
+}

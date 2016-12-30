@@ -6,6 +6,7 @@ class SprintsController < ApplicationController
   before_action :load_assignees_not_in_sprint, only: :edit
 
   def new
+    render partial: "sprints/form"
   end
 
   def create

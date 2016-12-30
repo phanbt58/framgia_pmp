@@ -1,5 +1,6 @@
+<%= render "shared/category_tab", project: @project, active_tab: @sprint.id, f: nil %>
 <%= form_for [@project, @sprint], html: {id: "lost_hour_form"} do |f| %>
-  <%= render "shared/category_tab", project: @project, active_tab: @sprint.id, f: f %>
+
   <div id="sprints" data-update-sprint="<%= can? :update, @sprint %>">
     <div class="row" id="chart">
       <div id="burndown_chart"></div>

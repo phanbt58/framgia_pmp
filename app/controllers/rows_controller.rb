@@ -6,7 +6,7 @@ class RowsController < ApplicationController
     @project = Project.find_by id: @sprint.project_id
 
     if @task.save
-      @assignees = @sprint.assignees
+      @assignees = @sprint.assignees.can_get_task
       @row_number = @sprint.tasks.size - 1
       @master_sprints = @sprint.master_sprints.order(day: :asc)
       @log_work_count = @sprint.log_works.size
