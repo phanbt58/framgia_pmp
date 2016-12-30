@@ -1,17 +1,21 @@
 <div class ="row">
   <ul class="nav nav-tabs" id="sprint-with-wpd-tab">
-    <li role="presentation" class="<%= tab_active sprint.id, active_tab %>">
+    <li role="presentation" class="<%= tab_active sprint.id, active_tab %>"
+      id="sprint_tab">
       <%= link_to t("sprints.sprint"), project_sprint_path(project, sprint),
         class: "sprint_tab" %>
     </li>
-    <li role="presentation" class="<%= tab_active Settings.tabs.sprint_wpd, active_tab %>">
+    <li role="presentation" class="<%= tab_active Settings.tabs.sprint_wpd, active_tab %>"
+      id="performances_tab">
       <%= link_to t("work_performances.view"),
         project_sprint_work_performances_path(project, sprint), class: "sprint_tab" %>
     </li>
-    <li class="pull-right" title="<%= t "sprints.setting" %>">
-      <%= link_to edit_project_sprint_path(@project, @sprint) do %>
-        <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
-      <% end %>
-    </li>
+    <% unless cannot? :edit, @sprint %>
+      <li class="pull-right" title="<%= t "sprints.setting" %>">
+        <%= link_to edit_project_sprint_path(project, sprint), id: "setting_sprint" do %>
+          <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 </div>

@@ -29,18 +29,28 @@
       </table>
     </div>
 
-    <div class="col-md-4" id="add_assignees">
-      <h4 class="text-center"><%= t "sprints.edit.add_assignee" %></h4>
-      <%= form_tag project_sprint_assignees_path(@project, @sprint), method: :post,
-          id: "add_assignee_sprint" do %>
-        <label><%= t "sprints.edit.members" %>:</label>
-        <%= select_tag "member_ids[]",
-          options_for_select(@assignees_not_in_sprint.collect{|a| [a.user_name, a.id]}),
-          {class: "form-control", id: "assignee", multiple: :true} %>
-        <br>
-        <%= submit_tag t("sprints.edit.add"), class: "btn btn-primary",
-          id: "add_assignee_button" %>
-      <% end %>
+    <div class="col-md-4" id="sprint_action">
+      <div id="add_assignees">
+        <p class="text-center"><%= t "sprints.edit.add_assignee" %></p>
+        <%= form_tag project_sprint_assignees_path(@project, @sprint), method: :post,
+            id: "add_assignee_sprint" do %>
+          <label><%= t "sprints.edit.members" %>:</label>
+          <%= select_tag "member_ids[]",
+            options_for_select(@assignees_not_in_sprint.collect{|a| [a.user_name, a.id]}),
+            {class: "form-control", id: "assignee", multiple: :true} %>
+          <br>
+          <%= submit_tag t("sprints.edit.add"), class: "btn btn-primary",
+            id: "add_assignee_button" %>
+        <% end %>
+      </div>
+      <div id="delete_sprint">
+        <p class="text-center"><%= t "sprints.edit.action" %></p>
+        <h5>
+          <i class="fa fa-trash fa-2x delete_icon" aria-hidden="true"></i>&ensp;
+          <%= link_to t("buttons.delete"), project_sprint_path(@project, @sprint),
+            method: :delete, data: {confirm: t("projects.delete.confirm")} %>
+        </h5>
+      </div>
     </div>
   </div>
 </div>
