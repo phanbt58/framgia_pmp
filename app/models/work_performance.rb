@@ -26,9 +26,12 @@ class WorkPerformance < ActiveRecord::Base
     where user_id: user_id, task_id: task_id,
     master_sprint_id: day_id, item_performance_id: item_id
   end
-
   scope :in_day, ->(phase, day) do
     where phase_id: phase.id, master_sprint_id: day.id
+  end
+  scope :of_task_in_day, ->(task_id, day_id, item_id) do
+    where task_id: task_id,
+    master_sprint_id: day_id, item_performance_id: item_id
   end
 
   def item_performance_name
