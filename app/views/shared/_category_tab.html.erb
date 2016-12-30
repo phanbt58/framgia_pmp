@@ -5,7 +5,8 @@
         <% if (can? :create, Sprint) && !project.close? %>
           <div class="navbar-header" id="create_new_sprint">
             <%= link_to content_tag(:span, "", class: "glyphicon glyphicon-plus"),
-              new_project_sprint_path(project) %>
+              new_project_sprint_path(project), data: {toggle: "modal",
+              target: "#create_sprint"} %>
           </div>
         <% end %>
         <div id="sprint-view">
@@ -44,6 +45,7 @@
                   <% end %>
                 <% end %>
               <% end %>
+              <h5 id="notify-message" class="pull-right"></h5>
             <% end %>
           </ul>
         </div>
@@ -59,12 +61,8 @@
             </li>
           </ul>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-          <% if f %>
-            <h5  id="notify-message" class="pull-left"></h5>
-          <% end %>
-        </ul>
       </div>
     </nav>
   </div>
+  <%= render "sprints/new_sprint_dialog" %>
 </div>
