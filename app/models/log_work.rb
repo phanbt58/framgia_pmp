@@ -1,8 +1,11 @@
 class LogWork < ActiveRecord::Base
+  include UpdatePerformance
+
   belongs_to :task
   belongs_to :master_sprint
   belongs_to :sprint
-  after_update :update_actual_time, :update_remaining_time
+  after_update :update_actual_time, :update_remaining_time, 
+    :update_performance_of_spent_time
 
   private
   def update_actual_time
