@@ -1,4 +1,4 @@
-$(document).on('page:change', function(){
+$(document).on('ready turbolink:load', function(){
   $('#phase').click(function(){
     if ($('#data-table') !== null){
       $('#data-table').remove();

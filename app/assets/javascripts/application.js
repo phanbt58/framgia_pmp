@@ -34,7 +34,7 @@
 //= require users
 //= sprints
 
-$(document).on('page:change', function(){
+$(document).on('ready turbolink:load', function(){
   $('#create_sprint').on('shown.bs.modal', function(){
     $('.datepicker').datepicker({
       format: I18n.t('date.format'),

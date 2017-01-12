@@ -1,4 +1,4 @@
-$(document).on('page:change', function(){
+$(document).on('ready turbolink:load', function(){
   $('#setting_project a:first').tab('show');
   $('#add_member_project').on('autocompleteopen', function(){
     $('.ui-autocomplete').width($('#add_member_project').width());

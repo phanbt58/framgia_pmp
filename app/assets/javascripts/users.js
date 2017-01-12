@@ -1,4 +1,4 @@
-$(document).on("page:change", function() {
+$(document).on("ready turbolink:load", function() {
   jQuery(function() {
     $("#users").dataTable({
       sPaginationType: "full_numbers",

@@ -1,4 +1,4 @@
-$(document).on('page:change', function(){
+$(document).on('ready turbolink:load', function(){
   $('[data-toggle="tooltip"]').tooltip();
   // total log_works
   totalLogWorksCol = function() {

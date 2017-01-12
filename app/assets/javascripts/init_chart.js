@@ -2,7 +2,7 @@ var chart;
 var estimate_data = [0];
 var actual_data = [0];
 
-$(document).on('page:change', function (){
+$(document).on('ready turbolink:load', function (){
   var burndown_chart = $('#burndown_chart');
   if (burndown_chart.length > 0){
     getChartData();

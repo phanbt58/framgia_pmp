@@ -1,4 +1,4 @@
-$(document).on('page:change', function(){
+$(document).on('ready turbolink:load', function(){
   if ($('#sprints.edit_sprint').length > 0){
     $('#sprint-with-wpd-tab li#performances_tab').remove();
   }

@@ -138,7 +138,7 @@ $(document).on('ready page:load', function() {
    });
 });
 
-$(document).on('page:change', function() {
+$(document).on('ready turbolink:load', function() {
   table_scroll_resize();
   change_style_table();
 
